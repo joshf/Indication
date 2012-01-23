@@ -18,7 +18,7 @@ PRIMARY KEY (\`id\`)
 5. Upload the SHTracker folder to your server via FTP or your hosts control panel 
 6. Open up http://yoursite.com/SHTracker/install.php in your browser and enter your database and user details  
 7. Delete install.php from your server
-8.  Make config.php unwritable (optional)
+8. Make config.php unwritable (optional)
 9. Login to the admin panel using the username and password you set during the install  
 10. Add your links/downloads. If you do not enter a count for a download it will start from zero  
 11. Done
