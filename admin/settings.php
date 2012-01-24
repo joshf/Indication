@@ -16,7 +16,6 @@ $currentadminpassword = ADMIN_PASSWORD;
 $currentwebsite = WEBSITE;
 $currentpathtoscript = PATH_TO_SCRIPT;
 $currentwaitstate = WAIT_STATE;
-$currentwaittime = WAIT_TIME;
 $currentwaitmessage = WAIT_MESSAGE;
 $currentwaitadcode = WAIT_AD_CODE; 
 
@@ -32,15 +31,11 @@ $adminpassword = $_POST["adminpassword"];
 $website = $_POST["website"];
 $pathtoscript = $_POST["pathtoscript"];
 $waitstate = $_POST["waitstate"];
-$waittime = $_POST["waittime"];
 $waitmessage = $_POST["waitmessage"];
 $waitadcode = $_POST["waitadcode"];
 $randomkey = RANDOM_KEY; 
 
 //Remember previous settings for wait
-if (empty($waittime)) {
-    $waittime = $currentwaittime;
-}
 if (empty($waitmessage)) {
     $waitmessage = $currentwaitmessage;
 }
@@ -49,8 +44,7 @@ if (empty($waitadcode)) {
 }
 
 //Wait will set incorrect variables
-if ($currentwaittime == "WAIT_TIME") {
-    $waittime = "";
+if ($currentwaitmessage == "WAIT_MESSAGE") {
     $waitmessage = "";
     $waitadcode = "";
 }
@@ -73,7 +67,6 @@ define(\"PATH_TO_SCRIPT\", \"$pathtoscript\");
 
 //Wait Settings
 define(\"WAIT_STATE\", \"$waitstate\");
-define(\"WAIT_TIME\", \"$waittime\");
 define(\"WAIT_MESSAGE\", \"$waitmessage\");
 define(\"WAIT_AD_CODE\", \"$waitadcode\");
 
@@ -119,7 +112,6 @@ Path to script: <input type="text" name="pathtoscript" value="<? echo $currentpa
 if ($currentwaitstate == "Enabled" ) {
     echo "<input type=\"radio\" name=\"waitstate\" value=\"Enabled\" checked/> Enabled<br />
     <input type=\"radio\" name=\"waitstate\" value=\"Disabled\" /> Disabled
-    <p>Wait Time (seconds): <input type=\"text\" name=\"waittime\" value=\"$currentwaittime\" /></p>
     <p>Custom Message:</p><p><textarea cols=\"80\" rows=\"8\" name=\"waitmessage\">$currentwaitmessage</textarea></p>
     <p>Adsense/Ad Code: (HTML only, PHP will not work!)</p><p><textarea cols=\"80\" rows=\"8\" name=\"waitadcode\">$currentwaitadcode</textarea></p>";
 } else {
