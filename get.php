@@ -1,4 +1,5 @@
 <?php
+//SHTracker, Copyright Josh Fradley 2012
 ob_start();
 ?>
 <html>
@@ -9,8 +10,6 @@ ob_start();
 </head>
 <body>
 <?php
-
-//SHTracker, Copyright Josh Fradley 2012
 
 //Connect to database
 require_once("config.php");
@@ -27,6 +26,11 @@ $id = mysql_real_escape_string($_GET["id"]);
 //Check ID is not blank
 if (empty($id)) {
     die("<h1>SHTracker: Error</h1><p>ID cannot be blank.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+}
+
+//Prevent some injection attacks, is this neccesary?
+if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
+    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>"); 
 }
 
 //If ID exists update count or die

@@ -25,7 +25,7 @@ if (empty($url)) {
 }
 
 //Prevent some injection attacks
-if (!preg_match("/^[a-zA-Z0-9. ]{1,}$/", $name)) {
+if (!preg_match("/^[a-zA-Z0-9(). ]{1,}$/", $name)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../add.php\">Go Back</a></p></body></html>"); 
 }
 
