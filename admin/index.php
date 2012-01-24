@@ -69,6 +69,6 @@ mysql_close($con);
 <p>You can access your downloads with this link: <? echo PATH_TO_SCRIPT; ?>/get.php?id=<em>id</em></p>
 <hr />
 <p><a href="settings.php">Settings</a> | <a href="logout.php">Logout</a></p>
-<small>SHTracker 1.6.7 "BigBewilderedBuffalo" Copyright Josh Fradley 2012</small>
+<small>SHTracker 1.6.7 "BigBewilderedBuffalo" Copyright <a href="http://sidhosting.co.uk">Josh Fradley 2012</a></small>
 </body>
 </html>
