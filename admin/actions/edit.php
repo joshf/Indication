@@ -27,7 +27,7 @@ if (empty($newurl)) {
 }
 
 //Prevent some injection attacks
-if (!preg_match("/^[a-zA-Z0-9. ]{1,}$/", $newname)) {
+if (!preg_match("/^[a-zA-Z0-9(). ]{1,}$/", $newname)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>"); 
 }
 
