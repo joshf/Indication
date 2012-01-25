@@ -1,6 +1,6 @@
 <?php
 
-//require("login.php");
+require("login.php");
 
 //SHTracker, Copyright Josh Fradley 2012
 
