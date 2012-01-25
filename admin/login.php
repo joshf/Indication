@@ -9,10 +9,8 @@ if (!file_exists("../config.php")) {
 
 require_once("../config.php");
 
-$storedpassword = ADMIN_PASSWORD;
-$password = sha1($storedpassword);
-$storeduser = ADMIN_USER;
-$user = sha1($storeduser);
+$password = sha1(ADMIN_PASSWORD);
+$user = ADMIN_USER;
 $randomkey = RANDOM_KEY;
 
 session_start();
@@ -21,7 +19,7 @@ if (!isset($_SESSION["loggedin" . $randomkey . ""])) {
 }
 
 if (isset($_POST["password"]) && isset($_POST["user"])) {
-    if (sha1($_POST["password"]) == $password && sha1($_POST["user"]) == $user) {
+    if (sha1($_POST["password"]) == $password && $_POST["user"] == $user) {
         $_SESSION["loggedin" . $randomkey . ""] = true;
     } else {
         die("<html><head><title>SHTracker: Login</title><link rel=\"stylesheet\" type=\"text/css\" href=\"../style.css\" /></head><body><h1>SHTracker: Error</h1><p>Incorrect password or username...</p><hr /><p><a href=\"../admin\">Go Back</a></p></body></html>");
