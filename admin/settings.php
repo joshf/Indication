@@ -1,6 +1,6 @@
 <?php
 
-require("login.php");
+//require("login.php");
 
 //SHTracker, Copyright Josh Fradley 2012
 
@@ -27,7 +27,7 @@ $dbuser = $_POST["dbuser"];
 $dbpassword = $_POST["dbpassword"];
 $dbname = $_POST["dbname"];
 $adminuser = $_POST["adminuser"];
-$adminpassword = $_POST["adminpassword"];
+$adminpassword = sha1($_POST["adminpassword"]);
 $website = $_POST["website"];
 $pathtoscript = $_POST["pathtoscript"];
 $waitstate = $_POST["waitstate"];

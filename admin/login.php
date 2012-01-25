@@ -9,7 +9,7 @@ if (!file_exists("../config.php")) {
 
 require_once("../config.php");
 
-$password = sha1(ADMIN_PASSWORD);
+$password = ADMIN_PASSWORD;
 $user = ADMIN_USER;
 $randomkey = RANDOM_KEY;
 
