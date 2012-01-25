@@ -4,7 +4,7 @@
 <?php
 
 require_once("config.php");
-echo "<title>" . WEBSITE . " download statistics</title>";
+echo "<title>SHTracker: " . WEBSITE . " download statistics</title>";
 
 ?>
 <!-- Change the style to match the rest of your site here -->
@@ -25,13 +25,22 @@ $id = mysql_real_escape_string($_GET["id"]);
 
 //Check ID is not blank
 if (empty($id)) {
-    die("<p>ID cannot be blank...</p>");
+    die("<h1>SHTracker: Error</h1><p>ID cannot be blank.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+}
+
+//Prevent some injection attacks, is this neccesary?
+if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
+    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>"); 
 }
 
 $getdownloadinfo = mysql_query("SELECT name, count FROM Data WHERE id = \"$id\"");
 $info = mysql_fetch_row($getdownloadinfo);
 
-echo "<p>" . $info["0"] . " has been downloaded " . $info["1"] . " times.</p>";
+if (!$info) {
+    die("<h1>SHTracker: Error</h1><p>ID <strong>$id</strong> does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+} else {
+    echo "<p>" . $info["0"] . " has been downloaded " . $info["1"] . " times.</p>";
+}
 
 mysql_close($con);
 
