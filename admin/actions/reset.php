@@ -10,11 +10,10 @@
 require_once("../../config.php");
 
 //Make user confirm action with a password
-$storedpassword = ADMIN_PASSWORD;
-$password = sha1($storedpassword);
+$password = ADMIN_PASSWORD;
 
 if (sha1($_POST["password"]) != $password) {
-    die("<h1>SHTracker: Error</h1><p>Password incorrect...</p><hr /><p><a href=\"../../admin\">Go Back</a></p>");
+    die("<h1>SHTracker: Error</h1><p>Password incorrect...</p><hr /><p><a href=\"../settings.php\">Go Back</a></p>");
 }
 
 //Connect to database
