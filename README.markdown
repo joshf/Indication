@@ -38,7 +38,7 @@ To show the number of clicks on an external page use either of the following cod
 
 ```php
 <?php
-$_GET['id'] = "download1";
+$_GET["id"] = "download1";
 include('SHTracker/show.php');
 ?>
 ```

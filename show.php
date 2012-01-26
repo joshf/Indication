@@ -28,7 +28,7 @@ if (empty($id)) {
     die("<h1>SHTracker: Error</h1><p>ID cannot be blank.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
 }
 
-//Prevent some injection attacks, is this neccesary?
+//Prevent some injection attacks
 if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>"); 
 }

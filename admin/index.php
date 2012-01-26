@@ -70,6 +70,6 @@ mysql_close($con);
 <p>You can access your downloads with this link: <? echo PATH_TO_SCRIPT; ?>/get.php?id=<em>id</em></p>
 <hr />
 <p><a href="settings.php">Settings</a> | <a href="logout.php">Logout</a></p>
-<small>SHTracker 1.7 (git) "AggravatedAddax" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
+<small>SHTracker 1.7 "AggravatedAddax" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
 </body>
 </html>
