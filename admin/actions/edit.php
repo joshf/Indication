@@ -30,15 +30,12 @@ if (empty($newurl)) {
 if (!preg_match("/^[a-zA-Z0-9(). ]{1,}$/", $newname)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>"); 
 }
-
 if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $newid)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>"); 
 }
-
 if (!preg_match("/^[a-zA-Z0-9.:?=#\/_-]{1,}$/", $newurl)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>"); 
 }
-
 if (!preg_match("/^[0-9]{1,}$/", $newcount)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers.</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>"); 
 }

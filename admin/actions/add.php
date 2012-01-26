@@ -28,13 +28,14 @@ if (empty($url)) {
 if (!preg_match("/^[a-zA-Z0-9(). ]{1,}$/", $name)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../add.php\">Go Back</a></p></body></html>"); 
 }
-
 if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../add.php\">Go Back</a></p></body></html>"); 
 }
-
 if (!preg_match("/^[a-zA-Z0-9.:?=#\/_-]{1,}$/", $url)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>"); 
+}
+if (!preg_match("/^[0-9]{1,}$/", $count)) {
+    die("<h1>SHTracker: Error</h1><p>Please enter only numbers.</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>"); 
 }
 
 //Connect to database
