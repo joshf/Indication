@@ -37,10 +37,10 @@ $randomkey = RANDOM_KEY;
 
 //Remember previous settings for wait
 if (empty($waitmessage)) {
-    $waitmessage = $currentwaitmessage;
+    $waitmessage = addslashes($currentwaitmessage);
 }
 if (empty($waitadcode)) {
-    $waitadcode = $currentwaitadcode;
+    $waitadcode = addslashes($currentwaitadcode);
 }
 
 //Wait will set incorrect variables
