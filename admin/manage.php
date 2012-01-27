@@ -115,7 +115,7 @@ mysql_close($con);
 </body>
 </html>
 <?php
-} else {
+} elseif ($command == "New") {
 //New
 header("Location: add.php");
 }
