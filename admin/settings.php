@@ -94,7 +94,6 @@ header("Location: " . $_SERVER["REQUEST_URI"]);
 <h1>SHTracker: Settings</h1>
 <p>Here you can change the settings for SHTracker.</p>
 <p><strong>Database Settings:</strong></p>
-<div id="form">
 <form method="post">
 Host: <input type="text" name="dbhost" value="<? echo $currentdbhost; ?>" /><br />
 User: <input type="text" name="dbuser" value="<? echo $currentdbuser; ?>" /><br />
@@ -131,7 +130,6 @@ if ($currentwaitstate == "Enabled" ) {
 <p>Password: <input type="password" name="password" /></p>
 <input type="submit" name="command" value="Reset All Counts to Zero" />
 </form>
-</div>
 <hr />
 <p><a href="../admin">Go Back</a></p>
 </body>

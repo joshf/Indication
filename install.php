@@ -57,7 +57,6 @@ exit;
 ?>
 <h1>SHTracker: Install</h1>
 <p><strong>Database Settings:</strong></p>
-<div id="form">
 <form method="post">
 Host: <input type="text" name="dbhost" /><br />
 User: <input type="text" name="dbuser" /><br />
@@ -71,6 +70,5 @@ Website Name: <input type="text" name="website" /><br />
 Path to Script: <input type="text" name="pathtoscript" /><br />
 <p><input type="submit" name="Install" value="Install"></p>
 </form>
-</div>
 </body>
 </html>

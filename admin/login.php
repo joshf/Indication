@@ -4,7 +4,7 @@
 
 //Dont bork if no config file is found
 if (!file_exists("../config.php")) {
-    die("<html><head><title>SHTracker: Login</title><link rel=\"stylesheet\" type=\"text/css\" href=\"../style.css\" /></head><body><h1>SHTracker: Error</h1><p>SHTracker has not been installed. Please run install.php first!</p><hr /><p><a href=\"../install.php\">Go To Install</a></p></body></html>"); 
+    die("<html><head><title>SHTracker: Error</title><link rel=\"stylesheet\" type=\"text/css\" href=\"../style.css\" /></head><body><h1>SHTracker: Error</h1><p>SHTracker has not been installed. Please run install.php first!</p><hr /><p><a href=\"../install.php\">Go To Install</a></p></body></html>"); 
 }
 
 require_once("../config.php");
@@ -35,13 +35,11 @@ if (!$_SESSION["loggedin" . $randomkey . ""]): ?>
 <body>
 <h1>SHTracker: Login</h1>
 <p>You need to login to continue.</p>
-<div id="form">
 <form method="post">
 User: <input type="text" name="user" /><br />
 Password: <input type="password" name="password" />
 <p><input type="submit" name="submit" value="Login" /></p>
 </form>
-</div>
 </body>
 </html>
 <?php

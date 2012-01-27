@@ -4,6 +4,11 @@ require("login.php");
 
 //SHTracker, Copyright Josh Fradley 2012
 
+//If nothing is passed, go home
+if (!isset($_POST["command"])) {
+    header("Location: ../admin");
+}
+
 $command = $_POST["command"];
 
 if ($command == "Edit") {
@@ -41,7 +46,6 @@ $result = mysql_fetch_row($getnameofdownload);
 ?>
 <h1>SHTracker: Editing download <? echo $result["0"]; ?></h1>
 <p>Please edit any values you wish.</p>
-<div id="form">
 <form action="actions/edit.php" method="post">
 <?php
 
@@ -59,7 +63,6 @@ mysql_close($con);
 <input type="hidden" name="idtoedit" value="<? echo $idtoedit; ?>" />
 <p><input type="submit" name="command" value="Edit" /></p>
 </form>
-</div>
 <hr />
 <p><a href="../admin">Go Back</a></p>
 </body>
@@ -102,13 +105,11 @@ mysql_close($con);
 ?>
 <h1>SHTracker: Delete download</h1>
 <p>Are you sure you wish to delete the download <strong><? echo $result["0"]; ?></strong>?</p>
-<div id="form">
 <form action="actions/delete.php" method="post">
 <input type="hidden" name="idtodelete" value="<? echo $idtodelete; ?>" />
 <input type="submit" name="command" value="Delete" />
 <input type="submit" name="command" value="Keep" />
 </form>
-</div>
 <hr />
 <p><a href="../admin">Go Back</a></p>
 </body>

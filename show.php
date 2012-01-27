@@ -9,6 +9,7 @@ echo "<title>SHTracker: " . WEBSITE . " download statistics</title>";
 ?>
 <!-- Change the style to match the rest of your site here -->
 <link rel="stylesheet" type="text/css" href="style.css" />
+<meta name="robots" content="noindex, nofollow">
 </head>
 <body>
 <?php

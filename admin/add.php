@@ -9,7 +9,6 @@ require("login.php");
 </head>
 <body>
 <h1>SHTracker: Add a download</h1>
-<div id="form">
 <form action="actions/add.php" method="post">
 <p>Name: <input type="text" size="50" name="name" /></p>
 <p>ID: <input type="text" size="50" name="id" /></p>
@@ -17,7 +16,6 @@ require("login.php");
 <p>Count: <input type="text" size="50" name="count" /></p>
 <input type="submit" name="command" value="Add" />
 </form>
-</div>
 <hr />
 <p><a href="../admin">Go Back</a></p>
 </body>
