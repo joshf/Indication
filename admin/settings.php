@@ -27,7 +27,11 @@ $dbuser = $_POST["dbuser"];
 $dbpassword = $_POST["dbpassword"];
 $dbname = $_POST["dbname"];
 $adminuser = $_POST["adminuser"];
-$adminpassword = sha1($_POST["adminpassword"]);
+//FIXME: Pretty terrible workaround
+$adminpassword = $_POST["adminpassword"];
+if ($adminpassword != $currentadminpassword) {
+    $adminpassword = sha1("$adminpassword");
+}
 $website = $_POST["website"];
 $pathtoscript = $_POST["pathtoscript"];
 $waitstate = $_POST["waitstate"];
