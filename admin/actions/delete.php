@@ -11,14 +11,6 @@ if ($_POST["command"] == "Keep") {
     die("<h1>SHTracker: Error</h1><p>Delete cancelled...</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>");
 }
 
-//Set variables
-$idtodelete = mysql_real_escape_string($_POST["idtodelete"]);
-
-//Check variables are not empty
-if (empty($idtodelete)) {
-    die("<h1>SHTracker: Error</h1><p>ID is missing...</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>");
-}
-
 //Connect to database
 require_once("../../config.php");
 
@@ -28,6 +20,13 @@ if (!$con) {
 }
 
 mysql_select_db(DB_NAME, $con);
+
+$idtodelete = mysql_real_escape_string($_POST["idtodelete"]);
+
+//Check variables are not empty
+if (empty($idtodelete)) {
+    die("<h1>SHTracker: Error</h1><p>ID is missing...</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>");
+}
 
 $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$idtodelete\"");
 $result = mysql_fetch_row($getnameofdownload);

@@ -7,11 +7,21 @@
 <body>
 <?php
 
+//Connect to database
+require_once("../../config.php");
+
+$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+if (!$con) {
+    die("Could not connect: " . mysql_error());
+}
+
+mysql_select_db(DB_NAME, $con);
+
 //Set variables
-$name = $_POST["name"];
-$id = $_POST["id"];
-$url = $_POST["url"];
-$count = $_POST["count"];
+$name = mysql_real_escape_string($_POST["name"]);
+$id = mysql_real_escape_string($_POST["id"]);
+$url = mysql_real_escape_string($_POST["url"]);
+$count = mysql_real_escape_string($_POST["count"]);
 
 //Check variables are not empty
 if (empty($name)) {
@@ -37,16 +47,6 @@ if (!preg_match("/^[a-zA-Z0-9.:?=#\/_-]{1,}$/", $url)) {
 if (!preg_match("/^[0-9]{1,}$/", $count)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers.</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>"); 
 }
-
-//Connect to database
-require_once("../../config.php");
-
-$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-if (!$con) {
-    die("Could not connect: " . mysql_error());
-}
-
-mysql_select_db(DB_NAME, $con);
 
 mysql_query("INSERT INTO Data (name, id, url, count)
 VALUES (\"$name\",\"$id\",\"$url\",\"$count\")");

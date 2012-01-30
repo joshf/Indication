@@ -7,13 +7,23 @@
 <body>
 <?php
 
-$idtoedit = $_POST["idtoedit"];
+//Connect to database
+require_once("../../config.php");
+
+$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+if (!$con) {
+    die("Could not connect: " . mysql_error());
+}
+
+mysql_select_db(DB_NAME, $con);
+
+$idtoedit = mysql_real_escape_string($_POST["idtoedit"]);
 
 //Set variables
-$newname = $_POST["name"];
-$newid = $_POST["id"];
-$newurl = $_POST["url"];
-$newcount = $_POST["count"];
+$newname = mysql_real_escape_string($_POST["name"]);
+$newid = mysql_real_escape_string($_POST["id"]);
+$newurl = mysql_real_escape_string($_POST["url"]);
+$newcount = mysql_real_escape_string($_POST["count"]);
 
 //Check variables are not empty
 if (empty($newname)) {
@@ -39,16 +49,6 @@ if (!preg_match("/^[a-zA-Z0-9.:?=#\/_-]{1,}$/", $newurl)) {
 if (!preg_match("/^[0-9]{1,}$/", $newcount)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers.</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>"); 
 }
-
-//Connect to database
-require_once("../../config.php");
-
-$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-if (!$con) {
-    die("Could not connect: " . mysql_error());
-}
-
-mysql_select_db(DB_NAME, $con);
 
 mysql_query("UPDATE Data SET name = \"$newname\", id = \"$newid\", url = \"$newurl\", count = \"$newcount\" WHERE id = \"$idtoedit\"");
 

@@ -42,10 +42,10 @@ $randomkey = RANDOM_KEY;
 
 //Remember previous settings for wait
 if (empty($waitmessage)) {
-    $waitmessage = addslashes($currentwaitmessage);
+    $waitmessage = $currentwaitmessage;
 }
 if (empty($waitadcode)) {
-    $waitadcode = addslashes($currentwaitadcode);
+    $waitadcode = $currentwaitadcode;
 }
 
 $string = "<?php

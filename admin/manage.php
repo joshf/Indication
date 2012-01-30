@@ -23,13 +23,6 @@ if ($command == "Edit") {
 <body>
 <?php
 
-$idtoedit = $_POST["id"];
-
-//Check variables are not empty
-if (empty($idtoedit)) {
-    die("<h1>SHTracker: Error</h1><p>No download selected...</p><hr /><p><a href=\"../admin\">Go Back</a></p></body></html>");
-}
-
 //Connect to database
 require_once("../config.php");
 
@@ -39,6 +32,13 @@ if (!$con) {
 }
 
 mysql_select_db(DB_NAME, $con);
+
+$idtoedit = mysql_real_escape_string($_POST["id"]);
+
+//Check variables are not empty
+if (empty($idtoedit)) {
+    die("<h1>SHTracker: Error</h1><p>No download selected...</p><hr /><p><a href=\"../admin\">Go Back</a></p></body></html>");
+}
 
 $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$idtoedit\"");
 $result = mysql_fetch_row($getnameofdownload);
@@ -69,9 +69,6 @@ mysql_close($con);
 </html>
 <?php
 } elseif ($command == "Delete") {
-
-$idtodelete = $_POST["id"];
-
 ?>
 <!-- Delete -->
 <html> 
@@ -82,11 +79,6 @@ $idtodelete = $_POST["id"];
 <body>
 <?
 
-//Check variables are not empty
-if (empty($idtodelete)) {
-    die("<h1>SHTracker: Error</h1><p>No download selected...</p><hr /><p><a href=\"../admin\">Go Back</a></p></body></html>");
-}
-
 //Connect to database
 require_once("../config.php");
 
@@ -96,6 +88,13 @@ if (!$con) {
 }
 
 mysql_select_db(DB_NAME, $con);
+
+$idtodelete = mysql_real_escape_string($_POST["id"]);
+
+//Check variables are not empty
+if (empty($idtodelete)) {
+    die("<h1>SHTracker: Error</h1><p>No download selected...</p><hr /><p><a href=\"../admin\">Go Back</a></p></body></html>");
+}
 
 $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$idtodelete\"");
 $result = mysql_fetch_row($getnameofdownload);

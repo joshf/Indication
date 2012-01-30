@@ -11,6 +11,16 @@ ob_start();
 <body>
 <?php
 
+//Connect to database
+require_once("config.php");
+
+$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+if (!$con) {
+    die("Could not connect: " . mysql_error());
+}
+
+mysql_select_db(DB_NAME, $con);
+
 //Accept POST or GET
 if (isset($_GET["id"])) {
     $id = mysql_real_escape_string($_GET["id"]);
@@ -27,16 +37,6 @@ if (empty($id)) {
 if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>"); 
 }
-
-//Connect to database
-require_once("config.php");
-
-$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-if (!$con) {
-    die("Could not connect: " . mysql_error());
-}
-
-mysql_select_db(DB_NAME, $con);
 
 //If ID exists update count or die
 $getinfo = "SELECT * FROM Data WHERE id = \"$id\"";
