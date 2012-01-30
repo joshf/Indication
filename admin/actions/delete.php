@@ -23,7 +23,7 @@ mysql_select_db(DB_NAME, $con);
 
 $idtodelete = mysql_real_escape_string($_POST["idtodelete"]);
 
-//Check variables are not empty
+//Check variable is not empty
 if (empty($idtodelete)) {
     die("<h1>SHTracker: Error</h1><p>ID is missing...</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>");
 }
