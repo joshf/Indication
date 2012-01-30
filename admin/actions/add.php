@@ -33,6 +33,9 @@ if (empty($id)) {
 if (empty($url)) {
     die("<h1>SHTracker: Error</h1><p>URL is missing...</p><hr /><p><a href=\"../add.php\">Go Back</a></p></body></html>");
 }
+if (empty($count)) {
+    $count = "0";
+}
 
 //Prevent some injection attacks
 if (!preg_match("/^[a-zA-Z0-9(). ]{1,}$/", $name)) {
