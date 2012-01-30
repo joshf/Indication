@@ -12,7 +12,7 @@ if ($_POST["command"] == "Keep") {
 }
 
 //Set variables
-$idtodelete = $_POST["idtodelete"];
+$idtodelete = mysql_real_escape_string($_POST["idtodelete"]);
 
 //Check variables are not empty
 if (empty($idtodelete)) {

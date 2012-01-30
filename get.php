@@ -13,9 +13,9 @@ ob_start();
 
 //Accept POST or GET
 if (isset($_GET["id"])) {
-    $id = $_GET["id"];
+    $id = mysql_real_escape_string($_GET["id"]);
 } else {
-    $id = $_POST["id"];
+    $id = mysql_real_escape_string($_POST["id"]);
 }
 
 //Check ID is not blank
