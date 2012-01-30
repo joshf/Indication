@@ -20,7 +20,11 @@ $dbuser = $_POST["dbuser"];
 $dbpassword = $_POST["dbpassword"];
 $dbname = $_POST["dbname"];
 $adminuser = $_POST["adminuser"];
-$adminpassword = sha1($_POST["adminpassword"]);
+if (strlen($_POST["adminpassword"]) < "6") {
+    die("<h1>SHTracker: Error</h1><p>You password must be longer than six characters.</p><hr /><p><a href=\"install.php\">Go Back</a></p></body></html>");
+} else {
+    $adminpassword = sha1($_POST["adminpassword"]);
+}
 $website = $_POST["website"];
 $pathtoscript = $_POST["pathtoscript"];
 $randomkey = str_shuffle("abcdefghijklmnopqrstuvwxyz123456789");

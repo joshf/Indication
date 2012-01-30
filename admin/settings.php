@@ -27,7 +27,6 @@ $dbuser = $_POST["dbuser"];
 $dbpassword = $_POST["dbpassword"];
 $dbname = $_POST["dbname"];
 $adminuser = $_POST["adminuser"];
-//FIXME: Pretty terrible workaround
 $adminpassword = $_POST["adminpassword"];
 if ($adminpassword != $currentadminpassword) {
     $adminpassword = sha1("$adminpassword");
@@ -35,8 +34,10 @@ if ($adminpassword != $currentadminpassword) {
 $website = $_POST["website"];
 $pathtoscript = $_POST["pathtoscript"];
 $waitstate = $_POST["waitstate"];
-$waitmessage = $_POST["waitmessage"];
-$waitadcode = $_POST["waitadcode"];
+if (isset($_POST["waitmessage"])) {
+    $waitmessage = $_POST["waitmessage"];
+    $waitadcode = $_POST["waitadcode"];
+}
 $randomkey = RANDOM_KEY; 
 
 //Remember previous settings for wait
@@ -45,12 +46,6 @@ if (empty($waitmessage)) {
 }
 if (empty($waitadcode)) {
     $waitadcode = addslashes($currentwaitadcode);
-}
-
-//Wait will set incorrect variables
-if ($currentwaitmessage == "WAIT_MESSAGE") {
-    $waitmessage = "";
-    $waitadcode = "";
 }
 
 $string = "<?php
