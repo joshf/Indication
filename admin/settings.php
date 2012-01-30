@@ -127,7 +127,8 @@ if ($currentwaitstate == "Enabled" ) {
 <form action="actions/reset.php" method="post">
 <p>To perform any of these actions, please enter your admin password.</p>
 <p>Password: <input type="password" name="password" /></p>
-<input type="submit" name="command" value="Reset All Counts to Zero" />
+<input type="submit" name="command" value="Reset All Counts to Zero" /><br />
+<input type="submit" name="command" value="Delete All Downloads" />
 </form>
 <hr />
 <p><a href="../admin">Go Back</a></p>
