@@ -2,7 +2,6 @@
 
 //SHTracker, Copyright Josh Fradley 2012
 
-//Dont bork if no config file is found
 if (!file_exists("../config.php")) {
     die("<html><head><title>SHTracker: Error</title><link rel=\"stylesheet\" type=\"text/css\" href=\"../style.css\" /></head><body><h1>SHTracker: Error</h1><p>SHTracker has not been installed. Please run install.php first!</p><hr /><p><a href=\"../install.php\">Go To Install</a></p></body></html>"); 
 }

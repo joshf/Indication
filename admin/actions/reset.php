@@ -22,7 +22,7 @@ if ($command == "Reset All Counts to Zero") {
 <!-- Reset -->
 <html> 
 <head>
-<title>SHTracker: Reset All Counts to Zero</title>
+<title>SHTracker: All Counts Reset to Zero</title>
 <link rel="stylesheet" type="text/css" href="../../style.css" />
 </head>
 <body>
@@ -41,7 +41,7 @@ mysql_query("UPDATE Data SET count = \"0\"");
 mysql_close($con);
 
 ?>
-<h1>SHTracker: Reset All Counts to Zero</h1>
+<h1>SHTracker: All Counts Reset to Zero</h1>
 <p>All counts have been reset to zero.</p>
 <hr />
 <p><a href="../../admin">Go Back</a></p>

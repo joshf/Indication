@@ -34,6 +34,7 @@ if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>"); 
 }
 
+//FIXME: Must be a better way of doing this
 $getdownloadinfo = mysql_query("SELECT name, count FROM Data WHERE id = \"$id\"");
 $info = mysql_fetch_row($getdownloadinfo);
 

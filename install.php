@@ -53,8 +53,7 @@ define(\"RANDOM_KEY\", \"$randomkey\");
 $configfile = fopen("config.php", "w");
 fwrite($configfile, $string);
 fclose($configfile);
-echo "<h1 style=\"color:green\">SHTracker: Install complete</h1><p>Please delete this file (install.php) from your server, as it poses a security risk!</p><p>It may also be helpful to make config.php unwritable.</p><p><a href=\"admin\">Admin Home</a></p></body></html>";
-exit;
+die("<h1 style=\"color:green\">SHTracker: Install complete</h1><p>Please delete this file (install.php) from your server, as it poses a security risk!</p><p>It may also be helpful to make config.php unwritable.</p><p><a href=\"admin\">Admin Home</a></p></body></html>");
  
 }
  
