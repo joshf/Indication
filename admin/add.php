@@ -4,11 +4,11 @@ require("login.php");
 <!-- SHTracker, Copyright Josh Fradley 2012 -->
 <html> 
 <head>
-<title>SHTracker: Add a Download</title>
+<title>SHTracker: Add A Download</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
 </head>
 <body>
-<h1>SHTracker: Add a download</h1>
+<h1>SHTracker: Add A Download</h1>
 <form action="actions/add.php" method="post">
 <p>Name: <input type="text" size="50" name="name" /></p>
 <p>ID: <input type="text" size="50" name="id" /></p>

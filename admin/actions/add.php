@@ -57,7 +57,7 @@ VALUES (\"$name\",\"$id\",\"$url\",\"$count\")");
 mysql_close($con);
 
 ?>
-<h1>SHTracker: Download added</h1>
+<h1>SHTracker: Download Added</h1>
 <p>The download <strong><? echo $name; ?></strong> has been added successfully.</p>
 <p><strong>Details:</strong></p>
 <ul>

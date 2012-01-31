@@ -4,7 +4,7 @@
 <?php
 
 require_once("config.php");
-echo "<title>SHTracker: " . WEBSITE . " download statistics</title>";
+echo "<title>SHTracker: " . WEBSITE . " Download Statistics</title>";
 
 ?>
 <!-- Change the style to match the rest of your site here -->

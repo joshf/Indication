@@ -36,7 +36,7 @@ mysql_query("DELETE FROM Data WHERE id = \"$idtodelete\"");
 mysql_close($con);
 
 ?>
-<h1>SHTracker: Download deleted</h1>
+<h1>SHTracker: Download Deleted</h1>
 <p>The download <strong><? echo $result["0"]; ?></strong> has been deleted.</p>
 <hr />
 <p><a href="../../admin">Back To Home</a></p>

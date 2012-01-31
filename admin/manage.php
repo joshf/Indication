@@ -43,7 +43,7 @@ $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$idtoedit\"
 $result = mysql_fetch_row($getnameofdownload);
 
 ?>
-<h1>SHTracker: Editing download <? echo $result["0"]; ?></h1>
+<h1>SHTracker: Editing Download <? echo $result["0"]; ?></h1>
 <p>Please edit any values you wish.</p>
 <form action="actions/edit.php" method="post">
 <?php
@@ -100,7 +100,7 @@ $result = mysql_fetch_row($getnameofdownload);
 mysql_close($con);
 
 ?>
-<h1>SHTracker: Delete download</h1>
+<h1>SHTracker: Deleting Download</h1>
 <p>Are you sure you wish to delete the download <strong><? echo $result["0"]; ?></strong>?</p>
 <form action="actions/delete.php" method="post">
 <input type="hidden" name="idtodelete" value="<? echo $idtodelete; ?>" />

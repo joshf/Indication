@@ -10,7 +10,6 @@ $password = ADMIN_PASSWORD;
 if (empty($_POST["password"])) {
     die("<html><head><title>SHTracker: Error</title><link rel=\"stylesheet\" type=\"text/css\" href=\"../../style.css\" /></head><body><h1>SHTracker: Error</h1><p>Password is blank...</p><hr /><p><a href=\"../settings.php\">Go Back</a></p></body></html>");
 }
-
 if (sha1($_POST["password"]) != $password) {
     die("<html><head><title>SHTracker: Error</title><link rel=\"stylesheet\" type=\"text/css\" href=\"../../style.css\" /></head><body><h1>SHTracker: Error</h1><p>Password incorrect...</p><hr /><p><a href=\"../settings.php\">Go Back</a></p></body></html>");
 }
@@ -23,7 +22,7 @@ if ($command == "Reset All Counts to Zero") {
 <!-- Reset -->
 <html> 
 <head>
-<title>SHTracker: All Counts Reset To Zero</title>
+<title>SHTracker: Reset All Counts to Zero</title>
 <link rel="stylesheet" type="text/css" href="../../style.css" />
 </head>
 <body>
@@ -42,7 +41,7 @@ mysql_query("UPDATE Data SET count = \"0\"");
 mysql_close($con);
 
 ?>
-<h1>SHTracker: Counts Reset to Zero</h1>
+<h1>SHTracker: Reset All Counts to Zero</h1>
 <p>All counts have been reset to zero.</p>
 <hr />
 <p><a href="../../admin">Go Back</a></p>
@@ -54,7 +53,7 @@ mysql_close($con);
 <!-- Delete -->
 <html> 
 <head>
-<title>SHTracker: Delete All Downloads</title>
+<title>SHTracker: All Downloads Deleted</title>
 <link rel="stylesheet" type="text/css" href="../../style.css" />
 </head>
 <body>
@@ -73,7 +72,7 @@ mysql_query("DELETE FROM Data");
 mysql_close($con);
 
 ?>
-<h1>SHTracker: All downloads deleted</h1>
+<h1>SHTracker: All Downloads Deleted</h1>
 <p>All downloads have been deleted.</p>
 <hr />
 <p><a href="../../admin">Go Back</a></p>
