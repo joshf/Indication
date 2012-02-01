@@ -1,4 +1,4 @@
-<!-- SHTracker, Copyright Josh Fradley 2012 -->
+<!-- SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker) -->
 <html>
 <head>
 <?php
@@ -34,14 +34,13 @@ if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>"); 
 }
 
-//FIXME: Must be a better way of doing this
-$getdownloadinfo = mysql_query("SELECT name, count FROM Data WHERE id = \"$id\"");
-$info = mysql_fetch_row($getdownloadinfo);
-
-if (!$info) {
+//If ID exists show count or else die
+$showinfo = mysql_query("SELECT name, count FROM Data WHERE id = \"$id\"");
+$showresult = mysql_fetch_row($showinfo); 
+if ($showresult != 0) { 
+    echo "<p>" . $showresult["0"] . " has been downloaded " . $showresult["1"] . " times.</p>";
+} else { 
     die("<h1>SHTracker: Error</h1><p>ID <strong>$id</strong> does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
-} else {
-    echo "<p>" . $info["0"] . " has been downloaded " . $info["1"] . " times.</p>";
 }
 
 mysql_close($con);

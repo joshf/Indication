@@ -1,7 +1,7 @@
 <?php
 require("login.php");
 ?>
-<!-- SHTracker, Copyright Josh Fradley 2012 -->
+<!-- SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker) -->
 <html> 
 <head>
 <title>SHTracker: Admin Home</title>
@@ -33,7 +33,7 @@ echo "<h1>SHTracker: " . WEBSITE . " Download Statistics</h1>
 <th>Count</th>
 </tr>";
 
-while($row = mysql_fetch_array($getdownloads)) {
+while($row = mysql_fetch_assoc($getdownloads)) {
     echo "<tr>";
     echo "<td><input type=\"radio\" name=\"id\" value=\"" . $row["id"] . "\" /></td>";
     echo "<td>" . $row["name"] . "</td>";
@@ -54,14 +54,12 @@ echo "</table>";
 <?
 
 $getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM Data");
-while($row = mysql_fetch_array($getnumberofdownloads)) {
-    echo "<p><strong>Number of downloads: </strong>" . $row["COUNT(id)"] . "</p>";
-}
+$resultnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
+echo "<p><strong>Number of downloads: </strong>" . $resultnumberofdownloads["COUNT(id)"] . "</p>";
 
-$gettotaldownloads = mysql_query("SELECT SUM(count) FROM Data");
-while($row = mysql_fetch_array($gettotaldownloads)) {
-    echo "<p><strong>Total downloads: </strong>" . $row["SUM(count)"] . "</p>";
-}
+$gettotalnumberofdownloads = mysql_query("SELECT SUM(count) FROM Data");
+$resulttotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
+echo "<p><strong>Total downloads: </strong>" . $resulttotalnumberofdownloads["SUM(count)"] . "</p>";
 
 mysql_close($con);
 
@@ -70,7 +68,7 @@ mysql_close($con);
 <p>You can access your downloads with this link: <? echo PATH_TO_SCRIPT; ?>/get.php?id=<em>id</em></p>
 <hr />
 <p><a href="settings.php">Settings</a> | <a href="logout.php">Logout</a></p>
-<small>SHTracker 1.7.3 (git) "AggravatedAddax" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
+<small>SHTracker 1.7.5 "AggravatedAddax" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
 <p><small><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9QFKYNSKM8CBJ">Donate</a></p>
 </body>
 </html>

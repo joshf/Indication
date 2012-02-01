@@ -1,4 +1,4 @@
-<!-- SHTracker, Copyright Josh Fradley 2012 -->
+<!-- SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker) -->
 <html> 
 <head>
 <title>SHTracker: Download Deleted</title>
@@ -29,7 +29,7 @@ if (empty($idtodelete)) {
 }
 
 $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$idtodelete\"");
-$result = mysql_fetch_row($getnameofdownload);
+$resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
 
 mysql_query("DELETE FROM Data WHERE id = \"$idtodelete\"");
 
@@ -37,7 +37,7 @@ mysql_close($con);
 
 ?>
 <h1>SHTracker: Download Deleted</h1>
-<p>The download <strong><? echo $result["0"]; ?></strong> has been deleted.</p>
+<p>The download <strong><? echo $resultnameofdownload["name"]; ?></strong> has been deleted.</p>
 <hr />
 <p><a href="../../admin">Back To Home</a></p>
 </body>

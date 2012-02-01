@@ -1,4 +1,4 @@
-<!-- SHTracker, Copyright Josh Fradley 2012 -->
+<!-- SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker) -->
 <html> 
 <head>
 <title>SHTracker: Download Added</title>

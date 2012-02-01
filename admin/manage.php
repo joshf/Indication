@@ -2,9 +2,8 @@
 
 require("login.php");
 
-//SHTracker, Copyright Josh Fradley 2012
+//SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
 
-//If nothing is passed, go home
 if (!isset($_POST["command"])) {
     header("Location: ../admin");
 }
@@ -40,16 +39,16 @@ mysql_select_db(DB_NAME, $con);
 $idtoedit = mysql_real_escape_string($_POST["id"]);
 
 $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$idtoedit\"");
-$result = mysql_fetch_row($getnameofdownload);
+$resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
 
 ?>
-<h1>SHTracker: Editing Download <? echo $result["0"]; ?></h1>
+<h1>SHTracker: Editing Download <? echo $resultnameofdownload["name"]; ?></h1>
 <p>Please edit any values you wish.</p>
 <form action="actions/edit.php" method="post">
 <?php
 
 $getidinfo = mysql_query("SELECT * FROM Data WHERE id = \"$idtoedit\"");
-while($row = mysql_fetch_array($getidinfo)) {
+while($row = mysql_fetch_assoc($getidinfo)) {
     echo "<p>Name: <input type=\"text\" size=\"50\" name=\"name\" value=\"" . $row["name"] . "\" /></p>";
     echo "<p>ID: <input type=\"text\" size=\"50\" name=\"id\" value=\"" . $row["id"] . "\" /></p>";
     echo "<p>URL: <input type=\"text\" size=\"50\" name=\"url\" value=\"" . $row["url"] . "\" /></p>";
@@ -95,13 +94,13 @@ mysql_select_db(DB_NAME, $con);
 $idtodelete = mysql_real_escape_string($_POST["id"]);
 
 $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$idtodelete\"");
-$result = mysql_fetch_row($getnameofdownload);
+$resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
 
 mysql_close($con);
 
 ?>
 <h1>SHTracker: Deleting Download</h1>
-<p>Are you sure you wish to delete the download <strong><? echo $result["0"]; ?></strong>?</p>
+<p>Are you sure you wish to delete the download <strong><? echo $resultnameofdownload["name"]; ?></strong>?</p>
 <form action="actions/delete.php" method="post">
 <input type="hidden" name="idtodelete" value="<? echo $idtodelete; ?>" />
 <input type="submit" name="command" value="Delete" />

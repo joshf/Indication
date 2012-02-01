@@ -2,7 +2,7 @@
 
 require("login.php");
 
-//SHTracker, Copyright Josh Fradley 2012
+//SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
 
 require_once("../config.php");
 

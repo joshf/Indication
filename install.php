@@ -1,4 +1,4 @@
-<!-- SHTracker, Copyright Josh Fradley 2012 -->
+<!-- SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker) -->
 <html>
 <head>
 <title>SHTracker: Install</title>
@@ -21,7 +21,7 @@ $dbpassword = $_POST["dbpassword"];
 $dbname = $_POST["dbname"];
 $adminuser = $_POST["adminuser"];
 if (strlen($_POST["adminpassword"]) < "6") {
-    die("<h1>SHTracker: Error</h1><p>You password must be longer than six characters.</p><hr /><p><a href=\"install.php\">Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>You password must be longer than six characters.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
 } else {
     $adminpassword = sha1($_POST["adminpassword"]);
 }
@@ -54,7 +54,7 @@ $configfile = fopen("config.php", "w");
 fwrite($configfile, $string);
 fclose($configfile);
 die("<h1 style=\"color:green\">SHTracker: Install complete</h1><p>Please delete this file (install.php) from your server, as it poses a security risk!</p><p>It may also be helpful to make config.php unwritable.</p><p><a href=\"admin\">Admin Home</a></p></body></html>");
- 
+
 }
  
 ?>
