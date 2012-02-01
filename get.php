@@ -40,7 +40,7 @@ if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
 
 //If ID exists update count or else die
 $getinfo = mysql_query("SELECT id, url FROM Data WHERE id = \"$id\"");
-$getresult = mysql_fetch_row($getinfo); 
+$getresult = mysql_fetch_assoc($getinfo); 
 if ($getresult != 0) { 
     mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
 } else { 
@@ -51,12 +51,12 @@ mysql_close($con);
 
 //Check whether wait is enabled
 if (WAIT_STATE == "Enabled" ) {
-    echo "<p>" . WAIT_MESSAGE . "</p><p>" . WAIT_AD_CODE . "</p><hr /><p><a href=\"" . $getresult["1"] . "\">Continue To Download</a></p></body></html>";
+    echo "<p>" . WAIT_MESSAGE . "</p><p>" . WAIT_AD_CODE . "</p><hr /><p><a href=\"" . $getresult["url"] . "\">Continue To Download</a></p></body></html>";
     exit;
 }
 
 //Redirect user to the download
-header("Location: " . $getresult["1"] . "");
+header("Location: " . $getresult["url"] . "");
 ob_end_flush();
 exit;
 ?>

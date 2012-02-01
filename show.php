@@ -36,9 +36,9 @@ if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
 
 //If ID exists show count or else die
 $showinfo = mysql_query("SELECT name, count FROM Data WHERE id = \"$id\"");
-$showresult = mysql_fetch_row($showinfo); 
+$showresult = mysql_fetch_assoc($showinfo); 
 if ($showresult != 0) { 
-    echo "<p>" . $showresult["0"] . " has been downloaded " . $showresult["1"] . " times.</p>";
+     echo "<p>" . $showresult["name"] . " has been downloaded " . $showresult["count"] . " times.</p>";
 } else { 
     die("<h1>SHTracker: Error</h1><p>ID <strong>$id</strong> does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
 }
