@@ -48,6 +48,12 @@ if (empty($waitadcode)) {
     $waitadcode = $currentwaitadcode;
 }
 
+//Wait will set incorrect variables
+if ($currentwaitmessage == "WAIT_MESSAGE") {
+    $waitmessage = "";
+    $waitadcode = "";
+}
+
 $string = "<?php
 
 //Database Settings
