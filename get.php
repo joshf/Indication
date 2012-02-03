@@ -41,10 +41,21 @@ if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
 //If ID exists update count or else die
 $getinfo = mysql_query("SELECT name, id, url FROM Data WHERE id = \"$id\"");
 $getresult = mysql_fetch_assoc($getinfo); 
-if ($getresult != 0) { 
-    mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
-} else { 
+if ($getresult == 0) { 
     die("<h1>SHTracker: Error</h1><p>ID <strong>$id</strong> does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+}
+
+//Count unique clicks only (BETA feature)
+//Set COUNT_UNIQUE_ONLY to Enabled to use in settings
+if (COUNT_UNIQUE_ONLY == "Enabled") {
+    if (!isset($_COOKIE["shtrackeruniqueness$id"])) {
+        mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
+        setcookie("shtrackeruniqueness$id", "True", time()+3600*24);
+    } else {
+        echo "<p>Your download has already been counted..</p>";
+    }
+} else {
+    mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
 }
 
 mysql_close($con);
