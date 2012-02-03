@@ -15,6 +15,7 @@ $currentadminuser = ADMIN_USER;
 $currentadminpassword = ADMIN_PASSWORD;
 $currentwebsite = WEBSITE;
 $currentpathtoscript = PATH_TO_SCRIPT;
+$currentcountuniqueonly = COUNT_UNIQUE_ONLY;
 $currentwaitstate = WAIT_STATE;
 $currentwaitmessage = WAIT_MESSAGE;
 $currentwaitadcode = WAIT_AD_CODE; 
@@ -33,6 +34,7 @@ if ($adminpassword != $currentadminpassword) {
 }
 $website = $_POST["website"];
 $pathtoscript = $_POST["pathtoscript"];
+$countuniqueonly = $_POST["countuniqueonly"];
 $waitstate = $_POST["waitstate"];
 if (isset($_POST["waitmessage"])) {
     $waitmessage = $_POST["waitmessage"];
@@ -69,6 +71,7 @@ define(\"ADMIN_PASSWORD\", \"$adminpassword\");
 //Other Settings
 define(\"WEBSITE\", \"$website\");
 define(\"PATH_TO_SCRIPT\", \"$pathtoscript\");
+define(\"COUNT_UNIQUE_ONLY\", \"$countuniqueonly\");
 
 //Wait Settings
 define(\"WAIT_STATE\", \"$waitstate\");
@@ -124,6 +127,17 @@ if ($currentwaitstate == "Enabled" ) {
     <input type=\"radio\" name=\"waitstate\" value=\"Disabled\" checked/> Disabled<br />";
 }
 
+?>
+<p><strong>Count Unique Visitors Only:</strong></p>
+<p style="color:red">BETA: Use with caution, not fully tested, you may lose some counts!</p>
+<?php
+if ($currentcountuniqueonly == "Enabled" ) {
+    echo "<input type=\"radio\" name=\"countuniqueonly\" value=\"Enabled\" checked/> Enabled<br />
+    <input type=\"radio\" name=\"countuniqueonly\" value=\"Disabled\" /> Disabled<br />";
+} else {
+    echo "<input type=\"radio\" name=\"countuniqueonly\" value=\"Enabled\" /> Enabled<br />
+    <input type=\"radio\" name=\"countuniqueonly\" value=\"Disabled\" checked/> Disabled<br />";
+}
 ?>
 <p><input type="submit" name="Save" value="Save" /></p>
 </form>
