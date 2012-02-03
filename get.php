@@ -46,13 +46,12 @@ if ($getresult == 0) {
 }
 
 //Count unique clicks only (BETA feature)
-//Set COUNT_UNIQUE_ONLY to Enabled to use in settings
 if (COUNT_UNIQUE_ONLY == "Enabled") {
-    if (!isset($_COOKIE["shtrackeruniqueness$id"])) {
+    if (!isset($_COOKIE["shtrackerhasdownloaded$id"])) {
         mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
-        setcookie("shtrackeruniqueness$id", "True", time()+3600*24);
+        setcookie("shtrackerhasdownloaded$id", "True", time()+3600*24);
     } else {
-        echo "<p>Your download has already been counted..</p>";
+        echo "<p>Your download has already been counted. Thankyou!</p>";
     }
 } else {
     mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
