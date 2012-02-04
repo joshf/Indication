@@ -13,6 +13,7 @@ if (file_exists("config.php")) {
 }
 
 if (isset($_POST["Install"])) {
+
  
 //Get new settings from POST
 $dbhost = $_POST["dbhost"];
@@ -20,14 +21,36 @@ $dbuser = $_POST["dbuser"];
 $dbpassword = $_POST["dbpassword"];
 $dbname = $_POST["dbname"];
 $adminuser = $_POST["adminuser"];
-if (strlen($_POST["adminpassword"]) < "6") {
-    die("<h1>SHTracker: Error</h1><p>You password must be longer than six characters.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
-} else {
-    $adminpassword = sha1($_POST["adminpassword"]);
-}
+$adminpassword = $_POST["adminpassword"];
 $website = $_POST["website"];
 $pathtoscript = $_POST["pathtoscript"];
 $randomkey = str_shuffle("abcdefghijklmnopqrstuvwxyz123456789");
+
+//Make sure we actually install something
+if (empty($dbhost)) {
+    die("<h1>SHTracker: Error</h1><p>Please enter a database host.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+}
+if (empty($dbuser)) {
+    die("<h1>SHTracker: Error</h1><p>Please enter a database user.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+}
+if (empty($dbpassword)) {
+    die("<h1>SHTracker: Error</h1><p>Please enter a database password.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+}
+if (empty($dbname)) {
+    die("<h1>SHTracker: Error</h1><p>Please enter a database name.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+}
+if (empty($adminuser)) {
+    die("<h1>SHTracker: Error</h1><p>Please enter a admin user.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+}
+if (empty($adminpassword)) {
+    die("<h1>SHTracker: Error</h1><p>Please enter a admin password.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+} else {
+    if (strlen($adminpassword) < "6") {
+        die("<h1>SHTracker: Error</h1><p>You password must be longer than six characters.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+    } else {
+        $adminpassword = sha1($adminpassword);
+    }
+}
 
 $string = "<?php
 
