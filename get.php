@@ -45,13 +45,11 @@ if ($getresult == 0) {
     die("<h1>SHTracker: Error</h1><p>ID <strong>$id</strong> does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
 }
 
-//Count unique clicks only (BETA feature)
+//Count unique clicks only
 if (COUNT_UNIQUE_ONLY == "Enabled") {
     if (!isset($_COOKIE["shtrackerhasdownloaded$id"])) {
         mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
         setcookie("shtrackerhasdownloaded$id", "True", time()+3600*24);
-    } else {
-        echo "<p>Your download has already been counted. Thankyou!</p>";
     }
 } else {
     mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
