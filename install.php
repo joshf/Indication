@@ -13,7 +13,6 @@ if (file_exists("config.php")) {
 }
 
 if (isset($_POST["Install"])) {
-
  
 //Get new settings from POST
 $dbhost = $_POST["dbhost"];
