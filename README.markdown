@@ -30,6 +30,8 @@ The script is called like this: /get.php?id=mydownload1
 
 So instead of linking to http://yoursite.com/some/directory/mydownload1.zip, link to http://yoursite.com/SHTracker/get.php?id=mydownload1
 
+This script can also be called via $_POST just set the name of the form to id and the value to the id you wish to download
+
 This will log the count of the download and redirect the user to the file
 
 To show the downloads for one id only, call http://yoursite.com/SHTracker/show.php?id=mydownload1. This could be done using an include or an iframe (see below)
@@ -57,4 +59,4 @@ Open up SHTracker/admin to add new downloads, view statistics, update existing d
 Removal:
 --------
 
-To remove SHTracker, simply delete the SHTracker folder from your server and drop the "Data" table from your database
+To remove SHTracker, simply delete the SHTracker folder from your server and delete the "Data" table from your database

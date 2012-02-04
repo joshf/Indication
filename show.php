@@ -22,7 +22,12 @@ if (!$con) {
     
 mysql_select_db(DB_NAME, $con);
 
-$id = mysql_real_escape_string($_GET["id"]);
+//Accept POST or GET
+if (isset($_GET["id"])) {
+    $id = mysql_real_escape_string($_GET["id"]);
+} else {
+    $id = mysql_real_escape_string($_POST["id"]);
+}
 
 //Check ID is not blank
 if (empty($id)) {

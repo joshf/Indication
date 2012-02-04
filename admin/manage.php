@@ -4,7 +4,8 @@ require("login.php");
 
 //SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
 
-if (!isset($_POST["command"])) {
+//If no download is selected or manage.php is called directly go home
+if (!isset($_POST["command"]) || !isset($_POST["id"])) {
     header("Location: ../admin");
 }
 
@@ -21,10 +22,6 @@ if ($command == "Edit") {
 </head>
 <body>
 <?php
-
-if (!isset($_POST["id"])) {
-    die("<h1>SHTracker: Error</h1><p>No download selected...</p><hr /><p><a href=\"../admin\">Go Back</a></p></body></html>");
-}
 
 //Connect to database
 require_once("../config.php");
@@ -76,10 +73,6 @@ mysql_close($con);
 </head>
 <body>
 <?
-
-if (!isset($_POST["id"])) {
-    die("<h1>SHTracker: Error</h1><p>No download selected...</p><hr /><p><a href=\"../admin\">Go Back</a></p></body></html>");
-}
 
 //Connect to database
 require_once("../config.php");
