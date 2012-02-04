@@ -46,7 +46,7 @@ if ($getresult == 0) {
 }
 
 //Count unique clicks only
-if (COUNT_UNIQUE_ONLY == "Enabled") {
+if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
     if (!isset($_COOKIE["shtrackerhasdownloaded$id"])) {
         mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
         setcookie("shtrackerhasdownloaded$id", "True", time()+3600*24);
