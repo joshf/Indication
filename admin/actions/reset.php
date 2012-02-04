@@ -4,6 +4,11 @@
 
 require_once("../../config.php");
 
+//If reset.php is called directly go home
+if (!isset($_POST["command"])) {
+    header("Location: ../../admin");
+}
+
 //Make user confirm action with a password
 $password = ADMIN_PASSWORD;
 
@@ -48,7 +53,7 @@ mysql_close($con);
 </body>
 </html>
 <?php
-} else {
+} elseif ($command == "Delete All Downloads") {
 ?>
 <!-- Delete -->
 <html> 
