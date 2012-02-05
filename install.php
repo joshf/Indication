@@ -66,6 +66,12 @@ define(\"ADMIN_PASSWORD\", \"$adminpassword\");
 //Other Settings
 define(\"WEBSITE\", \"$website\");
 define(\"PATH_TO_SCRIPT\", \"$pathtoscript\");
+define(\"COUNT_UNIQUE_ONLY_STATE\", \"Disabled\");
+
+//Wait Settings
+define(\"WAIT_STATE\", \"Disabled\");
+define(\"WAIT_MESSAGE\", \"\");
+define(\"WAIT_AD_CODE\", \"\");
 
 //Random Key
 define(\"RANDOM_KEY\", \"$randomkey\");

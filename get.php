@@ -39,13 +39,12 @@ if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
 }
 
 //If ID exists update count or else die
-$getinfo = mysql_query("SELECT name, id, url FROM Data WHERE id = \"$id\"");
+$getinfo = mysql_query("SELECT name, url FROM Data WHERE id = \"$id\"");
 $getresult = mysql_fetch_assoc($getinfo); 
 if ($getresult == 0) { 
     die("<h1>SHTracker: Error</h1><p>ID <strong>$id</strong> does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
 }
 
-//Count unique clicks only
 if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
     if (!isset($_COOKIE["shtrackerhasdownloaded$id"])) {
         mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
