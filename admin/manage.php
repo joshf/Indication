@@ -72,7 +72,7 @@ mysql_close($con);
 <link rel="stylesheet" type="text/css" href="../style.css" />
 </head>
 <body>
-<?
+<?php
 
 //Connect to database
 require_once("../config.php");

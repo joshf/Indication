@@ -38,7 +38,7 @@ if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>"); 
 }
 
-//If ID exists update count or else die
+//Check if ID exists
 $getinfo = mysql_query("SELECT name, url FROM Data WHERE id = \"$id\"");
 $getresult = mysql_fetch_assoc($getinfo); 
 if ($getresult == 0) { 
