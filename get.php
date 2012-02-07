@@ -48,7 +48,7 @@ if ($getresult == 0) {
 if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
     if (!isset($_COOKIE["shtrackerhasdownloaded$id"])) {
         mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
-        setcookie("shtrackerhasdownloaded$id", "True", time()+3600*24);
+        setcookie("shtrackerhasdownloaded$id", "True", time()+3600*COUNT_UNIQUE_ONLY_TIME);
     }
 } else {
     mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");

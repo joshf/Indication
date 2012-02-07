@@ -67,6 +67,7 @@ define(\"ADMIN_PASSWORD\", \"$adminpassword\");
 define(\"WEBSITE\", \"$website\");
 define(\"PATH_TO_SCRIPT\", \"$pathtoscript\");
 define(\"COUNT_UNIQUE_ONLY_STATE\", \"Disabled\");
+define(\"COUNT_UNIQUE_ONLY_TIME\", \"24\");
 
 //Wait Settings
 define(\"WAIT_STATE\", \"Disabled\");
