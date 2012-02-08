@@ -36,7 +36,9 @@ if ($adminpassword != $currentadminpassword) {
 $website = $_POST["website"];
 $pathtoscript = $_POST["pathtoscript"];
 $countuniqueonlystate = $_POST["countuniqueonlystate"];
-$countuniqueonlytime = $_POST["countuniqueonlytime"];
+if (isset($_POST["countuniqueonlytime"])) {
+    $countuniqueonlytime = $_POST["countuniqueonlytime"];
+}
 $waitstate = $_POST["waitstate"];
 if (isset($_POST["waitmessage"])) {
     $waitmessage = $_POST["waitmessage"];
@@ -44,12 +46,15 @@ if (isset($_POST["waitmessage"])) {
 }
 $randomkey = RANDOM_KEY; 
 
-//Remember previous settings for wait
+//Remember previous settings
 if (empty($waitmessage)) {
     $waitmessage = $currentwaitmessage;
 }
 if (empty($waitadcode)) {
     $waitadcode = $currentwaitadcode;
+}
+if (empty($countuniqueonlytime)) {
+    $countuniqueonlytime = $currentcountuniqueonlytime;
 }
 
 $string = "<?php
