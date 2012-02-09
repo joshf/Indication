@@ -7,6 +7,7 @@
 <body>
 <?php
 
+//Security check
 if (file_exists("config.php")) {
     die("<h1>SHTracker: Error</h1><p>SHTracker has already been installed! If you wish to reinstall SHTracker, please delete config.php from your server.</p><hr /><p><a href=\"admin\">Go Back</a></p></body></html>"); 
 }

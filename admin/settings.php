@@ -132,7 +132,6 @@ if ($currentwaitstate == "Enabled" ) {
 ?>
 <p><strong>Count Unique Visitors Only:</strong></p>
 <p>This settings allows you to make sure an individual users clicks are only counted once.</p>
-<p style="color:red">BETA: Use with caution, not fully tested, you may lose some counts!</p>
 <?php
 if ($currentcountuniqueonlystate == "Enabled" ) {
     echo "<p>Hours to consider user unique: <input type=\"text\" name=\"countuniqueonlytime\" value=\"$currentcountuniqueonlytime\" /></p><input type=\"radio\" name=\"countuniqueonlystate\" value=\"Enabled\" checked/> Enabled<br />
