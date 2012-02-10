@@ -15,9 +15,7 @@ $command = $_POST["command"];
 if ($command == "Reveal Link") {
     $_SESSION["idtoreveal"] = $_POST["id"];
     header("Location: ../admin");
-}
-
-if ($command == "Edit") {
+} elseif ($command == "Edit") {
 
 ?>
 <!-- Edit -->
