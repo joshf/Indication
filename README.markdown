@@ -28,6 +28,8 @@ Usage:
 
 The script is called like this: /get.php?id=mydownload1
 
+Replace ID with the ID name/number of your URL, for example: http://yoursite.com/SHTracker/get.php?id=mydownload1
+
 So instead of linking to http://yoursite.com/some/directory/mydownload1.zip, link to http://yoursite.com/SHTracker/get.php?id=mydownload1
 
 This script can also be called via $_POST just set the name of the form to id and the value to the id you wish to download
@@ -36,7 +38,7 @@ This will log the count of the download and redirect the user to the file
 
 To show the downloads for one id only, call http://yoursite.com/SHTracker/show.php?id=mydownload1. This could be done using an include or an iframe (see below)
 
-To show the number of clicks on an external page use either of the following codes:
+Example Codes:
 
 ```php
 <?php

@@ -65,9 +65,9 @@ mysql_close($con);
 
 ?>
 <hr />
-<p>You can access your downloads with this link: <? echo PATH_TO_SCRIPT; ?>/get.php?id=<em>id</em></p>
+<p>To track link clicks use the following URL rather than the original link: <? echo PATH_TO_SCRIPT; ?>/get.php?id=<em>id</em></p>
 <hr />
-<p><a href="settings.php">Settings</a> | <a href="logout.php">Logout</a></p>
+<p><a href="index.php">Refresh</a> | <a href="settings.php">Settings</a> | <a href="logout.php">Logout</a></p>
 <small>SHTracker 1.8 "InvisibleIguana" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
 <p><small><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9QFKYNSKM8CBJ">Donate</a></p>
 </body>
