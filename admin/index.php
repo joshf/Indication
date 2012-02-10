@@ -62,13 +62,16 @@ $gettotalnumberofdownloads = mysql_query("SELECT SUM(count) FROM Data");
 $resulttotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
 echo "<p><strong>Total downloads: </strong>" . $resulttotalnumberofdownloads["SUM(count)"] . "</p>";
 
-mysql_close($con);
-
-//FIXME: This could be better. Show link with ID
+//FIXME: Could this be done better?
 if (isset($_SESSION["idtoreveal"])) {
-    echo "<hr /><p>To track link clicks for the ID <strong>" . $_SESSION["idtoreveal"] . "</strong> use the following URL rather than the original link: <br /><textarea rows=\"1\" cols=\"80\" readonly=\"readonly\">" . PATH_TO_SCRIPT . "/get.php?id=" . $_SESSION["idtoreveal"] . "</textarea></p>";
+    $namequery = $_SESSION["idtoreveal"];
+    $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$namequery\"");
+    $resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
+    echo "<hr /><p>To track link clicks for the download <strong>" . $resultnameofdownload["name"] . "</strong> use the following URL rather than the original link: <br /><textarea rows=\"1\" cols=\"80\" readonly=\"readonly\">" . PATH_TO_SCRIPT . "/get.php?id=" . $_SESSION["idtoreveal"] . "</textarea></p>";
     unset($_SESSION["idtoreveal"]);
 }
+
+mysql_close($con);
 
 ?>
 <hr />
