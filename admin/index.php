@@ -51,18 +51,15 @@ echo "</table>";
 <input type="submit" name="command" value="Delete" />
 <input type="submit" name="command" value="Reveal Link" />
 </form>
+<p><em>To edit or delete a ID please select the radio button next to it.</em></p>
 <?php
 
 //FIXME: This could be better. Show link with ID
 if (isset($_SESSION["idtoreveal"])) {
-    echo "<p style=\"color:blue\"><em>Link for ID: " . $_SESSION["idtoreveal"] . "</em></p>";
-    echo "<textarea rows=\"1\" cols=\"100\">" . PATH_TO_SCRIPT . "get.php?id=" . $_SESSION["idtoreveal"] . "</textarea>";
+    echo "<p><em>Link for ID: " . $_SESSION["idtoreveal"] . "</em></p>";
+    echo "<textarea rows=\"1\" cols=\"100\">" . PATH_TO_SCRIPT . "/get.php?id=" . $_SESSION["idtoreveal"] . "</textarea>";
     unset($_SESSION["idtoreveal"]);
 }
-
-?>
-<p><em>To edit or delete a ID please select the radio button next to it.</em></p>
-<?
 
 $getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM Data");
 $resultnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
