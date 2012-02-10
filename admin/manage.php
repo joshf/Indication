@@ -12,7 +12,7 @@ if (!isset($_POST["command"]) || !isset($_POST["id"])) {
 $command = $_POST["command"];
 
 //FIXME: Show link on index.php we  have to use a session
-if ($command == "Reveal Link") {
+if ($command == "Show Tracking Link") {
     $_SESSION["idtoreveal"] = $_POST["id"];
     header("Location: ../admin");
 } elseif ($command == "Edit") {

@@ -49,17 +49,10 @@ echo "</table>";
 <input type="submit" name="command" value="New" />
 <input type="submit" name="command" value="Edit" />
 <input type="submit" name="command" value="Delete" />
-<input type="submit" name="command" value="Reveal Link" />
+<input type="submit" name="command" value="Show Tracking Link" />
 </form>
 <p><em>To edit or delete a ID please select the radio button next to it.</em></p>
 <?php
-
-//FIXME: This could be better. Show link with ID
-if (isset($_SESSION["idtoreveal"])) {
-    echo "<p><strong><em>Link for ID: " . $_SESSION["idtoreveal"] . "</em></strong></p>";
-    echo "<textarea rows=\"1\" cols=\"100\">" . PATH_TO_SCRIPT . "/get.php?id=" . $_SESSION["idtoreveal"] . "</textarea>";
-    unset($_SESSION["idtoreveal"]);
-}
 
 $getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM Data");
 $resultnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
@@ -71,9 +64,13 @@ echo "<p><strong>Total downloads: </strong>" . $resulttotalnumberofdownloads["SU
 
 mysql_close($con);
 
+//FIXME: This could be better. Show link with ID
+if (isset($_SESSION["idtoreveal"])) {
+    echo "<hr /><p>To track link clicks for the ID <strong>" . $_SESSION["idtoreveal"] . "</strong> use the following URL rather than the original link: " . PATH_TO_SCRIPT . "/get.php?id=" . $_SESSION["idtoreveal"] . "</p>";
+    unset($_SESSION["idtoreveal"]);
+}
+
 ?>
-<hr />
-<p>To track link clicks use the following URL rather than the original link: <? echo PATH_TO_SCRIPT; ?>/get.php?id=<em>id</em></p>
 <hr />
 <p><a href="index.php">Refresh</a> | <a href="settings.php">Settings</a> | <a href="logout.php">Logout</a></p>
 <small>SHTracker 1.8 "InvisibleIguana" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
