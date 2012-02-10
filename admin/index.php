@@ -51,7 +51,7 @@ echo "</table>";
 <input type="submit" name="command" value="Delete" />
 <input type="submit" name="command" value="Show Tracking Link" />
 </form>
-<p><em>To edit or delete a ID please select the radio button next to it.</em></p>
+<p><em>To edit, delete or show the tracking link for a ID please select the radio button next to it.</em></p>
 <?php
 
 $getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM Data");
@@ -66,7 +66,7 @@ mysql_close($con);
 
 //FIXME: This could be better. Show link with ID
 if (isset($_SESSION["idtoreveal"])) {
-    echo "<hr /><p>To track link clicks for the ID <strong>" . $_SESSION["idtoreveal"] . "</strong> use the following URL rather than the original link: " . PATH_TO_SCRIPT . "/get.php?id=" . $_SESSION["idtoreveal"] . "</p>";
+    echo "<hr /><p>To track link clicks for the ID <strong>" . $_SESSION["idtoreveal"] . "</strong> use the following URL rather than the original link: <br /><textarea rows=\"1\" cols=\"80\" readonly=\"readonly\">" . PATH_TO_SCRIPT . "/get.php?id=" . $_SESSION["idtoreveal"] . "</textarea></p>";
     unset($_SESSION["idtoreveal"]);
 }
 
