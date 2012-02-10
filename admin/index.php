@@ -51,6 +51,16 @@ echo "</table>";
 <input type="submit" name="command" value="Delete" />
 <input type="submit" name="command" value="Reveal Link" />
 </form>
+<?php
+
+//FIXME: This could be better. Show link with ID
+if (isset($_SESSION["idtoreveal"])) {
+    echo "<p style=\"color:blue\"><em>Link for ID: " . $_SESSION["idtoreveal"] . "</em></p>";
+    echo "<textarea rows=\"1\" cols=\"100\">" . PATH_TO_SCRIPT . "get.php?id=" . $_SESSION["idtoreveal"] . "</textarea>";
+    unset($_SESSION["idtoreveal"]);
+}
+
+?>
 <p><em>To edit or delete a ID please select the radio button next to it.</em></p>
 <?
 
@@ -63,13 +73,6 @@ $resulttotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
 echo "<p><strong>Total downloads: </strong>" . $resulttotalnumberofdownloads["SUM(count)"] . "</p>";
 
 mysql_close($con);
-
-//FIXME: This could be better. Show link with ID
-if (isset($_SESSION["idtoreveal"])) {
-    echo "<p style=\"color:blue\"><em>Link for ID: " . $_SESSION["idtoreveal"] . "</em></p>";
-    echo "<textarea rows=\"1\" cols=\"100\">" . PATH_TO_SCRIPT . "get.php?id=" . $_SESSION["idtoreveal"] . "</textarea>";
-    unset($_SESSION["idtoreveal"]);
-}
 
 ?>
 <hr />
