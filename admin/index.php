@@ -56,7 +56,7 @@ echo "</table>";
 
 //FIXME: This could be better. Show link with ID
 if (isset($_SESSION["idtoreveal"])) {
-    echo "<p><em>Link for ID: " . $_SESSION["idtoreveal"] . "</em></p>";
+    echo "<p><strong><em>Link for ID: " . $_SESSION["idtoreveal"] . "</em></strong></p>";
     echo "<textarea rows=\"1\" cols=\"100\">" . PATH_TO_SCRIPT . "/get.php?id=" . $_SESSION["idtoreveal"] . "</textarea>";
     unset($_SESSION["idtoreveal"]);
 }
