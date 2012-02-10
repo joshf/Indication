@@ -5,7 +5,7 @@ Installation:
 -------------
 
 1. Create a new database using your web hosts control panel (for instructions on how to do this please contact your web host)
-2. Select your new database in PhpMyAdmin or other MySQL tool
+2. Select your new database in phpMyAdmin or other MySQL tool
 3. Go to the query tab and paste the following in the box:
 <pre>CREATE TABLE \`Data\` (
 \`name\` VARCHAR(100) NOT NULL ,

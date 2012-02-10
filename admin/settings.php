@@ -114,11 +114,10 @@ User: <input type="text" name="adminuser" value="<? echo $currentadminuser; ?>" 
 Password: <input type="password" name="adminpassword" value="<? echo $currentadminpassword; ?>" /><br />
 <p><strong>Other settings:</strong></p>
 Website Name: <input type="text" name="website" value="<? echo $currentwebsite; ?>" /><br />
-Path to script: <input type="text" name="pathtoscript" value="<? echo $currentpathtoscript; ?>" /><br />
+Path to Script: <input type="text" name="pathtoscript" value="<? echo $currentpathtoscript; ?>" /><br />
 <p><strong>Wait settings:</strong></p>
 <p>Make users wait before they are served their download. This is useful if you use adverts on your site.</p>
 <?php
-
 if ($currentwaitstate == "Enabled" ) {
     echo "<input type=\"radio\" name=\"waitstate\" value=\"Enabled\" checked/> Enabled<br />
     <input type=\"radio\" name=\"waitstate\" value=\"Disabled\" /> Disabled
@@ -128,13 +127,12 @@ if ($currentwaitstate == "Enabled" ) {
     echo "<input type=\"radio\" name=\"waitstate\" value=\"Enabled\" /> Enabled<br />
     <input type=\"radio\" name=\"waitstate\" value=\"Disabled\" checked/> Disabled<br />";
 }
-
 ?>
 <p><strong>Count Unique Visitors Only:</strong></p>
 <p>This settings allows you to make sure an individual users clicks are only counted once.</p>
 <?php
 if ($currentcountuniqueonlystate == "Enabled" ) {
-    echo "<p>Hours to consider user unique: <input type=\"text\" name=\"countuniqueonlytime\" value=\"$currentcountuniqueonlytime\" /></p><input type=\"radio\" name=\"countuniqueonlystate\" value=\"Enabled\" checked/> Enabled<br />
+    echo "<p>Hours to consider a user unique: <input type=\"text\" name=\"countuniqueonlytime\" value=\"$currentcountuniqueonlytime\" /></p><input type=\"radio\" name=\"countuniqueonlystate\" value=\"Enabled\" checked/> Enabled<br />
     <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\" /> Disabled<br />";
 } else {
     echo "<input type=\"radio\" name=\"countuniqueonlystate\" value=\"Enabled\" /> Enabled<br />
