@@ -77,12 +77,12 @@ if (isset($_SESSION["idtoreveal"])) {
     $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$namequery\"");
     $resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
     echo "<script language=\"javascript\">
-    function showlink()
+    function showtrackinglink()
         {
-        prompt(\"Download link for download " . $resultnameofdownload["name"] . ". Press Ctrl/Cmd C to copy to the clipboard:\",\"" . PATH_TO_SCRIPT . "/get.php?id=" . $_SESSION["idtoreveal"] . "\");
+        prompt(\"Tracking link for download " . $resultnameofdownload["name"] . ". Press Ctrl/Cmd C to copy to the clipboard:\",\"" . PATH_TO_SCRIPT . "/get.php?id=" . $_SESSION["idtoreveal"] . "\");
         return \"\"   
         }
-        document.writeln(showlink())
+    document.writeIn(showtrackinglink())
     </script>";
     unset($_SESSION["idtoreveal"]);
 }
