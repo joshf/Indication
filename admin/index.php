@@ -9,6 +9,7 @@ require("login.php");
 <script src="../sorttable.js"></script>
 </head>
 <body>
+<noscript><p>Your browser does not support JavaScript or it is disabled, certain functions such as table sorting or displaying of tracking links will be broken!</p></noscript>
 <?php
 
 //Connect to database
