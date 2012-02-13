@@ -62,21 +62,32 @@ $gettotalnumberofdownloads = mysql_query("SELECT SUM(count) FROM Data");
 $resulttotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
 echo "<p><strong>Total downloads: </strong>" . $resulttotalnumberofdownloads["SUM(count)"] . "</p>";
 
+?>
+<hr />
+<p><a href="index.php">Refresh</a> | <a href="settings.php">Settings</a> | <a href="logout.php">Logout</a></p>
+<small>SHTracker 1.8 "InvisibleIguana" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
+<p><small><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9QFKYNSKM8CBJ">Donate</a></p>
+<?php
+
+//I know this should be higher, but the footer goes crazy otherwise
 //FIXME: Could this be done better?
 if (isset($_SESSION["idtoreveal"])) {
     $namequery = $_SESSION["idtoreveal"];
     $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$namequery\"");
     $resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
-    echo "<hr /><p>To track link clicks for the download <strong>" . $resultnameofdownload["name"] . "</strong> use the following URL rather than the original link: <br /><textarea rows=\"1\" cols=\"80\" readonly=\"readonly\">" . PATH_TO_SCRIPT . "/get.php?id=" . $_SESSION["idtoreveal"] . "</textarea></p>";
+    echo "<script language=\"javascript\">
+    function showlink()
+        {
+        prompt(\"Download link for download " . $resultnameofdownload["name"] . ". Press Ctrl/Cmd C to copy to the clipboard:\",\"" . PATH_TO_SCRIPT . "/get.php?id=" . $_SESSION["idtoreveal"] . "\");
+        return \"\"   
+        }
+        document.writeln(showlink())
+    </script>";
     unset($_SESSION["idtoreveal"]);
 }
 
 mysql_close($con);
 
 ?>
-<hr />
-<p><a href="index.php">Refresh</a> | <a href="settings.php">Settings</a> | <a href="logout.php">Logout</a></p>
-<small>SHTracker 1.8 "InvisibleIguana" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
-<p><small><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9QFKYNSKM8CBJ">Donate</a></p>
 </body>
 </html>
