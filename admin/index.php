@@ -8,7 +8,6 @@ require("login.php");
 <link rel="stylesheet" type="text/css" href="../style.css" />
 <script src="../sorttable.js"></script>
 <script src="../jquery.js"></script>
-
 </head>
 <body>
 <noscript><p>Your browser does not support JavaScript or it is disabled, certain functions such as table sorting or displaying of tracking links will be broken!</p></noscript>
@@ -48,17 +47,17 @@ while($row = mysql_fetch_assoc($getdownloads)) {
 echo "</table>";
 
 ?>
-<br />
 <script type="text/javascript">
     function showtrackinglink() 
     {
     prompt("Tracking link for ID " + $("input[name=id]:checked").val() + ". Press Ctrl/Cmd C to copy to the clipboard:","<?php echo PATH_TO_SCRIPT ?>/get.php?id=" + $("input[name=id]:checked").val())
     }
 </script>
+<br />
 <input type="submit" name="command" value="New" />
 <input type="submit" name="command" value="Edit" />
 <input type="submit" name="command" value="Delete" />
-<input type="button" name="showtrackinglink" onClick="showtrackinglink()" value="Show Tracking Link" />
+<input type="button" name="command" onClick="showtrackinglink()" value="Show Tracking Link" />
 </form>
 <p><em>To edit, delete or show the tracking link for a ID please select the radio button next to it.</em></p>
 <?php
