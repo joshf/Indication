@@ -68,7 +68,7 @@ mysql_close($con);
 <!-- Delete -->
 <html> 
 <head>
-<title>SHTracker: Deleting Download</title>
+<title>SHTracker: Download Deleted</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
 </head>
 <body>
@@ -89,18 +89,15 @@ $idtodelete = mysql_real_escape_string($_POST["id"]);
 $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$idtodelete\"");
 $resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
 
+mysql_query("DELETE FROM Data WHERE id = \"$idtodelete\"");
+
 mysql_close($con);
 
 ?>
-<h1>SHTracker: Deleting Download</h1>
-<p>Are you sure you wish to delete the download <strong><? echo $resultnameofdownload["name"]; ?></strong>?</p>
-<form action="actions/delete.php" method="post">
-<input type="hidden" name="idtodelete" value="<? echo $idtodelete; ?>" />
-<input type="submit" name="command" value="Delete" />
-<input type="submit" name="command" value="Keep" />
-</form>
+<h1>SHTracker: Download Deleted</h1>
+<p>The download <strong><? echo $resultnameofdownload["name"]; ?></strong> has been deleted.</p>
 <hr />
-<p><a href="../admin">Go Back</a></p>
+<p><a href="../admin">Back To Home</a></p>
 </body>
 </html>
 <?php
