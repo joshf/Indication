@@ -48,16 +48,27 @@ echo "</table>";
 
 ?>
 <script type="text/javascript">
-    function showtrackinglink() 
-    {
-    prompt("Tracking link for the download " + $("input[name=id]:checked").parent().siblings("td.name").text() + ". Press Ctrl/Cmd C to copy to the clipboard:","<?php echo PATH_TO_SCRIPT ?>/get.php?id=" + $("input[name=id]:checked").val())
+function showtrackinglink() 
+{
+    if ($("input[name=id]:checked").val()) {
+        prompt("Tracking link for the download " + $("input[name=id]:checked").parent().siblings("td.name").text() + ". Press Ctrl/Cmd C to copy to the clipboard:","<?php echo PATH_TO_SCRIPT ?>/get.php?id=" + $("input[name=id]:checked").val());
+    } else {
+        alert("No ID selected!");
     }
+}
+function isempty() 
+{
+    if (!$("input[name=id]:checked").val()) {
+        alert("No ID selected!");
+        return false;
+    }
+}
 </script>
 <br />
 <input type="submit" name="command" value="New" />
-<input type="submit" name="command" value="Edit" />
-<input type="submit" name="command" value="Delete" />
-<input type="button" name="command" onClick="showtrackinglink()" value="Show Tracking Link" />
+<input type="submit" name="command" onClick="return isempty()" value="Edit" />
+<input type="submit" name="command" onClick="return isempty()" value="Delete" />
+<input type="button" onClick="showtrackinglink()" name="command" value="Show Tracking Link" />
 </form>
 <p><em>To edit, delete or show the tracking link for a ID please select the radio button next to it.</em></p>
 <?php
