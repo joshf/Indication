@@ -63,11 +63,25 @@ function isempty()
         return false;
     }
 }
+function deleteconfirm() 
+{
+    if (!$("input[name=id]:checked").val()) {
+        alert("No ID selected!");
+        return false;
+    } else {
+        var delconfirm=confirm("Are you wish to delete the download " + $("input[name=id]:checked").parent().siblings("td.name").text() + "?");
+        if (delconfirm==true) {
+            return true;
+        } else {
+            return false; 
+        }
+    }
+}
 </script>
 <br />
 <input type="submit" name="command" value="New" />
 <input type="submit" name="command" onClick="return isempty()" value="Edit" />
-<input type="submit" name="command" onClick="return isempty()" value="Delete" />
+<input type="submit" name="command" onClick="return deleteconfirm()" value="Delete" />
 <input type="button" onClick="showtrackinglink()" name="command" value="Show Tracking Link" />
 </form>
 <p><em>To edit, delete or show the tracking link for a ID please select the radio button next to it.</em></p>
