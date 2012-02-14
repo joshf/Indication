@@ -38,7 +38,7 @@ echo "<h1>SHTracker: " . WEBSITE . " Download Statistics</h1>
 while($row = mysql_fetch_assoc($getdownloads)) {
     echo "<tr>";
     echo "<td><input type=\"radio\" name=\"id\" value=\"" . $row["id"] . "\" /></td>";
-    echo "<td>" . $row["name"] . "</td>";
+    echo "<td class=\"name\">" . $row["name"] . "</td>";
     echo "<td>" . $row["id"] . "</td>";
     echo "<td>" . $row["url"] . "</td>";
     echo "<td>" . $row["count"] . "</td>";
@@ -50,7 +50,7 @@ echo "</table>";
 <script type="text/javascript">
     function showtrackinglink() 
     {
-    prompt("Tracking link for ID " + $("input[name=id]:checked").val() + ". Press Ctrl/Cmd C to copy to the clipboard:","<?php echo PATH_TO_SCRIPT ?>/get.php?id=" + $("input[name=id]:checked").val())
+    prompt("Tracking link for the download " + $("input[name=id]:checked").parent().siblings("td.name").text() + ". Press Ctrl/Cmd C to copy to the clipboard:","<?php echo PATH_TO_SCRIPT ?>/get.php?id=" + $("input[name=id]:checked").val())
     }
 </script>
 <br />
