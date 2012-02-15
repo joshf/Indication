@@ -50,6 +50,12 @@ if (empty($adminpassword)) {
         $adminpassword = sha1($adminpassword);
     }
 }
+if (empty($website)) {
+    die("<h1>SHTracker: Error</h1><p>Please enter a website name.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+}
+if (empty($pathtoscript)) {
+    die("<h1>SHTracker: Error</h1><p>Please enter a script path.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+}
 
 $string = "<?php
 
@@ -88,6 +94,7 @@ die("<h1 style=\"color:green\">SHTracker: Install complete</h1><p>Please delete 
  
 ?>
 <h1>SHTracker: Install</h1>
+<p><em>All fields are required</em></p>
 <p><strong>Database Settings:</strong></p>
 <form method="post">
 Host: <input type="text" name="dbhost" /><br />
