@@ -83,6 +83,11 @@ function deleteconfirm()
 <input type="submit" name="command" onClick="return isempty()" value="Edit" />
 <input type="submit" name="command" onClick="return deleteconfirm()" value="Delete" />
 <input type="button" onClick="showtrackinglink()" name="command" value="Show Tracking Link" />
+<?php
+if (LOG_UPDATES_STATE == "Enabled") {
+    echo "<input type=\"submit\" name=\"command\" onClick=\"return isempty()\" value=\"View History\" />";
+}
+?>
 </form>
 <p><em>To edit, delete or show the tracking link for a ID please select the radio button next to it.</em></p>
 <?php

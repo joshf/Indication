@@ -102,7 +102,11 @@ mysql_close($con);
 </html>
 <?php
 } elseif ($command == "New") {
-//New
-header("Location: add.php");
+    //New
+    header("Location: add.php");
+} elseif ($command == "View History") {
+    //View history
+    $_SESSION["idtoviewhistory"] = $_POST["id"];
+    header("Location: history.php");
 }
 ?>
