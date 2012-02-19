@@ -100,7 +100,7 @@ mysql_close($con);
 ?>
 <hr />
 <p><a href="index.php">Refresh</a> | <a href="settings.php">Settings</a> | <a href="logout.php">Logout</a></p>
-<small>SHTracker 1.8 "InvisibleIguana" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
+<small>SHTracker 1.9 "CynicalChaffinch" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
 <p><small><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9QFKYNSKM8CBJ">Donate</a></p>
 </body>
 </html>
