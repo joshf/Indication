@@ -60,7 +60,7 @@ if (LOG_UPDATES_STATE == "Enabled") {
         mysql_query("UPDATE History SET count = \"$newcount\" WHERE dateupdated = \"$currentdate\" AND id = \"$newid\"");
     } else { 
         mysql_query("INSERT INTO History (dateupdated, id, count)
-        VALUES (\"$dateupdated\",\"$newid\",\"$newcount\")");
+        VALUES (\"$currentdate\",\"$newid\",\"$newcount\")");
     }
 }
 
