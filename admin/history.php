@@ -21,7 +21,7 @@ if (!$con) {
 
 mysql_select_db(DB_NAME, $con);
 
-//Switch to POST
+//Set id using SESSION
 $id = mysql_real_escape_string($_SESSION["idtoviewhistory"]);
 
 //Check ID is not blank
