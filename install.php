@@ -89,6 +89,26 @@ define(\"RANDOM_KEY\", \"$randomkey\");
 $configfile = fopen("config.php", "w");
 fwrite($configfile, $string);
 fclose($configfile);
+
+//Lay the table please
+$con = mysql_connect($dbhost, $dbuser, $dbpassword);
+if (!$con) {
+    die("<h1>SHTracker: Error</h1><p>Install failed!</p><p>Could not connect: " . mysql_error() . "</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+}
+
+mysql_select_db($dbname, $con);
+
+$createtable = "CREATE TABLE Data2 (
+name VARCHAR(100) NOT NULL,
+id VARCHAR(25) NOT NULL,
+url VARCHAR(200) NOT NULL,
+count INT(10) NOT NULL default '0',
+PRIMARY KEY (id)
+) ENGINE = MYISAM;";
+
+mysql_query($createtable, $con);
+mysql_close($con);
+
 die("<h1 style=\"color:green\">SHTracker: Install complete</h1><p>Please delete this file (install.php) from your server, as it poses a security risk!</p><p>It may also be helpful to make config.php unwritable.</p><p><a href=\"admin\">Admin Home</a></p></body></html>");
 
 }
