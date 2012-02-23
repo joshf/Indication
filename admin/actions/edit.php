@@ -54,7 +54,7 @@ mysql_query("UPDATE Data SET name = \"$newname\", id = \"$newid\", url = \"$newu
 
 if (LOG_UPDATES_STATE == "Enabled") {
     $currentdate = date("d-m-y");
-    $hasupdatebeenlogged = mysql_query("SELECT * FROM History WHERE dateupdated = \"$currentdate\" AND id = \"$newid\"");
+    $hasupdatebeenlogged = mysql_query("SELECT dateupdated, id FROM History WHERE dateupdated = \"$currentdate\" AND id = \"$newid\"");
     $getresult = mysql_fetch_assoc($hasupdatebeenlogged); 
     if ($getresult > 0) {
         mysql_query("UPDATE History SET count = \"$newcount\" WHERE dateupdated = \"$currentdate\" AND id = \"$newid\"");
