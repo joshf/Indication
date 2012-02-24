@@ -101,8 +101,8 @@ mysql_close($con);
 </body>
 </html>
 <?php
-} elseif ($command == "New") {
-    //New
+} elseif ($command == "Add") {
+    //Add
     header("Location: add.php");
 } elseif ($command == "View History") {
     //View history

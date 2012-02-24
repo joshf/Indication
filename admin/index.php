@@ -79,7 +79,7 @@ function deleteconfirm()
 }
 </script>
 <br />
-<input type="submit" name="command" value="New" />
+<input type="submit" name="command" value="Add" />
 <input type="submit" name="command" onClick="return isempty()" value="Edit" />
 <input type="submit" name="command" onClick="return deleteconfirm()" value="Delete" />
 <input type="button" onClick="showtrackinglink()" name="command" value="Show Tracking Link" />
