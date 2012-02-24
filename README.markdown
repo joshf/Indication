@@ -5,23 +5,14 @@ Installation:
 -------------
 
 1. Create a new database using your web hosts control panel (for instructions on how to do this please contact your web host)
-2. Select your new database in phpMyAdmin or other MySQL tool
-3. Go to the query tab and paste the following in the box:
-<pre>CREATE TABLE \`Data\` (
-\`name\` VARCHAR(100) NOT NULL ,
-\`id\` VARCHAR(25) NOT NULL ,
-\`url\` VARCHAR(200) NOT NULL ,
-\`count\` INT(10) NOT NULL default '0' ,
-PRIMARY KEY (\`id\`)
-) ENGINE = MYISAM;</pre> 
-4. Download and unzip SHTracker.zip  
-5. Upload the SHTracker folder to your server via FTP or your hosts control panel 
-6. Open up http://yoursite.com/SHTracker/install.php in your browser and enter your database and user details  
-7. Delete install.php from your server
-8. Make config.php unwritable (optional)
-9. Login to the admin panel using the username and password you set during the install  
-10. Add your links/downloads. If you do not enter a count for a download it will start from zero  
-11. Done
+2. Download and unzip SHTracker.zip  
+3. Upload the SHTracker folder to your server via FTP or your hosts control panel 
+4. Open up http://yoursite.com/SHTracker/install.php in your browser and enter your database and user details  
+5. Delete install.php from your server
+6. Make config.php unwritable (optional)
+7. Login to the admin panel using the username and password you set during the install  
+8. Add your links/downloads. If you do not enter a count for a download it will start from zero  
+9. Done
 
 Usage:
 ------

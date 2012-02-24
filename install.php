@@ -90,10 +90,10 @@ $configfile = fopen("config.php", "w");
 fwrite($configfile, $string);
 fclose($configfile);
 
-//Lay the table please
+//Create Data table
 $con = mysql_connect($dbhost, $dbuser, $dbpassword);
 if (!$con) {
-    die("<h1>SHTracker: Error</h1><p>Install failed!</p><p>Could not connect: " . mysql_error() . "</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+    die("<h1 style=\"color: red\">SHTracker: Install failed!</h1><p>Could not connect: " . mysql_error() . "</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
 }
 
 mysql_select_db($dbname, $con);
@@ -102,14 +102,15 @@ $createtable = "CREATE TABLE Data (
 name VARCHAR(100) NOT NULL,
 id VARCHAR(25) NOT NULL,
 url VARCHAR(200) NOT NULL,
-count INT(10) NOT NULL default '0',
+count INT(10) NOT NULL default \"0\",
 PRIMARY KEY (id)
 ) ENGINE = MYISAM;";
 
 mysql_query($createtable);
+
 mysql_close($con);
 
-die("<h1 style=\"color:green\">SHTracker: Install complete</h1><p>Please delete this file (install.php) from your server, as it poses a security risk!</p><p>It may also be helpful to make config.php unwritable.</p><p><a href=\"admin\">Admin Home</a></p></body></html>");
+die("<h1 style=\"color: green\">SHTracker: Install complete</h1><p>Please delete this file (install.php) from your server, as it poses a security risk!</p><p>It may also be helpful to make config.php unwritable.</p><p><a href=\"admin\">Go To Login</a></p></body></html>");
 
 }
  
@@ -118,7 +119,7 @@ die("<h1 style=\"color:green\">SHTracker: Install complete</h1><p>Please delete 
 <p><em>All fields are required</em></p>
 <p><strong>Database Settings:</strong></p>
 <form method="post">
-Host: <input type="text" name="dbhost" /><br />
+Host: <input type="text" name="dbhost" value="localhost" /><br />
 User: <input type="text" name="dbuser" /><br />
 Password: <input type="password" name="dbpassword" /><br />
 Name: <input type="text" name="dbname" /><br />
