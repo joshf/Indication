@@ -6,7 +6,6 @@ require("login.php");
 <head>
 <title>SHTracker: Admin Home</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
-<script src="../sorttable.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 </head>
 <body>
@@ -26,7 +25,7 @@ mysql_select_db(DB_NAME, $con);
 $getdownloads = mysql_query("SELECT * FROM Data ORDER BY name ASC");
 
 echo "<h1>SHTracker: " . WEBSITE . " Download Statistics</h1>
-<form action=\"manage.php\" method=\"post\"><table class=\"sortable\">
+<form action=\"manage.php\" method=\"post\"><table>
 <tr>
 <th></th>
 <th>Name</th>
