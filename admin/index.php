@@ -26,22 +26,23 @@ $getdownloads = mysql_query("SELECT * FROM Data ORDER BY name ASC");
 
 echo "<h1>SHTracker: " . WEBSITE . " Download Statistics</h1>
 <form action=\"manage.php\" method=\"post\"><table>
+<thead>
 <tr>
 <th></th>
 <th>Name</th>
 <th>ID</th>
 <th>URL</th>
 <th>Count</th>
-</tr>";
+</tr></thead>";
 
 while($row = mysql_fetch_assoc($getdownloads)) {
-    echo "<tr>";
+    echo "<tbody><tr>";
     echo "<td><input type=\"radio\" name=\"id\" value=\"" . $row["id"] . "\" /></td>";
     echo "<td class=\"name\">" . $row["name"] . "</td>";
     echo "<td>" . $row["id"] . "</td>";
     echo "<td>" . $row["url"] . "</td>";
     echo "<td>" . $row["count"] . "</td>";
-    echo "</tr>";
+    echo "</tr></tbody>";
 }
 echo "</table>";
 
