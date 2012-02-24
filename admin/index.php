@@ -9,7 +9,7 @@ require("login.php");
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 </head>
 <body>
-<noscript><p>Your browser does not support JavaScript or it is disabled, certain functions such as table sorting or displaying of tracking links will be broken!</p></noscript>
+<noscript><p>Your browser does not support JavaScript or it is disabled, certain functions such as the displaying of tracking links will be broken!</p></noscript>
 <?php
 
 //Connect to database
