@@ -102,6 +102,7 @@ header("Location: " . $_SERVER["REQUEST_URI"]);
 <head>
 <title>SHTracker: Settings</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 </head>
 <body>
 <h1>SHTracker: Settings</h1>
@@ -155,13 +156,22 @@ if ($currentlogupdatesstate == "Enabled" ) {
 <p><input type="submit" name="Save" value="Save" /></p>
 </form>
 <hr />
-<p><strong>Advanced settings:</strong></p>
-<p><em>Do not use these settings/options unless you know what you are doing!</em></p>
-<form action="actions/reset.php" method="post">
+<script type="text/javascript">
+function ispasswordempty() 
+{
+    if (!$("input[name=password]").val()) {
+        alert("Please enter your admin password!");
+        return false;
+    }
+}
+</script>
+<p><strong>Advanced Options:</strong></p>
+<p><em>Do not use these options unless you know what you are doing!</em></p>
+<form action="actions/advanced.php" method="post">
 <p>To perform any of these actions, please enter your admin password.</p>
 <p>Password: <input type="password" name="password" /></p>
-<input type="submit" name="command" value="Reset All Counts to Zero" /><br />
-<input type="submit" name="command" value="Delete All Downloads" />
+<input type="submit" name="command" onClick="return ispasswordempty()" value="Reset All Counts to Zero" /><br />
+<input type="submit" name="command" onClick="return ispasswordempty()" value="Delete All Downloads" />
 </form>
 <hr />
 <p><a href="../admin">Go Back</a></p>

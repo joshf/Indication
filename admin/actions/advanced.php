@@ -12,9 +12,6 @@ if (!isset($_POST["command"])) {
 //Make user confirm action with a password
 $password = ADMIN_PASSWORD;
 
-if (empty($_POST["password"])) {
-    die("<html><head><title>SHTracker: Error</title><link rel=\"stylesheet\" type=\"text/css\" href=\"../../style.css\" /></head><body><h1>SHTracker: Error</h1><p>Password is blank...</p><hr /><p><a href=\"../settings.php\">Go Back</a></p></body></html>");
-}
 if (sha1($_POST["password"]) != $password) {
     die("<html><head><title>SHTracker: Error</title><link rel=\"stylesheet\" type=\"text/css\" href=\"../../style.css\" /></head><body><h1>SHTracker: Error</h1><p>Password incorrect...</p><hr /><p><a href=\"../settings.php\">Go Back</a></p></body></html>");
 }
