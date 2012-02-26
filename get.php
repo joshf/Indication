@@ -30,19 +30,19 @@ if (isset($_GET["id"])) {
 
 //Check ID is not blank
 if (empty($id)) {
-    die("<h1>SHTracker: Error</h1><p>ID cannot be blank.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>ID cannot be blank.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
 //Prevent some injection attacks
 if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
-    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>"); 
+    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>"); 
 }
 
 //Check if ID exists
 $getinfo = mysql_query("SELECT name, url FROM Data WHERE id = \"$id\"");
 $getresult = mysql_fetch_assoc($getinfo); 
 if ($getresult == 0) { 
-    die("<h1>SHTracker: Error</h1><p>ID <strong>$id</strong> does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>ID <strong>$id</strong> does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
 if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {

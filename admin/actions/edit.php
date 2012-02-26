@@ -27,27 +27,27 @@ $newcount = mysql_real_escape_string($_POST["count"]);
 
 //Check variables are not empty
 if (empty($newname)) {
-    die("<h1>SHTracker: Error</h1><p>Name is missing...</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>Name is missing...</p><hr /><p><a href=\"../../admin\">&larr; Go Back</a></p></body></html>");
 }
 if (empty($newid)) {
-    die("<h1>SHTracker: Error</h1><p>ID is missing...</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>ID is missing...</p><hr /><p><a href=\"../../admin\">&larr; Go Back</a></p></body></html>");
 }
 if (empty($newurl)) {
-    die("<h1>SHTracker: Error</h1><p>URL is missing...</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>URL is missing...</p><hr /><p><a href=\"../../admin\">&larr; Go Back</a></p></body></html>");
 }
 
 //Prevent some injection attacks
 if (!preg_match("/^[a-zA-Z0-9(). ]{1,}$/", $newname)) {
-    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>"); 
+    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../../admin\">&larr; Go Back</a></p></body></html>"); 
 }
 if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $newid)) {
-    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>"); 
+    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../../admin\">&larr; Go Back</a></p></body></html>"); 
 }
 if (!preg_match("/^[a-zA-Z0-9.:?=#\/_-]{1,}$/", $newurl)) {
-    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>"); 
+    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../../admin\">&larr; Go Back</a></p></body></html>"); 
 }
 if (!preg_match("/^[0-9]{1,}$/", $newcount)) {
-    die("<h1>SHTracker: Error</h1><p>Please enter only numbers.</p><hr /><p><a href=\"../../admin\">Go Back</a></p></body></html>"); 
+    die("<h1>SHTracker: Error</h1><p>Please enter only numbers.</p><hr /><p><a href=\"../../admin\">&larr; Go Back</a></p></body></html>"); 
 }
 
 mysql_query("UPDATE Data SET name = \"$newname\", id = \"$newid\", url = \"$newurl\", count = \"$newcount\" WHERE id = \"$idtoedit\"");

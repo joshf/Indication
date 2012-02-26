@@ -174,6 +174,6 @@ function ispasswordempty()
 <input type="submit" name="command" onClick="return ispasswordempty()" value="Delete All Downloads" />
 </form>
 <hr />
-<p><a href="../admin">Go Back</a></p>
+<p><a href="../admin">&larr; Go Back</a></p>
 </body>
 </html>

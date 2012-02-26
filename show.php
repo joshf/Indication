@@ -31,12 +31,12 @@ if (isset($_GET["id"])) {
 
 //Check ID is not blank
 if (empty($id)) {
-    die("<h1>SHTracker: Error</h1><p>ID cannot be blank.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>ID cannot be blank.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
 //Prevent some injection attacks
 if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
-    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>"); 
+    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>"); 
 }
 
 //If ID exists show count or else die
@@ -49,7 +49,7 @@ if ($showresult != 0) {
         echo "<p>" . $showresult["name"] . " has been downloaded " . $showresult["count"] . " times.</p>";
     }
 } else { 
-    die("<h1>SHTracker: Error</h1><p>ID <strong>$id</strong> does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>ID <strong>$id</strong> does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
 mysql_close($con);

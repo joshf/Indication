@@ -17,7 +17,7 @@ if (isset($_POST["password"]) && isset($_POST["user"])) {
     if (sha1($_POST["password"]) == $password && $_POST["user"] == $user) {
         $_SESSION["is_logged_in"] = true;
     } else {
-        die("<html><head><title>SHTracker: Login</title><link rel=\"stylesheet\" type=\"text/css\" href=\"../style.css\" /></head><body><h1>SHTracker: Error</h1><p>Incorrect password or username...</p><hr /><p><a href=\"../admin\">Go Back</a></p></body></html>");
+        die("<html><head><title>SHTracker: Login</title><link rel=\"stylesheet\" type=\"text/css\" href=\"../style.css\" /></head><body><h1>SHTracker: Error</h1><p>Incorrect password or username...</p><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>");
     }
 } 
 

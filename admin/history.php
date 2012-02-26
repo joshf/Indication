@@ -32,19 +32,19 @@ $id = mysql_real_escape_string($_SESSION["idtoviewhistory"]);
 
 //Check ID is not blank
 if (empty($id)) {
-    die("<h1>SHTracker: Error</h1><p>ID cannot be blank.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>ID cannot be blank.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
 //Prevent some injection attacks
 if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
-    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>"); 
+    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>"); 
 }
 
 //Check if ID exists
 $checkifidexists = mysql_query("SELECT id FROM Data WHERE id = \"$id\"");
 $getresult = mysql_fetch_assoc($checkifidexists); 
 if ($getresult == 0) { 
-    die("<h1>SHTracker: Error</h1><p>ID <strong>$id</strong> does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>ID <strong>$id</strong> does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
 $gethistory = mysql_query("SELECT * FROM History WHERE id = \"$id\" ORDER BY dateupdated DESC");
@@ -71,6 +71,6 @@ unset($_SESSION["idtoviewhistory"]);
 ?>
 <br />
 <hr />
-<p><a href="../admin">Go Back</a></p>
+<p><a href="../admin">&larr; Go Back</a></p>
 </body>
 </html>

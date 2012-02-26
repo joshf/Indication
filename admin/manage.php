@@ -63,7 +63,7 @@ mysql_close($con);
 <p><input type="submit" name="command" value="Edit" /></p>
 </form>
 <hr />
-<p><a href="../admin">Go Back</a></p>
+<p><a href="../admin">&larr; Go Back</a></p>
 </body>
 </html>
 <?php

@@ -25,13 +25,13 @@ $count = mysql_real_escape_string($_POST["count"]);
 
 //Check variables are not empty
 if (empty($name)) {
-    die("<h1>SHTracker: Error</h1><p>Name is missing...</p><hr /><p><a href=\"../add.php\">Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>Name is missing...</p><hr /><p><a href=\"../add.php\">&larr; Go Back</a></p></body></html>");
 }
 if (empty($id)) {
-    die("<h1>SHTracker: Error</h1><p>ID is missing...</p><hr /><p><a href=\"../add.php\">Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>ID is missing...</p><hr /><p><a href=\"../add.php\">&larr; Go Back</a></p></body></html>");
 }
 if (empty($url)) {
-    die("<h1>SHTracker: Error</h1><p>URL is missing...</p><hr /><p><a href=\"../add.php\">Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>URL is missing...</p><hr /><p><a href=\"../add.php\">&larr; Go Back</a></p></body></html>");
 }
 if (empty($count)) {
     $count = "0";
@@ -39,16 +39,16 @@ if (empty($count)) {
 
 //Prevent some injection attacks
 if (!preg_match("/^[a-zA-Z0-9(). ]{1,}$/", $name)) {
-    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../add.php\">Go Back</a></p></body></html>"); 
+    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../add.php\">&larr; Go Back</a></p></body></html>"); 
 }
 if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
-    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../add.php\">Go Back</a></p></body></html>"); 
+    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../add.php\">&larr; Go Back</a></p></body></html>"); 
 }
 if (!preg_match("/^[a-zA-Z0-9.:?=#\/_-]{1,}$/", $url)) {
-    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../add.php\">Go Back</a></p></body></html>"); 
+    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../add.php\">&larr; Go Back</a></p></body></html>"); 
 }
 if (!preg_match("/^[0-9]{1,}$/", $count)) {
-    die("<h1>SHTracker: Error</h1><p>Please enter only numbers.</p><hr /><p><a href=\"../add.php\">Go Back</a></p></body></html>"); 
+    die("<h1>SHTracker: Error</h1><p>Please enter only numbers.</p><hr /><p><a href=\"../add.php\">&larr; Go Back</a></p></body></html>"); 
 }
 
 mysql_query("INSERT INTO Data (name, id, url, count)

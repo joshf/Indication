@@ -23,6 +23,6 @@ if (!isset($_SESSION["is_logged_in"])) {
 <input type="submit" name="command" value="Add" />
 </form>
 <hr />
-<p><a href="../admin">Go Back</a></p>
+<p><a href="../admin">&larr; Go Back</a></p>
 </body>
 </html>
