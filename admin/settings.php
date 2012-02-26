@@ -50,7 +50,6 @@ if (isset($_POST["waitmessage"])) {
     $waitmessage = $_POST["waitmessage"];
     $waitadcode = $_POST["waitadcode"];
 }
-$randomkey = RANDOM_KEY; 
 
 //Remember previous settings
 if (empty($waitmessage)) {
@@ -86,9 +85,6 @@ define(\"LOG_UPDATES_STATE\", \"$logupdatesstate\");
 define(\"WAIT_STATE\", \"$waitstate\");
 define(\"WAIT_MESSAGE\", \"$waitmessage\");
 define(\"WAIT_AD_CODE\", \"$waitadcode\");
-
-//Random Key
-define(\"RANDOM_KEY\", \"$randomkey\");
 
 ?>";
  

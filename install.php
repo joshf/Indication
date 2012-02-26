@@ -23,7 +23,6 @@ $adminuser = $_POST["adminuser"];
 $adminpassword = $_POST["adminpassword"];
 $website = $_POST["website"];
 $pathtoscript = $_POST["pathtoscript"];
-$randomkey = str_shuffle("abcdefghijklmnopqrstuvwxyz123456789");
 
 //Make sure we actually install something
 if (empty($dbhost)) {
@@ -80,9 +79,6 @@ define(\"LOG_UPDATES_STATE\", \"Disabled\");
 define(\"WAIT_STATE\", \"Disabled\");
 define(\"WAIT_MESSAGE\", \"\");
 define(\"WAIT_AD_CODE\", \"\");
-
-//Random Key
-define(\"RANDOM_KEY\", \"$randomkey\");
 
 ?>";
  
