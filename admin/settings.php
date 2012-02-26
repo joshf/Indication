@@ -21,7 +21,6 @@ $currentwebsite = WEBSITE;
 $currentpathtoscript = PATH_TO_SCRIPT;
 $currentcountuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
 $currentcountuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
-$currentlogupdatesstate = LOG_UPDATES_STATE;
 $currentwaitstate = WAIT_STATE;
 $currentwaitmessage = WAIT_MESSAGE;
 $currentwaitadcode = WAIT_AD_CODE; 
@@ -44,7 +43,6 @@ $countuniqueonlystate = $_POST["countuniqueonlystate"];
 if (isset($_POST["countuniqueonlytime"])) {
     $countuniqueonlytime = $_POST["countuniqueonlytime"];
 }
-$logupdatesstate = $_POST["logupdatesstate"];
 $waitstate = $_POST["waitstate"];
 if (isset($_POST["waitmessage"])) {
     $waitmessage = $_POST["waitmessage"];
@@ -79,7 +77,6 @@ define(\"WEBSITE\", \"$website\");
 define(\"PATH_TO_SCRIPT\", \"$pathtoscript\");
 define(\"COUNT_UNIQUE_ONLY_STATE\", \"$countuniqueonlystate\");
 define(\"COUNT_UNIQUE_ONLY_TIME\", \"$countuniqueonlytime\");
-define(\"LOG_UPDATES_STATE\", \"$logupdatesstate\");
 
 //Wait Settings
 define(\"WAIT_STATE\", \"$waitstate\");
@@ -141,16 +138,6 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 } else {
     echo "<input type=\"radio\" name=\"countuniqueonlystate\" value=\"Enabled\" /> Enabled<br />
     <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\" checked/> Disabled<br />";
-}
-?>
-<p><strong>Log updates:</strong></p>
-<?php
-if ($currentlogupdatesstate == "Enabled" ) {
-   echo "<input type=\"radio\" name=\"logupdatesstate\" value=\"Enabled\" checked/> Enabled<br />
-    <input type=\"radio\" name=\"logupdatesstate\" value=\"Disabled\" /> Disabled<br />";
-} else {
-    echo "<input type=\"radio\" name=\"logupdatesstate\" value=\"Enabled\" /> Enabled<br />
-    <input type=\"radio\" name=\"logupdatesstate\" value=\"Disabled\" checked/> Disabled<br />";
 }
 ?>
 <p><input type="submit" name="Save" value="Save" /></p>
