@@ -52,18 +52,6 @@ if (!preg_match("/^[0-9]{1,}$/", $newcount)) {
 
 mysql_query("UPDATE Data SET name = \"$newname\", id = \"$newid\", url = \"$newurl\", count = \"$newcount\" WHERE id = \"$idtoedit\"");
 
-if (LOG_UPDATES_STATE == "Enabled") {
-    $currentdate = date("d-m-y");
-    $hasupdatebeenlogged = mysql_query("SELECT dateupdated, id FROM History WHERE dateupdated = \"$currentdate\" AND id = \"$newid\"");
-    $getresult = mysql_fetch_assoc($hasupdatebeenlogged); 
-    if ($getresult != 0) {
-        mysql_query("UPDATE History SET count = \"$newcount\" WHERE dateupdated = \"$currentdate\" AND id = \"$newid\"");
-    } else { 
-        mysql_query("INSERT INTO History (dateupdated, id, count)
-        VALUES (\"$currentdate\",\"$newid\",\"$newcount\")");
-    }
-}
-
 mysql_close($con);
 
 ?> 

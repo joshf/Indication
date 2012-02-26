@@ -108,9 +108,5 @@ mysql_close($con);
 } elseif ($command == "Add") {
     //Add
     header("Location: add.php");
-} elseif ($command == "View History") {
-    //View history
-    $_SESSION["idtoviewhistory"] = $_POST["id"];
-    header("Location: history.php");
-}
+} 
 ?>
