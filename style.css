@@ -55,5 +55,13 @@ table td, table th  {
 
 table th {
 	background-color: #0080ff;
-	color:#ffffff;
+	color: #ffffff;
+}
+
+#loginform {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -150px;
+	margin-left: -150px;
 }

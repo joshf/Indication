@@ -32,6 +32,7 @@ if (!$_SESSION["loggedin" . $randomkey . ""]): ?>
 <link rel="stylesheet" type="text/css" href="../style.css" />
 </head>
 <body>
+<div id="loginform">
 <h1>SHTracker: Login</h1>
 <p>You need to login to continue.</p>
 <form method="post">
@@ -39,6 +40,9 @@ User: <input type="text" name="user" /><br />
 Password: <input type="password" name="password" />
 <p><input type="submit" name="submit" value="Login" /></p>
 </form>
+<p><a href="http://<?php echo $_SERVER["HTTP_HOST"]; ?>">&larr; Back to <?php echo WEBSITE; ?></a></p>
+<small>SHTracker Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
+</div>
 </body>
 </html>
 <?php
