@@ -29,9 +29,6 @@ if (!$con) {
 mysql_select_db(DB_NAME, $con);
 
 $getdownloads = mysql_query("SELECT * FROM Data ORDER BY name ASC");
-if (!$getdownloads) {
-    die("<p>Invalid query: " . mysql_error()) . "</p>";
-}
 
 echo "<h1>SHTracker: " . WEBSITE . " Download Statistics</h1>
 <form action=\"manage.php\" method=\"post\"><table>
