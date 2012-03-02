@@ -28,7 +28,20 @@ if (!$con) {
 
 mysql_select_db(DB_NAME, $con);
 
-$getdownloads = mysql_query("SELECT * FROM Data ORDER BY name ASC");
+if (isset($_GET["page"])) {
+    $page = mysql_real_escape_string($_GET["page"]);
+    if (empty($page)) {
+        die("<h1>SHDetect: Error</h1><p>Page value is empty...</p><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>"); 
+    }
+    if (!preg_match("/^[0-9]{1,}$/", $page)) {
+        die("<h1>SHDetect: Error</h1><p>Illegal character used...</p><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>"); 
+    }
+} else {
+    $page = 1;
+}
+$startfrom = ($page-1) * 20;
+
+$getdownloads = mysql_query("SELECT * FROM Data ORDER BY name ASC LIMIT $startfrom, 20");
 
 echo "<h1>SHTracker: " . WEBSITE . " Download Statistics</h1>
 <form action=\"manage.php\" method=\"post\"><table>
@@ -51,6 +64,15 @@ while($row = mysql_fetch_assoc($getdownloads)) {
     echo "</tr></tbody>";
 }
 echo "</table>";
+
+$getdatacount = mysql_query("SELECT COUNT(*) FROM Data");
+$resultgetdatacount = mysql_fetch_assoc($getdatacount); 
+$totalpages = ceil($resultgetdatacount["COUNT(*)"] / 20);
+echo "<p><em>Go To Page: </em>";
+for ($i=1; $i <= $totalpages; $i++) { 
+    echo " <a href=\"index.php?page=".$i."\">".$i."</a> "; 
+} 
+echo "</p>";
 
 ?>
 <script type="text/javascript">
@@ -84,7 +106,6 @@ function deleteconfirm()
     }
 }
 </script>
-<br />
 <input type="submit" name="command" value="Add" />
 <input type="submit" name="command" onClick="return isempty()" value="Edit" />
 <input type="submit" name="command" onClick="return deleteconfirm()" value="Delete" />
