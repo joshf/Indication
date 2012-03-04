@@ -80,10 +80,6 @@ define(\"WAIT_MESSAGE\", \"\");
 define(\"WAIT_AD_CODE\", \"\");
 
 ?>";
- 
-$configfile = fopen("config.php", "w");
-fwrite($configfile, $string);
-fclose($configfile);
 
 //Create Data table
 $con = mysql_connect($dbhost, $dbuser, $dbpassword);
@@ -104,6 +100,11 @@ PRIMARY KEY (id)
 mysql_query($createtable);
 
 mysql_close($con);
+
+//Write Config
+$configfile = fopen("config.php", "w");
+fwrite($configfile, $string);
+fclose($configfile);
 
 die("<h1 style=\"color: green\">SHTracker: Install complete</h1><p>Please delete this file (install.php) from your server, as it poses a security risk!</p><p>It may also be helpful to make config.php unwritable.</p><p><a href=\"admin\">Go To Login</a></p></body></html>");
 

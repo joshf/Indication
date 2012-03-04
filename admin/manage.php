@@ -8,7 +8,6 @@ if (!isset($_SESSION["is_logged_in"])) {
 
 //SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
 
-//If no download is selected or manage.php is called directly go home
 if (!isset($_POST["command"]) || !isset($_POST["id"])) {
     header("Location: ../admin");
 }
