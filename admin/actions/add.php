@@ -51,6 +51,13 @@ if (!preg_match("/^[0-9]{1,}$/", $count)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers.</p><hr /><p><a href=\"../add.php\">&larr; Go Back</a></p></body></html>"); 
 }
 
+//Check if ID exists
+$checkid = mysql_query("SELECT id FROM Data WHERE id = \"$id\"");
+$resultcheckid = mysql_fetch_assoc($checkid); 
+if ($resultcheckid != 0) { 
+    die("<h1>SHTracker: Error</h1><p>ID <strong>$id</strong> already exists.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+}
+
 mysql_query("INSERT INTO Data (name, id, url, count)
 VALUES (\"$name\",\"$id\",\"$url\",\"$count\")");
 

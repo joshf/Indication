@@ -19,7 +19,7 @@ if (!isset($_SESSION["is_logged_in"])) {
 <?php
 
 if (!file_exists("../config.php")) {
-    die("<h1>SHTracker: Error</h1><p>SHTracker has not been installed.</p><hr /><p><a href=\"../install.php\">&larr; Go To Install</a></p></body></html>"); 
+    die("<h1>SHTracker: Error</h1><p>SHTracker has not been installed.</p><hr /><p><a href=\"../install.php\">Go To Install</a></p></body></html>"); 
 }
 
 //Connect to database
