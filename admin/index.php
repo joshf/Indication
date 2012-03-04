@@ -18,6 +18,10 @@ if (!isset($_SESSION["is_logged_in"])) {
 <noscript><p>Your browser does not support JavaScript or it is disabled, certain functions such as the displaying of tracking links will be broken!</p></noscript>
 <?php
 
+if (!file_exists("../config.php")) {
+    die("<h1>SHTracker: Error</h1><p>SHTracker has not been installed.</p><hr /><p><a href=\"../install.php\">&larr; Go To Install</a></p></body></html>"); 
+}
+
 //Connect to database
 require_once("../config.php");
 

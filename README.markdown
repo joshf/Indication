@@ -31,7 +31,7 @@ This will log the count of the download and redirect the user to the file
 
 To show the downloads for one id only, call http://yoursite.com/SHTracker/show.php?id=mydownload1. To show just the count with no other text add "&plain" to the end of the URL. The showing of counts could be done using an include or an iframe (see below)
 
-Example Codes:
+**Example Codes:**
 
 ```php
 <?php
