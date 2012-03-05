@@ -1,7 +1,8 @@
 SHTracker Readme
 ================
 
-**Current Version: 1.9 CynicalChaffinch**
+#### Current Version: 1.9 "CynicalChaffinch"
+
 
 Installation:
 -------------
