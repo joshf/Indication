@@ -1,19 +1,19 @@
 SHTracker Readme
 ================
 
-Current Version: 1.9 "CynicalChaffinch"
+**Current Version: 1.9 "CynicalChaffinch"**
 
 Installation:
 -------------
 
 1. Create a new database using your web hosts control panel (for instructions on how to do this please contact your web host)
-2. Download and unzip SHTracker.zip  
-3. Upload the SHTracker folder to your server via FTP or your hosts control panel 
-4. Open up http://yoursite.com/SHTracker/install.php in your browser and enter your database and user details  
+2. Download and unzip SHTracker.zip
+3. Upload the SHTracker folder to your server via FTP or your hosts control panel
+4. Open up http://yoursite.com/SHTracker/install.php in your browser and enter your database and user details
 5. Delete install.php from your server
 6. Make config.php unwritable (optional)
-7. Login to the admin panel using the username and password you set during the install  
-8. Add your links/downloads. If you do not enter a count for a download it will start from zero  
+7. Login to the admin panel using the username and password you set during the install
+8. Add your links/downloads. If you do not enter a count for a download it will start from zero
 9. Done
 
 Usage:
