@@ -25,7 +25,7 @@ if (isset($_POST["password"]) && isset($_POST["user"])) {
                 setcookie("shtrackerrememberme", ADMIN_USER, time()+1209600);
             }
     } else {
-        die("<html><head><title>SHTracker: Login</title><link rel=\"stylesheet\" type=\"text/css\" href=\"../style.css\" /></head><body><h1>SHTracker: Error</h1><p>Incorrect password or username...</p><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>");
+        header("Location: login.php?login_error=true");
     }
 } 
 
@@ -39,7 +39,13 @@ if(!isset($_SESSION["is_logged_in"])) {
 <body>
 <div id="loginform">
 <h1>SHTracker: Login</h1>
-<p>You need to login to continue.</p>
+<?php 
+
+if(isset($_GET["login_error"])) {
+    echo "<div id=\"notice\" class=\"bad\"><p>Incorrect password or username!</p></div>";
+}
+
+?>
 <form method="post">
 User: <input type="text" name="user" /><br />
 Password: <input type="password" name="password" />

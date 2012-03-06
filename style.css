@@ -65,3 +65,11 @@ table th {
 	margin-top: -150px;
 	margin-left: -150px;
 }
+
+#notice.bad {
+	background-color: #FFEBE8;
+}
+
+#notice.good {
+	background-color: #E8FCFF;
+}
