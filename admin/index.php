@@ -109,6 +109,15 @@ function deleteconfirm()
         }
     }
 }
+function logoutconfirm() 
+{
+    var logoutconfirm=confirm("<?php echo ADMIN_USER; ?>, are you sure you wish to logout?");
+    if (logoutconfirm==true) {
+        return true;
+    } else {
+        return false; 
+    }
+}
 </script>
 <input type="submit" name="command" value="Add" />
 <input type="submit" name="command" onClick="return isempty()" value="Edit" />
@@ -130,7 +139,7 @@ mysql_close($con);
 
 ?>
 <hr />
-<p><a href="index.php">Refresh</a> | <a href="settings.php">Settings</a> | <a href="logout.php">Logout</a></p>
+<p><a href="index.php">Refresh</a> | <a href="settings.php">Settings</a> | <a href="logout.php" onClick="return logoutconfirm()">Logout</a></p>
 <small>SHTracker 1.9 "CynicalChaffinch" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
 <p><small><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9QFKYNSKM8CBJ">Donate</a></p>
 </body>
