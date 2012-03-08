@@ -56,6 +56,33 @@ if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
 
 mysql_close($con);
 
+//Password protect some downloads
+
+//These have to be set manually
+// ID => password
+$downloadspasses = array("download1" => "nygftrykhui");
+
+if (PASSWORD_PROTECT == "Enabled") {
+    if (array_key_exists($id, $downloadspasses)) {
+        if (isset($_POST["password"])) {
+            if (sha1($_POST["password"]) == sha1($downloadspasses["$id"])) {
+                header("Location: " . $getresult["url"] . "");
+                exit;
+            } else {
+                die("<h1>SHTracker: Error</h1><p>Incorrect password.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+            }
+        } else {
+            die("<h1>Downloading " . $getresult["name"] . "</h1>
+            <form method=\"post\">
+            <p>To access this download please enter the password you were given.</p>
+            <p>Password: <input type=\"password\" name=\"password\" /></p>
+            <input type=\"submit\" name=\"submit\" value=\"Get Download\" /></p></form>
+            </body>
+            </html>");
+        }
+    }
+}
+
 //Check whether wait is enabled
 if (WAIT_STATE == "Enabled" ) {
     echo "<h1>Downloading " . $getresult["name"] . "</h1><p>" . WAIT_MESSAGE . "</p><p>" . WAIT_AD_CODE . "</p><hr /><p><a href=\"" . $getresult["url"] . "\">Start Download</a></p></body></html>";
@@ -67,3 +94,5 @@ header("Location: " . $getresult["url"] . "");
 ob_end_flush();
 exit;
 ?>
+</body>
+</html>
