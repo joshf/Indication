@@ -126,18 +126,19 @@ if ($currentwaitstate == "Enabled" ) {
     <p>Adsense/Ad Code: (HTML only, PHP will not work!)</p><p><textarea cols=\"80\" rows=\"8\" name=\"waitadcode\">$currentwaitadcode</textarea></p>";
 } else {
     echo "<input type=\"radio\" name=\"waitstate\" value=\"Enabled\" /> Enabled<br />
-    <input type=\"radio\" name=\"waitstate\" value=\"Disabled\" checked/> Disabled<br />";
+    <input type=\"radio\" name=\"waitstate\" value=\"Disabled\" checked/> Disabled";
 }
 ?>
 <p><strong>Count Unique Visitors Only:</strong></p>
 <p>This settings allows you to make sure an individual users clicks are only counted once.</p>
 <?php
 if ($currentcountuniqueonlystate == "Enabled" ) {
-    echo "<p>Hours to consider a user unique: <input type=\"text\" name=\"countuniqueonlytime\" value=\"$currentcountuniqueonlytime\" /></p><input type=\"radio\" name=\"countuniqueonlystate\" value=\"Enabled\" checked/> Enabled<br />
-    <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\" /> Disabled<br />";
+    echo "<p>Hours to consider a user unique: <input type=\"text\" name=\"countuniqueonlytime\" value=\"$currentcountuniqueonlytime\" /></p>
+    <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Enabled\" checked/> Enabled<br />
+    <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\" /> Disabled";
 } else {
     echo "<input type=\"radio\" name=\"countuniqueonlystate\" value=\"Enabled\" /> Enabled<br />
-    <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\" checked/> Disabled<br />";
+    <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\" checked/> Disabled";
 }
 ?>
 <p><input type="submit" name="Save" value="Save" /></p>

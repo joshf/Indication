@@ -1,7 +1,7 @@
 SHTracker Readme
 ================
 
-#### Current Version: 1.9 "CynicalChaffinch"
+#### Current Version: 2.0 "DangerousDachshund"
 
 Installation:
 -------------
