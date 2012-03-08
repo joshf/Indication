@@ -7,7 +7,7 @@ unset($_SESSION["is_logged_in"]);
 if (isset($_COOKIE["shtrackerrememberme"])) {
 	setcookie("shtrackerrememberme", "", time()-86400);
 }
-header("Location: login.php");
+header("Location: login.php?logged_out=true");
 exit;
 
 ?>

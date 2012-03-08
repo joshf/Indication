@@ -44,6 +44,9 @@ if(!isset($_SESSION["is_logged_in"])) {
 if(isset($_GET["login_error"])) {
     echo "<div id=\"notice\" class=\"bad\"><p>Incorrect password or username!</p></div>";
 }
+if(isset($_GET["logged_out"])) {
+    echo "<div id=\"notice\" class=\"good\"><p>Logged out!</p></div>";
+}
 
 ?>
 <form method="post">
