@@ -67,14 +67,8 @@ mysql_close($con);
 </html>
 <?php
 } elseif ($command == "Delete") {
+// Delete
 ?>
-<!-- Delete -->
-<html> 
-<head>
-<title>SHTracker: Download Deleted</title>
-<link rel="stylesheet" type="text/css" href="../style.css" />
-</head>
-<body>
 <?php
 
 //Connect to database
@@ -89,20 +83,13 @@ mysql_select_db(DB_NAME, $con);
 
 $idtodelete = mysql_real_escape_string($_POST["id"]);
 
-$getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$idtodelete\"");
-$resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
-
 mysql_query("DELETE FROM Data WHERE id = \"$idtodelete\"");
 
 mysql_close($con);
 
+header("Location: index.php");
+
 ?>
-<h1>SHTracker: Download Deleted</h1>
-<p>The download <strong><? echo $resultnameofdownload["name"]; ?></strong> has been deleted.</p>
-<hr />
-<p><a href="../admin">Back To Home</a></p>
-</body>
-</html>
 <?php
 } elseif ($command == "Add") {
     //Add
