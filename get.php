@@ -54,18 +54,14 @@ if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
     mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
 }
 
-mysql_close($con);
-
-//Password protect some downloads
-
-//These have to be set manually
-// ID => password
-$downloadspasses = array("download1" => "nygftrykhui");
-
+//Password protect downloads
+//Requires row protect and password in your database table
 if (PASSWORD_PROTECT == "Enabled") {
-    if (array_key_exists($id, $downloadspasses)) {
+    $checkprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$id\"");
+    $checkprotectedresult = mysql_fetch_assoc($checkprotected); 
+    if ($checkprotectedresult["protect"] == "true") { 
         if (isset($_POST["password"])) {
-            if (sha1($_POST["password"]) == sha1($downloadspasses["$id"])) {
+            if (sha1($_POST["password"]) == $checkprotectedresult["password"]) {
                 header("Location: " . $getresult["url"] . "");
                 exit;
             } else {
@@ -82,6 +78,8 @@ if (PASSWORD_PROTECT == "Enabled") {
         }
     }
 }
+
+mysql_close($con);
 
 //Check whether wait is enabled
 if (WAIT_STATE == "Enabled" ) {
