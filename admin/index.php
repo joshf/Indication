@@ -56,18 +56,18 @@ echo "<h1>SHTracker: " . WEBSITE . " Download Statistics</h1>
 <th>ID</th>
 <th>URL</th>
 <th>Count</th>
-</tr></thead>";
+</tr></thead><tbody>";
 
 while($row = mysql_fetch_assoc($getdownloads)) {
-    echo "<tbody><tr>";
+    echo "<tr>";
     echo "<td><input type=\"radio\" name=\"id\" value=\"" . $row["id"] . "\" /></td>";
     echo "<td class=\"name\">" . $row["name"] . "</td>";
     echo "<td>" . $row["id"] . "</td>";
     echo "<td>" . $row["url"] . "</td>";
     echo "<td>" . $row["count"] . "</td>";
-    echo "</tr></tbody>";
+    echo "</tr>";
 }
-echo "</table>";
+echo "</tbody></table>";
 
 $getdatacount = mysql_query("SELECT COUNT(*) FROM Data");
 $resultgetdatacount = mysql_fetch_assoc($getdatacount); 
