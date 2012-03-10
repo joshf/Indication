@@ -154,7 +154,7 @@ function ispasswordempty()
 }
 </script>
 <p><b>Advanced Options:</b></p>
-<p><em>Do not use these options unless you know what you are doing!</em></p>
+<p><i>Do not use these options unless you know what you are doing!</i></p>
 <form action="actions/advanced.php" method="post">
 <p>To perform any of these actions, please enter your admin password.</p>
 <p>Password: <input type="password" name="password" /></p>

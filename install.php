@@ -112,7 +112,7 @@ die("<h1 style=\"color: green\">SHTracker: Install complete</h1><p>Please delete
  
 ?>
 <h1>SHTracker: Install</h1>
-<p><em>All fields are required</em></p>
+<p><i>All fields are required</i></p>
 <p><b>Database Settings:</b></p>
 <form method="post">
 Host: <input type="text" name="dbhost" value="localhost" /><br />
