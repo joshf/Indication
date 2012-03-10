@@ -56,14 +56,14 @@ mysql_close($con);
 
 ?> 
 <h1>SHTracker: Download Edited</h1>
-<p>The download <strong><? echo $newname; ?></strong> has been edited successfully.</p>
-<p><strong>Updated Details:</strong></p>
+<p>The download <b><? echo $newname; ?></b> has been edited successfully.</p>
+<p><b>Updated Details:</b></p>
 <ul>
 <li>Name : <? echo $newname; ?></li>
 <li>ID : <? echo $newid; ?></li>
 <li>URL : <? echo $newurl; ?></li>
 </ul>
-<p><strong>Download link:</strong></p>
+<p><b>Download link:</b></p>
 <p><? echo PATH_TO_SCRIPT; ?>/get.php?id=<? echo $newid; ?></p>
 <hr />
 <p><a href="../../admin">Back To Home</a></p>

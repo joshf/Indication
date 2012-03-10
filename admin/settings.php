@@ -104,19 +104,19 @@ header("Location: " . $_SERVER["REQUEST_URI"]);
 <body>
 <h1>SHTracker: Settings</h1>
 <p>Here you can change the settings for SHTracker.</p>
-<p><strong>Database Settings:</strong></p>
+<p><b>Database Settings:</b></p>
 <form method="post">
 Host: <input type="text" name="dbhost" value="<? echo $currentdbhost; ?>" /><br />
 User: <input type="text" name="dbuser" value="<? echo $currentdbuser; ?>" /><br />
 Password: <input type="password" name="dbpassword" value="<? echo $currentdbpassword; ?>" /><br />
 Name: <input type="text" name="dbname" value="<? echo $currentdbname; ?>" /><br />
-<p><strong>Admin Details:</strong></p>
+<p><b>Admin Details:</b></p>
 User: <input type="text" name="adminuser" value="<? echo $currentadminuser; ?>" /><br />
 Password: <input type="password" name="adminpassword" value="<? echo $currentadminpassword; ?>" /><br />
-<p><strong>Other settings:</strong></p>
+<p><b>Other settings:</b></p>
 Website Name: <input type="text" name="website" value="<? echo $currentwebsite; ?>" /><br />
 Path to Script: <input type="text" name="pathtoscript" value="<? echo $currentpathtoscript; ?>" /><br />
-<p><strong>Wait settings:</strong></p>
+<p><b>Wait settings:</b></p>
 <p>Make users wait before they are served their download. This is useful if you use adverts on your site.</p>
 <?php
 if ($currentwaitstate == "Enabled" ) {
@@ -129,7 +129,7 @@ if ($currentwaitstate == "Enabled" ) {
     <input type=\"radio\" name=\"waitstate\" value=\"Disabled\" checked/> Disabled";
 }
 ?>
-<p><strong>Count Unique Visitors Only:</strong></p>
+<p><b>Count Unique Visitors Only:</b></p>
 <p>This settings allows you to make sure an individual users clicks are only counted once.</p>
 <?php
 if ($currentcountuniqueonlystate == "Enabled" ) {
@@ -153,7 +153,7 @@ function ispasswordempty()
     }
 }
 </script>
-<p><strong>Advanced Options:</strong></p>
+<p><b>Advanced Options:</b></p>
 <p><em>Do not use these options unless you know what you are doing!</em></p>
 <form action="actions/advanced.php" method="post">
 <p>To perform any of these actions, please enter your admin password.</p>

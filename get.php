@@ -42,7 +42,7 @@ if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
 $getinfo = mysql_query("SELECT name, url FROM Data WHERE id = \"$id\"");
 $getresult = mysql_fetch_assoc($getinfo); 
 if ($getresult == 0) { 
-    die("<h1>SHTracker: Error</h1><p>ID <strong>$id</strong> does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>ID <b>$id</b> does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
 if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {

@@ -124,16 +124,16 @@ function logoutconfirm()
 <input type="submit" name="command" onClick="return deleteconfirm()" value="Delete" />
 <input type="button" onClick="showtrackinglink()" name="command" value="Show Tracking Link" />
 </form>
-<p><em>To edit, delete or show the tracking link for a ID please select the radio button next to it.</em></p>
+<p><i>To edit, delete or show the tracking link for a ID please select the radio button next to it.</i></p>
 <?php
 
 $getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM Data");
 $resultnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
-echo "<p><strong>Number of downloads: </strong>" . $resultnumberofdownloads["COUNT(id)"] . "</p>";
+echo "<p><b>Number of downloads: </b>" . $resultnumberofdownloads["COUNT(id)"] . "</p>";
 
 $gettotalnumberofdownloads = mysql_query("SELECT SUM(count) FROM Data");
 $resulttotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
-echo "<p><strong>Total downloads: </strong>" . $resulttotalnumberofdownloads["SUM(count)"] . "</p>";
+echo "<p><b>Total downloads: </b>" . $resulttotalnumberofdownloads["SUM(count)"] . "</p>";
 
 mysql_close($con);
 

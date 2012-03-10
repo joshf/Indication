@@ -49,7 +49,7 @@ if ($showresult != 0) {
         echo "<p>" . $showresult["name"] . " has been downloaded " . $showresult["count"] . " times.</p>";
     }
 } else { 
-    die("<h1>SHTracker: Error</h1><p>ID <strong>$id</strong> does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>ID <b>$id</b> does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
 mysql_close($con);

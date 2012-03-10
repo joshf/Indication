@@ -113,16 +113,16 @@ die("<h1 style=\"color: green\">SHTracker: Install complete</h1><p>Please delete
 ?>
 <h1>SHTracker: Install</h1>
 <p><em>All fields are required</em></p>
-<p><strong>Database Settings:</strong></p>
+<p><b>Database Settings:</b></p>
 <form method="post">
 Host: <input type="text" name="dbhost" value="localhost" /><br />
 User: <input type="text" name="dbuser" /><br />
 Password: <input type="password" name="dbpassword" /><br />
 Name: <input type="text" name="dbname" /><br />
-<p><strong>Admin Details:</strong></p>
+<p><b>Admin Details:</b></p>
 User: <input type="text" name="adminuser" /><br />
 Password: <input type="password" name="adminpassword" /><br />
-<p><strong>Other Settings:</strong></p>
+<p><b>Other Settings:</b></p>
 Website Name: <input type="text" name="website" /><br />
 Path to Script: <input type="text" name="pathtoscript" /><br />
 <p><input type="submit" name="Install" value="Install"></p>

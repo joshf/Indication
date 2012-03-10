@@ -55,7 +55,7 @@ if (!preg_match("/^[0-9]{1,}$/", $count)) {
 $checkid = mysql_query("SELECT id FROM Data WHERE id = \"$id\"");
 $resultcheckid = mysql_fetch_assoc($checkid); 
 if ($resultcheckid != 0) { 
-    die("<h1>SHTracker: Error</h1><p>ID <strong>$id</strong> already exists.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>ID <b>$id</b> already exists.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
 mysql_query("INSERT INTO Data (name, id, url, count)
@@ -65,14 +65,14 @@ mysql_close($con);
 
 ?>
 <h1>SHTracker: Download Added</h1>
-<p>The download <strong><? echo $name; ?></strong> has been added successfully.</p>
-<p><strong>Details:</strong></p>
+<p>The download <b><? echo $name; ?></b> has been added successfully.</p>
+<p><b>Details:</b></p>
 <ul>
 <li>Name : <? echo $name; ?></li>
 <li>ID : <? echo $id; ?></li>
 <li>URL : <? echo $url; ?></li>
 </ul>
-<p><strong>Download link:</strong></p>
+<p><b>Download link:</b></p>
 <p><? echo PATH_TO_SCRIPT; ?>/get.php?id=<? echo $id; ?></p>
 <hr />
 <p><a href="../../admin">Back To Home</a></p>
