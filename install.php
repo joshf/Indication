@@ -94,6 +94,8 @@ name VARCHAR(100) NOT NULL,
 id VARCHAR(25) NOT NULL,
 url VARCHAR(200) NOT NULL,
 count INT(10) NOT NULL default \"0\",
+protect VARCHAR(10) NOT NULL default \"false\",
+password VARCHAR(200) NOT NULL,
 PRIMARY KEY (id)
 ) ENGINE = MYISAM;";
 
