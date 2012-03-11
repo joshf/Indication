@@ -90,7 +90,7 @@ fwrite($configfile, $string);
 fclose($configfile);
 
 //Show updated values
-header("Location: " . $_SERVER["REQUEST_URI"]);
+header("Location: " . $_SERVER["REQUEST_URI"] . "");
 
 }
  
