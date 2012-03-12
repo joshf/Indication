@@ -56,7 +56,7 @@ if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
 
 //Password protect downloads
 //Requires row protect and password in your database table
-if (PASSWORD_PROTECT == "Enabled") {
+if (PROTECT_DOWNLOADS_STATE == "Enabled") {
     $checkprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$id\"");
     $checkprotectedresult = mysql_fetch_assoc($checkprotected); 
     if ($checkprotectedresult["protect"] == "true") { 

@@ -21,6 +21,7 @@ $currentwebsite = WEBSITE;
 $currentpathtoscript = PATH_TO_SCRIPT;
 $currentcountuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
 $currentcountuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
+$currentprotectdownloadsstate = PROTECT_DOWNLOADS_STATE;
 $currentwaitstate = WAIT_STATE;
 $currentwaitmessage = WAIT_MESSAGE;
 $currentwaitadcode = WAIT_AD_CODE; 
@@ -43,6 +44,7 @@ $countuniqueonlystate = $_POST["countuniqueonlystate"];
 if (isset($_POST["countuniqueonlytime"])) {
     $countuniqueonlytime = $_POST["countuniqueonlytime"];
 }
+$protectdownloadsstate = $_POST["protectdownloadsstate"];
 $waitstate = $_POST["waitstate"];
 if (isset($_POST["waitmessage"])) {
     $waitmessage = $_POST["waitmessage"];
@@ -77,6 +79,7 @@ define(\"WEBSITE\", \"$website\");
 define(\"PATH_TO_SCRIPT\", \"$pathtoscript\");
 define(\"COUNT_UNIQUE_ONLY_STATE\", \"$countuniqueonlystate\");
 define(\"COUNT_UNIQUE_ONLY_TIME\", \"$countuniqueonlytime\");
+define(\"PROTECT_DOWNLOADS_STATE\", \"$protectdownloadsstate\");
 
 //Wait Settings
 define(\"WAIT_STATE\", \"$waitstate\");
@@ -141,6 +144,17 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
     <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\" checked/> Disabled";
 }
 ?>
+<p><b>Download Protection:</b></p>
+<?php
+if ($currentprotectdownloadsstate == "Enabled" ) {
+    echo "<input type=\"radio\" name=\protectdownloadsstate\" value=\"Enabled\" checked/> Enabled<br />
+    <input type=\"radio\" name=\"protectdownloadsstate\" value=\"Disabled\" /> Disabled
+    <p>To manage download protection, go <a href=\"protect\">here</a>.</p>";
+} else {
+    echo "<input type=\"radio\" name=\"protectdownloadsstate\" value=\"Enabled\" /> Enabled<br />
+    <input type=\"radio\" name=\"protectdownloadsstate\" value=\"Disabled\" checked/> Disabled";
+}
+?>
 <p><input type="submit" name="Save" value="Save" /></p>
 </form>
 <hr />
@@ -161,9 +175,6 @@ function ispasswordempty()
 <input type="submit" name="command" onClick="return ispasswordempty()" value="Reset All Counts to Zero" /><br />
 <input type="submit" name="command" onClick="return ispasswordempty()" value="Delete All Downloads" />
 </form>
-<hr />
-<p><b>Download Protection:</b></p>
-<p>To manage download protection, go <a href="protect">here</a>.</p>
 <hr />
 <p><a href="../admin">&larr; Go Back</a></p>
 </body>
