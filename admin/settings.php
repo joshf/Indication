@@ -162,6 +162,9 @@ function ispasswordempty()
 <input type="submit" name="command" onClick="return ispasswordempty()" value="Delete All Downloads" />
 </form>
 <hr />
+<p><b>Download Protection:</b></p>
+<p>To manage download protection, go <a href="protect">here</a>.</p>
+<hr />
 <p><a href="../admin">&larr; Go Back</a></p>
 </body>
 </html>
