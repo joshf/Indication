@@ -55,7 +55,6 @@ if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
 }
 
 //Password protect downloads
-//Requires row protect and password in your database table
 if (PROTECT_DOWNLOADS_STATE == "Enabled") {
     $checkprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$id\"");
     $checkprotectedresult = mysql_fetch_assoc($checkprotected); 
@@ -73,6 +72,8 @@ if (PROTECT_DOWNLOADS_STATE == "Enabled") {
             <p>To access this download please enter the password you were given.</p>
             <p>Password: <input type=\"password\" name=\"password\" /></p>
             <input type=\"submit\" name=\"submit\" value=\"Get Download\" /></p></form>
+            <hr />
+            <p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p>
             </body>
             </html>");
         }
