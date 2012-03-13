@@ -145,6 +145,7 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 }
 ?>
 <p><b>Download Protection:</b></p>
+<p><b><i>BETA:</b></i> Please be careful</p>
 <?php
 if ($currentprotectdownloadsstate == "Enabled" ) {
     echo "<input type=\"radio\" name=\"protectdownloadsstate\" value=\"Enabled\" checked/> Enabled<br />
