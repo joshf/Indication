@@ -35,16 +35,23 @@ if (empty($id)) {
 }
 
 //Prevent some injection attacks
-if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $id)) {
+if (!preg_match("/^[a-zA-Z0-9.-]{1,}$/", $id)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>"); 
+}
+
+//Search for plain string
+$plainstring = "-plain";
+$isplain = strpos($id, $plainstring);
+if ($isplain == true) {
+    $id = substr($id, 0, -6);
 }
 
 //If ID exists show count or else die
 $showinfo = mysql_query("SELECT name, count FROM Data WHERE id = \"$id\"");
 $showresult = mysql_fetch_assoc($showinfo); 
 if ($showresult != 0) { 
-    if (isset($_GET["plain"])) {
-        echo $showresult["count"];
+    if ($isplain == true) {
+        echo "<p>" . $showresult["count"] . "</p>";
     } else {
         echo "<p>" . $showresult["name"] . " has been downloaded " . $showresult["count"] . " times.</p>";
     }
