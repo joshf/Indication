@@ -72,11 +72,15 @@ echo "</tbody></table>";
 $getdatacount = mysql_query("SELECT COUNT(*) FROM Data");
 $resultgetdatacount = mysql_fetch_assoc($getdatacount); 
 $totalpages = ceil($resultgetdatacount["COUNT(*)"] / 20);
-echo "<p><i>Go To Page: </i>";
-for ($i=1; $i <= $totalpages; $i++) { 
-    echo " <a href=\"index.php?page=".$i."\">".$i."</a> "; 
-} 
-echo "</p>";
+if ($resultgetdatacount["COUNT(*)"] > "20") {
+    echo "<p><i>Go To Page: </i>";
+    for ($i=1; $i <= $totalpages; $i++) { 
+        echo " <a href=\"index.php?page=".$i."\">".$i."</a> "; 
+    } 
+    echo "</p>";
+} else {
+    echo "<br />";
+}
 
 ?>
 <script type="text/javascript">
