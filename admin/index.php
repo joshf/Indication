@@ -109,11 +109,19 @@ function deleteconfirm()
         }
     }
 }
+function refreshpage() 
+{
+    window.location.reload()
+}
+function settingspage() 
+{
+    window.location = "settings.php";
+}
 function logoutconfirm() 
 {
     var logoutconfirm=confirm("<?php echo ADMIN_USER; ?>, are you sure you wish to logout?");
     if (logoutconfirm==true) {
-        return true;
+        window.location.replace("logout.php");
     } else {
         return false; 
     }
@@ -122,7 +130,7 @@ function logoutconfirm()
 <input type="submit" name="command" value="Add" />
 <input type="submit" name="command" onClick="return isempty()" value="Edit" />
 <input type="submit" name="command" onClick="return deleteconfirm()" value="Delete" />
-<input type="button" onClick="showtrackinglink()" name="command" value="Show Tracking Link" />
+<input type="button" name="Show Tracking Link" onClick="showtrackinglink()" value="Show Tracking Link" />
 </form>
 <p><i>To edit, delete or show the tracking link for a ID please select the radio button next to it.</i></p>
 <?php
@@ -139,7 +147,9 @@ mysql_close($con);
 
 ?>
 <hr />
-<p><a href="index.php">Refresh</a> | <a href="settings.php">Settings</a> | <a href="logout.php" onClick="return logoutconfirm()">Logout</a></p>
+<p><input type="button" name="Refresh" onClick="refreshpage()" value="Refresh" />
+<input type="button" name="Settings" onClick="settingspage()" value="Settings" />
+<input type="button" name="Logout" onClick="return logoutconfirm()" value="Logout" /></p>
 <small>SHTracker 2.0 "DangerousDachshund" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
 <p><small><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9QFKYNSKM8CBJ">Donate</a></p>
 </body>
