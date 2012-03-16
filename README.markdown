@@ -33,6 +33,8 @@ To show the downloads for one id only, call http://yoursite.com/SHTracker/show.p
 
 **Example Codes:**
 
+Normal:
+
 ```php
 <?php
 $_GET["id"] = "download1";
@@ -40,10 +42,27 @@ include("SHTracker/show.php");
 ?>
 ```
 
+Plain:
+
+```php
+<?php
+$_GET["id"] = "download1-plain";
+include("SHTracker/show.php");
+?>
+```
+
 OR:
+
+Normal:
 
 ```html
 <iframe src="SHTracker/show.php?id=download1"></iframe>
+```
+
+Plain:
+
+```html
+<iframe src="SHTracker/show.php?id=download1-plain"></iframe>
 ```
 
 Administration:
