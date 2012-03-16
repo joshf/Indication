@@ -170,12 +170,39 @@ function ispasswordempty()
 </script>
 <p><b>Advanced Options:</b></p>
 <p><i>Do not use these options unless you know what you are doing!</i></p>
-<form action="actions/advanced.php" method="post">
+<form method="post">
 <p>To perform any of these actions, please enter your admin password.</p>
 <p>Password: <input type="password" name="password" /></p>
 <input type="submit" name="command" onClick="return ispasswordempty()" value="Reset All Counts to Zero" /><br />
 <input type="submit" name="command" onClick="return ispasswordempty()" value="Delete All Downloads" />
 </form>
+<?
+
+//FIXME: Dont die
+if (isset($_POST["command"])) {
+    if (sha1($_POST["password"]) != $currentadminpassword) {
+        die("<div id=\"notice\" class=\"bad\"><p>Incorrect password!</p></div><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>");
+    }
+    
+    $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+    if (!$con) {
+        die("Could not connect: " . mysql_error());
+    }
+    
+    mysql_select_db(DB_NAME, $con);
+    
+    if ($_POST["command"] == "Reset All Counts to Zero") {
+        mysql_query("UPDATE Data SET count = \"0\"");
+        echo "<div id=\"notice\" class=\"good\"><p>All counts have been reset to zero!</p></div>";
+    } elseif ($_POST["command"] == "Delete All Downloads") {
+        mysql_query("DELETE FROM Data");
+        echo "<div id=\"notice\" class=\"good\"><p>All downloads have been deleted!</p></div>";
+    }
+    
+    mysql_close($con);
+}
+
+?>
 <hr />
 <p><a href="../admin">&larr; Go Back</a></p>
 </body>
