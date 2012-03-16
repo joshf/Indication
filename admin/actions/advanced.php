@@ -4,7 +4,6 @@
 
 require_once("../../config.php");
 
-//If reset.php is called directly go home
 if (!isset($_POST["command"])) {
     header("Location: ../../admin");
 }
