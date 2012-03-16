@@ -36,7 +36,7 @@ $dbname = $_POST["dbname"];
 $adminuser = $_POST["adminuser"];
 $adminpassword = $_POST["adminpassword"];
 if ($adminpassword != $currentadminpassword) {
-    $adminpassword = sha1("$adminpassword");
+    $adminpassword = sha1($adminpassword);
 }
 $website = $_POST["website"];
 $pathtoscript = $_POST["pathtoscript"];
@@ -145,12 +145,12 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 }
 ?>
 <p><b>Download Protection:</b></p>
-<p><b><i>BETA:</b></i> Please be careful</p>
+<p>Choose whether you want certain downloads to be password protected. If this is enabled, wait settings will be ignored.</p>
 <?php
 if ($currentprotectdownloadsstate == "Enabled" ) {
     echo "<input type=\"radio\" name=\"protectdownloadsstate\" value=\"Enabled\" checked/> Enabled<br />
     <input type=\"radio\" name=\"protectdownloadsstate\" value=\"Disabled\" /> Disabled
-    <p>To manage download protection, go <a href=\"protect\">here</a>.</p>";
+    <p>To set password protect for a download, go <a href=\"protect\">here</a>.</p>";
 } else {
     echo "<input type=\"radio\" name=\"protectdownloadsstate\" value=\"Enabled\" /> Enabled<br />
     <input type=\"radio\" name=\"protectdownloadsstate\" value=\"Disabled\" checked/> Disabled";

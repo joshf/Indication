@@ -67,9 +67,8 @@ mysql_close($con);
 </html>
 <?php
 } elseif ($command == "Delete") {
+    
 // Delete
-?>
-<?php
 
 //Connect to database
 require_once("../config.php");
@@ -89,10 +88,5 @@ mysql_close($con);
 
 header("Location: index.php");
 
-?>
-<?php
-} elseif ($command == "Add") {
-    //Add
-    header("Location: add.php");
-} 
+}
 ?>

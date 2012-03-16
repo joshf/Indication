@@ -113,6 +113,10 @@ function deleteconfirm()
         }
     }
 }
+function addpage() 
+{
+    window.location = "add.php";
+}
 function refreshpage() 
 {
     window.location.reload()
@@ -131,7 +135,7 @@ function logoutconfirm()
     }
 }
 </script>
-<input type="submit" name="command" value="Add" />
+<input type="button" name="Add" onClick="addpage()" value="Add" />
 <input type="submit" name="command" onClick="return isempty()" value="Edit" />
 <input type="submit" name="command" onClick="return deleteconfirm()" value="Delete" />
 <input type="button" name="Show Tracking Link" onClick="showtrackinglink()" value="Show Tracking Link" />
