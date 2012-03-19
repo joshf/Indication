@@ -80,5 +80,7 @@ mysql_close($con);
 </body>
 </html>
 <?php
+} else {
+	header("Location: ../../admin");
 }
 ?>

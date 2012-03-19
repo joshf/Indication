@@ -174,6 +174,8 @@ if (PROTECT_DOWNLOADS_STATE == "Enabled") {
 if (isset($_GET["notice"])) {
     if ($_GET["notice"] == "success") {
         echo "<div id=\"notice\" class=\"good\"><p>Download has been updated.</p></div>";
+    } else {
+        echo "<div id=\"notice\" class=\"bad\"><p>An error has occured.</p></div>";
     }
 }
 
