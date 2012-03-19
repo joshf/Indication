@@ -68,7 +68,7 @@ mysql_close($con);
 <?php
 } elseif ($command == "Delete") {
     
-    // Delete
+    //Delete
     
     //Connect to database
     require_once("../config.php");
@@ -87,7 +87,74 @@ mysql_close($con);
     mysql_close($con);
     
     header("Location: index.php");
+    
+} elseif ($command == "Set Password") {
 
+    //Set Password
+    
+    //Connect to database
+    require_once("../config.php");
+    
+    $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+    if (!$con) {
+            die("Could not connect: " . mysql_error());
+    }
+    
+    mysql_select_db(DB_NAME, $con);
+    
+    $idtoprotect = mysql_real_escape_string($_POST["id"]);
+    $inputtedpassword = mysql_real_escape_string($_POST["password"]);
+    
+    $password = sha1($inputtedpassword);
+    
+    mysql_query("UPDATE Data SET protect = \"true\", password = \"$password\" WHERE id = \"$idtoprotect\"");
+    
+    mysql_close($con);
+    
+    header("Location: index.php?notice=success");
+    
+} elseif ($command == "Unprotect") {
+
+    //Unprotect
+    
+    //Connect to database
+    require_once("../config.php");
+    
+    $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+    if (!$con) {
+            die("Could not connect: " . mysql_error());
+    }
+    
+    mysql_select_db(DB_NAME, $con);
+
+    $idtounprotect = mysql_real_escape_string($_POST["id"]);
+    
+    mysql_query("UPDATE Data SET protect = \"false\", password = \"\" WHERE id = \"$idtounprotect\"");
+    
+    mysql_close($con);
+    
+    header("Location: index.php?notice=success");
+    
+} elseif ($command == "Unprotect All") {
+    
+    //Unprotect All
+    
+    //Connect to database
+    require_once("../config.php");
+    
+    $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+    if (!$con) {
+            die("Could not connect: " . mysql_error());
+    }
+    
+    mysql_select_db(DB_NAME, $con);
+    
+    mysql_query("UPDATE Data SET protect = \"false\", password = \"\"");
+    
+    mysql_close($con);
+    
+    header("Location: index.php?notice=success");
+    
 } else {
     header("Location: index.php");
 }

@@ -149,8 +149,7 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 <?php
 if ($currentprotectdownloadsstate == "Enabled" ) {
     echo "<input type=\"radio\" name=\"protectdownloadsstate\" value=\"Enabled\" checked/> Enabled<br />
-    <input type=\"radio\" name=\"protectdownloadsstate\" value=\"Disabled\" /> Disabled
-    <p>To set password protect for a download, go <a href=\"protect\">here</a>.</p>";
+    <input type=\"radio\" name=\"protectdownloadsstate\" value=\"Disabled\" /> Disabled";
 } else {
     echo "<input type=\"radio\" name=\"protectdownloadsstate\" value=\"Enabled\" /> Enabled<br />
     <input type=\"radio\" name=\"protectdownloadsstate\" value=\"Disabled\" checked/> Disabled";

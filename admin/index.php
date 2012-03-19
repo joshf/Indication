@@ -134,11 +134,50 @@ function logoutconfirm()
         return false; 
     }
 }
+$(document).ready(function() {
+    $("#passwordbox").css("display","none");
+});
+function showpasswordbox() 
+{
+    if (!$("input[name=id]:checked").val()) {
+        alert("No ID selected!");
+        return false;
+    } else {
+        $("#passwordbox").show("fast");
+        return false;
+    }
+}
+function ispasswordempty() 
+{
+    if (!$("input[name=password]").val()) {
+        alert("Please enter a password!");
+        return false;
+    }
+}
 </script>
+<div id="passwordbox">
+<p>Please enter a password: <input type="password" name="password" />
+<input type="submit" name="command" onClick="return ispasswordempty()" value="Set Password" /></p>
+</div>
 <input type="button" name="Add" onClick="addpage()" value="Add" />
 <input type="submit" name="command" onClick="return isempty()" value="Edit" />
 <input type="submit" name="command" onClick="return deleteconfirm()" value="Delete" />
 <input type="button" name="Show Tracking Link" onClick="showtrackinglink()" value="Show Tracking Link" />
+<?php
+
+if (PROTECT_DOWNLOADS_STATE == "Enabled") {
+    echo "<input type=\"submit\" name=\"command\" onClick=\"return showpasswordbox()\" value=\"Protect\" />
+          <input type=\"submit\" name=\"command\" onClick=\"return isempty()\" value=\"Unprotect\" />
+          <input type=\"submit\" name=\"command\" value=\"Unprotect All\" />";
+    }
+    
+if (isset($_GET["notice"])) {
+    if ($_GET["notice"] == "success") {
+        echo "<div id=\"notice\" class=\"good\"><p>Download has been updated.</p></div>";
+    }
+}
+
+?>
 </form>
 <p><i>To edit, delete or show the tracking link for a ID please select the radio button next to it.</i></p>
 <?php
