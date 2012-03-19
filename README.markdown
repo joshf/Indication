@@ -68,7 +68,7 @@ Plain:
 Administration:
 ---------------
 
-Open up SHTracker/admin to add new downloads, view statistics, update existing downloads or delete downloads
+Open up SHTracker/admin to add new downloads, view statistics, update existing downloads or delete downloads. The admin panel can also be used to password protect downloads or to show you the tracking link for a download.
 
 Removal:
 --------
