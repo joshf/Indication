@@ -68,25 +68,27 @@ mysql_close($con);
 <?php
 } elseif ($command == "Delete") {
     
-// Delete
+    // Delete
+    
+    //Connect to database
+    require_once("../config.php");
+    
+    $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+    if (!$con) {
+        die("Could not connect: " . mysql_error());
+    }
+    
+    mysql_select_db(DB_NAME, $con);
+    
+    $idtodelete = mysql_real_escape_string($_POST["id"]);
+    
+    mysql_query("DELETE FROM Data WHERE id = \"$idtodelete\"");
+    
+    mysql_close($con);
+    
+    header("Location: index.php");
 
-//Connect to database
-require_once("../config.php");
-
-$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-if (!$con) {
-    die("Could not connect: " . mysql_error());
-}
-
-mysql_select_db(DB_NAME, $con);
-
-$idtodelete = mysql_real_escape_string($_POST["id"]);
-
-mysql_query("DELETE FROM Data WHERE id = \"$idtodelete\"");
-
-mysql_close($con);
-
-header("Location: index.php");
-
+} else {
+    header("Location: index.php");
 }
 ?>
