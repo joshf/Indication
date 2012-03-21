@@ -51,6 +51,10 @@ if (!preg_match("/^[0-9]{1,}$/", $count)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>"); 
 }
 
+//Convert to lowercase
+$id = strtolower($id);
+$url = strtolower($url);
+
 //Check if ID exists
 $checkid = mysql_query("SELECT id FROM Data WHERE id = \"$id\"");
 $resultcheckid = mysql_fetch_assoc($checkid); 

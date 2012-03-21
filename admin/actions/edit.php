@@ -50,6 +50,10 @@ if (!preg_match("/^[0-9]{1,}$/", $newcount)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers.</p><hr /><p><a href=\"../../admin\">&larr; Go Back</a></p></body></html>"); 
 }
 
+//Convert to lowercase
+$newid = strtolower($newid);
+$newurl = strtolower($newurl);
+
 mysql_query("UPDATE Data SET name = \"$newname\", id = \"$newid\", url = \"$newurl\", count = \"$newcount\" WHERE id = \"$idtoedit\"");
 
 mysql_close($con);
