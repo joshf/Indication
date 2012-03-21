@@ -103,6 +103,13 @@ header("Location: " . $_SERVER["REQUEST_URI"] . "");
 <title>SHTracker: Settings</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/flick/jquery-ui.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<style type="text/css">
+.ui-button-text {
+    font-size: 0.6em;
+}
+</style>
 </head>
 <body>
 <h1>SHTracker: Settings</h1>
@@ -159,19 +166,35 @@ if ($currentprotectdownloadsstate == "Enabled" ) {
 </form>
 <hr />
 <script type="text/javascript">
+$(document).ready(function() {
+    $("#passwordempty").dialog({
+        autoOpen: false,
+        modal: true,
+        height: 170,
+        width: 400,
+        buttons: {
+            "Close": function() {
+                $(this).dialog("close");
+            }
+        }
+    });
+});
 function ispasswordempty() 
 {
     if (!$("input[name=password]").val()) {
-        alert("Please enter your admin password!");
+        $("#passwordempty").dialog("open");
         return false;
     }
 }
 </script>
 <p><b>Advanced Options:</b></p>
-<div id="notice" class="bad"><p><i>Do not use these options unless you know what you are doing!</i></p></div>
+<p><i>Do not use these options unless you know what you are doing!</i></p>
 <form action="actions/advanced.php" method="post">
 <p>To perform any of these actions, please enter your admin password.</p>
 <p>Password: <input type="password" name="password" /></p>
+<div id="passwordempty" title="SHTracker: Error">
+    <p>Please enter a password!</p>
+</div>
 <input type="submit" name="command" onClick="return ispasswordempty()" value="Reset All Counts to Zero" /><br />
 <input type="submit" name="command" onClick="return ispasswordempty()" value="Delete All Downloads" />
 </form>
