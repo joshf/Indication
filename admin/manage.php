@@ -88,7 +88,7 @@ mysql_close($con);
     
     header("Location: index.php");
     
-} elseif ($command == "Set Password") {
+} elseif ($command == "Protect") {
 
     //Set Password
     
@@ -111,7 +111,7 @@ mysql_close($con);
     
     mysql_close($con);
     
-    header("Location: index.php?notice=success");
+    header("Location: index.php");
     
 } elseif ($command == "Unprotect") {
 
@@ -133,7 +133,7 @@ mysql_close($con);
     
     mysql_close($con);
     
-    header("Location: index.php?notice=success");
+    header("Location: index.php");
     
 } elseif ($command == "Unprotect All") {
     
@@ -153,7 +153,7 @@ mysql_close($con);
     
     mysql_close($con);
     
-    header("Location: index.php?notice=success");
+    header("Location: index.php");
     
 } else {
     header("Location: index.php");
