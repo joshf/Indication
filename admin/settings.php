@@ -105,6 +105,7 @@ header("Location: " . $_SERVER["REQUEST_URI"] . "");
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/flick/jquery-ui.css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script src="http://hashmask.googlecode.com/svn/trunk/jquery.sha1.js"></script>
 <style type="text/css">
 /* Make buttons smaller */
 .ui-button-text {
@@ -174,6 +175,13 @@ $(document).ready(function() {
             $("#passwordempty").show("fast");
             return false;
         } else {
+            var inputtedpassword = $("#password").val();
+            var pass = $.sha1(inputtedpassword);
+            var storedpass = "<? echo ADMIN_PASSWORD; ?>";
+            if (pass != storedpass) {
+                $("#incorrectpass").show("fast");
+                return false;
+            }
             var pass = $("#password").val();
             $.ajax({  
                 type: "POST",  
@@ -192,7 +200,13 @@ $(document).ready(function() {
             $("#passwordempty").show("fast");
             return false;
         } else {
-            var pass = $("#password").val();
+            var inputtedpassword = $("#password").val();
+            var pass = $.sha1(inputtedpassword);
+            var storedpass = "<? echo ADMIN_PASSWORD; ?>";
+            if (pass != storedpass) {
+                $("#incorrectpass").show("fast");
+                return false;
+            }
             $.ajax({  
                 type: "POST",  
                 url: "actions/advanced.php",  
@@ -214,6 +228,10 @@ $(document).ready(function() {
     $("#passwordempty").click(function() {
         $("#passwordempty").hide("fast");
     });
+    $("#incorrectpass").click(function() {
+        $("#incorrectpass").hide("fast");
+    });
+
     /* End */
 });
 </script>
@@ -229,6 +247,9 @@ $(document).ready(function() {
 </div>
 <div id="dadsuccess" style="display: none">
     <div id="notice" class="good"><p>All downloads deleted!</p></div>
+</div>
+<div id="incorrectpass" style="display: none">
+    <div id="notice" class="bad"><p>Incorrect password!</p></div>
 </div>
 <button id="dorac">Reset All Counts to Zero</button><br />
 <button id="dodad">Delete All Downloads</button>
