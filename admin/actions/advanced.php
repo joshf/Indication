@@ -5,7 +5,7 @@
 require_once("../../config.php");
 
 if (!isset($_POST["command"])) {
-	header("Location: ../../admin");
+	header("Location: ../settings.php");
 }
 
 //Make user confirm action with a password

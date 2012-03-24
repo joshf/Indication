@@ -168,7 +168,7 @@ if ($currentprotectdownloadsstate == "Enabled" ) {
 <hr />
 <script type="text/javascript">
 $(document).ready(function() {
-    /* Do Rac */
+    /* Do RAC */
     $("#dorac").click(function() {
         if (!$("input[name=password]").val()) {
             $("#passwordempty").show("fast");
