@@ -106,6 +106,7 @@ header("Location: " . $_SERVER["REQUEST_URI"] . "");
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/flick/jquery-ui.css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <style type="text/css">
+/* Make buttons smaller */
 .ui-button-text {
     font-size: 0.6em;
 }
@@ -167,37 +168,70 @@ if ($currentprotectdownloadsstate == "Enabled" ) {
 <hr />
 <script type="text/javascript">
 $(document).ready(function() {
-    $("#passwordempty").dialog({
-        autoOpen: false,
-        modal: true,
-        height: 170,
-        width: 400,
-        buttons: {
-            "Close": function() {
-                $(this).dialog("close");
-            }
+    /* Do Rac */
+    $("#dorac").click(function() {
+        if (!$("input[name=password]").val()) {
+            $("#passwordempty").show("fast");
+            return false;
+        } else {
+            var pass = $("#password").val();
+            $.ajax({  
+                type: "POST",  
+                url: "actions/advanced.php",  
+                data: "command=Reset All Counts to Zero&password="+ pass +"",
+                success: function() { 
+                    $("#racsuccess").show("fast");
+                }      
+            });
         }
     });
+    /* End */
+    /* Do DAD */
+    $("#dodad").click(function() {
+        if (!$("input[name=password]").val()) {
+            $("#passwordempty").show("fast");
+            return false;
+        } else {
+            var pass = $("#password").val();
+            $.ajax({  
+                type: "POST",  
+                url: "actions/advanced.php",  
+                data: "command=Delete All Downloads&password="+ pass +"",
+                success: function() { 
+                    $("#dadsuccess").show("fast");
+                }      
+            });
+        }
+    });
+    /* End */
+    /* Hide DIVS */
+    $("#racsuccess").click(function() {
+        $("#racsuccess").hide("fast");
+    });
+    $("#dadsuccess").click(function() {
+        $("#dadsuccess").hide("fast");
+    });
+    $("#passwordempty").click(function() {
+        $("#passwordempty").hide("fast");
+    });
+    /* End */
 });
-function ispasswordempty() 
-{
-    if (!$("input[name=password]").val()) {
-        $("#passwordempty").dialog("open");
-        return false;
-    }
-}
 </script>
 <p><b>Advanced Options:</b></p>
 <p><i>Do not use these options unless you know what you are doing!</i></p>
-<form action="actions/advanced.php" method="post">
 <p>To perform any of these actions, please enter your admin password.</p>
-<p>Password: <input type="password" name="password" /></p>
-<div id="passwordempty" title="SHTracker: Error">
-    <p>Please enter a password!</p>
+<p>Password: <input type="password" id="password" name="password" /></p>
+<div id="passwordempty" style="display: none">
+    <div id="notice" class="bad"><p>Please enter a password!</p></div>
 </div>
-<input type="submit" name="command" onClick="return ispasswordempty()" value="Reset All Counts to Zero" /><br />
-<input type="submit" name="command" onClick="return ispasswordempty()" value="Delete All Downloads" />
-</form>
+<div id="racsuccess" style="display: none">
+    <div id="notice" class="good"><p>All downloads reset to zero!</p></div>
+</div>
+<div id="dadsuccess" style="display: none">
+    <div id="notice" class="good"><p>All downloads deleted!</p></div>
+</div>
+<button id="dorac">Reset All Counts to Zero</button><br />
+<button id="dodad">Delete All Downloads</button>
 <hr />
 <p><a href="../admin">&larr; Go Back</a></p>
 </body>
