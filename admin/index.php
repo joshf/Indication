@@ -328,7 +328,7 @@ mysql_close($con);
 <p><button id="dorefresh">Refresh</button>
 <button id="dogotosettingspage">Settings</button>
 <button id="showlogout">Logout</button></p>
-<small>SHTracker 2.0 "DangerousDachshund" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
-<p><small><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9QFKYNSKM8CBJ">Donate</a></p>
+<small>SHTracker 2.0b1 "DangerousDachshund" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
+<p><small><a href="http://sidhosting.co.uk/misc/donate.html">Donate</a></p>
 </body>
 </html>
