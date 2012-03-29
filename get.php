@@ -95,6 +95,7 @@ if (WAIT_STATE == "Enabled" ) {
 header("Location: " . $getresult["url"] . "");
 ob_end_flush();
 exit;
+
 ?>
 </body>
 </html>

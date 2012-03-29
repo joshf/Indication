@@ -20,7 +20,7 @@ if (!isset($_SESSION["is_logged_in"])) {
 <p>ID: <input type="text" size="50" name="id" /></p>
 <p>URL: <input type="text" size="50" name="url" /></p>
 <p>Count: <input type="text" size="50" name="count" /></p>
-<input type="submit" name="command" value="Add" />
+<input type="submit" value="Add" />
 </form>
 <hr />
 <p><a href="../admin">&larr; Go Back</a></p>

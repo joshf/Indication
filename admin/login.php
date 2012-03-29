@@ -3,7 +3,7 @@
 //SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
 
 if (!file_exists("../config.php")) {
-    die("<html><head><title>SHTracker: Error</title><link rel=\"stylesheet\" type=\"text/css\" href=\"../style.css\" /></head><body><h1>SHTracker: Error</h1><p>SHTracker has not been installed. Please run install.php first!</p><hr /><p><a href=\"../install.php\">Go To Install</a></p></body></html>"); 
+    header("Location: ../installer");
 }
 
 require_once("../config.php");
@@ -42,10 +42,10 @@ if(!isset($_SESSION["is_logged_in"])) {
 <?php 
 
 if(isset($_GET["login_error"])) {
-    echo "<div id=\"notice\" class=\"bad\"><p>Incorrect password or username!</p></div>";
+    echo "<div id=\"noticebad\"><p>Incorrect password or username!</p></div>";
 }
 if(isset($_GET["logged_out"])) {
-    echo "<div id=\"notice\" class=\"good\"><p>Logged out!</p></div>";
+    echo "<div id=\"noticegood\"><p>Logged out!</p></div>";
 }
 
 ?>

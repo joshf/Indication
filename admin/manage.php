@@ -90,7 +90,7 @@ mysql_close($con);
     
 } elseif ($command == "Protect") {
 
-    //Set Password
+    //Protect
     
     //Connect to database
     require_once("../config.php");

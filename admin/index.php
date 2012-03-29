@@ -7,7 +7,7 @@ if (!isset($_SESSION["is_logged_in"])) {
 }
 
 if (!file_exists("../config.php")) {
-    die("<h1>SHTracker: Error</h1><p>SHTracker has not been installed.</p><hr /><p><a href=\"../installer\">Go To Installer &rarr;</a></p></body></html>"); 
+    header("Location: ../installer");
 }
 
 //Connect to database
@@ -328,7 +328,7 @@ mysql_close($con);
 <p><button id="dorefresh">Refresh</button>
 <button id="dogotosettingspage">Settings</button>
 <button id="showlogout">Logout</button></p>
-<small>SHTracker 2.0b1 "DangerousDachshund" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
+<small>SHTracker 2.0 "DangerousDachshund" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
 <p><small><a href="http://sidhosting.co.uk/misc/donate.html">Donate</a></p>
 </body>
 </html>
