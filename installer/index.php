@@ -1,3 +1,11 @@
+<?php
+
+//Security check
+if (file_exists("config.php")) {
+    die("<h1>SHTracker: Error</h1><p>SHTracker has already been installed! If you wish to reinstall SHTracker, please delete config.php from your server.</p><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>"); 
+}
+
+?>
 <!-- SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker) -->
 <html>
 <head>
@@ -44,18 +52,10 @@ $(document).ready(function(){
     });
 });
 </script>
-<?php
-
-//Security check
-if (file_exists("config.php")) {
-    die("<h1>SHTracker: Error</h1><p>SHTracker has already been installed! If you wish to reinstall SHTracker, please delete config.php from your server.</p><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>"); 
-}
-
-?>
 <h1>SHTracker: Installer</h1>
 <p><i>All fields are required</i></p>
 <p><b>Database Settings:</b></p>
-<form action="do_install.php" method="post" id="installform" >
+<form action="install.php" method="post" id="installform" >
 Host: <input type="text" name="dbhost" value="localhost" /><br />
 User: <input type="text" name="dbuser" /><br />
 Password: <input type="password" name="dbpassword" /><br />
