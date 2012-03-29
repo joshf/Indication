@@ -102,16 +102,8 @@ header("Location: " . $_SERVER["REQUEST_URI"] . "");
 <head>
 <title>SHTracker: Settings</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/flick/jquery-ui.css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-<script src="http://hashmask.googlecode.com/svn/trunk/jquery.sha1.js"></script>
-<style type="text/css">
-/* Make buttons smaller */
-.ui-button-text {
-    font-size: 0.6em;
-}
-</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://hashmask.googlecode.com/svn/trunk/jquery.sha1.js"></script>
 </head>
 <body>
 <h1>SHTracker: Settings</h1>

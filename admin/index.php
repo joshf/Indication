@@ -12,15 +12,15 @@ if (!isset($_SESSION["is_logged_in"])) {
 <head>
 <title>SHTracker: Admin Home</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/flick/jquery-ui.css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <style type="text/css">
 /* Make buttons smaller */
 .ui-button-text {
     font-size: 0.6em;
 }
 </style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 </head>
 <body>
 <noscript><p>Your browser does not support JavaScript or it is disabled, most functions will be broken! Please upgrade your browser or enable JavaScript.</p></noscript>
