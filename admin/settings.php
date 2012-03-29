@@ -106,6 +106,75 @@ header("Location: " . $_SERVER["REQUEST_URI"] . "");
 <script type="text/javascript" src="http://hashmask.googlecode.com/svn/trunk/jquery.sha1.js"></script>
 </head>
 <body>
+<script type="text/javascript">
+$(document).ready(function() {
+    /* Do RAC */
+    $("#dorac").click(function() {
+        if (!$("input[name=password]").val()) {
+            $("#passwordempty").show("fast");
+            return false;
+        } else {
+            var inputtedpassword = $("#password").val();
+            var pass = $.sha1(inputtedpassword);
+            var storedpass = "<? echo ADMIN_PASSWORD; ?>";
+            if (pass != storedpass) {
+                $("#incorrectpass").show("fast");
+                return false;
+            }
+            var pass = $("#password").val();
+            $.ajax({  
+                type: "POST",  
+                url: "actions/advanced.php",  
+                data: "command=Reset All Counts to Zero&password="+ pass +"",
+                success: function() { 
+                    $("#racsuccess").show("fast");
+                }      
+            });
+        }
+    });
+    /* End */
+    /* Do DAD */
+    $("#dodad").click(function() {
+        if (!$("input[name=password]").val()) {
+            $("#passwordempty").show("fast");
+            return false;
+        } else {
+            var inputtedpassword = $("#password").val();
+            var pass = $.sha1(inputtedpassword);
+            var storedpass = "<? echo ADMIN_PASSWORD; ?>";
+            if (pass != storedpass) {
+                $("#incorrectpass").show("fast");
+                return false;
+            }
+            var pass = $("#password").val();
+            $.ajax({  
+                type: "POST",  
+                url: "actions/advanced.php",  
+                data: "command=Delete All Downloads&password="+ pass +"",
+                success: function() { 
+                    $("#dadsuccess").show("fast");
+                }      
+            });
+        }
+    });
+    /* End */
+    /* Hide DIVS */
+    $("#racsuccess").click(function() {
+        $("#racsuccess").hide("fast");
+    });
+    $("#dadsuccess").click(function() {
+        $("#dadsuccess").hide("fast");
+    });
+    $("#passwordempty").click(function() {
+        $("#passwordempty").hide("fast");
+    });
+    $("#incorrectpass").click(function() {
+        $("#incorrectpass").hide("fast");
+    });
+
+    /* End */
+});
+</script>
 <h1>SHTracker: Settings</h1>
 <p>Here you can change the settings for SHTracker.</p>
 <p><b>Database Settings:</b></p>
@@ -159,89 +228,21 @@ if ($currentprotectdownloadsstate == "Enabled" ) {
 <p><input type="submit" name="Save" value="Save" /></p>
 </form>
 <hr />
-<script type="text/javascript">
-$(document).ready(function() {
-    /* Do RAC */
-    $("#dorac").click(function() {
-        if (!$("input[name=password]").val()) {
-            $("#passwordempty").show("fast");
-            return false;
-        } else {
-            var inputtedpassword = $("#password").val();
-            var pass = $.sha1(inputtedpassword);
-            var storedpass = "<? echo ADMIN_PASSWORD; ?>";
-            if (pass != storedpass) {
-                $("#incorrectpass").show("fast");
-                return false;
-            }
-            var pass = $("#password").val();
-            $.ajax({  
-                type: "POST",  
-                url: "actions/advanced.php",  
-                data: "command=Reset All Counts to Zero&password="+ pass +"",
-                success: function() { 
-                    $("#racsuccess").show("fast");
-                }      
-            });
-        }
-    });
-    /* End */
-    /* Do DAD */
-    $("#dodad").click(function() {
-        if (!$("input[name=password]").val()) {
-            $("#passwordempty").show("fast");
-            return false;
-        } else {
-            var inputtedpassword = $("#password").val();
-            var pass = $.sha1(inputtedpassword);
-            var storedpass = "<? echo ADMIN_PASSWORD; ?>";
-            if (pass != storedpass) {
-                $("#incorrectpass").show("fast");
-                return false;
-            }
-            $.ajax({  
-                type: "POST",  
-                url: "actions/advanced.php",  
-                data: "command=Delete All Downloads&password="+ pass +"",
-                success: function() { 
-                    $("#dadsuccess").show("fast");
-                }      
-            });
-        }
-    });
-    /* End */
-    /* Hide DIVS */
-    $("#racsuccess").click(function() {
-        $("#racsuccess").hide("fast");
-    });
-    $("#dadsuccess").click(function() {
-        $("#dadsuccess").hide("fast");
-    });
-    $("#passwordempty").click(function() {
-        $("#passwordempty").hide("fast");
-    });
-    $("#incorrectpass").click(function() {
-        $("#incorrectpass").hide("fast");
-    });
-
-    /* End */
-});
-</script>
 <p><b>Advanced Options:</b></p>
 <p><i>Do not use these options unless you know what you are doing!</i></p>
 <p>To perform any of these actions, please enter your admin password.</p>
 <p>Password: <input type="password" id="password" name="password" /></p>
 <div id="passwordempty" style="display: none">
-    <div id="notice" class="bad"><p>Please enter a password!</p></div>
+    <div id="noticebad"><p>Please enter a password!</p></div>
 </div>
 <div id="racsuccess" style="display: none">
-    <div id="notice" class="good"><p>All downloads reset to zero!</p></div>
+    <div id="noticegood"><p>All downloads reset to zero!</p></div>
 </div>
 <div id="dadsuccess" style="display: none">
-    <div id="notice" class="good"><p>All downloads deleted!</p></div>
+    <div id="noticegood"><p>All downloads deleted!</p></div>
 </div>
 <div id="incorrectpass" style="display: none">
-    <div id="notice" class="bad"><p>Incorrect password!</p></div>
+    <div id="noticebad"><p>Incorrect password!</p></div>
 </div>
 <button id="dorac">Reset All Counts to Zero</button><br />
 <button id="dodad">Delete All Downloads</button>

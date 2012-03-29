@@ -19,68 +19,41 @@ $command = $_POST["command"];
 
 if ($command == "Reset All Counts to Zero") {
 
-?>
-<!-- Reset -->
-<html> 
-<head>
-<title>SHTracker: All Counts Reset to Zero</title>
-<link rel="stylesheet" type="text/css" href="../../style.css" />
-</head>
-<body>
-<?php
+	//Reset All Counts to Zero
+	
+	//Connect to database
+	$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+	if (!$con) {
+		die("Could not connect: " . mysql_error());
+	}
+	
+	mysql_select_db(DB_NAME, $con);
+	
+	mysql_query("UPDATE Data SET count = \"0\"");
+	
+	mysql_close($con);	
+	
+	header("Location: ../settings.php");
 
-//Connect to database
-$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-if (!$con) {
-	die("Could not connect: " . mysql_error());
-}
-
-mysql_select_db(DB_NAME, $con);
-
-mysql_query("UPDATE Data SET count = \"0\"");
-
-mysql_close($con);
-
-?>
-<h1>SHTracker: All Counts Reset to Zero</h1>
-<p>All counts have been reset to zero.</p>
-<hr />
-<p><a href="../../admin">&larr; Go Back</a></p>
-</body>
-</html>
-<?php
 } elseif ($command == "Delete All Downloads") {
-?>
-<!-- Delete -->
-<html> 
-<head>
-<title>SHTracker: All Downloads Deleted</title>
-<link rel="stylesheet" type="text/css" href="../../style.css" />
-</head>
-<body>
-<?php
-
-//Connect to database
-$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-if (!$con) {
-	die("Could not connect: " . mysql_error());
-}
-
-mysql_select_db(DB_NAME, $con);
-
-mysql_query("DELETE FROM Data");
-
-mysql_close($con);
-
-?>
-<h1>SHTracker: All Downloads Deleted</h1>
-<p>All downloads have been deleted.</p>
-<hr />
-<p><a href="../../admin">&larr; Go Back</a></p>
-</body>
-</html>
-<?php
+	
+	//Delete All Downloads
+	
+	//Connect to database
+	$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+	if (!$con) {
+		die("Could not connect: " . mysql_error());
+	}
+	
+	mysql_select_db(DB_NAME, $con);
+	
+	mysql_query("DELETE FROM Data");
+	
+	mysql_close($con);
+	
+	header("Location: ../settings.php");
+	
 } else {
-	header("Location: ../../admin");
+	header("Location: ../settings.php");
 }
 ?>

@@ -1,11 +1,3 @@
-<?php
-
-//Security check
-if (file_exists("config.php")) {
-    die("<h1>SHTracker: Error</h1><p>SHTracker has already been installed! If you wish to reinstall SHTracker, please delete config.php from your server.</p><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>"); 
-}
-
-?>
 <!-- SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker) -->
 <html>
 <head>
@@ -15,6 +7,14 @@ if (file_exists("config.php")) {
 <script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 </head>
 <body>
+<?php
+
+//Security check
+if (file_exists("../config.php")) {
+    die("<h1>SHTracker: Error</h1><p>SHTracker has already been installed! If you wish to reinstall SHTracker, please delete config.php from your server.</p><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>"); 
+}
+
+?>
 <script type="text/javascript">
 $(document).ready(function(){
     $("#installform").validate({
@@ -66,7 +66,7 @@ Password: <input type="password" name="adminpassword" /><br />
 <p><b>Other Settings:</b></p>
 Website Name: <input type="text" name="website" /><br />
 Path to Script: <input type="text" name="pathtoscript" /><br />
-<input type="submit" value="Install" />
+<p><input type="submit" value="Install" /></p>
 </form>
 </body>
 </html>

@@ -1,6 +1,8 @@
 <?php
+
 //SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
 ob_start();
+
 ?>
 <html>
 <head>
@@ -55,6 +57,7 @@ if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
 }
 
 //Password protect downloads
+//FIXME: Could this be done in Jquery?
 if (PROTECT_DOWNLOADS_STATE == "Enabled") {
     $checkprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$id\"");
     $checkprotectedresult = mysql_fetch_assoc($checkprotected); 

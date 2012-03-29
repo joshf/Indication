@@ -6,6 +6,13 @@ if (!isset($_SESSION["is_logged_in"])) {
     exit; 
 }
 
+if (!file_exists("../config.php")) {
+    die("<h1>SHTracker: Error</h1><p>SHTracker has not been installed.</p><hr /><p><a href=\"../installer\">Go To Installer &rarr;</a></p></body></html>"); 
+}
+
+//Connect to database
+require_once("../config.php");
+
 ?>
 <!-- SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker) -->
 <html> 
@@ -24,75 +31,6 @@ if (!isset($_SESSION["is_logged_in"])) {
 </head>
 <body>
 <noscript><p>Your browser does not support JavaScript or it is disabled, most functions will be broken! Please upgrade your browser or enable JavaScript.</p></noscript>
-<?php
-
-if (!file_exists("../config.php")) {
-    die("<h1>SHTracker: Error</h1><p>SHTracker has not been installed.</p><hr /><p><a href=\"../installer\">Go To Installer &rarr;</a></p></body></html>"); 
-}
-
-//Connect to database
-require_once("../config.php");
-
-$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-if (!$con) {
-    die("Could not connect: " . mysql_error());
-}
-
-mysql_select_db(DB_NAME, $con);
-
-//Pagination fail safes
-if (isset($_GET["page"])) {
-    $page = mysql_real_escape_string($_GET["page"]);
-    if (empty($page)) {
-        die("<h1>SHDetect: Error</h1><p>Page value is empty...</p><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>"); 
-    }
-    if (!preg_match("/^[0-9]{1,}$/", $page)) {
-        die("<h1>SHDetect: Error</h1><p>Illegal character used...</p><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>"); 
-    }
-} else {
-    $page = 1;
-}
-$startfrom = ($page-1) * 20;
-
-$getdownloads = mysql_query("SELECT * FROM Data ORDER BY name ASC LIMIT $startfrom, 20");
-
-echo "<h1>SHTracker: " . WEBSITE . " Download Statistics</h1>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Name</th>
-<th>ID</th>
-<th>URL</th>
-<th>Count</th>
-</tr></thead><tbody>";
-
-while($row = mysql_fetch_assoc($getdownloads)) {
-    echo "<tr>";
-    echo "<td><input type=\"radio\" name=\"id\" value=\"" . $row["id"] . "\" /></td>";
-    echo "<td>" . $row["name"] . "</td>";
-    echo "<td>" . $row["id"] . "</td>";
-    echo "<td>" . $row["url"] . "</td>";
-    echo "<td>" . $row["count"] . "</td>";
-    echo "</tr>";
-}
-echo "</tbody></table>";
-
-//Pagination stuff
-$getdatacount = mysql_query("SELECT COUNT(*) FROM Data");
-$resultgetdatacount = mysql_fetch_assoc($getdatacount); 
-$totalpages = ceil($resultgetdatacount["COUNT(*)"] / 20);
-if ($resultgetdatacount["COUNT(*)"] > "20") {
-    echo "<p><i>Go To Page: </i>";
-    for ($i=1; $i <= $totalpages; $i++) { 
-        echo " <a href=\"index.php?page=".$i."\">".$i."</a> "; 
-    } 
-    echo "</p>";
-} else {
-    echo "<br />";
-}
-
-?>
 <script type="text/javascript">
 $(document).ready(function() {
     /* Edit */
@@ -276,6 +214,68 @@ $(document).ready(function() {
     /* End */
 });
 </script>
+<?php
+
+$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+if (!$con) {
+    die("Could not connect: " . mysql_error());
+}
+
+mysql_select_db(DB_NAME, $con);
+
+//Pagination fail safes
+if (isset($_GET["page"])) {
+    $page = mysql_real_escape_string($_GET["page"]);
+    if (empty($page)) {
+        die("<h1>SHDetect: Error</h1><p>Page value is empty...</p><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>"); 
+    }
+    if (!preg_match("/^[0-9]{1,}$/", $page)) {
+        die("<h1>SHDetect: Error</h1><p>Illegal character used...</p><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>"); 
+    }
+} else {
+    $page = 1;
+}
+$startfrom = ($page-1) * 20;
+
+$getdownloads = mysql_query("SELECT * FROM Data ORDER BY name ASC LIMIT $startfrom, 20");
+
+echo "<h1>SHTracker: " . WEBSITE . " Download Statistics</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+<th>ID</th>
+<th>URL</th>
+<th>Count</th>
+</tr></thead><tbody>";
+
+while($row = mysql_fetch_assoc($getdownloads)) {
+    echo "<tr>";
+    echo "<td><input type=\"radio\" name=\"id\" value=\"" . $row["id"] . "\" /></td>";
+    echo "<td>" . $row["name"] . "</td>";
+    echo "<td>" . $row["id"] . "</td>";
+    echo "<td>" . $row["url"] . "</td>";
+    echo "<td>" . $row["count"] . "</td>";
+    echo "</tr>";
+}
+echo "</tbody></table>";
+
+//Pagination stuff
+$getdatacount = mysql_query("SELECT COUNT(*) FROM Data");
+$resultgetdatacount = mysql_fetch_assoc($getdatacount); 
+$totalpages = ceil($resultgetdatacount["COUNT(*)"] / 20);
+if ($resultgetdatacount["COUNT(*)"] > "20") {
+    echo "<p><i>Go To Page: </i>";
+    for ($i=1; $i <= $totalpages; $i++) { 
+        echo " <a href=\"index.php?page=".$i."\">".$i."</a> "; 
+    } 
+    echo "</p>";
+} else {
+    echo "<br />";
+}
+
+?>
 <div id="edit" style="display: none">
     <p>Loading...</p>
 </div>
@@ -286,13 +286,13 @@ $(document).ready(function() {
     <p>Please enter a password: <input type="password" id="password" name="password" /></p>
 </div>
 <div id="noidselectedmessage" style="display: none">
-    <div id="notice" class="bad"><p>No ID selected!</p></div>
+    <div id="noticebad"><p>No ID selected!</p></div>
 </div>
 <div id="unprotectedmessage" style="display: none">
-    <div id="notice" class="good"><p>Download(s) has/have been unprotected!</p></div>
+    <div id="noticegood"><p>Download(s) has/have been unprotected!</p></div>
 </div>
 <div id="protectedmessage" style="display: none">
-    <div id="notice" class="good"><p>Download has been protected!</p></div>
+    <div id="noticegood"><p>Download has been protected!</p></div>
 </div>
 <div id="logout" style="display: none" title="SHTracker: Logout">
     <p><? echo ADMIN_USER; ?>, are you sure you wish to logout?</p>
