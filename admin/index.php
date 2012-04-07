@@ -249,15 +249,29 @@ echo "<h1>SHTracker: " . WEBSITE . " Download Statistics</h1>
 <th>URL</th>
 <th>Count</th>
 </tr></thead><tbody>";
+    
+$isalt = false;
 
 while($row = mysql_fetch_assoc($getdownloads)) {
-    echo "<tr>";
-    echo "<td><input type=\"radio\" name=\"id\" value=\"" . $row["id"] . "\" /></td>";
-    echo "<td>" . $row["name"] . "</td>";
-    echo "<td>" . $row["id"] . "</td>";
-    echo "<td>" . $row["url"] . "</td>";
-    echo "<td>" . $row["count"] . "</td>";
-    echo "</tr>";
+    if($isalt == false){
+        echo "<tr>";
+        echo "<td><input type=\"radio\" name=\"id\" value=\"" . $row["id"] . "\" /></td>";
+        echo "<td>" . $row["name"] . "</td>";
+        echo "<td>" . $row["id"] . "</td>";
+        echo "<td>" . $row["url"] . "</td>";
+        echo "<td>" . $row["count"] . "</td>";
+        echo "</tr>";
+        $isalt = true;
+    } else {
+        echo "<tr class=\"alt\">";
+        echo "<td><input type=\"radio\" name=\"id\" value=\"" . $row["id"] . "\" /></td>";
+        echo "<td>" . $row["name"] . "</td>";
+        echo "<td>" . $row["id"] . "</td>";
+        echo "<td>" . $row["url"] . "</td>";
+        echo "<td>" . $row["count"] . "</td>";
+        echo "</tr>";
+        $isalt = false;
+    }
 }
 echo "</tbody></table>";
 

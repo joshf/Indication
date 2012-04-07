@@ -45,23 +45,28 @@ a:active {
 }
 
 table {
-	color: black;
 	font-size: 16px;
 	font-family: Helvetica, Verdana, Arial, sans-serif;
 	width: 100%;
 	border-collapse: collapse;
 }
 
-table td, table th  {
+table th {
+	text-align: left;
+	background-color: #0080ff;
+	color: #ffffff;
+	padding: 3px 7px 1px 7px;
+}
+
+table td  {
 	text-align: left;
 	color: black;
 	border: 1px solid #0080ff;
 	padding: 3px 7px 1px 7px;
 }
 
-table th {
-	background-color: #0080ff;
-	color: #ffffff;
+table tr.alt {
+	background-color: #CAE1FF;
 }
 
 #loginform {
