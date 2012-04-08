@@ -74,6 +74,6 @@ fclose($configfile);
 <h1>SHTracker: Install Complete</h1>
 <p>Please delete the "installer" folder from your server, as it poses a security risk!</p>
 <p>It may also be helpful to make config.php unwritable.</p>
-<p><a href="../admin">Go To Login &rarr;</a></p>
+<p><a href="../admin">Go To Login</a></p>
 </body>
 </html>

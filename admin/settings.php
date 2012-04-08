@@ -215,7 +215,7 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 }
 ?>
 <p><b>Download Protection:</b></p>
-<p>Choose whether you want certain downloads to be password protected. If this is enabled, wait settings will be ignored.</p>
+<p>Choose whether you want certain downloads to be password protected.</p>
 <?php
 if ($currentprotectdownloadsstate == "Enabled" ) {
     echo "<input type=\"radio\" name=\"protectdownloadsstate\" value=\"Enabled\" checked/> Enabled<br />
