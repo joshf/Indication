@@ -57,16 +57,12 @@ if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
 }
 
 //Password protect downloads
-//FIXME: Could this be done in Jquery?
 if (PROTECT_DOWNLOADS_STATE == "Enabled") {
     $checkprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$id\"");
     $checkprotectedresult = mysql_fetch_assoc($checkprotected); 
     if ($checkprotectedresult["protect"] == "true") { 
         if (isset($_POST["password"])) {
-            if (sha1($_POST["password"]) == $checkprotectedresult["password"]) {
-                header("Location: " . $getresult["url"] . "");
-                exit;
-            } else {
+            if (sha1($_POST["password"]) != $checkprotectedresult["password"]) {
                 die("<h1>SHTracker: Error</h1><p>Incorrect password.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
             }
         } else {
