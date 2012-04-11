@@ -18,9 +18,8 @@ if (!isset($_SESSION["is_logged_in"])) {
 <script type="text/javascript">
 $(document).ready(function() {
 	$("input:checkbox[name=passwordprotectstate]").click(function() {
-    	$("#passwordentry").toggle("fast");
-	});
-	
+    	$("#passwordentry").toggle(this.checked);
+    });
 });
 </script>
 <h1>SHTracker: Add A Download</h1>

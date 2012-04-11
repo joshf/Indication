@@ -28,9 +28,8 @@ if ($command == "Edit") {
 <script type="text/javascript">
 $(document).ready(function() {
     $("input:checkbox[name=passwordprotectstate]").click(function() {
-        $("#passwordentry").toggle("fast");
+        $("#passwordentry").toggle(this.checked);
     });
-
 });
 </script>
 <?php
@@ -64,6 +63,7 @@ while($row = mysql_fetch_assoc($getidinfo)) {
     echo "<p>Count: <input type=\"text\" size=\"50\" name=\"count\" value=\"" . $row["count"] . "\" /></p>";
 }
 
+//Check if download is protected
 $checkprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$idtoedit\"");
 $checkprotectedresult = mysql_fetch_assoc($checkprotected); 
 if ($checkprotectedresult["protect"] == "true") { 
