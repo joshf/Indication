@@ -57,25 +57,23 @@ if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
 }
 
 //Password protect downloads
-if (PROTECT_DOWNLOADS_STATE == "Enabled") {
-    $checkprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$id\"");
-    $checkprotectedresult = mysql_fetch_assoc($checkprotected); 
-    if ($checkprotectedresult["protect"] == "true") { 
-        if (isset($_POST["password"])) {
-            if (sha1($_POST["password"]) != $checkprotectedresult["password"]) {
-                die("<h1>SHTracker: Error</h1><p>Incorrect password.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
-            }
-        } else {
-            die("<h1>Downloading " . $getresult["name"] . "</h1>
-            <form method=\"post\">
-            <p>To access this download please enter the password you were given.</p>
-            <p>Password: <input type=\"password\" name=\"password\" /></p>
-            <input type=\"submit\" name=\"submit\" value=\"Get Download\" /></p></form>
-            <hr />
-            <p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p>
-            </body>
-            </html>");
+$checkprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$id\"");
+$checkprotectedresult = mysql_fetch_assoc($checkprotected); 
+if ($checkprotectedresult["protect"] == "true") { 
+    if (isset($_POST["password"])) {
+        if (sha1($_POST["password"]) != $checkprotectedresult["password"]) {
+            die("<h1>SHTracker: Error</h1><p>Incorrect password.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
         }
+    } else {
+        die("<h1>Downloading " . $getresult["name"] . "</h1>
+        <form method=\"post\">
+        <p>To access this download please enter the password you were given.</p>
+        <p>Password: <input type=\"password\" name=\"password\" /></p>
+        <input type=\"submit\" name=\"submit\" value=\"Get Download\" /></p></form>
+        <hr />
+        <p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p>
+        </body>
+        </html>");
     }
 }
 

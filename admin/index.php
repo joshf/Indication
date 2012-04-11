@@ -100,72 +100,6 @@ $(document).ready(function() {
         } 
     });
     /* End */
-    /* Protect Dialog */
-    $("#protect").dialog({
-        autoOpen: false,
-        modal: false,
-        height: 200,
-        width: 400,
-        buttons: {
-            "Protect": function() {
-                var id = $("input:radio[name=id]:checked").val();
-                var pass = $("#password").val();
-                $.ajax({  
-                    type: "POST",  
-                    url: "manage.php",  
-                    data: "command=Protect&id="+ id +"&password="+ pass +"",
-                    success: function() { 
-                        $("#protectedmessage").show("fast");
-                    }  
-                });
-                $("#password").val("");
-                $(this).dialog("close");
-            },
-            "Cancel": function() {
-                $(this).dialog("close");
-            }
-        }
-    });
-    $("#showprotect").click(function() {
-        if (!$("input[name=id]:checked").val()) {
-            $("#noidselectedmessage").show("fast");
-            return false;
-        } else {
-            $("#protect").dialog("open");
-            return false;
-        } 
-    });
-    /* End */
-    /* Unprotect */
-    $("#dounprotect").click(function() {
-        if (!$("input[name=id]:checked").val()) {
-            $("#noidselectedmessage").show("fast");
-            return false;
-        } else {
-            var id = $("input:radio[name=id]:checked").val();
-            $.ajax({  
-                type: "POST",  
-                url: "manage.php",  
-                data: "command=Unprotect&id="+ id +"",
-                success: function() { 
-                    $("#unprotectedmessage").show("fast");
-                }      
-            });
-        }
-    });
-    /* End */
-    /* Unprotect All */
-    $("#dounprotectall").click(function() {
-        $.ajax({  
-            type: "POST",  
-            url: "manage.php",  
-            data: "command=Unprotect All",
-            success: function() { 
-                $("#unprotectedmessage").show("fast");
-            }      
-        });
-    });
-    /* End */
     /* Logout dialog */
     $("#logout").dialog({
         autoOpen: false,
@@ -204,12 +138,6 @@ $(document).ready(function() {
     /* Hide DIVS */
     $("#noidselectedmessage").click(function() {
         $("#noidselectedmessage").hide("fast");
-    });
-    $("#unprotectedmessage").click(function() {
-        $("#unprotectedmessage").hide("fast");
-    });
-    $("#protectedmessage").click(function() {
-        $("#protectedmessage").hide("fast");
     });
     /* End */
 });
@@ -296,17 +224,8 @@ if ($resultgetdatacount["COUNT(*)"] > "20") {
 <div id="delete" style="display: none" title="SHTracker: Delete Download">
     <p>Delete download?</p>
 </div>
-<div id="protect" style="display: none" title="SHTracker: Protect Download">
-    <p>Please enter a password: <input type="password" id="password" name="password" /></p>
-</div>
 <div id="noidselectedmessage" style="display: none">
     <div id="noticebad"><p>No ID selected!</p></div>
-</div>
-<div id="unprotectedmessage" style="display: none">
-    <div id="noticegood"><p>Download(s) has/have been unprotected!</p></div>
-</div>
-<div id="protectedmessage" style="display: none">
-    <div id="noticegood"><p>Download has been protected!</p></div>
 </div>
 <div id="logout" style="display: none" title="SHTracker: Logout">
     <p><? echo ADMIN_USER; ?>, are you sure you wish to logout?</p>
@@ -315,15 +234,6 @@ if ($resultgetdatacount["COUNT(*)"] > "20") {
 <button id="dogotoeditpage">Edit</button>
 <button id="showdelete">Delete</button>
 <button id="showtrackinglink">Show Tracking Link</button>
-<?php
-
-if (PROTECT_DOWNLOADS_STATE == "Enabled") {
-    echo "<button id=\"showprotect\">Protect</button>
-          <button id=\"dounprotect\">Unprotect</button>
-          <button id=\"dounprotectall\">Unprotect All</button>";
-}
-    
-?>
 <p><i>To edit, delete or show the tracking link for a ID please select the radio button next to it.</i></p>
 <?php
 
