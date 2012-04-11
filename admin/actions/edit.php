@@ -54,7 +54,19 @@ if (!preg_match("/^[0-9]{1,}$/", $newcount)) {
 $newid = strtolower($newid);
 $newurl = strtolower($newurl);
 
-mysql_query("UPDATE Data SET name = \"$newname\", id = \"$newid\", url = \"$newurl\", count = \"$newcount\" WHERE id = \"$idtoedit\"");
+if (isset($_POST["passwordprotectstate"])) {
+    $protect = "true";
+    $inputtedpassword = mysql_real_escape_string($_POST["password"]);
+    if (empty($inputtedpassword)) {
+        die("<h1>SHTracker: Error</h1><p>Password is missing...</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    }
+    $password = sha1($inputtedpassword);
+} else {
+    $protect = "false";
+    $password = "";
+}
+
+mysql_query("UPDATE Data SET name = \"$newname\", id = \"$newid\", url = \"$newurl\", count = \"$newcount\", protect = \"$protect\", password = \"$password\" WHERE id = \"$idtoedit\"");
 
 mysql_close($con);
 

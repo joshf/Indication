@@ -22,8 +22,17 @@ if ($command == "Edit") {
 <head>
 <title>SHTracker: Editing Download</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 </head>
 <body>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("input:checkbox[name=passwordprotectstate]").click(function() {
+        $("#passwordentry").toggle("fast");
+    });
+
+});
+</script>
 <?php
 
 //Connect to database
@@ -55,9 +64,20 @@ while($row = mysql_fetch_assoc($getidinfo)) {
     echo "<p>Count: <input type=\"text\" size=\"50\" name=\"count\" value=\"" . $row["count"] . "\" /></p>";
 }
 
+$checkprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$idtoedit\"");
+$checkprotectedresult = mysql_fetch_assoc($checkprotected); 
+if ($checkprotectedresult["protect"] == "true") { 
+    echo "<p>Enable password protection? <input type=\"checkbox\" name=\"passwordprotectstate\" checked=\"yes\" /></p>";
+} else {
+    echo "<p>Enable password protection? <input type=\"checkbox\" name=\"passwordprotectstate\" /></p>";
+}
+
 mysql_close($con);
 
 ?>
+<div id="passwordentry" style="display: none">
+    <p>Please enter a password: <input type="password" name="password" /></p>
+</div>
 <input type="hidden" name="idtoedit" value="<? echo $idtoedit; ?>" />
 <p><input type="submit" name="command" value="Edit" /></p>
 </form>

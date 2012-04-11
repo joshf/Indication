@@ -62,8 +62,21 @@ if ($resultcheckid != 0) {
     die("<h1>SHTracker: Error</h1><p>ID <b>$id</b> already exists.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
-mysql_query("INSERT INTO Data (name, id, url, count)
-VALUES (\"$name\",\"$id\",\"$url\",\"$count\")");
+
+if (isset($_POST["passwordprotectstate"])) {
+    $protect = "true";
+    $inputtedpassword = mysql_real_escape_string($_POST["password"]);
+    if (empty($inputtedpassword)) {
+        die("<h1>SHTracker: Error</h1><p>Password is missing...</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    }
+    $password = sha1($inputtedpassword);
+} else {
+    $protect = "false";
+    $password = "";
+}
+    
+mysql_query("INSERT INTO Data (name, id, url, count, protect, password)
+VALUES (\"$name\",\"$id\",\"$url\",\"$count\",\"$protect\",\"$password\")");
 
 mysql_close($con);
 
