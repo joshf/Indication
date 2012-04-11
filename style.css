@@ -1,23 +1,23 @@
 p, form, ul {
 	font-family: Helvetica, Verdana, Arial, sans-serif;
-	color: black;
+	color: #000000;
 	font-size: 16px;
 }
 
 h1 {
 	font-family: Helvetica, Verdana, Arial, sans-serif;
-	color: black;
+	color: #000000;
 	font-size: 25px;
 }
 
 h2 {
-	color: black;
+	color: #000000;
 	font-size: 20px;
 	font-family: Helvetica, Verdana, Arial, sans-serif;
 }
 
 h3 {
-	color: black;
+	color: #000000;
 	font-size: 15px;
 	font-family: Helvetica, Verdana, Arial, sans-serif;
 }
@@ -25,7 +25,7 @@ h3 {
 small {
 	font-family: Helvetica, Verdana, Arial, sans-serif;
 	font-size: 10px;
-	color: black;
+	color: #000000;
 }
 
 a:link {
@@ -60,7 +60,7 @@ table th {
 
 table td  {
 	text-align: left;
-	color: black;
+	color: #000000;
 	border: 1px solid #0080ff;
 	padding: 3px 7px 1px 7px;
 }
