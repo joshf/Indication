@@ -59,7 +59,8 @@ Plain:
 
 ```php
 <?php
-$_GET["id"] = "download1&plain=true";
+$_GET["id"] = "download1";
+$_GET["plain"] = "true";
 include("SHTracker/show.php");
 ?>
 ```
