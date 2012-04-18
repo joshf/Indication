@@ -56,15 +56,15 @@ $newid = strtolower($newid);
 $newurl = strtolower($newurl);
 
 if (isset($_POST["passwordprotectstate"])) {
-    $getprotectinfo = mysql_query("SELECT protect, password FROM Data WHERE id = \"$idtoedit\"");
+    $getprotectinfo = mysql_query("SELECT password FROM Data WHERE id = \"$idtoedit\"");
     $getprotectinforesult = mysql_fetch_assoc($getprotectinfo); 
-    if ($getprotectinforesult["protect"] == "true") {
+    if (!isset($_POST["password"])) {
+        die("<h1>SHTracker: Error</h1><p>Password is missing...</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    } 
+    $inputtedpassword = mysql_real_escape_string($_POST["password"]);
+    if (empty($inputtedpassword)) {
         $password = $getprotectinforesult["password"];
     } else {
-        $inputtedpassword = mysql_real_escape_string($_POST["password"]);
-        if (empty($inputtedpassword)) {
-            die("<h1>SHTracker: Error</h1><p>Password is missing...</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
-        } 
         $password = sha1($inputtedpassword);
     }
     $protect = "true";
