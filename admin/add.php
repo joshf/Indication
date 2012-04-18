@@ -36,23 +36,26 @@ $(document).ready(function() {
 		"Please enter only numbers, letters or points."
 	); 
     $("#addform").validate({
-    	rules: {
-    		name: {
-    			required: true,
-    			legalname: true
-    		},
-    		id: {
-    			required: true,
-    			legalid: true
-    		},
-    		url: {
-    			required: true,
-    			url: true
-    		},
-    		count: {
-	    		digits: true
-    		},
-    	}
+		rules: {
+			name: {
+				required: true,
+				legalname: true
+			},
+			id: {
+				required: true,
+				legalid: true
+			},
+			url: {
+				required: true,
+				url: true
+			},
+			count: {
+				digits: true
+			},
+			password: {
+				required: true
+			},
+		}
     });
 });
 </script>

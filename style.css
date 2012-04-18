@@ -86,8 +86,8 @@ table tr.alt {
 }
 
 label.error {
-	float: none; 
+	float: none;
 	color: red; 
-	padding-left: .5em; 
+	padding-left: 5px; 
 	vertical-align: top; 
 }

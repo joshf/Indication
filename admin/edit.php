@@ -57,6 +57,9 @@ $(document).ready(function() {
             count: {
                 digits: true
             },
+            password: {
+                required: true
+            },
         }
     });
 });

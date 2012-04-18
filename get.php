@@ -56,7 +56,7 @@ if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
     mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
 }
 
-//Password protect downloads
+//Check if download is password protected
 $checkprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$id\"");
 $checkprotectedresult = mysql_fetch_assoc($checkprotected); 
 if ($checkprotectedresult["protect"] == "true") { 

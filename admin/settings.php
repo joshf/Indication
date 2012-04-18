@@ -84,7 +84,8 @@ define(\"WAIT_MESSAGE\", \"$waitmessage\");
 define(\"WAIT_AD_CODE\", \"$waitadcode\");
 
 ?>";
- 
+
+//Write config
 $configfile = fopen("../config.php", "w");
 fwrite($configfile, $string);
 fclose($configfile);

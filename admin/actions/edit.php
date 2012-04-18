@@ -37,6 +37,7 @@ if (empty($newurl)) {
 }
 
 //Prevent some injection attacks
+//FIXME: We should allow spaces in name
 if (!preg_match("/^[a-zA-Z0-9()._-]{1,}$/", $newname)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../../admin\">&larr; Go Back</a></p></body></html>"); 
 }
@@ -55,12 +56,18 @@ $newid = strtolower($newid);
 $newurl = strtolower($newurl);
 
 if (isset($_POST["passwordprotectstate"])) {
-    $protect = "true";
-    $inputtedpassword = mysql_real_escape_string($_POST["password"]);
-    if (empty($inputtedpassword)) {
-        die("<h1>SHTracker: Error</h1><p>Password is missing...</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    $getprotectinfo = mysql_query("SELECT protect, password FROM Data WHERE id = \"$idtoedit\"");
+    $getprotectinforesult = mysql_fetch_assoc($getprotectinfo); 
+    if ($getprotectinforesult["protect"] == "true") {
+        $password = $getprotectinforesult["password"];
+    } else {
+        $inputtedpassword = mysql_real_escape_string($_POST["password"]);
+        if (empty($inputtedpassword)) {
+            die("<h1>SHTracker: Error</h1><p>Password is missing...</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+        } 
+        $password = sha1($inputtedpassword);
     }
-    $password = sha1($inputtedpassword);
+    $protect = "true";
 } else {
     $protect = "false";
     $password = "";
