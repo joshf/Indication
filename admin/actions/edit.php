@@ -37,10 +37,10 @@ if (empty($newurl)) {
 }
 
 //Prevent some injection attacks
-if (!preg_match("/^[a-zA-Z0-9(). ]{1,}$/", $newname)) {
+if (!preg_match("/^[a-zA-Z0-9()._-]{1,}$/", $newname)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../../admin\">&larr; Go Back</a></p></body></html>"); 
 }
-if (!preg_match("/^[a-zA-Z0-9.]{1,}$/", $newid)) {
+if (!preg_match("/^[a-zA-Z0-9._-]{1,}$/", $newid)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"../../admin\">&larr; Go Back</a></p></body></html>"); 
 }
 if (!preg_match("/^[a-zA-Z0-9.:?=#\/_-]{1,}$/", $newurl)) {

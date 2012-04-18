@@ -23,12 +23,46 @@ if ($command == "Edit") {
 <title>SHTracker: Editing Download</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 </head>
 <body>
 <script type="text/javascript">
 $(document).ready(function() {
     $("input:checkbox[name=passwordprotectstate]").click(function() {
         $("#passwordentry").toggle(this.checked);
+    });
+    $.validator.addMethod(
+        "legalname",
+        function(value, element) {
+            return this.optional(element) || /^[a-zA-Z0-9()._-]+$/.test(value);
+        },
+        "Please enter only numbers, letters or points."
+    );
+    $.validator.addMethod(
+        "legalid",
+        function(value, element) {
+            return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
+        },
+        "Please enter only numbers, letters or points."
+    ); 
+    $("#editform").validate({
+        rules: {
+            name: {
+                required: true,
+                legalname: true
+            },
+            id: {
+                required: true,
+                legalid: true
+            },
+            url: {
+                required: true,
+                url: true
+            },
+            count: {
+                digits: true
+            },
+        }
     });
 });
 </script>
@@ -52,7 +86,7 @@ $resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
 ?>
 <h1>SHTracker: Editing Download <? echo $resultnameofdownload["name"]; ?></h1>
 <p>Please edit any values you wish.</p>
-<form action="actions/edit.php" method="post">
+<form action="actions/edit.php" method="post" id="editform">
 <?php
 
 $getidinfo = mysql_query("SELECT * FROM Data WHERE id = \"$idtoedit\"");
