@@ -24,7 +24,7 @@ $(document).ready(function() {
 	$.validator.addMethod(
 		"legalname",
 		function(value, element) {
-			return this.optional(element) || /^[a-zA-Z0-9()._- ]+$/.test(value);
+			return this.optional(element) || /^[a-zA-Z0-9()._-]+$/.test(value);
 		},
 		"Please enter only numbers, letters or points."
 	);

@@ -38,7 +38,7 @@ if (empty($count)) {
 }
 
 //Prevent some injection attacks
-if (!preg_match("/^[a-zA-Z0-9()._- ]{1,}$/", $name)) {
+if (!preg_match("/^[a-zA-Z0-9()._-]{1,}$/", $name)) {
     die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>"); 
 }
 if (!preg_match("/^[a-zA-Z0-9._-]{1,}$/", $id)) {

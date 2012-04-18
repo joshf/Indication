@@ -40,7 +40,7 @@ $(document).ready(function() {
             return false;
         } else {
             var id = $("input:radio[name=id]:checked").val();
-            $("#edit").append("<form name=\"edit\" action=\"manage.php\" method=\"post\"><input type=\"hidden\" name=\"command\" value=\"Edit\" /><input type=\"hidden\" name=\"id\" value=\""+ id +"\" /><form>");
+            $("#edit").append("<form name=\"edit\" action=\"edit.php\" method=\"post\"><input type=\"hidden\" name=\"id\" value=\""+ id +"\" /><form>");
             document.forms["edit"].submit();        
         }
     });
@@ -56,8 +56,8 @@ $(document).ready(function() {
                 var id = $("input:radio[name=id]:checked").val();
                 $.ajax({  
                     type: "POST",  
-                    url: "manage.php",  
-                    data: "command=Delete&id="+ id +"",
+                    url: "actions/delete.php",  
+                    data: "id="+ id +"",
                     success: function() {  
                         window.location.reload();
                     }	
@@ -252,7 +252,7 @@ mysql_close($con);
 <p><button id="dorefresh">Refresh</button>
 <button id="dogotosettingspage">Settings</button>
 <button id="showlogout">Logout</button></p>
-<small>SHTracker 2.2.1 "FarfetchedFerret" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
+<small>SHTracker 2.3 "GiganticGibbon" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
 <p><small><a href="http://sidhosting.co.uk/misc/donate.html">Donate</a></p>
 </body>
 </html>

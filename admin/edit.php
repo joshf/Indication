@@ -8,16 +8,11 @@ if (!isset($_SESSION["is_logged_in"])) {
 
 //SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
 
-if (!isset($_POST["command"]) || !isset($_POST["id"])) {
+if (!isset($_POST["id"])) {
     header("Location: ../admin");
 }
 
-$command = $_POST["command"];
-
-if ($command == "Edit") {
-
 ?>
-<!-- Edit -->
 <html> 
 <head>
 <title>SHTracker: Editing Download</title>
@@ -119,30 +114,3 @@ mysql_close($con);
 <p><a href="../admin">&larr; Go Back</a></p>
 </body>
 </html>
-<?php
-} elseif ($command == "Delete") {
-    
-    //Delete
-    
-    //Connect to database
-    require_once("../config.php");
-    
-    $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-    if (!$con) {
-        die("Could not connect: " . mysql_error());
-    }
-    
-    mysql_select_db(DB_NAME, $con);
-    
-    $idtodelete = mysql_real_escape_string($_POST["id"]);
-    
-    mysql_query("DELETE FROM Data WHERE id = \"$idtodelete\"");
-    
-    mysql_close($con);
-    
-    header("Location: index.php");
-    
-} else {
-    header("Location: index.php");
-}
-?>
