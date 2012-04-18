@@ -12,6 +12,7 @@ if (!isset($_SESSION["is_logged_in"])) {
 <head>
 <title>SHTracker: Add A Download</title>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 <link rel="stylesheet" type="text/css" href="../style.css" />
 </head>
 <body>
@@ -20,10 +21,43 @@ $(document).ready(function() {
 	$("input:checkbox[name=passwordprotectstate]").click(function() {
     	$("#passwordentry").toggle(this.checked);
     });
+	$.validator.addMethod(
+		"legalname",
+		function(value, element) {
+			return this.optional(element) || /^[a-zA-Z0-9()._- ]+$/.test(value);
+		},
+		"Please enter only numbers, letters or points."
+	);
+	$.validator.addMethod(
+		"legalid",
+		function(value, element) {
+			return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
+		},
+		"Please enter only numbers, letters or points."
+	); 
+    $("#addform").validate({
+    	rules: {
+    		name: {
+    			required: true,
+    			legalname: true
+    		},
+    		id: {
+    			required: true,
+    			legalid: true
+    		},
+    		url: {
+    			required: true,
+    			url: true
+    		},
+    		count: {
+	    		digits: true
+    		},
+    	}
+    });
 });
 </script>
 <h1>SHTracker: Add A Download</h1>
-<form action="actions/add.php" method="post">
+<form action="actions/add.php" method="post" id="addform">
 <p>Name: <input type="text" size="50" name="name" /></p>
 <p>ID: <input type="text" size="50" name="id" /></p>
 <p>URL: <input type="text" size="50" name="url" /></p>
