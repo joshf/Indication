@@ -17,7 +17,6 @@ $adminpassword = sha1($_POST["adminpassword"]);
 $website = $_POST["website"];
 $pathtoscript = $_POST["pathtoscript"];
 
-//Write Settings
 $installstring = "<?php
 
 //Database Settings

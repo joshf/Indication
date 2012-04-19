@@ -23,10 +23,6 @@ $id = mysql_real_escape_string($_POST["id"]);
 $url = mysql_real_escape_string($_POST["url"]);
 $count = mysql_real_escape_string($_POST["count"]);
 
-if (empty($count)) {
-    $count = "0";
-}
-
 //Convert to lowercase
 $id = strtolower($id);
 $url = strtolower($url);

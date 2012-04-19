@@ -28,6 +28,6 @@ mysql_query("DELETE FROM Data WHERE id = \"$idtodelete\"");
 
 mysql_close($con);
 
-header("Location: ../admin");
+header("Location: ../../admin");
 
 ?>

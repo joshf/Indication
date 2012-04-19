@@ -60,7 +60,7 @@ if (empty($countuniqueonlytime)) {
     $countuniqueonlytime = $currentcountuniqueonlytime;
 }
 
-$string = "<?php
+$settingsstring = "<?php
 
 //Database Settings
 define(\"DB_HOST\", \"$dbhost\");
@@ -87,7 +87,7 @@ define(\"WAIT_AD_CODE\", \"$waitadcode\");
 
 //Write config
 $configfile = fopen("../config.php", "w");
-fwrite($configfile, $string);
+fwrite($configfile, $settingstring);
 fclose($configfile);
 
 //Show updated values

@@ -65,7 +65,7 @@ if ($checkprotectedresult["protect"] == "true") {
             die("<h1>SHTracker: Error</h1><p>Incorrect password.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
         }
     } else {
-        die("<h1>Downloading " . $getresult["name"] . "</h1>
+        echo "<h1>Downloading " . $getresult["name"] . "</h1>
         <form method=\"post\">
         <p>To access this download please enter the password you were given.</p>
         <p>Password: <input type=\"password\" name=\"password\" /></p>
@@ -73,7 +73,8 @@ if ($checkprotectedresult["protect"] == "true") {
         <hr />
         <p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p>
         </body>
-        </html>");
+        </html>";
+        exit;
     }
 }
 
