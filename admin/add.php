@@ -19,12 +19,12 @@ if (!isset($_SESSION["is_logged_in"])) {
 <script type="text/javascript">
 $(document).ready(function() {
 	$("input:checkbox[name=passwordprotectstate]").click(function() {
-    	$("#passwordentry").toggle(this.checked);
-    });
+		$("#passwordentry").toggle(this.checked);
+	});
 	$.validator.addMethod(
 		"legalname",
 		function(value, element) {
-			return this.optional(element) || /^[a-zA-Z0-9()._-]+$/.test(value);
+			return this.optional(element) || /^[a-zA-Z0-9()._-\s]+$/.test(value);
 		},
 		"Please enter only numbers, letters or points."
 	);
@@ -35,7 +35,7 @@ $(document).ready(function() {
 		},
 		"Please enter only numbers, letters or points."
 	); 
-    $("#addform").validate({
+	$("#addform").validate({
 		rules: {
 			name: {
 				required: true,
@@ -56,7 +56,7 @@ $(document).ready(function() {
 				required: true
 			},
 		}
-    });
+	});
 });
 </script>
 <h1>SHTracker: Add A Download</h1>
