@@ -1,5 +1,11 @@
 <?php
 
+session_start();
+if (!isset($_SESSION["is_logged_in"])) {
+	header("Location: ../login.php");
+	exit; 
+}
+
 //SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
 
 require_once("../../config.php");
@@ -35,7 +41,7 @@ if ($command == "Reset All Counts to Zero") {
 	mysql_close($con);	
 	
 	header("Location: ../settings.php");
-
+	
 } elseif ($command == "Delete All Downloads") {
 	
 	//Delete All Downloads

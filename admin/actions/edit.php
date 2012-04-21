@@ -1,4 +1,18 @@
-<!-- SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker) -->
+<?php
+
+session_start();
+if (!isset($_SESSION["is_logged_in"])) {
+    header("Location: ../login.php");
+    exit; 
+}
+
+if (!isset($_POST["id"])) {
+    header("Location: ../../admin");
+}
+
+//SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
+
+?>
 <html> 
 <head>
 <title>SHTracker: Download Edited</title>
