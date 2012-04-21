@@ -2,8 +2,8 @@
 
 session_start();
 if (!isset($_SESSION["is_logged_in"])) {
-	header("Location: ../login.php");
-	exit; 
+    header("Location: ../login.php");
+    exit; 
 }
 
 //SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
