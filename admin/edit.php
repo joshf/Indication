@@ -35,14 +35,14 @@ $(document).ready(function() {
         function(value, element) {
             return this.optional(element) || /^[a-zA-Z0-9()._-\s]+$/.test(value);
         },
-        "Please enter only numbers, letters or points."
+        "Illegal character. Only spaces, points, underscores or dashes are allowed."
     );
     $.validator.addMethod(
         "legalid",
         function(value, element) {
             return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
         },
-        "Please enter only numbers, letters or points."
+        "Illegal character. Only points, underscores or dashes are allowed."
     ); 
     $("#editform").validate({
         rules: {
