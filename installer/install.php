@@ -16,6 +16,7 @@ $adminuser = $_POST["adminuser"];
 $adminpassword = sha1($_POST["adminpassword"]);
 $website = $_POST["website"];
 $pathtoscript = $_POST["pathtoscript"];
+$uniquekey = str_shuffle("abcdefghijklmnopqrstuvwxyz123456789");
 
 $installstring = "<?php
 
@@ -34,6 +35,7 @@ define(\"WEBSITE\", \"$website\");
 define(\"PATH_TO_SCRIPT\", \"$pathtoscript\");
 define(\"COUNT_UNIQUE_ONLY_STATE\", \"Disabled\");
 define(\"COUNT_UNIQUE_ONLY_TIME\", \"24\");
+define(\"UNIQUE_KEY\", \"$uniquekey\");
 
 //Wait Settings
 define(\"WAIT_STATE\", \"Disabled\");
