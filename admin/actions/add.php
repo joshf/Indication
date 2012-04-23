@@ -1,12 +1,16 @@
 <?php
 
+//SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
+
+require_once("../../config.php");
+
+$uniquekey = UNIQUE_KEY;
+
 session_start();
-if (!isset($_SESSION["is_logged_in"])) {
+if (!isset($_SESSION["is_logged_in" . $uniquekey . ""])) {
     header("Location: ../login.php");
     exit; 
 }
-
-//SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
 
 ?>
 <html> 
@@ -18,8 +22,6 @@ if (!isset($_SESSION["is_logged_in"])) {
 <?php
 
 //Connect to database
-require_once("../../config.php");
-
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
     die("Could not connect: " . mysql_error());

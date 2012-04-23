@@ -1,7 +1,13 @@
 <?php
 
+//SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
+
+require_once("../config.php");
+
+$uniquekey = UNIQUE_KEY;
+
 session_start();
-if (!isset($_SESSION["is_logged_in"])) {
+if (!isset($_SESSION["is_logged_in" . $uniquekey . ""])) {
     header("Location: login.php");
     exit; 
 }
@@ -10,11 +16,7 @@ if (!file_exists("../config.php")) {
     header("Location: ../installer");
 }
 
-//Connect to database
-require_once("../config.php");
-
 ?>
-<!-- SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker) -->
 <html> 
 <head>
 <title>SHTracker: Admin Home</title>
@@ -252,7 +254,7 @@ mysql_close($con);
 <p><button id="dorefresh">Refresh</button>
 <button id="dogotosettingspage">Settings</button>
 <button id="showlogout">Logout</button></p>
-<small>SHTracker 2.5 "GiganticGibbon" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
+<small>SHTracker 2.6 "HelpfulHorse" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
 <p><small><a href="http://sidhosting.co.uk/misc/donate.html">Donate</a></p>
 </body>
 </html>

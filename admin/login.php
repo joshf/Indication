@@ -10,26 +10,27 @@ require_once("../config.php");
 
 $password = ADMIN_PASSWORD;
 $user = ADMIN_USER;
+$uniquekey = UNIQUE_KEY;
 
 session_start();
 
 //If cookie is set, skip login
-if (isset($_COOKIE["shtrackerrememberme"])) {
-    $_SESSION["is_logged_in"] = true;
+if (isset($_COOKIE["shtrackerrememberme" . $uniquekey . ""])) {
+    $_SESSION["is_logged_in" . $uniquekey . ""] = true;
 }
 
 if (isset($_POST["password"]) && isset($_POST["user"])) {
     if (sha1($_POST["password"]) == $password && $_POST["user"] == $user) {
-        $_SESSION["is_logged_in"] = true;
+        $_SESSION["is_logged_in" . $uniquekey . ""] = true;
             if (isset($_POST["rememberme"])) {
-                setcookie("shtrackerrememberme", ADMIN_USER, time()+1209600);
+                setcookie("shtrackerrememberme" . $uniquekey . "", ADMIN_USER, time()+1209600);
             }
     } else {
         header("Location: login.php?login_error=true");
     }
 } 
 
-if (!isset($_SESSION["is_logged_in"])) {
+if (!isset($_SESSION["is_logged_in" . $uniquekey . ""])) {
 ?>
 <html>
 <head>

@@ -1,14 +1,16 @@
 <?php
 
-session_start();
-if (!isset($_SESSION["is_logged_in"])) {
-    header("Location: ../login.php");
-    exit; 
-}
-
 //SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
 
 require_once("../../config.php");
+
+$uniquekey = UNIQUE_KEY;
+
+session_start();
+if (!isset($_SESSION["is_logged_in" . $uniquekey . ""])) {
+	header("Location: ../login.php");
+	exit; 
+}
 
 if (!isset($_POST["command"])) {
 	header("Location: ../settings.php");

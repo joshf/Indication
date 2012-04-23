@@ -1,14 +1,16 @@
 <?php
 
-session_start();
-if (!isset($_SESSION["is_logged_in"])) {
-    header("Location: login.php");
-    exit; 
-}
-
 //SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
 
 require_once("../config.php");
+
+$uniquekey = UNIQUE_KEY;
+
+session_start();
+if (!isset($_SESSION["is_logged_in" . $uniquekey . ""])) {
+    header("Location: login.php");
+    exit; 
+}
 
 //Get current settings
 $currentdbhost = DB_HOST;
@@ -77,6 +79,7 @@ define(\"WEBSITE\", \"$website\");
 define(\"PATH_TO_SCRIPT\", \"$pathtoscript\");
 define(\"COUNT_UNIQUE_ONLY_STATE\", \"$countuniqueonlystate\");
 define(\"COUNT_UNIQUE_ONLY_TIME\", \"$countuniqueonlytime\");
+define(\"UNIQUE_KEY\", \"$uniquekey\");
 
 //Wait Settings
 define(\"WAIT_STATE\", \"$waitstate\");
@@ -87,7 +90,7 @@ define(\"WAIT_AD_CODE\", \"$waitadcode\");
 
 //Write config
 $configfile = fopen("../config.php", "w");
-fwrite($configfile, $settingstring);
+fwrite($configfile, $settingsstring);
 fclose($configfile);
 
 //Show updated values
