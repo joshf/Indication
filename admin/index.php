@@ -22,12 +22,6 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <title>SHTracker: Admin Home</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/flick/jquery-ui.css" />
-<style type="text/css">
-/* Make buttons smaller */
-.ui-button-text {
-    font-size: 0.6em;
-}
-</style>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 </head>
@@ -50,6 +44,7 @@ $(document).ready(function() {
     /* Delete Dialog */
     $("#delete").dialog({
         autoOpen: false,
+        resizable: false,
         modal: false,
         height: 200,
         width: 400,
@@ -61,7 +56,7 @@ $(document).ready(function() {
                     url: "actions/delete.php",  
                     data: "id="+ id +"",
                     success: function() {  
-                        window.location.reload();
+                        $("#deletedone").show("fast");
                     }	
                 });
                 $(this).dialog("close");
@@ -90,6 +85,7 @@ $(document).ready(function() {
             var id = $("input:radio[name=id]:checked").val();
             $("<div title=\"SHTracker: Show Tracking Link\"><p>Tracking link for download. Press Ctrl/Cmd C to copy to the clipboard:<input type=\"text\" size=\"70\" value=\"<? echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"\"</p></div>").dialog({
                 autoOpen: true,
+                resizable: false,
                 modal: false,
                 height: 200,
                 width: 680,
@@ -105,6 +101,7 @@ $(document).ready(function() {
     /* Logout dialog */
     $("#logout").dialog({
         autoOpen: false,
+        resizable: false,
         modal: true,
         height: 170,
         width: 400,
@@ -140,6 +137,10 @@ $(document).ready(function() {
     /* Hide DIVS */
     $("#noidselectedmessage").click(function() {
         $("#noidselectedmessage").hide("fast");
+    });
+    $("#deletedone").click(function() {
+        $("#deletedone").hide("fast");
+        window.location.reload();
     });
     /* End */
 });
@@ -225,6 +226,9 @@ if ($resultgetdatacount["COUNT(*)"] > "20") {
 </div>
 <div id="delete" style="display: none" title="SHTracker: Delete Download">
     <p>Delete download?</p>
+</div>
+<div id="deletedone" style="display: none">
+    <div id="noticegood"><p>Download deleted!</p></div>
 </div>
 <div id="noidselectedmessage" style="display: none">
     <div id="noticebad"><p>No ID selected!</p></div>

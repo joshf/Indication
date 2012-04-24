@@ -91,3 +91,7 @@ label.error {
 	padding-left: 5px; 
 	vertical-align: top; 
 }
+
+.ui-button-text {
+	font-size: 0.6em;
+}
