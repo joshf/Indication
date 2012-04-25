@@ -72,7 +72,7 @@ $(document).ready(function() {
 <p>Count: <input type="text" size="50" name="count" value="0" /></p>
 <p>Enable password protection? <input type="checkbox" name="passwordprotectstate" /></p>
 <div id="passwordentry" style="display: none">
-	<p>Please enter a password: <input type="password" name="password" /></p>
+	<p><i>Please enter a password:</i> <input type="password" name="password" /></p>
 </div>
 <input type="submit" value="Add" />
 </form>
