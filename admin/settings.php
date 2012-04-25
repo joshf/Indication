@@ -47,8 +47,8 @@ if (isset($_POST["countuniqueonlytime"])) {
 }
 $waitstate = $_POST["waitstate"];
 if (isset($_POST["waitmessage"])) {
-    $waitmessage = $_POST["waitmessage"];
-    $waitadcode = $_POST["waitadcode"];
+    $waitmessage = addslashes($_POST["waitmessage"]);
+    $waitadcode = addslashes($_POST["waitadcode"]);
 }
 
 //Remember previous settings
