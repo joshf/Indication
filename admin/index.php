@@ -35,6 +35,7 @@ $(document).ready(function() {
             $("#noidselectedmessage").show("fast");
             return false;
         } else {
+            $("#noidselectedmessage").hide("fast");
             var id = $("input:radio[name=id]:checked").val();
             $("#edit").append("<form name=\"edit\" action=\"edit.php\" method=\"post\"><input type=\"hidden\" name=\"id\" value=\""+ id +"\" /><form>");
             document.forms["edit"].submit();        
@@ -71,6 +72,7 @@ $(document).ready(function() {
             $("#noidselectedmessage").show("fast");
             return false;
         } else {
+            $("#noidselectedmessage").hide("fast");
             $("#delete").dialog("open");
             return false;
         } 
@@ -82,6 +84,7 @@ $(document).ready(function() {
             $("#noidselectedmessage").show("fast");
             return false;
         } else {
+            $("#noidselectedmessage").hide("fast");
             var id = $("input:radio[name=id]:checked").val();
             $("<div title=\"SHTracker: Show Tracking Link\"><p>Tracking link for download. Press Ctrl/Cmd C to copy to the clipboard:<input type=\"text\" size=\"70\" value=\"<? echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"\"</p></div>").dialog({
                 autoOpen: true,
