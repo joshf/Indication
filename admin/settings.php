@@ -24,8 +24,8 @@ $currentpathtoscript = PATH_TO_SCRIPT;
 $currentcountuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
 $currentcountuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
 $currentwaitstate = WAIT_STATE;
-$currentwaitmessage = WAIT_MESSAGE;
-$currentwaitadcode = WAIT_AD_CODE; 
+$currentwaitmessage = htmlspecialchars_decode(WAIT_MESSAGE);
+$currentwaitadcode = htmlspecialchars_decode(WAIT_AD_CODE); 
 
 if (isset($_POST["Save"])) {
 
@@ -47,8 +47,13 @@ if (isset($_POST["countuniqueonlytime"])) {
 }
 $waitstate = $_POST["waitstate"];
 if (isset($_POST["waitmessage"])) {
-    $waitmessage = addslashes($_POST["waitmessage"]);
-    $waitadcode = addslashes($_POST["waitadcode"]);
+    if (get_magic_quotes_gpc()) {
+        $waitmessage = stripslashes(htmlspecialchars($_POST["waitmessage"]));
+        $waitadcode = stripslashes(htmlspecialchars($_POST["waitadcode"]));
+    } else {
+        $waitmessage = htmlspecialchars($_POST["waitmessage"]);
+        $waitadcode = htmlspecialchars($_POST["waitadcode"]);
+    }
 }
 
 //Remember previous settings

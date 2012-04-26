@@ -83,7 +83,9 @@ mysql_close($con);
 
 //Check whether wait is enabled
 if (WAIT_STATE == "Enabled" ) {
-    echo "<h1>Downloading " . $getresult["name"] . "</h1><p>" . WAIT_MESSAGE . "</p><p>" . WAIT_AD_CODE . "</p><hr /><p><a href=\"" . $getresult["url"] . "\">Start Download</a></p></body></html>";
+    $waitmessage = htmlspecialchars_decode(WAIT_MESSAGE);
+    $waitadcode = htmlspecialchars_decode(WAIT_AD_CODE); 
+    echo "<h1>Downloading " . $getresult["name"] . "</h1><p>" . $waitmessage . "</p><p>" . $waitadcode . "</p><hr /><p><a href=\"" . $getresult["url"] . "\">Start Download</a></p></body></html>";
     exit;
 }
 
