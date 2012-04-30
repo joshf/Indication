@@ -39,6 +39,10 @@ $count = mysql_real_escape_string($_POST["count"]);
 $id = strtolower($id);
 $url = strtolower($url);
 
+if (empty($name)) {
+    die("<h1>SHTracker: Error</h1><p>Fields are empty.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+}
+
 //Check if ID exists
 $checkid = mysql_query("SELECT id FROM Data WHERE id = \"$id\"");
 $resultcheckid = mysql_fetch_assoc($checkid); 
