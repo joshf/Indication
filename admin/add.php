@@ -23,45 +23,45 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <body>
 <script type="text/javascript">
 $(document).ready(function() {
-	$("input:checkbox[name=passwordprotectstate]").click(function() {
-		$("#passwordentry").toggle(this.checked);
-	});
-	$.validator.addMethod(
-		"legalname",
-		function(value, element) {
-			return this.optional(element) || /^[a-zA-Z0-9()._-\s]+$/.test(value);
-		},
-		"Illegal character. Only spaces, points, underscores or dashes are allowed."
-	);
-	$.validator.addMethod(
-		"legalid",
-		function(value, element) {
-			return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
-		},
-		"Illegal character. Only points, underscores or dashes are allowed."
-	); 
-	$("#addform").validate({
-		rules: {
-			name: {
-				required: true,
-				legalname: true
-			},
-			id: {
-				required: true,
-				legalid: true
-			},
-			url: {
-				required: true,
-				url: true
-			},
-			count: {
-				digits: true
-			},
-			password: {
-				required: true
-			},
-		}
-	});
+    $("input:checkbox[name=passwordprotectstate]").click(function() {
+    	$("#passwordentry").toggle(this.checked);
+    });
+    $.validator.addMethod(
+    	"legalname",
+    	function(value, element) {
+    		return this.optional(element) || /^[a-zA-Z0-9()._-]+$/.test(value);
+    	},
+    	"Illegal character. Only points, underscores or dashes are allowed."
+    );
+    $.validator.addMethod(
+    	"legalid",
+    	function(value, element) {
+    		return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
+    	},
+    	"Illegal character. Only points, underscores or dashes are allowed."
+    ); 
+    $("#addform").validate({
+    	rules: {
+    		name: {
+    			required: true,
+    			legalname: true
+    		},
+    		id: {
+    			required: true,
+    			legalid: true
+    		},
+    		url: {
+    			required: true,
+    			url: true
+    		},
+    		count: {
+    			digits: true
+    		},
+    		password: {
+    			required: true
+    		},
+    	}
+    });
 });
 </script>
 <h1>SHTracker: Add A Download</h1>
