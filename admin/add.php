@@ -24,43 +24,43 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <script type="text/javascript">
 $(document).ready(function() {
     $("input:checkbox[name=passwordprotectstate]").click(function() {
-    	$("#passwordentry").toggle(this.checked);
+        $("#passwordentry").toggle(this.checked);
     });
     $.validator.addMethod(
-    	"legalname",
-    	function(value, element) {
-    		return this.optional(element) || /^[a-zA-Z0-9()._-]+$/.test(value);
-    	},
-    	"Illegal character. Only points, underscores or dashes are allowed."
+        "legalname",
+        function(value, element) {
+            return this.optional(element) || /^[a-zA-Z0-9()._-]+$/.test(value);
+        },
+        "Illegal character. Only points, underscores or dashes are allowed."
     );
     $.validator.addMethod(
-    	"legalid",
-    	function(value, element) {
-    		return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
-    	},
-    	"Illegal character. Only points, underscores or dashes are allowed."
+        "legalid",
+        function(value, element) {
+            return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
+        },
+        "Illegal character. Only points, underscores or dashes are allowed."
     ); 
     $("#addform").validate({
-    	rules: {
-    		name: {
-    			required: true,
-    			legalname: true
-    		},
-    		id: {
-    			required: true,
-    			legalid: true
-    		},
-    		url: {
-    			required: true,
-    			url: true
-    		},
-    		count: {
-    			digits: true
-    		},
-    		password: {
-    			required: true
-    		},
-    	}
+        rules: {
+            name: {
+                required: true,
+                legalname: true
+            },
+            id: {
+                required: true,
+                legalid: true
+            },
+            url: {
+                required: true,
+                url: true
+            },
+            count: {
+                digits: true
+            },
+            password: {
+                required: true
+            },
+        }
     });
 });
 </script>
