@@ -36,11 +36,7 @@ define(\"PATH_TO_SCRIPT\", \"$pathtoscript\");
 define(\"COUNT_UNIQUE_ONLY_STATE\", \"Disabled\");
 define(\"COUNT_UNIQUE_ONLY_TIME\", \"24\");
 define(\"UNIQUE_KEY\", \"$uniquekey\");
-
-//Wait Settings
-define(\"WAIT_STATE\", \"Disabled\");
-define(\"WAIT_MESSAGE\", \"\");
-define(\"WAIT_AD_CODE\", \"\");
+define(\"AD_CODE\", \"\");
 
 ?>";
 

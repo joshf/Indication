@@ -33,9 +33,9 @@ $(document).ready(function() {
     $.validator.addMethod(
         "legalname",
         function(value, element) {
-            return this.optional(element) || /^[a-zA-Z0-9()._-]+$/.test(value);
+            return this.optional(element) || /^[a-zA-Z0-9()._-\s]+$/.test(value);
         },
-        "Illegal character. Only points, underscores or dashes are allowed."
+        "Illegal character. Only points, spaces, underscores or dashes are allowed."
     );
     $.validator.addMethod(
         "legalid",
