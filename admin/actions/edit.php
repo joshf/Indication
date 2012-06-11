@@ -63,7 +63,13 @@ if (isset($_POST["passwordprotectstate"])) {
     $password = "";
 }
 
-mysql_query("UPDATE Data SET name = \"$newname\", id = \"$newid\", url = \"$newurl\", count = \"$newcount\", protect = \"$protect\", password = \"$password\" WHERE id = \"$idtoedit\"");
+if (isset($_POST["showadsstate"])) {
+    $showads = "true";
+} else {
+    $showads = "false";
+}
+
+mysql_query("UPDATE Data SET name = \"$newname\", id = \"$newid\", url = \"$newurl\", count = \"$newcount\", protect = \"$protect\", password = \"$password\", showads = \"$showads\" WHERE id = \"$idtoedit\"");
 
 mysql_close($con);
 

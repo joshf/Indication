@@ -74,6 +74,7 @@ $(document).ready(function() {
 <div id="passwordentry" style="display: none">
 	<p><i>Please enter a password:</i> <input type="password" name="password" /></p>
 </div>
+<p>Show ads? <input type="checkbox" name="showadsstate" /></p>
 <input type="submit" value="Add" />
 </form>
 <hr />

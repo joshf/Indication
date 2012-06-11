@@ -108,6 +108,14 @@ if ($checkprotectedresult["protect"] == "true") {
     echo "<p>Enable password protection? <input type=\"checkbox\" name=\"passwordprotectstate\" /></p>";
 }
 
+//Check if we should show ads
+$checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$idtoedit\"");
+$checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
+if ($checkifadsshowresult["showads"] == "true") { 
+    echo "<p>Show ads? <input type=\"checkbox\" name=\"showadsstate\" checked=\"yes\" /></p>";
+} else {
+    echo "<p>Show ads? <input type=\"checkbox\" name=\"showadsstate\" /></p>";
+}
 mysql_close($con);
 
 ?>

@@ -23,9 +23,7 @@ $currentwebsite = WEBSITE;
 $currentpathtoscript = PATH_TO_SCRIPT;
 $currentcountuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
 $currentcountuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
-$currentwaitstate = WAIT_STATE;
-$currentwaitmessage = htmlspecialchars_decode(WAIT_MESSAGE);
-$currentwaitadcode = htmlspecialchars_decode(WAIT_AD_CODE); 
+$currentadcode = htmlspecialchars_decode(AD_CODE); 
 
 if (isset($_POST["Save"])) {
 
@@ -45,23 +43,17 @@ $countuniqueonlystate = $_POST["countuniqueonlystate"];
 if (isset($_POST["countuniqueonlytime"])) {
     $countuniqueonlytime = $_POST["countuniqueonlytime"];
 }
-$waitstate = $_POST["waitstate"];
-if (isset($_POST["waitmessage"])) {
+if (isset($_POST["adcode"])) {
     if (get_magic_quotes_gpc()) {
-        $waitmessage = stripslashes(htmlspecialchars($_POST["waitmessage"]));
-        $waitadcode = stripslashes(htmlspecialchars($_POST["waitadcode"]));
+        $adcode = stripslashes(htmlspecialchars($_POST["adcode"]));
     } else {
-        $waitmessage = htmlspecialchars($_POST["waitmessage"]);
-        $waitadcode = htmlspecialchars($_POST["waitadcode"]);
+        $adcode = htmlspecialchars($_POST["adcode"]);
     }
 }
 
 //Remember previous settings
-if (empty($waitmessage)) {
-    $waitmessage = $currentwaitmessage;
-}
-if (empty($waitadcode)) {
-    $waitadcode = $currentwaitadcode;
+if (empty($adcode)) {
+    $adcode = $currentadcode;
 }
 if (empty($countuniqueonlytime)) {
     $countuniqueonlytime = $currentcountuniqueonlytime;
@@ -85,11 +77,7 @@ define(\"PATH_TO_SCRIPT\", \"$pathtoscript\");
 define(\"COUNT_UNIQUE_ONLY_STATE\", \"$countuniqueonlystate\");
 define(\"COUNT_UNIQUE_ONLY_TIME\", \"$countuniqueonlytime\");
 define(\"UNIQUE_KEY\", \"$uniquekey\");
-
-//Wait Settings
-define(\"WAIT_STATE\", \"$waitstate\");
-define(\"WAIT_MESSAGE\", \"$waitmessage\");
-define(\"WAIT_AD_CODE\", \"$waitadcode\");
+define(\"AD_CODE\", \"$adcode\");
 
 ?>";
 
@@ -195,19 +183,9 @@ Password: <input type="password" name="adminpassword" value="<? echo $currentadm
 <p><b>Other settings:</b></p>
 Website Name: <input type="text" name="website" value="<? echo $currentwebsite; ?>" /><br />
 Path to Script: <input type="text" name="pathtoscript" value="<? echo $currentpathtoscript; ?>" /><br />
-<p><b>Wait settings:</b></p>
-<p>Make users wait before they are served their download. This is useful if you use adverts on your site.</p>
-<?php
-if ($currentwaitstate == "Enabled" ) {
-    echo "<input type=\"radio\" name=\"waitstate\" value=\"Enabled\" checked/> Enabled<br />
-    <input type=\"radio\" name=\"waitstate\" value=\"Disabled\" /> Disabled
-    <p>Custom Message:</p><p><textarea cols=\"80\" rows=\"8\" name=\"waitmessage\">$currentwaitmessage</textarea></p>
-    <p>Adsense/Ad Code: (HTML only, PHP will not work!)</p><p><textarea cols=\"80\" rows=\"8\" name=\"waitadcode\">$currentwaitadcode</textarea></p>";
-} else {
-    echo "<input type=\"radio\" name=\"waitstate\" value=\"Enabled\" /> Enabled<br />
-    <input type=\"radio\" name=\"waitstate\" value=\"Disabled\" checked/> Disabled";
-}
-?>
+<p><b>Ad Code:</b></p>
+<p>Show an advert before user can continue to their download. This can be changed on a per download basis.</p>
+<p><textarea cols="80" rows="8" name="adcode"><? echo $currentadcode; ?></textarea></p>
 <p><b>Count Unique Visitors Only:</b></p>
 <p>This settings allows you to make sure an individual users clicks are only counted once.</p>
 <?php

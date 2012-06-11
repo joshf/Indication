@@ -62,9 +62,15 @@ if (isset($_POST["passwordprotectstate"])) {
     $protect = "false";
     $password = "";
 }
+
+if (isset($_POST["showadsstate"])) {
+    $showads = "true";
+} else {
+    $showads = "false";
+}
     
-mysql_query("INSERT INTO Data (name, id, url, count, protect, password)
-VALUES (\"$name\",\"$id\",\"$url\",\"$count\",\"$protect\",\"$password\")");
+mysql_query("INSERT INTO Data (name, id, url, count, protect, password, showads)
+VALUES (\"$name\",\"$id\",\"$url\",\"$count\",\"$protect\",\"$password\",\"$showads\")");
 
 mysql_close($con);
 

@@ -79,15 +79,18 @@ if ($checkprotectedresult["protect"] == "true") {
     }
 }
 
-mysql_close($con);
 
-//Check whether wait is enabled
-if (WAIT_STATE == "Enabled" ) {
-    $waitmessage = htmlspecialchars_decode(WAIT_MESSAGE);
-    $waitadcode = htmlspecialchars_decode(WAIT_AD_CODE); 
-    echo "<h1>Downloading " . $getresult["name"] . "</h1><p>" . $waitmessage . "</p><p>" . $waitadcode . "</p><hr /><p><a href=\"" . $getresult["url"] . "\">Start Download</a></p></body></html>";
+//Check if we should show ads
+$checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$id\"");
+$checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
+if ($checkifadsshowresult["showads"] == "true") { 
+    $adcode = htmlspecialchars_decode(AD_CODE); 
+    echo "<h1>Downloading " . $getresult["name"] . "</h1><p>" . $adcode . "</p><hr /><p><a href=\"" . $getresult["url"] . "\">Start Download</a></p></body></html>";
     exit;
 }
+
+
+mysql_close($con);
 
 //Redirect user to the download
 header("Location: " . $getresult["url"] . "");
