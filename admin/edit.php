@@ -124,7 +124,7 @@ mysql_close($con);
     <p>Please enter a password: <input type="password" name="password" /></p>
 </div>
 <input type="hidden" name="idtoedit" value="<? echo $idtoedit; ?>" />
-<p><input type="submit" name="command" value="Edit" /></p>
+<p><input type="submit" value="Update" /></p>
 </form>
 <hr />
 <p><a href="../admin">&larr; Go Back</a></p>
