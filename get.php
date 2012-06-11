@@ -15,8 +15,8 @@ ob_start();
 <body>
 <script type="text/javascript">
 $(document).ready(function() { 
-      $("#downloadurl").delay(5000).show("fast");
-      $("#downloadurlwait").delay(5000).hide("fast");
+    $("#downloadurl").delay(5000).show("fast");
+    $("#downloadurlwait").delay(5000).hide("fast");
 });
 </script>
 <?php
