@@ -33,6 +33,9 @@ $(document).ready(function() {
     $("#dogotoeditpage").click(function() {
         if (!$("input[name=id]:checked").val()) {
             $("#noidselectedmessage").show("fast");
+            setTimeout(function(){
+                $("#noidselectedmessage").hide("fast");
+            },3000)
             return false;
         } else {
             $("#noidselectedmessage").hide("fast");
@@ -70,6 +73,9 @@ $(document).ready(function() {
     $("#showdelete").click(function() {
         if (!$("input[name=id]:checked").val()) {
             $("#noidselectedmessage").show("fast");
+            setTimeout(function(){
+                $("#noidselectedmessage").hide("fast");
+            },3000)
             return false;
         } else {
             $("#noidselectedmessage").hide("fast");
@@ -82,6 +88,9 @@ $(document).ready(function() {
     $("#showtrackinglink").click(function() {
         if (!$("input[name=id]:checked").val()) {
             $("#noidselectedmessage").show("fast");
+            setTimeout(function(){
+                $("#noidselectedmessage").hide("fast");
+            },3000)
             return false;
         } else {
             $("#noidselectedmessage").hide("fast");
@@ -261,7 +270,7 @@ mysql_close($con);
 <p><button id="dorefresh">Refresh</button>
 <button id="dogotosettingspage">Settings</button>
 <button id="showlogout">Logout</button></p>
-<small>SHTracker 2.6 "HelpfulHorse" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
+<small>SHTracker 2.7 "IdioticIndri" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
 <p><small><a href="http://sidhosting.co.uk/misc/donate.html">Donate</a></p>
 </body>
 </html>

@@ -5,7 +5,7 @@ SHTracker is a PHP click counter which can also be used as a download counter. Y
 
 The script uses SQL databases. It comes with an admin panel where you can view how many times a link has been clicked. You can also easily add, edit, reset or remove links using the admin panel. SHTracker can also display the current click count on any web page.
 
-#### Current Version: 2.6 "HelpfulHorse"
+#### Current Version: 2.7 "IdioticIndri"
 
 Features:
 ---------
@@ -55,7 +55,7 @@ include("SHTracker/show.php");
 ?>
 ```
 
-Plain:
+Without formatting:
 
 ```php
 <?php
@@ -73,7 +73,7 @@ Normal:
 <iframe src="SHTracker/show.php?id=download1"></iframe>
 ```
 
-Plain:
+Without formatting:
 
 ```html
 <iframe src="SHTracker/show.php?id=download1&plain=true"></iframe>
