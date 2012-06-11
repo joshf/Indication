@@ -29,11 +29,6 @@ if (empty($id)) {
     die("<h1>SHTracker: Error</h1><p>ID cannot be blank.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
-//Prevent some injection attacks
-if (!preg_match("/^[a-zA-Z0-9.-]{1,}$/", $id)) {
-    die("<h1>SHTracker: Error</h1><p>Please enter only numbers, letters or points.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>"); 
-}
-
 //If ID exists show count or else die
 $showinfo = mysql_query("SELECT name, count FROM Data WHERE id = \"$id\"");
 $showresult = mysql_fetch_assoc($showinfo); 
@@ -44,7 +39,7 @@ if ($showresult != 0) {
         echo "<p>" . $showresult["name"] . " has been downloaded " . $showresult["count"] . " times.</p>";
     }
 } else { 
-    die("<h1>SHTracker: Error</h1><p>ID <b>$id</b> does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>ID does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
 mysql_close($con);
