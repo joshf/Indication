@@ -116,6 +116,7 @@ if ($checkifadsshowresult["showads"] == "true") {
 } else {
     echo "<p>Show ads? <input type=\"checkbox\" name=\"showadsstate\" /></p>";
 }
+
 mysql_close($con);
 
 ?>
