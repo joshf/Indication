@@ -9,9 +9,16 @@ ob_start();
 <head>
 <title>SHTracker</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <meta name="robots" content="noindex, nofollow">
 </head>
 <body>
+<script type="text/javascript">
+$(document).ready(function() { 
+      $("#downloadurl").delay(5000).show("fast");
+      $("#downloadurlwait").delay(5000).hide("fast");
+});
+</script>
 <?php
 
 //Connect to database
@@ -80,7 +87,7 @@ $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$id\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
 if ($checkifadsshowresult["showads"] == "true") { 
     $adcode = htmlspecialchars_decode(AD_CODE); 
-    echo "<h1>Downloading " . $getresult["name"] . "</h1><p>" . $adcode . "</p><hr /><p><a href=\"" . $getresult["url"] . "\">Start Download</a></p></body></html>";
+    echo "<h1>Downloading " . $getresult["name"] . "</h1><p>" . $adcode . "</p><hr /><div id=\"downloadurlwait\"><p>Your download will be ready shortly...</p></div><div id=\"downloadurl\" style=\"display: none\"><p><a href=\"" . $getresult["url"] . "\">Start Download</a></p></div></body></html>";
     exit;
 }
 
