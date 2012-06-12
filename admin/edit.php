@@ -102,7 +102,7 @@ while($row = mysql_fetch_assoc($getidinfo)) {
 //Check if download is protected
 $checkprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$idtoedit\"");
 $checkprotectedresult = mysql_fetch_assoc($checkprotected); 
-if ($checkprotectedresult["protect"] == "true") { 
+if ($checkprotectedresult["protect"] == "1") { 
     echo "<p>Enable password protection? <input type=\"checkbox\" name=\"passwordprotectstate\" checked=\"yes\" /></p>";
 } else {
     echo "<p>Enable password protection? <input type=\"checkbox\" name=\"passwordprotectstate\" /></p>";
@@ -111,7 +111,7 @@ if ($checkprotectedresult["protect"] == "true") {
 //Check if we should show ads
 $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$idtoedit\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
-if ($checkifadsshowresult["showads"] == "true") { 
+if ($checkifadsshowresult["showads"] == "1") { 
     echo "<p>Show ads? <input type=\"checkbox\" name=\"showadsstate\" checked=\"yes\" /></p>";
 } else {
     echo "<p>Show ads? <input type=\"checkbox\" name=\"showadsstate\" /></p>";

@@ -57,16 +57,16 @@ if (isset($_POST["passwordprotectstate"])) {
     } else {
         $password = sha1($inputtedpassword);
     }
-    $protect = "true";
+    $protect = "1";
 } else {
-    $protect = "false";
+    $protect = "0";
     $password = "";
 }
 
 if (isset($_POST["showadsstate"])) {
-    $showads = "true";
+    $showads = "1";
 } else {
-    $showads = "false";
+    $showads = "0";
 }
 
 mysql_query("UPDATE Data SET name = \"$newname\", id = \"$newid\", url = \"$newurl\", count = \"$newcount\", protect = \"$protect\", password = \"$password\", showads = \"$showads\" WHERE id = \"$idtoedit\"");

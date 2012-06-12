@@ -15,8 +15,8 @@ ob_start();
 <body>
 <script type="text/javascript">
 $(document).ready(function() { 
-    $("#downloadurl").delay(5000).show("fast");
-    $("#downloadurlwait").delay(5000).hide("fast");
+    $("#downloadurl").delay(5100).fadeIn("fast");
+    $("#downloadurlwait").delay(5000).fadeOut("fast");
 });
 </script>
 <?php
@@ -62,7 +62,7 @@ if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
 //Check if download is password protected
 $checkprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$id\"");
 $checkprotectedresult = mysql_fetch_assoc($checkprotected); 
-if ($checkprotectedresult["protect"] == "true") { 
+if ($checkprotectedresult["protect"] == "1") { 
     if (isset($_POST["password"])) {
         if (sha1($_POST["password"]) != $checkprotectedresult["password"]) {
             die("<h1>SHTracker: Error</h1><p>Incorrect password.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
@@ -72,7 +72,7 @@ if ($checkprotectedresult["protect"] == "true") {
         <form method=\"post\">
         <p>To access this download please enter the password you were given.</p>
         <p>Password: <input type=\"password\" name=\"password\" /></p>
-        <input type=\"submit\" name=\"submit\" value=\"Get Download\" /></p></form>
+        <input type=\"submit\" value=\"Get Download\" /></p></form>
         <hr />
         <p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p>
         </body>
@@ -85,7 +85,7 @@ if ($checkprotectedresult["protect"] == "true") {
 //Check if we should show ads
 $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$id\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
-if ($checkifadsshowresult["showads"] == "true") { 
+if ($checkifadsshowresult["showads"] == "1") { 
     $adcode = htmlspecialchars_decode(AD_CODE); 
     echo "<h1>Downloading " . $getresult["name"] . "</h1><p>" . $adcode . "</p><hr /><div id=\"downloadurlwait\"><p>Your download will be ready shortly...</p></div><div id=\"downloadurl\" style=\"display: none\"><p><a href=\"" . $getresult["url"] . "\">Start Download</a></p></div></body></html>";
     exit;

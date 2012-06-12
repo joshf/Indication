@@ -53,9 +53,9 @@ name VARCHAR(100) NOT NULL,
 id VARCHAR(25) NOT NULL,
 url VARCHAR(200) NOT NULL,
 count INT(10) NOT NULL default \"0\",
-protect VARCHAR(10) NOT NULL default \"false\",
+protect TINYINT(1) NOT NULL default \"0\",
 password VARCHAR(200) NOT NULL,
-showads VARCHAR(10) NOT NULL default \"true\",
+showads TINYINT(1) NOT NULL default \"0\",
 PRIMARY KEY (id)
 ) ENGINE = MYISAM;";
 

@@ -52,21 +52,21 @@ if ($resultcheckid != 0) {
 
 
 if (isset($_POST["passwordprotectstate"])) {
-    $protect = "true";
+    $protect = "1";
     $inputtedpassword = mysql_real_escape_string($_POST["password"]);
     if (empty($inputtedpassword)) {
         die("<h1>SHTracker: Error</h1><p>Password is missing...</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
     }
     $password = sha1($inputtedpassword);
 } else {
-    $protect = "false";
+    $protect = "0";
     $password = "";
 }
 
 if (isset($_POST["showadsstate"])) {
-    $showads = "true";
+    $showads = "1";
 } else {
-    $showads = "false";
+    $showads = "0";
 }
     
 mysql_query("INSERT INTO Data (name, id, url, count, protect, password, showads)
