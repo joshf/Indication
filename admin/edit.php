@@ -108,6 +108,12 @@ if ($checkprotectedresult["protect"] == "1") {
     echo "<p>Enable password protection? <input type=\"checkbox\" name=\"passwordprotectstate\" /></p>";
 }
 
+?>
+<div id="passwordentry" style="display: none">
+    <p>Please enter a password: <input type="password" name="password" /></p>
+</div>
+<?
+
 //Check if we should show ads
 $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$idtoedit\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
@@ -120,9 +126,6 @@ if ($checkifadsshowresult["showads"] == "1") {
 mysql_close($con);
 
 ?>
-<div id="passwordentry" style="display: none">
-    <p>Please enter a password: <input type="password" name="password" /></p>
-</div>
 <input type="hidden" name="idtoedit" value="<? echo $idtoedit; ?>" />
 <p><input type="submit" value="Update" /></p>
 </form>

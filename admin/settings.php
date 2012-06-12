@@ -106,6 +106,9 @@ $(document).ready(function() {
     $("#dorac").click(function() {
         if (!$("input[name=password]").val()) {
             $("#passwordempty").show("fast");
+            setTimeout(function(){
+                $("#passwordempty").hide("fast");
+            },3000)
             return false;
         } else {
             var inputtedpassword = $("#password").val();
@@ -113,6 +116,9 @@ $(document).ready(function() {
             var storedpass = "<? echo ADMIN_PASSWORD; ?>";
             if (pass != storedpass) {
                 $("#incorrectpass").show("fast");
+                setTimeout(function(){
+                    $("#incorrectpass").hide("fast");
+                },3000)
                 return false;
             }
             var pass = $("#password").val();
@@ -122,6 +128,9 @@ $(document).ready(function() {
                 data: "command=Reset All Counts to Zero&password="+ pass +"",
                 success: function() { 
                     $("#racsuccess").show("fast");
+                    setTimeout(function(){
+                        $("#racsuccess").hide("fast");
+                    },3000)
                 }      
             });
         }
@@ -131,6 +140,9 @@ $(document).ready(function() {
     $("#dodad").click(function() {
         if (!$("input[name=password]").val()) {
             $("#passwordempty").show("fast");
+            setTimeout(function(){
+                $("#passwordempty").hide("fast");
+            },3000)
             return false;
         } else {
             var inputtedpassword = $("#password").val();
@@ -138,6 +150,9 @@ $(document).ready(function() {
             var storedpass = "<? echo ADMIN_PASSWORD; ?>";
             if (pass != storedpass) {
                 $("#incorrectpass").show("fast");
+                setTimeout(function(){
+                    $("#incorrectpass").hide("fast");
+                },3000)
                 return false;
             }
             var pass = $("#password").val();
@@ -147,6 +162,9 @@ $(document).ready(function() {
                 data: "command=Delete All Downloads&password="+ pass +"",
                 success: function() { 
                     $("#dadsuccess").show("fast");
+                    setTimeout(function(){
+                        $("#dadsuccess").hide("fast");
+                    },3000)
                 }      
             });
         }
