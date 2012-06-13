@@ -15,7 +15,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 ?>
 <html> 
 <head>
-<title>SHTracker: Download Added</title>
+<title>SHTracker: Download/Link Added</title>
 <link rel="stylesheet" type="text/css" href="../../style.css" />
 </head>
 <body>
@@ -75,7 +75,7 @@ VALUES (\"$name\",\"$id\",\"$url\",\"$count\",\"$protect\",\"$password\",\"$show
 mysql_close($con);
 
 ?>
-<h1>SHTracker: Download Added</h1>
+<h1>SHTracker: Download/Link Added</h1>
 <p>The download <b><? echo $name; ?></b> has been added successfully.</p>
 <p><b>Details:</b></p>
 <ul>

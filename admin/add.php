@@ -15,7 +15,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 ?>
 <html> 
 <head>
-<title>SHTracker: Add A Download</title>
+<title>SHTracker: Add A Download/Link</title>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 <link rel="stylesheet" type="text/css" href="../style.css" />
@@ -64,7 +64,7 @@ $(document).ready(function() {
     });
 });
 </script>
-<h1>SHTracker: Add A Download</h1>
+<h1>SHTracker: Add A Download/Link</h1>
 <form action="actions/add.php" method="post" id="addform">
 <p>Name: <input type="text" size="50" name="name" /></p>
 <p>ID: <input type="text" size="50" name="id" /></p>

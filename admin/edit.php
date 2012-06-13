@@ -19,7 +19,7 @@ if (!isset($_POST["id"])) {
 ?>
 <html> 
 <head>
-<title>SHTracker: Editing Download</title>
+<title>SHTracker: Editing Download/Link</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
@@ -86,7 +86,7 @@ $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$idtoedit\"
 $resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
 
 ?>
-<h1>SHTracker: Editing Download <? echo $resultnameofdownload["name"]; ?></h1>
+<h1>SHTracker: Editing Download/Link <? echo $resultnameofdownload["name"]; ?></h1>
 <p>Please edit any values you wish.</p>
 <form action="actions/edit.php" method="post" id="editform">
 <?php

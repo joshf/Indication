@@ -19,7 +19,7 @@ if (!isset($_POST["id"])) {
 ?>
 <html> 
 <head>
-<title>SHTracker: Download Edited</title>
+<title>SHTracker: Download/Link Edited</title>
 <link rel="stylesheet" type="text/css" href="../../style.css" />
 </head>
 <body>
@@ -74,7 +74,7 @@ mysql_query("UPDATE Data SET name = \"$newname\", id = \"$newid\", url = \"$newu
 mysql_close($con);
 
 ?> 
-<h1>SHTracker: Download Edited</h1>
+<h1>SHTracker: Download/Link Edited</h1>
 <p>The download <b><? echo $newname; ?></b> has been edited successfully.</p>
 <p><b>Updated Details:</b></p>
 <ul>
