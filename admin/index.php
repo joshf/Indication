@@ -170,10 +170,10 @@ mysql_select_db(DB_NAME, $con);
 if (isset($_GET["page"])) {
     $page = mysql_real_escape_string($_GET["page"]);
     if (empty($page)) {
-        die("<h1>SHTracker: Error</h1><p>Page value is empty...</p><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>"); 
+        $page = 1;
     }
     if (!preg_match("/^[0-9]{1,}$/", $page)) {
-        die("<h1>SHTracker: Error</h1><p>Illegal character used...</p><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>"); 
+        die("<h1>SHTracker: Error</h1><p>Page does not exist...</p><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>"); 
     }
 } else {
     $page = 1;
