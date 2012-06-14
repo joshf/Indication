@@ -110,7 +110,7 @@ if ($checkprotectedresult["protect"] == "1") {
 
 ?>
 <div id="passwordentry" style="display: none">
-    <p>Please enter a password: <input type="password" name="password" /></p>
+    <p><i>Please enter a password:</i> <input type="password" name="password" /></p>
 </div>
 <?
 
