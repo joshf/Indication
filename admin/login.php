@@ -57,7 +57,7 @@ Password: <input type="password" name="password" />
 <p><input type="submit" name="submit" value="Login" /></p>
 </form>
 <p><a href="http://<?php echo $_SERVER["HTTP_HOST"]; ?>">&larr; Back to <?php echo WEBSITE; ?></a></p>
-<small>SHTracker 2.7 Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
+<small>SHTracker 2.7.1 Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
 </div>
 </body>
 </html>
