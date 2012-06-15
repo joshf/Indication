@@ -15,8 +15,16 @@ ob_start();
 <body>
 <script type="text/javascript">
 $(document).ready(function() { 
-    $("#downloadurl").delay(5100).fadeIn("fast");
-    $("#downloadurlwait").delay(5000).fadeOut("fast");
+    var count = 5;
+    countdown = setInterval(function(){
+        $("#counterplacholder").html("<p>Your download will be ready in " + count + " second(s)</p>");
+        if (count <= 0) {
+            clearInterval(countdown);
+            $("#counterplacholder").fadeOut("fast");
+            $("#downloadurl").delay(500).fadeIn("fast");
+        }
+        count--;
+    }, 1000);
 });
 </script>
 <?php
@@ -87,7 +95,7 @@ $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$id\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
 if ($checkifadsshowresult["showads"] == "1") { 
     $adcode = htmlspecialchars_decode(AD_CODE); 
-    echo "<h1>Downloading " . $getresult["name"] . "</h1><p>" . $adcode . "</p><hr /><div id=\"downloadurlwait\"><p>Your download will be ready shortly...</p></div><div id=\"downloadurl\" style=\"display: none\"><p><a href=\"" . $getresult["url"] . "\">Start Download</a></p></div></body></html>";
+    echo "<h1>Downloading " . $getresult["name"] . "</h1><p>" . $adcode . "</p><hr /><div id=\"counterplacholder\"></div><div id=\"downloadurl\" style=\"display: none\"><p><a href=\"" . $getresult["url"] . "\">Start Download</a></p></div></body></html>";
     exit;
 }
 
