@@ -61,6 +61,11 @@ $(document).ready(function() {
                     data: "id="+ id +"",
                     success: function() {  
                         $("#deletedone").show("fast");
+                        setTimeout(function(){
+                            $("#deletedone").hide("fast");
+                            window.location.reload();
+                        },3000)
+                        return false;
                     }	
                 });
                 $(this).dialog("close");
