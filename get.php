@@ -68,11 +68,11 @@ if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
 }
 
 //Check if download is password protected
-$checkprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$id\"");
-$checkprotectedresult = mysql_fetch_assoc($checkprotected); 
-if ($checkprotectedresult["protect"] == "1") { 
+$checkifprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$id\"");
+$checkifprotectedresult = mysql_fetch_assoc($checkifprotected); 
+if ($checkifprotectedresult["protect"] == "1") { 
     if (isset($_POST["password"])) {
-        if (sha1($_POST["password"]) != $checkprotectedresult["password"]) {
+        if (sha1($_POST["password"]) != $checkifprotectedresult["password"]) {
             die("<h1>SHTracker: Error</h1><p>Incorrect password.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
         }
     } else {
@@ -98,7 +98,6 @@ if ($checkifadsshowresult["showads"] == "1") {
     echo "<h1>Downloading " . $getresult["name"] . "</h1><p>" . $adcode . "</p><hr /><div id=\"counterplacholder\"></div><div id=\"downloadurl\" style=\"display: none\"><p><a href=\"" . $getresult["url"] . "\">Start Download</a></p></div></body></html>";
     exit;
 }
-
 
 mysql_close($con);
 

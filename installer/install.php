@@ -40,18 +40,19 @@ define(\"AD_CODE\", \"\");
 
 ?>";
 
-//Create Data table
+//Check if we can connect
 $con = mysql_connect($dbhost, $dbuser, $dbpassword);
 if (!$con) {
     die("<h1>SHTracker: Install Failed</h1><p>Could not connect to database: " . mysql_error() . ". Please go back and try again.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
-//Check Database exists
+//Check if database exists
 $does_db_exist = mysql_select_db($dbname, $con);
 if (!$does_db_exist) {
     die("<h1>SHTracker: Install Failed</h1><p>Database does not exist: " . mysql_error() . ". Please go back and try again.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
+//Create Data table
 $createtable = "CREATE TABLE Data (
 name VARCHAR(100) NOT NULL,
 id VARCHAR(25) NOT NULL,
@@ -76,6 +77,6 @@ fclose($configfile);
 <h1>SHTracker: Install Complete</h1>
 <p>SHTracker has been successfully installed. Please delete the "installer" folder from your server, as it poses a potential security risk!</p>
 <p>It may also be helpful to make config.php unwritable.</p>
-<p><a href="../admin">Go To Login</a></p>
+<p><a href="../admin">Go To Login &rarr;</a></p>
 </body>
 </html>

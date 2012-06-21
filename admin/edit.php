@@ -100,9 +100,9 @@ while($row = mysql_fetch_assoc($getidinfo)) {
 }
 
 //Check if download is protected
-$checkprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$idtoedit\"");
-$checkprotectedresult = mysql_fetch_assoc($checkprotected); 
-if ($checkprotectedresult["protect"] == "1") { 
+$checkifprotected = mysql_query("SELECT protect FROM Data WHERE id = \"$idtoedit\"");
+$checkifprotectedresult = mysql_fetch_assoc($checkifprotected); 
+if ($checkifprotectedresult["protect"] == "1") { 
     echo "<p>Enable password protection? <input type=\"checkbox\" name=\"passwordprotectstate\" checked=\"yes\" /></p>";
 } else {
     echo "<p>Enable password protection? <input type=\"checkbox\" name=\"passwordprotectstate\" /></p>";
