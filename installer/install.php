@@ -43,10 +43,14 @@ define(\"AD_CODE\", \"\");
 //Create Data table
 $con = mysql_connect($dbhost, $dbuser, $dbpassword);
 if (!$con) {
-    die("<h1>SHTracker: Install Failed</h1><p>Could not connect to database: " . mysql_error() . "</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Install Failed</h1><p>Could not connect to database: " . mysql_error() . ". Please go back and try again.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
-mysql_select_db($dbname, $con);
+//Check Database exists
+$does_db_exist = mysql_select_db($dbname, $con);
+if (!$does_db_exist) {
+    die("<h1>SHTracker: Install Failed</h1><p>Database does not exist: " . mysql_error() . ". Please go back and try again.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+}
 
 $createtable = "CREATE TABLE Data (
 name VARCHAR(100) NOT NULL,
