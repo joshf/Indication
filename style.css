@@ -1,97 +1,97 @@
 p, form, ul {
-	font-family: Helvetica, Verdana, Arial, sans-serif;
-	color: #000000;
-	font-size: 16px;
+    font-family: Helvetica, Verdana, Arial, sans-serif;
+    font-size: 16px;
+    color: #000000;
 }
 
 h1 {
-	font-family: Helvetica, Verdana, Arial, sans-serif;
-	color: #000000;
-	font-size: 25px;
+    font-family: Helvetica, Verdana, Arial, sans-serif;
+    font-size: 25px;
+    color: #000000;
 }
 
 h2 {
-	color: #000000;
-	font-size: 20px;
-	font-family: Helvetica, Verdana, Arial, sans-serif;
+    font-family: Helvetica, Verdana, Arial, sans-serif;
+    font-size: 20px;
+    color: #000000;
 }
 
 h3 {
-	color: #000000;
-	font-size: 15px;
-	font-family: Helvetica, Verdana, Arial, sans-serif;
+    font-family: Helvetica, Verdana, Arial, sans-serif;
+    font-size: 15px;
+    color: #000000;
 }
 
 small {
-	font-family: Helvetica, Verdana, Arial, sans-serif;
-	font-size: 10px;
-	color: #000000;
+    font-family: Helvetica, Verdana, Arial, sans-serif;
+    font-size: 10px;
+    color: #000000;
 }
 
 a:link {
-	color: #0080ff;
+    color: #0080ff;
 }
 
 a:visited {
-	color: #ff8000;
+    color: #ff8000;
 }
 
 a:hover {
-	color: #ffa500;
+    color: #ffa500;
 }
 
 a:active {
-	color: #0080ff;
+    color: #0080ff;
 }
 
 table {
-	font-size: 16px;
-	font-family: Helvetica, Verdana, Arial, sans-serif;
-	width: 100%;
-	border-collapse: collapse;
+    font-family: Helvetica, Verdana, Arial, sans-serif;
+    font-size: 16px;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 table th {
-	text-align: left;
-	background-color: #0080ff;
-	color: #ffffff;
-	padding: 3px 7px 1px 7px;
+    text-align: left;
+    background-color: #0080ff;
+    color: #ffffff;
+    padding: 3px 7px 1px 7px;
 }
 
 table td  {
-	text-align: left;
-	color: #000000;
-	border: 1px solid #0080ff;
-	padding: 3px 7px 1px 7px;
+    text-align: left;
+    color: #000000;
+    border: 1px solid #0080ff;
+    padding: 3px 7px 1px 7px;
 }
 
 table tr.alt {
-	background-color: #cae1ff;
+    background-color: #cae1ff;
 }
 
 #loginform {
-	position: fixed;
-	top: 49%;
-	left: 52%;
-	margin-top: -150px;
-	margin-left: -150px;
+    position: fixed;
+    top: 49%;
+    left: 52%;
+    margin-top: -150px;
+    margin-left: -150px;
 }
 
 #noticebad {
-	background-color: #ffebe8;
+    background-color: #ffebe8;
 }
 
 #noticegood {
-	background-color: #e8fcff;
+    background-color: #e8fcff;
 }
 
 label.error {
-	float: none;
-	color: red; 
-	padding-left: 5px; 
-	vertical-align: top; 
+    float: none;
+    color: red; 
+    padding-left: 5px; 
+    vertical-align: top; 
 }
 
 .ui-button-text {
-	font-size: 0.6em;
+    font-size: 0.6em;
 }
