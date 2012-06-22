@@ -26,7 +26,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 </head>
 <body>
-<noscript><p>Your browser does not support JavaScript or it is disabled, most functions will be broken! Please upgrade your browser or enable JavaScript.</p></noscript>
+<noscript><p>Your browser does not support JavaScript or it is disabled, nearly all functions will be broken! Please upgrade your browser or enable JavaScript.</p></noscript>
 <script type="text/javascript">
 $(document).ready(function() {
     /* Edit */
