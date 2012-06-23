@@ -138,7 +138,7 @@ $(document).ready(function() {
     /* End */
     /* Do DAD */
     $("#dodad").click(function() {
-        if (!$("input[name=password]").val()) {
+        if (!$("#password").val()) {
             $("#passwordempty").show("fast");
             setTimeout(function(){
                 $("#passwordempty").hide("fast");

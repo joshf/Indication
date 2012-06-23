@@ -187,7 +187,7 @@ $startfrom = ($page-1) * 20;
 
 $getdownloads = mysql_query("SELECT * FROM Data ORDER BY name ASC LIMIT $startfrom, 20");
 
-echo "<h1>SHTracker: " . WEBSITE . " Download Statistics</h1>
+echo "<h1>SHTracker: Downloads for " . WEBSITE . "</h1>
 <table>
 <thead>
 <tr>
