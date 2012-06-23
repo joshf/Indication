@@ -47,7 +47,7 @@ if (isset($_GET["login_error"])) {
 } elseif (isset($_GET["logged_out"])) {
     echo "<p class=\"loggedout\">You have been logged out!</p>";
 } else {
-    echo "<p style=\"font-size: 14px;\">Welcome! Please login</p>";
+    echo "<p style=\"font-size: 14px;\">Welcome back! Please login</p>";
 }
 
 ?>
@@ -59,8 +59,8 @@ Password:<br />
 <p><input type="checkbox" name="rememberme"> Keep me logged in</p>
 <p><input class="loginbutton" type="submit" name="submit" value="Login" /></p>
 </form>
-<p><a href="http://<?php echo $_SERVER["HTTP_HOST"]; ?>">&larr; Back to <?php echo WEBSITE; ?></a></p>
-<small>SHTracker 3.0b1 Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
+<p class="loginfooter"><a href="http://<?php echo $_SERVER["HTTP_HOST"]; ?>">&larr; Back to <?php echo WEBSITE; ?></a></p>
+<p class="loginfooter">Copyright Josh Fradley <? echo date("Y"); ?></p>
 </div>
 </body>
 </html>
