@@ -39,14 +39,15 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 </head>
 <body>
 <div id="loginform">
-<h1>SHTracker: Login</h1>
+<h1>SHTracker</h1>
 <?php 
 
 if (isset($_GET["login_error"])) {
-    echo "<p class=\"noticebad\">Incorrect password or username!</p>";
-}
-if (isset($_GET["logged_out"])) {
-    echo "<p class=\"noticegood\">Logged out!</p>";
+    echo "<p class=\"loginerror\">Incorrect password or username!</p>";
+} elseif (isset($_GET["logged_out"])) {
+    echo "<p class=\"loggedout\">You have been logged out!</p>";
+} else {
+    echo "<p style=\"font-size: 14px;\">Welcome! Please login</p>";
 }
 
 ?>

@@ -71,7 +71,7 @@ table tr.alt {
 
 #loginform {
     width: 234px;
-    margin-top: 159px;
+    margin-top: 129px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -82,6 +82,16 @@ p.noticebad {
 
 p.noticegood {
     color: #397d02;
+}
+
+p.loginerror {
+    font-size: 14px;
+    color: #ff0000; 
+}
+
+p.loggedout {
+    font-size: 14px;
+    color: #397d02; 
 }
 
 label.error {
