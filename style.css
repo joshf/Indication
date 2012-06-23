@@ -70,11 +70,10 @@ table tr.alt {
 }
 
 #loginform {
-    width: 220px;
-    margin-top: 150px;
+    width: 234px;
+    margin-top: 159px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 150px;
 }
 
 p.noticebad {
@@ -87,7 +86,7 @@ p.noticegood {
 
 label.error {
     float: none;
-    color: red; 
+    color: #ff0000; 
     padding-left: 5px; 
     vertical-align: top; 
 }

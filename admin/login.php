@@ -51,10 +51,12 @@ if (isset($_GET["logged_out"])) {
 
 ?>
 <form method="post">
-User: <input type="text" name="user" /><br />
-Password: <input type="password" name="password" />
-<p><input type="checkbox" name="rememberme">Keep me logged in</p>
-<p><input type="submit" name="submit" value="Login" /></p>
+Username:<br />
+<input type="text" size="35" name="user" /><br />
+Password:<br />
+<input type="password" size="35" name="password" /><br />
+<p><input type="checkbox" name="rememberme"> Keep me logged in</p>
+<p><input class="loginbutton" type="submit" name="submit" value="Login" /></p>
 </form>
 <p><a href="http://<?php echo $_SERVER["HTTP_HOST"]; ?>">&larr; Back to <?php echo WEBSITE; ?></a></p>
 <small>SHTracker 3.0b1 Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
