@@ -68,6 +68,6 @@ Website Name: <input type="text" name="website" /><br />
 Path to Script: <input type="text" name="pathtoscript" /><br />
 <p><input type="submit" value="Install" /></p>
 </form>
-<small>SHTracker 3.0b1 Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
+<small>SHTracker 3.0b2 Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
 </body>
 </html>
