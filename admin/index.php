@@ -245,10 +245,10 @@ if ($resultgetdatacount["COUNT(*)"] > "20") {
     <p>Delete download?</p>
 </div>
 <div id="deletedone" style="display: none">
-    <div id="noticegood"><p>Download deleted!</p></div>
+    <p class="noticegood">Download deleted!</p>
 </div>
 <div id="noidselectedmessage" style="display: none">
-    <div id="noticebad"><p>No ID selected!</p></div>
+    <p class="noticebad">No ID selected!</p>
 </div>
 <div id="logout" style="display: none" title="SHTracker: Logout">
     <p><? echo ADMIN_USER; ?>, are you sure you wish to logout?</p>

@@ -77,12 +77,12 @@ table tr.alt {
     margin-bottom: 150px;
 }
 
-#noticebad {
-    background-color: #ffebe8;
+p.noticebad {
+    color: #ff0000; 
 }
 
-#noticegood {
-    background-color: #e8fcff;
+p.noticegood {
+    color: #397d02;
 }
 
 label.error {

@@ -224,16 +224,16 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 <p>To perform any of these actions, please enter your admin password.</p>
 <p>Password: <input type="password" id="password" name="password" /></p>
 <div id="passwordempty" style="display: none">
-    <div id="noticebad"><p>Please enter a password!</p></div>
+    <p class="noticebad">Please enter a password!</p>
 </div>
 <div id="racsuccess" style="display: none">
-    <div id="noticegood"><p>All downloads reset to zero!</p></div>
+    <p class="noticegood">All downloads reset to zero!</p>
 </div>
 <div id="dadsuccess" style="display: none">
-    <div id="noticegood"><p>All downloads deleted!</p></div>
+    <p class="noticegood">All downloads deleted!</p>
 </div>
 <div id="incorrectpass" style="display: none">
-    <div id="noticebad"><p>Incorrect password!</p></div>
+    <p class="noticebad">Incorrect password!</p>
 </div>
 <button id="dorac">Reset All Counts to Zero</button><br />
 <button id="dodad">Delete All Downloads</button>

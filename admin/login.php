@@ -43,10 +43,10 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <?php 
 
 if (isset($_GET["login_error"])) {
-    echo "<div id=\"noticebad\"><p>Incorrect password or username!</p></div>";
+    echo "<p class=\"noticebad\">Incorrect password or username!</p>";
 }
 if (isset($_GET["logged_out"])) {
-    echo "<div id=\"noticegood\"><p>Logged out!</p></div>";
+    echo "<p class=\"noticegood\">Logged out!</p>";
 }
 
 ?>
