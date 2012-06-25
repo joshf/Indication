@@ -1,12 +1,7 @@
 <!-- SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker) -->
 <html>
 <head>
-<?php
-
-require_once("config.php");
-echo "<title>SHTracker: " . WEBSITE . " Download Statistics</title>";
-
-?>
+<title>SHTracker</title>
 <!-- Change the style to match the rest of your site here -->
 <link rel="stylesheet" type="text/css" href="style.css" />
 <meta name="robots" content="noindex, nofollow">
@@ -15,6 +10,8 @@ echo "<title>SHTracker: " . WEBSITE . " Download Statistics</title>";
 <?php
 
 //Connect to database
+require_once("config.php");
+
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
     die("Could not connect: " . mysql_error());
@@ -36,7 +33,7 @@ if ($showresult != 0) {
     if (isset($_GET["plain"])) {
         echo $showresult["count"];
     } else {
-        echo "<p>" . $showresult["name"] . " has been downloaded " . $showresult["count"] . " times.</p>";
+        echo "<p>" . $showresult["name"] . " has been downloaded " . $showresult["count"] . " time(s).</p>";
     }
 } else { 
     die("<h1>SHTracker: Error</h1><p>ID does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");

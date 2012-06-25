@@ -53,8 +53,8 @@ if (empty($id)) {
 
 //Check if ID exists
 $getinfo = mysql_query("SELECT name, url FROM Data WHERE id = \"$id\"");
-$getresult = mysql_fetch_assoc($getinfo); 
-if ($getresult == 0) { 
+$getinforesult = mysql_fetch_assoc($getinfo); 
+if ($getinforesult == 0) { 
     die("<h1>SHTracker: Error</h1><p>ID does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
@@ -76,7 +76,7 @@ if ($checkifprotectedresult["protect"] == "1") {
             die("<h1>SHTracker: Error</h1><p>Incorrect password.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
         }
     } else {
-        echo "<h1>Downloading " . $getresult["name"] . "</h1>
+        die("<h1>Downloading " . $getinforesult["name"] . "</h1>
         <form method=\"post\">
         <p>To access this download please enter the password you were given.</p>
         <p>Password: <input type=\"password\" name=\"password\" /></p>
@@ -84,25 +84,22 @@ if ($checkifprotectedresult["protect"] == "1") {
         <hr />
         <p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p>
         </body>
-        </html>";
-        exit;
+        </html>");
     }
 }
-
 
 //Check if we should show ads
 $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$id\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
 if ($checkifadsshowresult["showads"] == "1") { 
     $adcode = htmlspecialchars_decode(AD_CODE); 
-    echo "<h1>Downloading " . $getresult["name"] . "</h1><p>" . $adcode . "</p><hr /><div id=\"counterplacholder\"></div><div id=\"downloadurl\" style=\"display: none\"><p><a href=\"" . $getresult["url"] . "\">Start Download</a></p></div></body></html>";
-    exit;
+    die("<h1>Downloading " . $getinforesult["name"] . "</h1><p>" . $adcode . "</p><hr /><div id=\"counterplacholder\"></div><div id=\"downloadurl\" style=\"display: none\"><p><a href=\"" . $getinforesult["url"] . "\">Start Download</a></p></div></body></html>");
 }
 
 mysql_close($con);
 
 //Redirect user to the download
-header("Location: " . $getresult["url"] . "");
+header("Location: " . $getinforesult["url"] . "");
 ob_end_flush();
 exit;
 
