@@ -74,7 +74,13 @@ if ($checkifprotectedresult["protect"] == "1") {
     if (isset($_POST["password"])) {
         if (sha1($_POST["password"]) != $checkifprotectedresult["password"]) {
             die("<h1>SHTracker: Error</h1><p>Incorrect password.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+        } else {
+            setcookie("shtrackerhasauthed_$id", time()+60*5, time()+60*5);
         }
+    } elseif (isset($_COOKIE["shtrackerhasauthed_$id"])) {
+        $time = ($_COOKIE["shtrackerhasauthed_$id"]-time()) / 60; 
+        $timeleft = ceil($time);
+        echo "<small><b>Notice:</b> your download session wll expire in $timeleft minutes...</small>";
     } else {
         die("<h1>Downloading " . $getinforesult["name"] . "</h1>
         <form method=\"post\">
