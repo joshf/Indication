@@ -64,6 +64,7 @@ showads TINYINT(1) NOT NULL default \"0\",
 PRIMARY KEY (id)
 ) ENGINE = MYISAM;";
 
+//Run query
 mysql_query($createtable);
 
 mysql_close($con);
@@ -76,7 +77,6 @@ fclose($configfile);
 ?>
 <h1>SHTracker: Install Complete</h1>
 <p>SHTracker has been successfully installed. Please delete the "installer" folder from your server, as it poses a potential security risk!</p>
-<p>It may also be helpful to make config.php unwritable.</p>
 <p><a href="../admin">Go To Login &rarr;</a></p>
 </body>
 </html>

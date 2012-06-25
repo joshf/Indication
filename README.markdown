@@ -13,7 +13,7 @@ Features:
 * Password protect downloads
 * Count unique visitors to avoid multiple counts from same user
 * Support displaying of ads before user is redirected to download
-* Full admin panel, with Jquery support
+* Full admin panel, enhanced with Jquery
 * Display download counts to users
 
 Installation:
@@ -24,15 +24,14 @@ Installation:
 3. Upload the SHTracker folder to your server via FTP or your hosts control panel
 4. Open up http://yoursite.com/SHTracker/install.php in your browser and enter your database/user details
 5. Delete the "installer" folder from your server
-6. Make config.php unwritable (optional)
-7. Login to the admin panel using the username and password you set during the install process
-8. Add your links/downloads
-9. SHTracker should now be set up
+6. Login to the admin panel using the username and password you set during the install process
+7. Add your links/downloads
+8. SHTracker should now be set up
 
 Usage:
 ------
 
-The script is called like this: /get.php?id=mydownload1
+The main script is called like this: /get.php?id=mydownload1
 
 Replace ID with the ID name/number of your URL, for example: http://yoursite.com/SHTracker/get.php?id=mydownload1
 
@@ -44,7 +43,7 @@ This script can also be called via $_POST just set the name of the form to id an
 
 To show the download count for one id only, call http://yoursite.com/SHTracker/show.php?id=mydownload1. To show just the count with no other text add "&plain=true" to the end of the URL. The showing of counts could be done using an include or an iframe (see below)
 
-**Example Codes:**
+**Example codes to show count to a user:**
 
 Normal:
 

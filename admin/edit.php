@@ -62,7 +62,8 @@ $(document).ready(function() {
                 digits: true
             },
             password: {
-                required: true
+                required: true,
+                minlength: 6
             },
         }
     });
