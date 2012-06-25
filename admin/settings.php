@@ -96,94 +96,78 @@ header("Location: " . $_SERVER["REQUEST_URI"] . "");
 <head>
 <title>SHTracker: Settings</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/flick/jquery-ui.css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://hashmask.googlecode.com/svn/trunk/jquery.sha1.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 </head>
 <body>
 <script type="text/javascript">
 $(document).ready(function() {
-    /* Do RAC */
-    $("#dorac").click(function() {
-        if (!$("input[name=password]").val()) {
-            $("#passwordempty").show("fast");
-            setTimeout(function(){
-                $("#passwordempty").hide("fast");
-            },3000)
-            return false;
-        } else {
-            var inputtedpassword = $("#password").val();
-            var pass = $.sha1(inputtedpassword);
-            var storedpass = "<? echo ADMIN_PASSWORD; ?>";
-            if (pass != storedpass) {
-                $("#incorrectpass").show("fast");
-                setTimeout(function(){
-                    $("#incorrectpass").hide("fast");
-                },3000)
-                return false;
+    /* RAC dialog */
+    $("#racconfirm").dialog({
+        autoOpen: false,
+        resizable: false,
+        modal: true,
+        height: 250,
+        width: 450,
+        buttons: {
+            "Confirm": function() {
+                var pass = $("#passwordrac").val();
+                $.ajax({  
+                    type: "POST",  
+                    url: "actions/advanced.php",  
+                    data: "command=Reset All Counts to Zero&password="+ pass +"",
+                    success: function() { 
+                        $("#racsuccess").show("fast");
+                        setTimeout(function(){
+                            $("#racsuccess").hide("fast");
+                        },3000)
+                    }      
+                });
+                $(this).dialog("close");
+            },
+            "Cancel": function() {
+                $(this).dialog("close");
             }
-            var pass = $("#password").val();
-            $.ajax({  
-                type: "POST",  
-                url: "actions/advanced.php",  
-                data: "command=Reset All Counts to Zero&password="+ pass +"",
-                success: function() { 
-                    $("#racsuccess").show("fast");
-                    setTimeout(function(){
-                        $("#racsuccess").hide("fast");
-                    },3000)
-                }      
-            });
         }
     });
+    $("#showracconfirm").click(function() {
+        $("#racconfirm").dialog("open");
+        return false;
+    });
     /* End */
-    /* Do DAD */
-    $("#dodad").click(function() {
-        if (!$("#password").val()) {
-            $("#passwordempty").show("fast");
-            setTimeout(function(){
-                $("#passwordempty").hide("fast");
-            },3000)
-            return false;
-        } else {
-            var inputtedpassword = $("#password").val();
-            var pass = $.sha1(inputtedpassword);
-            var storedpass = "<? echo ADMIN_PASSWORD; ?>";
-            if (pass != storedpass) {
-                $("#incorrectpass").show("fast");
-                setTimeout(function(){
-                    $("#incorrectpass").hide("fast");
-                },3000)
-                return false;
+    /* DAD dialog */
+    $("#dadconfirm").dialog({
+        autoOpen: false,
+        resizable: false,
+        modal: true,
+        height: 250,
+        width: 450,
+        buttons: {
+            "Confirm": function() {
+                var pass = $("#passworddad").val();
+                $.ajax({  
+                    type: "POST",  
+                    url: "actions/advanced.php",  
+                    data: "command=Delete All Downloads&password="+ pass +"",
+                    success: function() { 
+                        $("#dadsuccess").show("fast");
+                        setTimeout(function(){
+                            $("#dadsuccess").hide("fast");
+                        },3000)
+                    }      
+                });
+                $(this).dialog("close");
+            },
+            "Cancel": function() {
+                $(this).dialog("close");
             }
-            var pass = $("#password").val();
-            $.ajax({  
-                type: "POST",  
-                url: "actions/advanced.php",  
-                data: "command=Delete All Downloads&password="+ pass +"",
-                success: function() { 
-                    $("#dadsuccess").show("fast");
-                    setTimeout(function(){
-                        $("#dadsuccess").hide("fast");
-                    },3000)
-                }      
-            });
         }
     });
-    /* End */
-    /* Hide DIVS */
-    $("#racsuccess").click(function() {
-        $("#racsuccess").hide("fast");
+    $("#showdadconfirm").click(function() {
+        $("#dadconfirm").dialog("open");
+        return false;
     });
-    $("#dadsuccess").click(function() {
-        $("#dadsuccess").hide("fast");
-    });
-    $("#passwordempty").click(function() {
-        $("#passwordempty").hide("fast");
-    });
-    $("#incorrectpass").click(function() {
-        $("#incorrectpass").hide("fast");
-    });
-
     /* End */
 });
 </script>
@@ -221,22 +205,23 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 <hr />
 <p><b>Advanced Options:</b></p>
 <p><i>Do not use these options unless you know what you are doing!</i></p>
-<p>To perform any of these actions, please enter your admin password.</p>
-<p>Password: <input type="password" id="password" name="password" /></p>
-<div id="passwordempty" style="display: none">
-    <p class="noticebad">Please enter a password!</p>
+<div id="dadconfirm" style="display: none" title="SHTracker: Delete All Downloads">
+    <p>All downloads will be deleted, are you sure you wish to do this?  Please confirm with your admin password.</p>
+    <p>Password: <input type="password" id="passworddad" name="password" /></p>
 </div>
-<div id="racsuccess" style="display: none">
-    <p class="noticegood">All downloads reset to zero!</p>
+<div id="racconfirm" style="display: none" title="SHTracker: Reset Counts">
+    <p>All counts will be reset to zero, are you sure you wish to do this? Please confirm with your admin password.</p>
+    <p>Password: <input type="password" id="passwordrac" name="password" /></p>
+</p>
 </div>
 <div id="dadsuccess" style="display: none">
     <p class="noticegood">All downloads deleted!</p>
 </div>
-<div id="incorrectpass" style="display: none">
-    <p class="noticebad">Incorrect password!</p>
+<div id="racsuccess" style="display: none">
+    <p class="noticegood">All counts reset to zero!</p>
 </div>
-<button id="dorac">Reset All Counts to Zero</button><br />
-<button id="dodad">Delete All Downloads</button>
+<button id="showracconfirm">Reset All Counts to Zero</button><br />
+<button id="showdadconfirm">Delete All Downloads</button>
 <hr />
 <p><a href="../admin">&larr; Go Back</a></p>
 </body>
