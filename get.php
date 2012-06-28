@@ -67,6 +67,9 @@ if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
     mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
 }
 
+//Cookies don't like dots
+$idclean = str_replace(".", "_", $id);
+
 //Check if download is password protected
 $checkifprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$id\"");
 $checkifprotectedresult = mysql_fetch_assoc($checkifprotected); 
@@ -75,10 +78,10 @@ if ($checkifprotectedresult["protect"] == "1") {
         if (sha1($_POST["password"]) != $checkifprotectedresult["password"]) {
             die("<h1>SHTracker: Error</h1><p>Incorrect password.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
         } else {
-            setcookie("shtrackerhasauthed_$id", time()+60*5, time()+900);
+            setcookie("shtrackerhasauthed_$idclean", time()+900, time()+900);
         }
-    } elseif (isset($_COOKIE["shtrackerhasauthed_$id"])) {
-        $time = ($_COOKIE["shtrackerhasauthed_$id"]-time()) / 60; 
+    } elseif (isset($_COOKIE["shtrackerhasauthed_$idclean"])) {
+        $time = ($_COOKIE["shtrackerhasauthed_$idclean"]-time()) / 60; 
         $timeleft = ceil($time);
         echo "<small><b>Notice:</b> your download session wll expire in $timeleft minutes...</small>";
     } else {
