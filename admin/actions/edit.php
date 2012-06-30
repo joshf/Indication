@@ -45,6 +45,11 @@ $newcount = mysql_real_escape_string($_POST["count"]);
 $newid = strtolower($newid);
 $newurl = strtolower($newurl);
 
+//Failsafes
+if (empty($newname) || empty($newid) || empty($newurl)) {
+    die("<h1>SHTracker: Error</h1><p>One or more fields are empty.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+}
+
 if (isset($_POST["passwordprotectstate"])) {
     if (!isset($_POST["password"])) {
         die("<h1>SHTracker: Error</h1><p>Password is missing...</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
