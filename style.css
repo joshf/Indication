@@ -48,6 +48,7 @@ table {
     font-family: Helvetica, Verdana, Arial, sans-serif;
     font-size: 16px;
     width: 100%;
+    border: 1px solid #0080ff;
     border-collapse: collapse;
 }
 
@@ -99,7 +100,7 @@ label.error {
     float: none;
     color: #ff0000; 
     padding-left: 5px; 
-    vertical-align: top; 
+    vertical-align: middle; 
 }
 
 p.noticebad {

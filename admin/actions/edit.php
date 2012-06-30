@@ -75,7 +75,7 @@ mysql_close($con);
 
 ?> 
 <h1>SHTracker: Download/Link Edited</h1>
-<p>The download <b><? echo $newname; ?></b> has been edited successfully.</p>
+<p>The download/link <b><? echo $newname; ?></b> has been edited successfully.</p>
 <p><b>Updated Details:</b></p>
 <ul>
 <li>Name : <? echo $newname; ?></li>
