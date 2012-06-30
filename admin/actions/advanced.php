@@ -20,6 +20,7 @@ if (!isset($_POST["command"])) {
 $password = ADMIN_PASSWORD;
 
 if (sha1($_POST["password"]) != $password) {
+	$_SESSION["adv_state"] = "incorrect_pass";
 	header("Location: ../settings.php");
 	exit;
 }
@@ -40,7 +41,9 @@ if ($command == "Reset All Counts to Zero") {
 	
 	mysql_query("UPDATE Data SET count = \"0\"");
 	
-	mysql_close($con);	
+	mysql_close($con);
+	
+	$_SESSION["adv_state"] = "rac_success";
 	
 	header("Location: ../settings.php");
 	
@@ -59,6 +62,8 @@ if ($command == "Reset All Counts to Zero") {
 	mysql_query("DELETE FROM Data");
 	
 	mysql_close($con);
+	
+	$_SESSION["adv_state"] = "dad_success";
 	
 	header("Location: ../settings.php");
 	
