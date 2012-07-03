@@ -133,7 +133,7 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 <p><b>Advanced Options:</b></p>
 <p><i>Do not use these options unless you know what you are doing!</i></p>
 <form action="actions/advanced.php" method="post">
-<p>To perform any of these actions, please enter your admin password.</p>
+<p>To perform any of these actions enter your admin password.</p>
 <?php
 
 if (isset($_SESSION["adv_state"])) {
