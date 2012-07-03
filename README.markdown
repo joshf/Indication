@@ -12,7 +12,7 @@ Features:
 
 * Password protect downloads
 * Count unique visitors to avoid multiple counts from same user
-* Support displaying of ads before user is redirected to download
+* Supports displaying of ads before user is redirected to download
 * Full admin panel, enhanced with Jquery
 * Display download counts to users
 
