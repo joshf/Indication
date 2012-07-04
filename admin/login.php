@@ -67,5 +67,6 @@ Password:<br />
 <?php
 } else {
     header("Location: index.php");
+    exit;
 }
 ?>

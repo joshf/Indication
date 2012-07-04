@@ -32,4 +32,6 @@ mysql_close($con);
 
 header("Location: ../../admin");
 
+exit;
+
 ?>
