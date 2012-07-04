@@ -39,7 +39,7 @@ $(document).ready(function() {
             setTimeout(function(){
                 $("#noidselectedmessage").hide("fast");
             },3000)
-            event.preventDefault();
+            return false;
         } else {
             $("#noidselectedmessage").hide("fast");
             var id = $("input:radio[name=id]:checked").val();
@@ -68,7 +68,7 @@ $(document).ready(function() {
                             $("#deletedone").hide("fast");
                             window.location.reload();
                         },3000)
-                        event.preventDefault();
+                        return false;
                     }	
                 });
                 $(this).dialog("close");
@@ -84,11 +84,11 @@ $(document).ready(function() {
             setTimeout(function(){
                 $("#noidselectedmessage").hide("fast");
             },3000)
-            event.preventDefault();
+            return false;
         } else {
             $("#noidselectedmessage").hide("fast");
             $("#delete").dialog("open");
-            event.preventDefault();
+            return false;
         } 
     });
     /* End */
@@ -99,7 +99,7 @@ $(document).ready(function() {
             setTimeout(function(){
                 $("#noidselectedmessage").hide("fast");
             },3000)
-            event.preventDefault();
+            return false;
         } else {
             $("#noidselectedmessage").hide("fast");
             var id = $("input:radio[name=id]:checked").val();
@@ -136,7 +136,7 @@ $(document).ready(function() {
     });
     $("#showlogout").click(function() {
         $("#logout").dialog("open");
-        event.preventDefault();
+        return false;
     });
     /* End */
     /* Refresh */
