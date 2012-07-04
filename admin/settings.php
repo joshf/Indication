@@ -134,20 +134,6 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 <p><i>Do not use these options unless you know what you are doing!</i></p>
 <form action="actions/advanced.php" method="post">
 <p>To perform any of these actions enter your admin password.</p>
-<?php
-
-if (isset($_SESSION["adv_state"])) {
-    if ($_SESSION["adv_state"] == "rac_success") {
-        echo "<p class=\"noticegood\">All counts reset to zero!</p>";
-    } elseif ($_SESSION["adv_state"] == "dad_success") {
-        echo "<p class=\"noticegood\">All downloads deleted!</p>";
-    } elseif ($_SESSION["adv_state"] == "incorrect_pass") {
-        echo "<p class=\"noticebad\">Incorrect password!</p>";
-    }
-    unset($_SESSION["adv_state"]);
-}
-
-?>
 <p>Password: <input type="password" name="password" /></p>
 <input type="submit" name="command" value="Reset All Counts to Zero" /><br />
 <input type="submit" name="command" value="Delete All Downloads" />
