@@ -44,32 +44,6 @@ a:active {
     color: #0080ff;
 }
 
-table {
-    font-family: Helvetica, Verdana, Arial, sans-serif;
-    font-size: 16px;
-    width: 100%;
-    border: 1px solid #0080ff;
-    border-collapse: collapse;
-}
-
-table th {
-    text-align: left;
-    background-color: #0080ff;
-    color: #ffffff;
-    padding: 3px 7px 1px 7px;
-}
-
-table td  {
-    text-align: left;
-    color: #000000;
-    border: 1px solid #0080ff;
-    padding: 3px 7px 1px 7px;
-}
-
-table tr.alt {
-    background-color: #cae1ff;
-}
-
 #loginform {
     text-align: center;
     border:1px dotted #000000;
@@ -114,3 +88,4 @@ p.noticegood {
 .ui-button-text {
     font-size: 0.6em;
 }
+

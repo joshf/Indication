@@ -22,8 +22,10 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <title>SHTracker: Admin Home</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/flick/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.1/css/jquery.dataTables_themeroller.css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.1/jquery.dataTables.js"></script>
 </head>
 <body>
 <!--[if IE]>
@@ -31,7 +33,19 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <![endif]-->
 <noscript><p>Your browser does not support JavaScript or it is disabled, nearly all functions will be broken! Please upgrade your browser or enable JavaScript.</p></noscript>
 <script type="text/javascript">
-$(document).ready(function() {
+$(document).ready(function() {  
+     $("#downloads").dataTable({
+        "aoColumns": [{ 
+            "bSortable": false 
+        },
+        null,
+        null,
+        null,
+        null
+        ], 
+    "bJQueryUI": true,
+    "sPaginationType": "full_numbers"
+    });
     /* Edit */
     $("#dogotoeditpage").click(function() {
         if (!$("input[name=id]:checked").val()) {
@@ -174,24 +188,10 @@ if (!$con) {
 
 mysql_select_db(DB_NAME, $con);
 
-//Pagination fail safes
-if (isset($_GET["page"])) {
-    $page = mysql_real_escape_string($_GET["page"]);
-    if (empty($page)) {
-        $page = 1;
-    }
-    if (!preg_match("/^[0-9]{1,}$/", $page)) {
-        die("<h1>SHTracker: Error</h1><p>Page does not exist...</p><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>"); 
-    }
-} else {
-    $page = 1;
-}
-$startfrom = ($page-1) * 20;
-
-$getdownloads = mysql_query("SELECT * FROM Data ORDER BY name ASC LIMIT $startfrom, 20");
+$getdownloads = mysql_query("SELECT * FROM Data");
 
 echo "<h1>SHTracker: Downloads for " . WEBSITE . "</h1>
-<table>
+<p><table id=\"downloads\">
 <thead>
 <tr>
 <th></th>
@@ -224,21 +224,7 @@ while($row = mysql_fetch_assoc($getdownloads)) {
         $isalt = false;
     }
 }
-echo "</tbody></table>";
-
-//Pagination
-$getdatacount = mysql_query("SELECT COUNT(*) FROM Data");
-$resultgetdatacount = mysql_fetch_assoc($getdatacount); 
-$totalpages = ceil($resultgetdatacount["COUNT(*)"] / 20);
-if ($resultgetdatacount["COUNT(*)"] > "20") {
-    echo "<p><i>Go To Page: </i>";
-    for ($i=1; $i <= $totalpages; $i++) { 
-        echo " <a href=\"index.php?page=".$i."\">".$i."</a> "; 
-    } 
-    echo "</p>";
-} else {
-    echo "<br />";
-}
+echo "</tbody></table></p>";
 
 ?>
 <div id="edit" style="display: none">
