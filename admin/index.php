@@ -34,17 +34,17 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <noscript><p>Your browser does not support JavaScript or it is disabled, nearly all functions will be broken! Please upgrade your browser or enable JavaScript.</p></noscript>
 <script type="text/javascript">
 $(document).ready(function() {  
-     $("#downloads").dataTable({
+    $("#downloads").dataTable({
         "aoColumns": [{ 
             "bSortable": false 
-        },
-        null,
-        null,
-        null,
-        null
+            },
+            null,
+            null,
+            null,
+            null
         ], 
-    "bJQueryUI": true,
-    "sPaginationType": "full_numbers"
+        "bJQueryUI": true,
+        "sPaginationType": "full_numbers"
     });
     /* Edit */
     $("#dogotoeditpage").click(function() {
