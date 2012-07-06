@@ -2,6 +2,8 @@
 
 //SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
 
+$version = "3.0.1";
+
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
 }
@@ -259,12 +261,18 @@ echo "<p><b>Total downloads: </b>" . $resulttotalnumberofdownloads["SUM(count)"]
 
 mysql_close($con);
 
+//Update checking
+$remoteversion = file_get_contents("https://raw.github.com/joshf/SHTracker/master/version.txt");
+if ($version < $remoteversion) {
+    echo "<p class=\"noticebad\">An update to SHTracker is available! Version $remoteversion has been released (you have $version). Click <a href=\"https://github.com/joshf/shtracker/zipball/$remoteversion\" target=\"_blank\">here</a> to update.</p>";
+}
+
 ?>
 <hr />
 <p><button id="dorefresh">Refresh</button>
 <button id="dogotosettingspage">Settings</button>
 <button id="showlogout">Logout</button></p>
-<small>SHTracker 3.0 "JoyfulJaguar" Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
-<p><small><a href="http://sidhosting.co.uk/misc/donate.html">Donate</a></p>
+<small>SHTracker <? echo $version; ?> "JoyfulJaguar" Copyright <a href="http://sidhosting.co.uk" target="_blank">Josh Fradley</a> <? echo date("Y"); ?></small>
+<p><small><a href="http://sidhosting.co.uk/misc/donate.html" target="_blank">Donate</a></p>
 </body>
 </html>
