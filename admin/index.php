@@ -230,19 +230,19 @@ echo "</tbody></table></p>";
 
 ?>
 <div id="edit" style="display: none">
-    <p>Loading...</p>
+<p>Loading...</p>
 </div>
 <div id="delete" style="display: none" title="SHTracker: Delete Download">
-    <p>Delete download?</p>
+<p>Delete download?</p>
 </div>
 <div id="deletedone" style="display: none">
-    <p class="noticegood">Download deleted!</p>
+<p class="noticegood">Download deleted!</p>
 </div>
 <div id="noidselectedmessage" style="display: none">
-    <p class="noticebad">No ID selected!</p>
+<p class="noticebad">No ID selected!</p>
 </div>
 <div id="logout" style="display: none" title="SHTracker: Logout">
-    <p><? echo ADMIN_USER; ?>, are you sure you wish to logout?</p>
+<p><? echo ADMIN_USER; ?>, are you sure you wish to logout?</p>
 </div>
 <button id="dogotoaddpage">Add</button>
 <button id="dogotoeditpage">Edit</button>

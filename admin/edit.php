@@ -111,7 +111,7 @@ if ($checkifprotectedresult["protect"] == "1") {
 
 ?>
 <div id="passwordentry" style="display: none">
-    <p><i>Please enter a password:</i> <input type="password" name="password" /></p>
+<p><i>Please enter a password:</i> <input type="password" name="password" /></p>
 </div>
 <?
 
@@ -119,9 +119,9 @@ if ($checkifprotectedresult["protect"] == "1") {
 $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$idtoedit\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
 if ($checkifadsshowresult["showads"] == "1") { 
-    echo "<p>Show ads? <input type=\"checkbox\" name=\"showadsstate\" checked=\"yes\" /></p>";
+    echo "<p>Show Ads? <input type=\"checkbox\" name=\"showadsstate\" checked=\"yes\" /></p>";
 } else {
-    echo "<p>Show ads? <input type=\"checkbox\" name=\"showadsstate\" /></p>";
+    echo "<p>Show Ads? <input type=\"checkbox\" name=\"showadsstate\" /></p>";
 }
 
 mysql_close($con);

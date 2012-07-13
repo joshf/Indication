@@ -56,8 +56,8 @@ Username:<br />
 <input type="text" name="user" style="width:190px;" /><br />
 Password:<br />
 <input type="password" name="password" style="width:190px;" /><br />
-<p><input type="checkbox" name="rememberme"> Keep me logged in</p>
-<p><input class="loginbutton" type="submit" name="submit" value="Login" /></p>
+<p><input type="checkbox" name="rememberme"> Remember me?</p>
+<p><input class="loginbutton" type="submit" value="Login" /></p>
 </form>
 <p class="loginfooter"><a href="http://<?php echo $_SERVER["HTTP_HOST"]; ?>">&larr; Back to <?php echo WEBSITE; ?></a></p>
 <p class="loginfooter">Copyright Josh Fradley <? echo date("Y"); ?></p>
