@@ -16,7 +16,8 @@ if (file_exists("../config.php")) {
 
 //Get path to script
 $currenturl = $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
-$pathtoscript = "http://" . substr($currenturl, 0, strpos($currenturl, "installer/"));
+$pathtoscriptwithslash = "http://" . substr($currenturl, 0, strpos($currenturl, "installer"));
+$pathtoscript = rtrim($pathtoscriptwithslash,"/");
 
 ?>
 <script type="text/javascript">

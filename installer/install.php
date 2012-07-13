@@ -77,6 +77,6 @@ fclose($configfile);
 ?>
 <h1>SHTracker: Install Complete</h1>
 <p>SHTracker has been successfully installed. Please delete the "installer" folder from your server, as it poses a potential security risk!</p>
-<p><a href="../admin">Go To Login &rarr;</a></p>
+<p><a href="../admin">Go To Login</a></p>
 </body>
 </html>
