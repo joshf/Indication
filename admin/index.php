@@ -273,6 +273,5 @@ if ($version < $remoteversion) {
 <button id="dogotosettingspage">Settings</button>
 <button id="showlogout">Logout</button></p>
 <small>SHTracker <? echo $version; ?> "JoyfulJaguar" Copyright <a href="http://sidhosting.co.uk" target="_blank">Josh Fradley</a> <? echo date("Y"); ?></small>
-<p><small><a href="http://sidhosting.co.uk/misc/donate.html" target="_blank">Donate</a></p>
 </body>
 </html>
