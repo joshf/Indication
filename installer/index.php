@@ -11,8 +11,12 @@
 
 //Security check
 if (file_exists("../config.php")) {
-    die("<h1>SHTracker: Error</h1><p>SHTracker has already been installed! If you wish to reinstall SHTracker, please delete config.php from your server and run this script again.</p><hr /><p><a href=\"../admin\">&larr; Go Back</a></p></body></html>"); 
+    die("<h1>SHTracker: Error</h1><p>SHTracker has already been installed! If you wish to reinstall SHTracker, please delete config.php from your server and run this script again.</p><hr /><p><a href=\"../admin\">Go To Admin Home</a></p></body></html>"); 
 }
+
+//Get path to script
+$currenturl = $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+$pathtoscript = "http://" . substr($currenturl, 0, strpos($currenturl, "installer/"));
 
 ?>
 <script type="text/javascript">
@@ -65,9 +69,9 @@ User: <input type="text" name="adminuser" /><br />
 Password: <input type="password" name="adminpassword" /><br />
 <p><b>Other Settings:</b></p>
 Website Name: <input type="text" name="website" /><br />
-Path to Script: <input type="text" name="pathtoscript" /><br />
+Path to Script: <input type="text" name="pathtoscript" value="<? echo $pathtoscript; ?>" /><br />
 <p><input type="submit" value="Install" /></p>
 </form>
-<small>SHTracker 3.0.1 Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
+<small>SHTracker 3.1 Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
 </body>
 </html>

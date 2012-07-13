@@ -2,7 +2,7 @@
 
 //SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
 
-$version = "3.0.1";
+$version = "3.1";
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
