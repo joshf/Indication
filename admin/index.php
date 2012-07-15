@@ -3,6 +3,7 @@
 //SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
 
 $version = "3.1";
+$codename = "KindheartedKoala";
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
@@ -272,6 +273,6 @@ if ($version < $remoteversion) {
 <p><button id="dorefresh">Refresh</button>
 <button id="dogotosettingspage">Settings</button>
 <button id="showlogout">Logout</button></p>
-<small>SHTracker <? echo $version; ?> "JoyfulJaguar" Copyright <a href="http://sidhosting.co.uk" target="_blank">Josh Fradley</a> <? echo date("Y"); ?></small>
+<small>SHTracker <? echo $version; ?> "<? echo $codename; ?>" Copyright <a href="http://sidhosting.co.uk" target="_blank">Josh Fradley</a> <? echo date("Y"); ?></small>
 </body>
 </html>
