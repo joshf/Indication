@@ -53,9 +53,9 @@ if (isset($_GET["login_error"])) {
 ?>
 <form method="post">
 Username:<br />
-<input type="text" name="user" style="width:190px;" /><br />
+<input type="text" name="user" style="width: 190px; text-align: center;" /><br />
 Password:<br />
-<input type="password" name="password" style="width:190px;" /><br />
+<input type="password" name="password" style="width: 190px; text-align: center;" /><br />
 <p><input type="checkbox" name="rememberme"> Remember me?</p>
 <p><input class="loginbutton" type="submit" value="Login" /></p>
 </form>
