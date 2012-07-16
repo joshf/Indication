@@ -13,6 +13,7 @@ $dbuser = $_POST["dbuser"];
 $dbpassword = $_POST["dbpassword"];
 $dbname = $_POST["dbname"];
 $adminuser = $_POST["adminuser"];
+$adminemail= $_POST["adminemail"];
 $adminpassword = sha1($_POST["adminpassword"]);
 $website = $_POST["website"];
 $pathtoscript = $_POST["pathtoscript"];
@@ -28,6 +29,7 @@ define(\"DB_NAME\", \"$dbname\");
 
 //Admin Details
 define(\"ADMIN_USER\", \"$adminuser\");
+define(\"ADMIN_EMAIL\", \"$adminemail\");
 define(\"ADMIN_PASSWORD\", \"$adminpassword\");
 
 //Other Settings

@@ -42,6 +42,10 @@ $(document).ready(function() {
             adminuser: {
                 required: true,
             },
+            adminemail: {
+                required: true,
+                email: true
+            },
             adminpassword: {
                 required: true,
                 minlength: 6
@@ -67,6 +71,7 @@ Password: <input type="password" name="dbpassword" /><br />
 Name: <input type="text" name="dbname" /><br />
 <p><b>Admin Details:</b></p>
 User: <input type="text" name="adminuser" /><br />
+Email: <input type="text" name="adminemail" /><br />
 Password: <input type="password" name="adminpassword" /><br />
 <p><b>Other Settings:</b></p>
 Website Name: <input type="text" name="website" /><br />

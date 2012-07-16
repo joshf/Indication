@@ -18,6 +18,7 @@ $currentdbuser = DB_USER;
 $currentdbpassword = DB_PASSWORD;
 $currentdbname = DB_NAME;
 $currentadminuser = ADMIN_USER;
+$currentadminemail = ADMIN_EMAIL;
 $currentadminpassword = ADMIN_PASSWORD;
 $currentwebsite = WEBSITE;
 $currentpathtoscript = PATH_TO_SCRIPT;
@@ -33,6 +34,7 @@ $dbuser = $_POST["dbuser"];
 $dbpassword = $_POST["dbpassword"];
 $dbname = $_POST["dbname"];
 $adminuser = $_POST["adminuser"];
+$adminemail = $_POST["adminemail"];
 $adminpassword = $_POST["adminpassword"];
 if ($adminpassword != $currentadminpassword) {
     $adminpassword = sha1($adminpassword);
@@ -69,6 +71,7 @@ define(\"DB_NAME\", \"$dbname\");
 
 //Admin Details
 define(\"ADMIN_USER\", \"$adminuser\");
+define(\"ADMIN_EMAIL\", \"$adminemail\");
 define(\"ADMIN_PASSWORD\", \"$adminpassword\");
 
 //Other Settings
@@ -108,6 +111,7 @@ Password: <input type="password" name="dbpassword" value="<? echo $currentdbpass
 Name: <input type="text" name="dbname" value="<? echo $currentdbname; ?>" /><br />
 <p><b>Admin Details:</b></p>
 User: <input type="text" name="adminuser" value="<? echo $currentadminuser; ?>" /><br />
+Email: <input type="text" name="adminemail" value="<? echo $currentadminemail; ?>" /><br />
 Password: <input type="password" name="adminpassword" value="<? echo $currentadminpassword; ?>" /><br />
 <p><b>Other settings:</b></p>
 Website Name: <input type="text" name="website" value="<? echo $currentwebsite; ?>" /><br />
