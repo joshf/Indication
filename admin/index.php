@@ -71,24 +71,22 @@ $(document).ready(function() {
         } else {
             $("#noidselectedmessage").hide("fast");
             var id = $("input:radio[name=id]:checked").val();
-            if (typeof id === "undefined") {
-                alert("SHTracker Error: Trying to pass an undefined id to edit");
-                return false;
-            }
-            $("#edit").append("<form name=\"edit\" action=\"edit.php\" method=\"post\"><input type=\"hidden\" name=\"id\" value=\""+ id +"\" /><form>");
-            document.forms["edit"].submit();        
+            window.location = "edit.php?id="+ id +"";
         }
     });
     /* End */
     /* Delete Dialog */
-    $("#delete").dialog({
-        autoOpen: false,
-        resizable: false,
-        modal: false,
-        height: 200,
-        width: 400,
-        buttons: {
-            "Delete": function() {
+    $("#showdelete").click(function() {
+        if (!$("input[name=id]:checked").val()) {
+            $("#noidselectedmessage").show("fast");
+            setTimeout(function(){
+                $("#noidselectedmessage").hide("fast");
+            },3000)
+            return false;
+        } else {
+            $("#noidselectedmessage").hide("fast");
+            deleteconfirm=confirm("Delete download?")
+            if (deleteconfirm==true) {
                 var id = $("input:radio[name=id]:checked").val();
                 $.ajax({  
                     type: "POST",  
@@ -103,24 +101,9 @@ $(document).ready(function() {
                         return false;
                     }	
                 });
-                $(this).dialog("close");
-            },
-            "Cancel": function() {
-                $(this).dialog("close");
+            } else {
+                return false;
             }
-        }
-    });
-    $("#showdelete").click(function() {
-        if (!$("input[name=id]:checked").val()) {
-            $("#noidselectedmessage").show("fast");
-            setTimeout(function(){
-                $("#noidselectedmessage").hide("fast");
-            },3000)
-            return false;
-        } else {
-            $("#noidselectedmessage").hide("fast");
-            $("#delete").dialog("open");
-            return false;
         } 
     });
     /* End */
@@ -135,40 +118,18 @@ $(document).ready(function() {
         } else {
             $("#noidselectedmessage").hide("fast");
             var id = $("input:radio[name=id]:checked").val();
-            $("<div title=\"SHTracker: Show Tracking Link\"><p>Tracking link for download. Press Ctrl/Cmd C to copy to the clipboard:<input type=\"text\" size=\"70\" value=\"<? echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"\"</p></div>").dialog({
-                autoOpen: true,
-                resizable: false,
-                modal: false,
-                height: 200,
-                width: 680,
-                buttons: {
-                    "Close": function() {
-                        $(this).dialog("close");
-                    }
-                }
-            });
+            prompt("Tracking link for selected download. Press Ctrl/Cmd C to copy to the clipboard:", "<? echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
         } 
     });
     /* End */
     /* Logout dialog */
-    $("#logout").dialog({
-        autoOpen: false,
-        resizable: false,
-        modal: true,
-        height: 170,
-        width: 400,
-        buttons: {
-            "Logout": function() {
-                window.location.replace("logout.php");
-            },
-            "Cancel": function() {
-                $(this).dialog("close");
-            }
-        }
-    });
     $("#showlogout").click(function() {
-        $("#logout").dialog("open");
-        return false;
+        logoutconfirm=confirm("<? echo ADMIN_USER; ?>, are you sure you wish to logout?")
+        if (logoutconfirm==true) {
+            window.location.replace("logout.php");
+        } else {
+            return false;
+        }
     });
     /* End */
     /* Refresh */
@@ -248,20 +209,11 @@ while($row = mysql_fetch_assoc($getdownloads)) {
 echo "</tbody></table></p>";
 
 ?>
-<div id="edit" style="display: none">
-<p>Loading...</p>
-</div>
-<div id="delete" style="display: none" title="SHTracker: Delete Download">
-<p>Delete download?</p>
-</div>
 <div id="deletedone" style="display: none">
 <p class="noticegood">Download deleted!</p>
 </div>
 <div id="noidselectedmessage" style="display: none">
 <p class="noticebad">No ID selected!</p>
-</div>
-<div id="logout" style="display: none" title="SHTracker: Logout">
-<p><? echo ADMIN_USER; ?>, are you sure you wish to logout?</p>
 </div>
 <button id="dogotoaddpage">Add</button>
 <button id="dogotoeditpage">Edit</button>
