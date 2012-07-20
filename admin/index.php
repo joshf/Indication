@@ -46,11 +46,11 @@ $(document).ready(function() {
     $("#dogotosettingspage").button();
     $("#showlogout").button();
     /* End */
-    /* Datatables */
+    /* DataTables */
     $("#downloads").dataTable({
         "aoColumns": [{ 
             "bSortable": false 
-            },
+        },
             null,
             null,
             null,
@@ -70,7 +70,7 @@ $(document).ready(function() {
         }
     });
     /* End */
-    /* Delete Dialog */
+    /* Delete */
     $("#showdelete").click(function() {
         if (!$("input:radio[name=id]:checked").val()) {
             alert("No ID Selected!"); 
@@ -103,7 +103,7 @@ $(document).ready(function() {
         } 
     });
     /* End */
-    /* Logout dialog */
+    /* Logout */
     $("#showlogout").click(function() {
         logoutconfirm=confirm("<? echo ADMIN_USER; ?>, are you sure you wish to logout?")
         if (logoutconfirm==true) {
