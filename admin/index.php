@@ -71,6 +71,10 @@ $(document).ready(function() {
         } else {
             $("#noidselectedmessage").hide("fast");
             var id = $("input:radio[name=id]:checked").val();
+            if (typeof id === "undefined") {
+                alert("SHTracker Error: Trying to pass an undefined id to edit");
+                return false;
+            }
             $("#edit").append("<form name=\"edit\" action=\"edit.php\" method=\"post\"><input type=\"hidden\" name=\"id\" value=\""+ id +"\" /><form>");
             document.forms["edit"].submit();        
         }
