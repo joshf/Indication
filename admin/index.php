@@ -62,14 +62,9 @@ $(document).ready(function() {
     /* End */
     /* Edit */
     $("#dogotoeditpage").click(function() {
-        if (!$("input[name=id]:checked").val()) {
-            $("#noidselectedmessage").show("fast");
-            setTimeout(function(){
-                $("#noidselectedmessage").hide("fast");
-            },3000)
-            return false;
+        if (!$("input:radio[name=id]:checked").val()) {
+            alert("No ID Selected!"); 
         } else {
-            $("#noidselectedmessage").hide("fast");
             var id = $("input:radio[name=id]:checked").val();
             window.location = "edit.php?id="+ id +"";
         }
@@ -77,14 +72,9 @@ $(document).ready(function() {
     /* End */
     /* Delete Dialog */
     $("#showdelete").click(function() {
-        if (!$("input[name=id]:checked").val()) {
-            $("#noidselectedmessage").show("fast");
-            setTimeout(function(){
-                $("#noidselectedmessage").hide("fast");
-            },3000)
-            return false;
+        if (!$("input:radio[name=id]:checked").val()) {
+            alert("No ID Selected!"); 
         } else {
-            $("#noidselectedmessage").hide("fast");
             deleteconfirm=confirm("Delete download?")
             if (deleteconfirm==true) {
                 var id = $("input:radio[name=id]:checked").val();
@@ -93,12 +83,8 @@ $(document).ready(function() {
                     url: "actions/delete.php",  
                     data: "id="+ id +"",
                     success: function() {  
-                        $("#deletedone").show("fast");
-                        setTimeout(function(){
-                            $("#deletedone").hide("fast");
-                            window.location.reload();
-                        },3000)
-                        return false;
+                        alert("Download has been deleted!");
+                        window.location.reload();
                     }	
                 });
             } else {
@@ -109,14 +95,9 @@ $(document).ready(function() {
     /* End */
     /* Tracking Link */
     $("#showtrackinglink").click(function() {
-        if (!$("input[name=id]:checked").val()) {
-            $("#noidselectedmessage").show("fast");
-            setTimeout(function(){
-                $("#noidselectedmessage").hide("fast");
-            },3000)
-            return false;
+        if (!$("input:radio[name=id]:checked").val()) {
+            alert("No ID selected!");
         } else {
-            $("#noidselectedmessage").hide("fast");
             var id = $("input:radio[name=id]:checked").val();
             prompt("Tracking link for selected download. Press Ctrl/Cmd C to copy to the clipboard:", "<? echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
         } 
@@ -145,15 +126,6 @@ $(document).ready(function() {
     /* Add */
     $("#dogotoaddpage").click(function() {
         window.location = "add.php";
-    });
-    /* End */
-    /* Hide DIVS */
-    $("#noidselectedmessage").click(function() {
-        $("#noidselectedmessage").hide("fast");
-    });
-    $("#deletedone").click(function() {
-        $("#deletedone").hide("fast");
-        window.location.reload();
     });
     /* End */
 });
@@ -209,12 +181,6 @@ while($row = mysql_fetch_assoc($getdownloads)) {
 echo "</tbody></table></p>";
 
 ?>
-<div id="deletedone" style="display: none">
-<p class="noticegood">Download deleted!</p>
-</div>
-<div id="noidselectedmessage" style="display: none">
-<p class="noticebad">No ID selected!</p>
-</div>
 <button id="dogotoaddpage">Add</button>
 <button id="dogotoeditpage">Edit</button>
 <button id="showdelete">Delete</button>

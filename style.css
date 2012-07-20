@@ -77,14 +77,6 @@ label.error {
     vertical-align: middle; 
 }
 
-p.noticebad {
-    color: #ff0000; 
-}
-
-p.noticegood {
-    color: #397d02;
-}
-
 .ui-button-text {
     font-size: 0.6em;
 }
