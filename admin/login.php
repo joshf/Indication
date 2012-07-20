@@ -8,8 +8,8 @@ if (!file_exists("../config.php")) {
 
 require_once("../config.php");
 
-$password = ADMIN_PASSWORD;
 $user = ADMIN_USER;
+$password = ADMIN_PASSWORD;
 $uniquekey = UNIQUE_KEY;
 
 session_start();

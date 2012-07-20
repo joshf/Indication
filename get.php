@@ -89,7 +89,7 @@ if ($checkifprotectedresult["protect"] == "1") {
         <form method=\"post\">
         <p>To access this download please enter the password you were given.</p>
         <p>Password: <input type=\"password\" name=\"password\" /></p>
-        <input type=\"submit\" value=\"Get Download\" /></p></form>
+        <input type=\"submit\" value=\"Get Download\" /></form>
         <hr />
         <p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p>
         </body>

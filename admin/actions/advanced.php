@@ -48,26 +48,26 @@ if ($command == "Reset All Counts to Zero") {
     //Reset All Counts to Zero
     
     mysql_query("UPDATE Data SET count = \"0\"");
-    
-    mysql_close($con);
-    	
-    die("<h1>SHTracker: Action Successful</h1><p>All counts have been reset to zero.</p><hr /><p><a href=\"../settings.php\">Back To Settings</a></p></body></html>");
+        	
+    echo "<h1>SHTracker: Action Successful</h1><p>All counts have been reset to zero.</p><hr /><p><a href=\"../settings.php\">Back To Settings</a></p>";
 	
 } elseif ($command == "Delete All Downloads") {
 	
     //Delete All Downloads
         
     mysql_query("DELETE FROM Data");
-    
-    mysql_close($con);
-    	
-    die("<h1>SHTracker: Action Successful</h1><p>All downloads have been deleted.</p><hr /><p><a href=\"../settings.php\">Back To Settings</a></p></body></html>");
+        	
+    echo "<h1>SHTracker: Action Successful</h1><p>All downloads have been deleted.</p><hr /><p><a href=\"../settings.php\">Back To Settings</a></p>";
 	
 } else {
     mysql_close($con);
     header("Location: ../settings.php");
     exit;
 }
+
+//Close connection
+mysql_close($con);
+
 ?>
 </body>
 </html>

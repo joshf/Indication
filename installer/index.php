@@ -63,8 +63,8 @@ $(document).ready(function() {
 </script>
 <h1>SHTracker: Installer</h1>
 <p><i>All fields are required!</i></p>
-<p><b>Database Settings:</b></p>
 <form action="install.php" method="post" id="installform" >
+<p><b>Database Settings:</b></p>
 Host: <input type="text" name="dbhost" value="localhost" /><br />
 User: <input type="text" name="dbuser" /><br />
 Password: <input type="password" name="dbpassword" /><br />
