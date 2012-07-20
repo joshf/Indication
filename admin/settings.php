@@ -13,10 +13,6 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 }
 
 //Get current settings
-$currentdbhost = DB_HOST;
-$currentdbuser = DB_USER;
-$currentdbpassword = DB_PASSWORD;
-$currentdbname = DB_NAME;
 $currentadminuser = ADMIN_USER;
 $currentadminemail = ADMIN_EMAIL;
 $currentadminpassword = ADMIN_PASSWORD;
@@ -29,10 +25,6 @@ $currentadcode = htmlspecialchars_decode(AD_CODE);
 if (isset($_POST["Save"])) {
 
 //Get new settings from POST
-$dbhost = $_POST["dbhost"];
-$dbuser = $_POST["dbuser"];
-$dbpassword = $_POST["dbpassword"];
-$dbname = $_POST["dbname"];
 $adminuser = $_POST["adminuser"];
 $adminemail = $_POST["adminemail"];
 $adminpassword = $_POST["adminpassword"];
@@ -64,10 +56,10 @@ if (empty($countuniqueonlytime)) {
 $settingsstring = "<?php
 
 //Database Settings
-define(\"DB_HOST\", \"$dbhost\");
-define(\"DB_USER\", \"$dbuser\");
-define(\"DB_PASSWORD\", \"$dbpassword\");
-define(\"DB_NAME\", \"$dbname\");
+define(\"DB_HOST\", \"" . DB_HOST . "\");
+define(\"DB_USER\", \"" . DB_USER . "\");
+define(\"DB_PASSWORD\", \"" . DB_PASSWORD . "\");
+define(\"DB_NAME\", \"" . DB_NAME . "\");
 
 //Admin Details
 define(\"ADMIN_USER\", \"$adminuser\");
@@ -102,13 +94,7 @@ header("Location: " . $_SERVER["REQUEST_URI"] . "");
 </head>
 <body>
 <h1>SHTracker: Settings</h1>
-<p>Here you can change the settings for SHTracker.</p>
-<p><b>Database Settings:</b></p>
 <form method="post">
-Host: <input type="text" name="dbhost" value="<? echo $currentdbhost; ?>" /><br />
-User: <input type="text" name="dbuser" value="<? echo $currentdbuser; ?>" /><br />
-Password: <input type="password" name="dbpassword" value="<? echo $currentdbpassword; ?>" /><br />
-Name: <input type="text" name="dbname" value="<? echo $currentdbname; ?>" /><br />
 <p><b>Admin Details:</b></p>
 User: <input type="text" name="adminuser" value="<? echo $currentadminuser; ?>" /><br />
 Email: <input type="text" name="adminemail" value="<? echo $currentadminemail; ?>" /><br />
