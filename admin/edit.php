@@ -12,7 +12,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
     exit; 
 }
 
-if (!isset($_POST["id"])) {
+if (!isset($_GET["id"])) {
     header("Location: ../admin");
 }
 
@@ -81,7 +81,14 @@ if (!$con) {
 
 mysql_select_db(DB_NAME, $con);
 
-$idtoedit = mysql_real_escape_string($_POST["id"]);
+$idtoedit = mysql_real_escape_string($_GET["id"]);
+
+//Check if ID exists
+$doesidexist = mysql_query("SELECT id FROM Data WHERE id = \"$idtoedit\"");
+$doesidexistresult = mysql_fetch_assoc($doesidexist); 
+if ($doesidexistresult == 0) { 
+    die("<h1>SHTracker: Error</h1><p>ID does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+}
 
 $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$idtoedit\"");
 $resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
