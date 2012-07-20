@@ -194,8 +194,6 @@ if (!$does_db_exist) {
     die("<h1>SHTracker: Error</h1><p>Could not connect to database: " . mysql_error() . ". Check your database settings are correct.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
-mysql_select_db(DB_NAME, $con);
-
 $getdownloads = mysql_query("SELECT * FROM Data");
 
 echo "<h1>SHTracker: Downloads for " . WEBSITE . "</h1>
