@@ -33,19 +33,19 @@ if (sha1($_POST["password"]) != $password) {
     die("<h1>SHTracker: Action Failed</h1><p>Incorrect password entered. Please go back and try again.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
+//Connect to database
+$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+if (!$con) {
+    die("Could not connect: " . mysql_error());
+}
+
+mysql_select_db(DB_NAME, $con);
+
 $command = $_POST["command"];
 
 if ($command == "Reset All Counts to Zero") {
 
     //Reset All Counts to Zero
-    
-    //Connect to database
-    $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-    if (!$con) {
-    	die("Could not connect: " . mysql_error());
-    }
-    
-    mysql_select_db(DB_NAME, $con);
     
     mysql_query("UPDATE Data SET count = \"0\"");
     
@@ -56,15 +56,7 @@ if ($command == "Reset All Counts to Zero") {
 } elseif ($command == "Delete All Downloads") {
 	
     //Delete All Downloads
-    
-    //Connect to database
-    $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-    if (!$con) {
-    	die("Could not connect: " . mysql_error());
-    }
-    
-    mysql_select_db(DB_NAME, $con);
-    
+        
     mysql_query("DELETE FROM Data");
     
     mysql_close($con);
@@ -72,6 +64,7 @@ if ($command == "Reset All Counts to Zero") {
     die("<h1>SHTracker: Action Successful</h1><p>All downloads have been deleted.</p><hr /><p><a href=\"../settings.php\">Back To Settings</a></p></body></html>");
 	
 } else {
+    mysql_close($con);
     header("Location: ../settings.php");
     exit;
 }
