@@ -36,7 +36,17 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <![endif]-->
 <noscript><p>Your browser does not support JavaScript or it is disabled, nearly all functions will be broken! Please upgrade your browser or enable JavaScript.</p></noscript>
 <script type="text/javascript">
-$(document).ready(function() {  
+$(document).ready(function() {
+    /* jQuery UI buttons */
+    $("#dogotoaddpage").button();
+    $("#dogotoeditpage").button();
+    $("#showdelete").button();
+    $("#showtrackinglink").button();
+    $("#dorefresh").button();
+    $("#dogotosettingspage").button();
+    $("#showlogout").button();
+    /* End */
+    /* Datatables */
     $("#downloads").dataTable({
         "aoColumns": [{ 
             "bSortable": false 
@@ -49,6 +59,7 @@ $(document).ready(function() {
         "bJQueryUI": true,
         "sPaginationType": "full_numbers"
     });
+    /* End */
     /* Edit */
     $("#dogotoeditpage").click(function() {
         if (!$("input[name=id]:checked").val()) {
