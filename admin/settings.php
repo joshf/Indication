@@ -138,15 +138,6 @@ echo "</select>";
 <p><input type="submit" name="Save" value="Save" /></p>
 </form>
 <hr />
-<p><b>Advanced Options:</b></p>
-<p><i>Do not use these options unless you know what you are doing!</i></p>
-<form action="actions/advanced.php" method="post">
-<p>To perform any of these actions enter your admin password.</p>
-<p>Password: <input type="password" name="password" /></p>
-<input type="submit" name="command" value="Reset All Counts to Zero" /><br />
-<input type="submit" name="command" value="Delete All Downloads" />
-</form>
-<hr />
 <p><a href="../admin">&larr; Go Back</a></p>
 </body>
 </html>
