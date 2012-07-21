@@ -21,6 +21,7 @@ $currentpathtoscript = PATH_TO_SCRIPT;
 $currentcountuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
 $currentcountuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
 $currentadcode = htmlspecialchars_decode(AD_CODE); 
+$currentjquerytheme = JQUERY_THEME;
 
 if (isset($_POST["Save"])) {
 
@@ -44,6 +45,7 @@ if (isset($_POST["adcode"])) {
         $adcode = htmlspecialchars($_POST["adcode"]);
     }
 }
+$jquerytheme = $_POST["jquerytheme"];
 
 //Remember previous settings
 if (empty($adcode)) {
@@ -73,6 +75,7 @@ define(\"COUNT_UNIQUE_ONLY_STATE\", \"$countuniqueonlystate\");
 define(\"COUNT_UNIQUE_ONLY_TIME\", \"$countuniqueonlytime\");
 define(\"UNIQUE_KEY\", \"$uniquekey\");
 define(\"AD_CODE\", \"$adcode\");
+define(\"JQUERY_THEME\", \"$jquerytheme\");
 
 ?>";
 
@@ -116,6 +119,19 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
     echo "<input type=\"radio\" name=\"countuniqueonlystate\" value=\"Enabled\" /> Enabled<br />
     <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\" checked/> Disabled";
 }
+?>
+<p><b>jQuery Theme:</b></p>
+<?php
+
+echo "<p>Current theme: <b>$currentjquerytheme</b></p>";
+
+$themes = array("base", "black-tie", "blitzer", "cupertino", "dark-hive", "dot-luv", "eggplant", "excite-bike", "flick", "hot-sneaks", "humanity", "le-frog", "mint-choc", "overcast", "pepper-grinder", "redmond", "smoothness", "south-street", "start", "sunny", "swanky-purse", "trontastic", "ui-darkness", "ui-lightness", "vader");
+echo "<select name=\"jquerytheme\">";
+foreach ($themes as $value) {
+    echo "<option value=\"$value\">$value</option>";
+}
+echo "</select>";
+
 ?>
 <p><input type="submit" name="Save" value="Save" /></p>
 </form>

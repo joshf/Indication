@@ -39,6 +39,7 @@ define(\"COUNT_UNIQUE_ONLY_STATE\", \"Disabled\");
 define(\"COUNT_UNIQUE_ONLY_TIME\", \"24\");
 define(\"UNIQUE_KEY\", \"$uniquekey\");
 define(\"AD_CODE\", \"\");
+define(\"JQUERY_THEME\", \"flick\");
 
 ?>";
 
