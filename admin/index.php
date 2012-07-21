@@ -63,7 +63,10 @@ $(document).ready(function() {
     /* Edit */
     $("#dogotoeditpage").click(function() {
         if (!$("input:radio[name=id]:checked").val()) {
-            alert("No ID Selected!"); 
+            $("#noidselectedmessage").show("fast");
+            setTimeout(function(){
+                $("#noidselectedmessage").hide("fast");
+            }, 3000); 
         } else {
             var id = $("input:radio[name=id]:checked").val();
             window.location = "edit.php?id="+ id +"";
@@ -73,7 +76,10 @@ $(document).ready(function() {
     /* Delete */
     $("#showdelete").click(function() {
         if (!$("input:radio[name=id]:checked").val()) {
-            alert("No ID Selected!"); 
+            $("#noidselectedmessage").show("fast");
+            setTimeout(function(){
+                $("#noidselectedmessage").hide("fast");
+            }, 3000); 
         } else {
             deleteconfirm=confirm("Delete download?")
             if (deleteconfirm==true) {
@@ -83,8 +89,10 @@ $(document).ready(function() {
                     url: "actions/delete.php",  
                     data: "id="+ id +"",
                     success: function() {  
-                        alert("Download has been deleted!");
-                        window.location.reload();
+                        $("#downloaddeletedmessage").show("fast");
+                        setTimeout(function(){
+                            window.location.reload()
+                        }, 3000);               
                     }	
                 });
             } else {
@@ -96,7 +104,10 @@ $(document).ready(function() {
     /* Tracking Link */
     $("#showtrackinglink").click(function() {
         if (!$("input:radio[name=id]:checked").val()) {
-            alert("No ID selected!");
+            $("#noidselectedmessage").show("fast");
+            setTimeout(function(){
+                $("#noidselectedmessage").hide("fast");
+            }, 3000);
         } else {
             var id = $("input:radio[name=id]:checked").val();
             prompt("Tracking link for selected download. Press Ctrl/Cmd C to copy to the clipboard:", "<? echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
@@ -154,33 +165,25 @@ echo "<h1>SHTracker: Downloads for " . WEBSITE . "</h1>
 <th>URL</th>
 <th>Count</th>
 </tr></thead><tbody>";
-    
-$isalt = false;
 
 while($row = mysql_fetch_assoc($getdownloads)) {
-    if($isalt == false){
-        echo "<tr>";
-        echo "<td><input type=\"radio\" name=\"id\" value=\"" . $row["id"] . "\" /></td>";
-        echo "<td>" . $row["name"] . "</td>";
-        echo "<td>" . $row["id"] . "</td>";
-        echo "<td>" . $row["url"] . "</td>";
-        echo "<td>" . $row["count"] . "</td>";
-        echo "</tr>";
-        $isalt = true;
-    } else {
-        echo "<tr class=\"alt\">";
-        echo "<td><input type=\"radio\" name=\"id\" value=\"" . $row["id"] . "\" /></td>";
-        echo "<td>" . $row["name"] . "</td>";
-        echo "<td>" . $row["id"] . "</td>";
-        echo "<td>" . $row["url"] . "</td>";
-        echo "<td>" . $row["count"] . "</td>";
-        echo "</tr>";
-        $isalt = false;
-    }
+    echo "<tr>";
+    echo "<td><input type=\"radio\" name=\"id\" value=\"" . $row["id"] . "\" /></td>";
+    echo "<td>" . $row["name"] . "</td>";
+    echo "<td>" . $row["id"] . "</td>";
+    echo "<td>" . $row["url"] . "</td>";
+    echo "<td>" . $row["count"] . "</td>";
+    echo "</tr>";
 }
 echo "</tbody></table></p>";
 
 ?>
+<div id="noidselectedmessage" style="display: none">
+<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span><b>Error:</b> No ID selected!</p>
+</div>
+<div id="downloaddeletedmessage" style="display: none">
+<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span><b>Info:</b> Download deleted!</p>
+</div>
 <button id="dogotoaddpage">Add</button>
 <button id="dogotoeditpage">Edit</button>
 <button id="showdelete">Delete</button>
