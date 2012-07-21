@@ -211,7 +211,7 @@ mysql_close($con);
 //Update checking
 $remoteversion = file_get_contents("https://raw.github.com/joshf/SHTracker/master/version.txt");
 if ($version < $remoteversion) {
-    echo "<p class=\"noticebad\">An update to SHTracker is available! Version $remoteversion has been released (you have $version). Click <a href=\"https://github.com/joshf/shtracker/zipball/$remoteversion\" target=\"_blank\">here</a> to update.</p>";
+    echo "<p><span class=\"ui-icon ui-icon-alert\" style=\"float: left; margin-right: .3em;\"></span>An update to SHTracker is available! Version $remoteversion has been released (you have $version). Click <a href=\"https://github.com/joshf/shtracker/zipball/$remoteversion\" target=\"_blank\">here</a> to update.</p>";
 }
 
 ?>
