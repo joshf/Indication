@@ -185,10 +185,10 @@ while($row = mysql_fetch_assoc($getdownloads)) {
 echo "</tbody></table></p>";
 
 ?>
-<div id="noidselectedmessage" style="display: none">
+<div id="noidselectedmessage" style="display: none;">
 <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span><b>Error:</b> No ID selected!</p>
 </div>
-<div id="downloaddeletedmessage" style="display: none">
+<div id="downloaddeletedmessage" style="display: none;">
 <p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span><b>Info:</b> Download deleted!</p>
 </div>
 <button id="dogotoaddpage">Add</button>
