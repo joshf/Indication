@@ -2,8 +2,8 @@
 
 //SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
 
-$version = "3.1";
-$codename = "KindheartedKoala";
+$version = "3.2";
+$codename = "LaughingLemur";
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
