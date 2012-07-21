@@ -48,42 +48,48 @@ $(document).ready(function() {
     /* End */
     /* DataTables */
     $("#downloads").dataTable({
-        "aoColumns": [{ 
-            "bSortable": false 
-        },
-            null,
-            null,
-            null,
-            null
-        ], 
         "bJQueryUI": true,
         "sPaginationType": "full_numbers"
     });
     /* End */
+    /* Table selection */
+    var is_selected = 0;
+    $("#downloads tbody").delegate("tr", "click", function() {
+        if (is_selected) {
+            $("td:first", is_selected).parent().children().each(function() {
+                $(this).removeClass("highlight_row");
+            });
+        }
+        is_selected = this;
+        $("td:first", this).parent().children().each(function() {
+            $(this).addClass("highlight_row");
+        });
+        name = $("td:eq(0)", this).text();
+        id = $("td:eq(1)", this).text();
+    });
+    /* End */
     /* Edit */
     $("#dogotoeditpage").click(function() {
-        if (!$("input:radio[name=id]:checked").val()) {
+        if (!is_selected) {
             $("#noidselectedmessage").show("fast");
             setTimeout(function(){
                 $("#noidselectedmessage").hide("fast");
             }, 3000); 
         } else {
-            var id = $("input:radio[name=id]:checked").val();
             window.location = "edit.php?id="+ id +"";
         }
     });
     /* End */
     /* Delete */
     $("#showdelete").click(function() {
-        if (!$("input:radio[name=id]:checked").val()) {
+        if (!is_selected) {
             $("#noidselectedmessage").show("fast");
             setTimeout(function(){
                 $("#noidselectedmessage").hide("fast");
             }, 3000); 
         } else {
-            deleteconfirm=confirm("Delete download?")
+            deleteconfirm=confirm("Delete "+ name +"?")
             if (deleteconfirm==true) {
-                var id = $("input:radio[name=id]:checked").val();
                 $.ajax({  
                     type: "POST",  
                     url: "actions/delete.php",  
@@ -103,14 +109,13 @@ $(document).ready(function() {
     /* End */
     /* Tracking Link */
     $("#showtrackinglink").click(function() {
-        if (!$("input:radio[name=id]:checked").val()) {
+        if (!is_selected) {
             $("#noidselectedmessage").show("fast");
             setTimeout(function(){
                 $("#noidselectedmessage").hide("fast");
             }, 3000);
         } else {
-            var id = $("input:radio[name=id]:checked").val();
-            prompt("Tracking link for selected download. Press Ctrl/Cmd C to copy to the clipboard:", "<? echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
+            prompt("Tracking link for "+ name +". Press Ctrl/Cmd C to copy to the clipboard:", "<? echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
         } 
     });
     /* End */
@@ -159,7 +164,6 @@ echo "<h1>SHTracker: Downloads for " . WEBSITE . "</h1>
 <p><table id=\"downloads\">
 <thead>
 <tr>
-<th></th>
 <th>Name</th>
 <th>ID</th>
 <th>URL</th>
@@ -168,7 +172,6 @@ echo "<h1>SHTracker: Downloads for " . WEBSITE . "</h1>
 
 while($row = mysql_fetch_assoc($getdownloads)) {
     echo "<tr>";
-    echo "<td><input type=\"radio\" name=\"id\" value=\"" . $row["id"] . "\" /></td>";
     echo "<td>" . $row["name"] . "</td>";
     echo "<td>" . $row["id"] . "</td>";
     echo "<td>" . $row["url"] . "</td>";
