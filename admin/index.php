@@ -13,6 +13,10 @@ require_once("../config.php");
 
 $uniquekey = UNIQUE_KEY;
 
+if (isset($_GET["nojs"])) {
+    die("Please enable JavaScript to use SHTracker. For instructions on how to do this, see <a href=\"http://www.activatejavascript.org\">here</a>.");
+}
+
 session_start();
 if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
     header("Location: login.php");
@@ -34,7 +38,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <!--[if IE]>
 <p>Please use a browser than conforms to web standards and can actually renders webpages properly. I suggest Firefox or Chrome.</p>
 <![endif]-->
-<noscript><p>Your browser does not support JavaScript or it is disabled, nearly all functions will be broken! Please upgrade your browser or enable JavaScript.</p></noscript>
+<noscript><meta http-equiv="refresh" content="0; url=index.php?nojs=true"></noscript>
 <script type="text/javascript">
 $(document).ready(function() {
     /* jQuery UI buttons */
