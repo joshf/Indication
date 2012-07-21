@@ -9,7 +9,7 @@ ob_start();
 <head>
 <title>SHTracker</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <meta name="robots" content="noindex, nofollow">
 </head>
 <body>
@@ -58,17 +58,17 @@ if ($getinforesult == 0) {
     die("<h1>SHTracker: Error</h1><p>ID does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
+//Cookies don't like dots
+$idclean = str_replace(".", "_", $id);
+
 if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
-    if (!isset($_COOKIE["shtrackerhasdownloaded_$id"])) {
+    if (!isset($_COOKIE["shtrackerhasdownloaded_$idclean"])) {
         mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
-        setcookie("shtrackerhasdownloaded_$id", "True", time()+3600*COUNT_UNIQUE_ONLY_TIME);
+        setcookie("shtrackerhasdownloaded_$idclean", "True", time()+3600*COUNT_UNIQUE_ONLY_TIME);
     }
 } else {
     mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
 }
-
-//Cookies don't like dots
-$idclean = str_replace(".", "_", $id);
 
 //Check if download is password protected
 $checkifprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$id\"");

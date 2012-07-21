@@ -107,6 +107,7 @@ Website Name: <input type="text" name="website" value="<? echo $currentwebsite; 
 Path to Script: <input type="text" name="pathtoscript" value="<? echo $currentpathtoscript; ?>" /><br />
 <p><b>Ad Code:</b></p>
 <p>Show an advert before user can continue to their download. This can be changed on a per download basis.</p>
+<small><b>N.B:</b> On some server configurations using html code here may intefere with WordPress. This should be fixed in the next release.</small>
 <p><textarea cols="80" rows="8" name="adcode"><? echo $currentadcode; ?></textarea></p>
 <p><b>Count Unique Visitors Only:</b></p>
 <p>This settings allows you to make sure an individual users clicks are only counted once.</p>
@@ -123,12 +124,13 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 <p><b>jQuery Theme:</b></p>
 <?php
 
-echo "<p>Current theme: <b>$currentjquerytheme</b></p>";
+echo "<p>Current theme: <b>" . ucfirst($currentjquerytheme) . "</b></p>";
 
 $themes = array("base", "black-tie", "blitzer", "cupertino", "dark-hive", "dot-luv", "eggplant", "excite-bike", "flick", "hot-sneaks", "humanity", "le-frog", "mint-choc", "overcast", "pepper-grinder", "redmond", "smoothness", "south-street", "start", "sunny", "swanky-purse", "trontastic", "ui-darkness", "ui-lightness", "vader");
+
 echo "<select name=\"jquerytheme\">";
 foreach ($themes as $value) {
-    echo "<option value=\"$value\">$value</option>";
+    echo "<option value=\"$value\">". ucfirst($value) . "</option>";
 }
 echo "</select>";
 

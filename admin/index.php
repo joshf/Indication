@@ -61,12 +61,12 @@ $(document).ready(function() {
     $("#downloads tbody").delegate("tr", "click", function() {
         if (is_selected) {
             $("td:first", is_selected).parent().children().each(function() {
-                $(this).removeClass("highlight_row");
+                $(this).removeClass("highlight-row");
             });
         }
         is_selected = this;
         $("td:first", this).parent().children().each(function() {
-            $(this).addClass("highlight_row");
+            $(this).addClass("highlight-row");
         });
         name = $("td:eq(0)", this).text();
         id = $("td:eq(1)", this).text();

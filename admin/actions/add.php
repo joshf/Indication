@@ -51,7 +51,6 @@ if ($resultcheckid != 0) {
     die("<h1>SHTracker: Error</h1><p>ID <b>$id</b> already exists.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
-
 if (isset($_POST["passwordprotectstate"])) {
     $protect = "1";
     $inputtedpassword = mysql_real_escape_string($_POST["password"]);

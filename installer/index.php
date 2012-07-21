@@ -3,7 +3,7 @@
 <head>
 <title>SHTracker: Installer</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 </head>
 <body>
@@ -17,7 +17,7 @@ if (file_exists("../config.php")) {
 //Get path to script
 $currenturl = $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
 $pathtoscriptwithslash = "http://" . substr($currenturl, 0, strpos($currenturl, "installer"));
-$pathtoscript = rtrim($pathtoscriptwithslash,"/");
+$pathtoscript = rtrim($pathtoscriptwithslash, "/");
 
 ?>
 <script type="text/javascript">
