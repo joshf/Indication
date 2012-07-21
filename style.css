@@ -80,3 +80,7 @@ label.error {
 .ui-button-text {
     font-size: 0.6em;
 }
+
+.highlight_row { 
+    background-color:#dddddd !important; 
+}
