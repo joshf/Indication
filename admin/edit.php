@@ -46,7 +46,7 @@ $(document).ready(function() {
     ); 
     $("#editform").validate({
         rules: {
-            name: {
+            downloadname: {
                 required: true,
                 legalname: true
             },
@@ -101,7 +101,7 @@ $resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
 
 $getidinfo = mysql_query("SELECT * FROM Data WHERE id = \"$idtoedit\"");
 while($row = mysql_fetch_assoc($getidinfo)) {
-    echo "<p>Name: <input type=\"text\" size=\"50\" name=\"name\" value=\"" . $row["name"] . "\" /></p>";
+    echo "<p>Name: <input type=\"text\" size=\"50\" name=\"downloadname\" value=\"" . $row["name"] . "\" /></p>";
     echo "<p>ID: <input type=\"text\" size=\"50\" name=\"id\" value=\"" . $row["id"] . "\" /></p>";
     echo "<p>URL: <input type=\"text\" size=\"50\" name=\"url\" value=\"" . $row["url"] . "\" /></p>";
     echo "<p>Count: <input type=\"text\" size=\"50\" name=\"count\" value=\"" . $row["count"] . "\" /></p>";

@@ -42,7 +42,7 @@ $(document).ready(function() {
     ); 
     $("#addform").validate({
         rules: {
-            name: {
+            downloadname: {
                 required: true,
                 legalname: true
             },
@@ -67,7 +67,7 @@ $(document).ready(function() {
 </script>
 <h1>SHTracker: Add A Download/Link</h1>
 <form action="actions/add.php" method="post" id="addform">
-<p>Name: <input type="text" size="50" name="name" /></p>
+<p>Name: <input type="text" size="50" name="downloadname" /></p>
 <p>ID: <input type="text" size="50" name="id" /></p>
 <p>URL: <input type="text" size="50" name="url" /></p>
 <p>Count: <input type="text" size="50" name="count" value="0" /></p>

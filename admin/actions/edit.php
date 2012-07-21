@@ -36,7 +36,7 @@ mysql_select_db(DB_NAME, $con);
 $idtoedit = mysql_real_escape_string($_POST["idtoedit"]);
 
 //Set variables
-$newname = mysql_real_escape_string($_POST["name"]);
+$newname = mysql_real_escape_string($_POST["downloadname"]);
 $newid = mysql_real_escape_string($_POST["id"]);
 $newurl = mysql_real_escape_string($_POST["url"]);
 $newcount = mysql_real_escape_string($_POST["count"]);

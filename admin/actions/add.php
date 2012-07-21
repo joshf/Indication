@@ -30,7 +30,7 @@ if (!$con) {
 mysql_select_db(DB_NAME, $con);
 
 //Set variables
-$name = mysql_real_escape_string($_POST["name"]);
+$name = mysql_real_escape_string($_POST["downloadname"]);
 $id = mysql_real_escape_string($_POST["id"]);
 $url = mysql_real_escape_string($_POST["url"]);
 $count = mysql_real_escape_string($_POST["count"]);
