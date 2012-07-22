@@ -94,13 +94,26 @@ $(document).ready(function() {
         } else {
             deleteconfirm=confirm("Delete "+ name +"?")
             if (deleteconfirm==true) {
+                $("#loadingmessage").ajaxStart(function() {
+                    $(this).show();
+                });
+                $("#loadingmessage").ajaxStop(function() {
+                    $(this).hide();
+                });
                 $.ajax({  
                     type: "POST",  
                     url: "actions/delete.php",  
                     data: "id="+ id +"",
+                    error: function() {  
+                        $("#failuremessage").show("fast");
+                        setTimeout(function(){
+                            $("#failuremessage").hide("fast");
+                        }, 3000); 
+                    },
                     success: function() {  
                         $("#downloaddeletedmessage").show("fast");
                         setTimeout(function(){
+                            $("#downloaddeletedmessage").hide("fast");
                             window.location.reload()
                         }, 3000);               
                     }	
@@ -185,6 +198,12 @@ while($row = mysql_fetch_assoc($getdownloads)) {
 echo "</tbody></table></p>";
 
 ?>
+<div id="failuremessage" style="display: none;">
+<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span><b>Error:</b> Ajax query failed!</p>
+</div>
+<div id="loadingmessage" style="display: none;">
+<p><img src="http://cdn.cstatic.net/images/spinner.gif" style="float: left; margin-right: .3em;"></span><b>Info:</b> Working...</p>
+</div>
 <div id="noidselectedmessage" style="display: none;">
 <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span><b>Error:</b> No ID selected!</p>
 </div>
