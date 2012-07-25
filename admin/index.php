@@ -14,7 +14,7 @@ require_once("../config.php");
 $uniquekey = UNIQUE_KEY;
 
 if (isset($_GET["nojs"])) {
-    die("Please enable JavaScript to use SHTracker. For instructions on how to do this, see <a href=\"http://www.activatejavascript.org\">here</a>.");
+    die("<html><head><title>SHTracker: Error</title><link rel=\"stylesheet\" type=\"text/css\" href=\"../style.css\" /></head><body><p>Please enable JavaScript to use SHTracker. For instructions on how to do this, see <a href=\"http://www.activatejavascript.org\">here</a>.</p></body></html>");
 }
 
 session_start();
