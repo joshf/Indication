@@ -198,22 +198,22 @@ while($row = mysql_fetch_assoc($getdownloads)) {
 echo "</tbody></table></p>";
 
 ?>
-<div id="failuremessage" style="display: none;">
+<div id="failuremessage" class="ui-state-error ui-corner-all" style="display: none; padding: 0 .7em;">
 <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span><b>Error:</b> Ajax query failed!</p>
 </div>
-<div id="loadingmessage" style="display: none;">
+<div id="loadingmessage" class="ui-state-highlight ui-corner-all" style="display: none; padding: 0 .7em;">
 <p><img src="http://cdn.cstatic.net/images/spinner.gif" style="float: left; margin-right: .3em;"></span><b>Info:</b> Working...</p>
 </div>
-<div id="noidselectedmessage" style="display: none;">
+<div id="noidselectedmessage" class="ui-state-error ui-corner-all" style="display: none; padding: 0 .7em;">
 <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span><b>Error:</b> No ID selected!</p>
 </div>
-<div id="downloaddeletedmessage" style="display: none;">
+<div id="downloaddeletedmessage" class="ui-state-highlight ui-corner-all" style="display: none; padding: 0 .7em;">
 <p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span><b>Info:</b> Download deleted!</p>
 </div>
-<button id="dogotoaddpage">Add</button>
+<p><button id="dogotoaddpage">Add</button>
 <button id="dogotoeditpage">Edit</button>
 <button id="showdelete">Delete</button>
-<button id="showtrackinglink">Show Tracking Link</button>
+<button id="showtrackinglink">Show Tracking Link</button></p>
 <p><i>To edit, delete or show the tracking link for a ID please select the radio button next to it.</i></p>
 <?php
 
