@@ -87,7 +87,7 @@ mysql_close($con);
 <li>ID : <? echo $newid; ?></li>
 <li>URL : <? echo $newurl; ?></li>
 </ul>
-<p><b>Download link:</b></p>
+<p><b>Tracking Link:</b></p>
 <p><? echo PATH_TO_SCRIPT; ?>/get.php?id=<? echo $newid; ?></p>
 <hr />
 <p><a href="../../admin">Back To Home</a></p>

@@ -83,7 +83,7 @@ mysql_close($con);
 <li>ID : <? echo $id; ?></li>
 <li>URL : <? echo $url; ?></li>
 </ul>
-<p><b>Download link:</b></p>
+<p><b>Tracking Link:</b></p>
 <p><? echo PATH_TO_SCRIPT; ?>/get.php?id=<? echo $id; ?></p>
 <hr />
 <p><a href="../../admin">Back To Home</a></p>
