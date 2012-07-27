@@ -197,6 +197,12 @@ while($row = mysql_fetch_assoc($getdownloads)) {
 }
 echo "</tbody></table></p>";
 
+//Update checking
+$remoteversion = file_get_contents("https://raw.github.com/joshf/SHTracker/master/version.txt");
+if ($version < $remoteversion) {
+    echo "<div id=\"updatemessage\" class=\"ui-state-highlight ui-corner-all\" style=\"padding: 0 .7em;\"><p><span class=\"ui-icon ui-icon-refresh\" style=\"float: left; margin-right: .3em;\"></span><b>Info:</b> An update to SHTracker is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/shtracker/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"https://github.com/joshf/shtracker/zipball/$remoteversion\" target=\"_blank\">here</a> to update.</p></div>";
+}
+
 ?>
 <div id="failuremessage" class="ui-state-error ui-corner-all" style="display: none; padding: 0 .7em;">
 <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span><b>Error:</b> Ajax query failed!</p>
@@ -226,12 +232,6 @@ $resulttotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
 echo "<p><b>Total downloads: </b>" . $resulttotalnumberofdownloads["SUM(count)"] . "</p>";
 
 mysql_close($con);
-
-//Update checking
-$remoteversion = file_get_contents("https://raw.github.com/joshf/SHTracker/master/version.txt");
-if ($version < $remoteversion) {
-    echo "<p><span class=\"ui-icon ui-icon-alert\" style=\"float: left; margin-right: .3em;\"></span>An update to SHTracker is available! Version $remoteversion has been released (you have $version). Click <a href=\"https://github.com/joshf/shtracker/zipball/$remoteversion\" target=\"_blank\">here</a> to update.</p>";
-}
 
 ?>
 <hr />
