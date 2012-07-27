@@ -16,6 +16,11 @@ Features:
 * Full admin panel, enhanced with jQuery
 * Display download counts to users
 
+Screenshots:
+------------
+
+Screenshots of SHTracker 3.2 can be found [here](http://imgur.com/a/GSgAs).
+
 Installation:
 -------------
 
