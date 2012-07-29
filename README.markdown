@@ -92,3 +92,8 @@ Removal:
 --------
 
 To remove SHTracker, simply delete the SHTracker folder from your server and delete the "Data" table from your database
+
+Contributing:
+-------------
+
+Feel free to fork and make any changes you want to SHTracker. If you want them to be added to master then send a pull request.
