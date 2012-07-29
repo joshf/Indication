@@ -19,7 +19,7 @@ Features:
 Screenshots:
 ------------
 
-Screenshots of SHTracker 3.2 can be found [here](http://imgur.com/a/GSgAs).
+Screenshots of SHTracker can be found [here](http://imgur.com/a/GSgAs).
 
 Installation:
 -------------
