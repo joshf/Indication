@@ -16,8 +16,8 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <html> 
 <head>
 <title>SHTracker: Add A Download/Link</title>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="//jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 <link rel="stylesheet" type="text/css" href="../style.css" />
 </head>
 <body>
