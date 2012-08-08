@@ -99,12 +99,12 @@ header("Location: " . $_SERVER["REQUEST_URI"] . "");
 <h1>SHTracker: Settings</h1>
 <form method="post">
 <p><b>Admin Details:</b></p>
-User: <input type="text" name="adminuser" value="<? echo $currentadminuser; ?>" /><br />
+<p>User: <input type="text" name="adminuser" value="<? echo $currentadminuser; ?>" /><br />
 Email: <input type="text" name="adminemail" value="<? echo $currentadminemail; ?>" /><br />
-Password: <input type="password" name="adminpassword" value="<? echo $currentadminpassword; ?>" /><br />
+Password: <input type="password" name="adminpassword" value="<? echo $currentadminpassword; ?>" /></p>
 <p><b>Other settings:</b></p>
-Website Name: <input type="text" name="website" value="<? echo $currentwebsite; ?>" /><br />
-Path to Script: <input type="text" name="pathtoscript" value="<? echo $currentpathtoscript; ?>" /><br />
+<p>Website Name: <input type="text" name="website" value="<? echo $currentwebsite; ?>" /><br />
+Path to Script: <input type="text" name="pathtoscript" value="<? echo $currentpathtoscript; ?>" /></p>
 <p><b>Ad Code:</b></p>
 <p>Show an advert before user can continue to their download. This can be changed on a per download basis.</p>
 <small><b>N.B:</b> On some server configurations using html code here may intefere with WordPress. This should be fixed in the next release.</small>
@@ -114,11 +114,11 @@ Path to Script: <input type="text" name="pathtoscript" value="<? echo $currentpa
 <?php
 if ($currentcountuniqueonlystate == "Enabled" ) {
     echo "<p>Hours to consider a user unique: <input type=\"text\" name=\"countuniqueonlytime\" value=\"$currentcountuniqueonlytime\" /></p>
-    <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Enabled\" checked/> Enabled<br />
-    <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\" /> Disabled";
+    <p><input type=\"radio\" name=\"countuniqueonlystate\" value=\"Enabled\" checked/> Enabled<br />
+    <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\" /> Disabled</p>";
 } else {
-    echo "<input type=\"radio\" name=\"countuniqueonlystate\" value=\"Enabled\" /> Enabled<br />
-    <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\" checked/> Disabled";
+    echo "<p><input type=\"radio\" name=\"countuniqueonlystate\" value=\"Enabled\" /> Enabled<br />
+    <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\" checked/> Disabled</p>";
 }
 ?>
 <p><b>jQuery Theme:</b></p>
@@ -128,11 +128,11 @@ echo "<p>Current theme: <b>" . ucfirst($currentjquerytheme) . "</b></p>";
 
 $themes = array("base", "black-tie", "blitzer", "cupertino", "dark-hive", "dot-luv", "eggplant", "excite-bike", "flick", "hot-sneaks", "humanity", "le-frog", "mint-choc", "overcast", "pepper-grinder", "redmond", "smoothness", "south-street", "start", "sunny", "swanky-purse", "trontastic", "ui-darkness", "ui-lightness", "vader");
 
-echo "<select name=\"jquerytheme\">";
+echo "<p><select name=\"jquerytheme\">";
 foreach ($themes as $value) {
     echo "<option value=\"$value\">". ucfirst($value) . "</option>";
 }
-echo "</select>";
+echo "</select></p>";
 
 ?>
 <p><input type="submit" name="Save" value="Save" /></p>
