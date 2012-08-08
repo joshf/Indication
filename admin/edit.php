@@ -43,6 +43,13 @@ $(document).ready(function() {
             return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
         },
         "Illegal character. Only points, underscores or dashes are allowed."
+    );
+    $.validator.addMethod(
+        "legalurl",
+        function(value, element) { 
+            return this.optional(element) || /^[a-zA-Z0-9.?=:#_\-/\-]+$/.test(value);
+        },
+        "Illegal character. Please use a valid URL or directory path."
     ); 
     $("#editform").validate({
         rules: {
@@ -56,7 +63,7 @@ $(document).ready(function() {
             },
             url: {
                 required: true,
-                url: true
+                legalurl: true
             },
             count: {
                 digits: true
