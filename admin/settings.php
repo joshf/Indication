@@ -107,7 +107,7 @@ Password: <input type="password" name="adminpassword" value="<? echo $currentadm
 Path to Script: <input type="text" name="pathtoscript" value="<? echo $currentpathtoscript; ?>" /></p>
 <p><b>Ad Code:</b></p>
 <p>Show an advert before user can continue to their download. This can be changed on a per download basis.</p>
-<small><b>N.B:</b> On some server configurations using html code here may intefere with WordPress. This should be fixed in the next release.</small>
+<small><b>N.B:</b> On some server configurations using html code here may produce errors.</small>
 <p><textarea cols="80" rows="8" name="adcode"><? echo $currentadcode; ?></textarea></p>
 <p><b>Count Unique Visitors Only:</b></p>
 <p>This settings allows you to make sure an individual users clicks are only counted once.</p>
