@@ -27,7 +27,7 @@ Installation:
 1. Create a new database using your web hosts control panel (for instructions on how to do this please contact your web host)
 2. Download and unzip SHTracker.zip
 3. Upload the SHTracker folder to your server via FTP or your hosts control panel
-4. Open up http://yoursite.com/SHTracker/install.php in your browser and enter your database/user details
+4. Open up http://yoursite.com/SHTracker/installer in your browser and enter your database/user details
 5. Delete the "installer" folder from your server
 6. Login to the admin panel using the username and password you set during the install process
 7. Add your links/downloads
