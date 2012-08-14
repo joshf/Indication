@@ -27,8 +27,14 @@ if (isset($_POST["Save"])) {
 
 //Get new settings from POST
 $adminuser = $_POST["adminuser"];
+if (empty($adminuser)) {
+    $adminuser = $currentadminuser;
+}
 $adminemail = $_POST["adminemail"];
 $adminpassword = $_POST["adminpassword"];
+if (empty($adminpassword)) {
+    $adminpassword = $currentadminpassword;
+}
 if ($adminpassword != $currentadminpassword) {
     $adminpassword = sha1($adminpassword);
 }
