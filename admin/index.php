@@ -72,6 +72,11 @@ $(document).ready(function() {
         id = $("td:eq(1)", this).text();
     });
     /* End */
+    /* Add */
+    $("#dogotoaddpage").click(function() {
+        window.location = "add.php";
+    });
+    /* End */
     /* Edit */
     $("#dogotoeditpage").click(function() {
         if (!is_selected) {
@@ -136,16 +141,6 @@ $(document).ready(function() {
         } 
     });
     /* End */
-    /* Logout */
-    $("#showlogout").click(function() {
-        logoutconfirm=confirm("<? echo ADMIN_USER; ?>, are you sure you wish to logout?")
-        if (logoutconfirm==true) {
-            window.location.replace("logout.php");
-        } else {
-            return false;
-        }
-    });
-    /* End */
     /* Refresh */
     $("#dorefresh").click(function() {
         window.location.reload();
@@ -156,9 +151,14 @@ $(document).ready(function() {
         window.location = "settings.php";
     });
     /* End */
-    /* Add */
-    $("#dogotoaddpage").click(function() {
-        window.location = "add.php";
+    /* Logout */
+    $("#showlogout").click(function() {
+        logoutconfirm=confirm("<? echo ADMIN_USER; ?>, are you sure you wish to logout?")
+        if (logoutconfirm==true) {
+            window.location.replace("logout.php");
+        } else {
+            return false;
+        }
     });
     /* End */
 });
