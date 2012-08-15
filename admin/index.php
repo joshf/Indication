@@ -225,11 +225,11 @@ if ($version < $remoteversion) {
 
 $getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM Data");
 $resultnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
-echo "<p><b>Number of downloads: </b>" . $resultnumberofdownloads["COUNT(id)"] . "</p>";
+echo "<p><b>Number of Downloads: </b>" . $resultnumberofdownloads["COUNT(id)"] . "</p>";
 
 $gettotalnumberofdownloads = mysql_query("SELECT SUM(count) FROM Data");
 $resulttotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
-echo "<p><b>Total downloads: </b>" . $resulttotalnumberofdownloads["SUM(count)"] . "</p>";
+echo "<p><b>Total Downloads: </b>" . $resulttotalnumberofdownloads["SUM(count)"] . "</p>";
 
 mysql_close($con);
 
