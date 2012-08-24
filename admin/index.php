@@ -29,10 +29,10 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <title>SHTracker: Admin Home</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
 <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/themes/<? echo JQUERY_THEME; ?>/jquery-ui.css" />
-<link rel="stylesheet" type="text/css" href="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.1/css/jquery.dataTables_themeroller.css" />
+<link rel="stylesheet" type="text/css" href="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.3/css/jquery.dataTables_themeroller.css" />
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
-<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.1/jquery.dataTables.js"></script>
+<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.3/jquery.dataTables.js"></script>
 </head>
 <body>
 <!--[if IE]>
