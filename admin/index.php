@@ -2,7 +2,7 @@
 
 //SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
 
-$version = "3.3";
+$version = "3.3.5";
 $codename = "MagnificentMeerkat";
 
 if (!file_exists("../config.php")) {
