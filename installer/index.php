@@ -22,6 +22,13 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 ?>
 <script type="text/javascript">
 $(document).ready(function() {
+    $.validator.addMethod(
+        "legalurl",
+        function(value, element) { 
+            return this.optional(element) || /^[a-zA-Z0-9.?=:#_\-/\-]+$/.test(value);
+        },
+        "Please enter a valid URL."
+    ); 
     $("#installform").validate({
         rules: {
             adminpassword: {
@@ -50,13 +57,16 @@ $(document).ready(function() {
                 required: true,
                 minlength: 6
             },
+            adminpasswordconfirm: {
+                equalTo: "#adminpassword",
+            },
             website: {
                 required: true,
             },
             pathtoscript: {
                 required: true,
-                url: true
-            },
+                legalurl: true
+            }
         }
     });
 });
@@ -73,9 +83,11 @@ Name: <input type="text" name="dbname" /><br />
 User: <input type="text" name="adminuser" /><br />
 Email: <input type="text" name="adminemail" /><br />
 Password: <input type="password" name="adminpassword" /><br />
+Confirm Password: <input type="password" name="adminpasswordconfirm" /><br />
 <p><b>Other Settings:</b></p>
 Website Name: <input type="text" name="website" /><br />
 Path to Script: <input type="text" name="pathtoscript" value="<? echo $pathtoscript; ?>" /><br />
+<input type="hidden" name="install" />
 <p><input type="submit" value="Install" /></p>
 </form>
 <small>SHTracker 3.3.5 Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>

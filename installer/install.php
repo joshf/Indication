@@ -7,6 +7,10 @@
 <body>
 <?php
 
+if (!isset($_POST["doinstall"])) {
+    die("<h1>SHTracker: Error</h1><p>Installer can not be called directly!</p><hr /><p><a href=\"../installer\">&larr; Go To Installer</a></p></body></html>");
+}
+
 //Get new settings from POST
 $dbhost = $_POST["dbhost"];
 $dbuser = $_POST["dbuser"];
