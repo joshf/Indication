@@ -17,11 +17,11 @@ ob_start();
 $(document).ready(function() { 
     var count = 5;
     countdown = setInterval(function(){
-        $("#counterplaceholder").html("<p>Your download will be ready in " + count + " second(s)</p>");
+        $("#counterplaceholder").html("<p><i>Your download will be ready in " + count + " second(s)</i></p>");
         if (count <= 0) {
             clearInterval(countdown);
             $("#counterplaceholder").fadeOut("fast");
-            $("#downloadurl").delay(500).fadeIn("fast");
+            $("#downloadbutton").delay(300).fadeIn("fast");
         }
         count--;
     }, 1000);
@@ -102,7 +102,7 @@ $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$id\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
 if ($checkifadsshowresult["showads"] == "1") { 
     $adcode = htmlspecialchars_decode(AD_CODE); 
-    die("<h1>Downloading " . $getinforesult["name"] . "</h1><p>" . $adcode . "</p><hr /><div id=\"counterplaceholder\"></div><div id=\"downloadurl\" style=\"display: none\"><p><a href=\"" . $getinforesult["url"] . "\">Start Download</a></p></div></body></html>");
+    die("<h1>Downloading " . $getinforesult["name"] . "</h1><p>" . $adcode . "</p><p><div id=\"counterplaceholder\"></div></p><p><button id=\"downloadbutton\" style=\"display: none\" onClick=\"window.location = '" . $getinforesult["url"] . "'\">Get Download</button></p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
 mysql_close($con);
