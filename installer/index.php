@@ -82,12 +82,12 @@ Name: <input type="text" name="dbname" /><br />
 <p><b>Admin Details:</b></p>
 User: <input type="text" name="adminuser" /><br />
 Email: <input type="text" name="adminemail" /><br />
-Password: <input type="password" name="adminpassword" /><br />
+Password: <input type="password" name="adminpassword" id="adminpassword" /><br />
 Confirm Password: <input type="password" name="adminpasswordconfirm" /><br />
 <p><b>Other Settings:</b></p>
 Website Name: <input type="text" name="website" /><br />
 Path to Script: <input type="text" name="pathtoscript" value="<? echo $pathtoscript; ?>" /><br />
-<input type="hidden" name="install" />
+<input type="hidden" name="doinstall" />
 <p><input type="submit" value="Install" /></p>
 </form>
 <small>SHTracker 3.3.5 Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
