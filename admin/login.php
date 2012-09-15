@@ -56,7 +56,7 @@ if (isset($_GET["login_error"])) {
 <input type="text" name="user" id="user" style="width: 190px; text-align: center;" /><br />
 <label for="password">Password</label><br />
 <input type="password" name="password" id="password" style="width: 190px; text-align: center;" /><br />
-<p><input type="checkbox" name="rememberme"> Remember me?</p>
+<p><input type="checkbox" name="rememberme"> Remember Me?</p>
 <p><input type="submit" value="Login" /></p>
 </form>
 <p class="loginfooter"><a href="http://<?php echo $_SERVER["HTTP_HOST"]; ?>">&larr; Back to <?php echo WEBSITE; ?></a></p>
