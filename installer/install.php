@@ -8,7 +8,7 @@
 <?php
 
 if (!isset($_POST["doinstall"])) {
-    die("<h1>SHTracker: Error</h1><p>This installer can not be called directly!</p><hr /><p><a href=\"../installer\">&larr; Go To Installer</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>This installer can not be called directly!</p><hr /><p><a href=\"../installer\">Go To Installer</a></p></body></html>");
 }
 
 //Get new settings from POST
