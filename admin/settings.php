@@ -116,7 +116,7 @@ Path to Script: <input type="text" name="pathtoscript" value="<? echo $currentpa
 <small><b>N.B:</b> On some server configurations using html code here may produce errors.</small>
 <p><textarea cols="80" rows="8" name="adcode"><? echo $currentadcode; ?></textarea></p>
 <p><b>Count Unique Visitors Only:</b></p>
-<p>This settings allows you to make sure an individual users clicks are only counted once.</p>
+<p>This settings allows you to make sure an individual users' clicks are only counted once.</p>
 <?php
 if ($currentcountuniqueonlystate == "Enabled" ) {
     echo "<p>Hours to consider a user unique: <input type=\"text\" name=\"countuniqueonlytime\" value=\"$currentcountuniqueonlytime\" /></p>

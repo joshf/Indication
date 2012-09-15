@@ -8,7 +8,7 @@
 <?php
 
 if (!isset($_POST["doinstall"])) {
-    die("<h1>SHTracker: Error</h1><p>Installer can not be called directly!</p><hr /><p><a href=\"../installer\">&larr; Go To Installer</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>This installer can not be called directly!</p><hr /><p><a href=\"../installer\">&larr; Go To Installer</a></p></body></html>");
 }
 
 //Get new settings from POST
@@ -74,12 +74,12 @@ PRIMARY KEY (id)
 //Run query
 mysql_query($createtable);
 
-mysql_close($con);
-
 //Write Config
 $configfile = fopen("../config.php", "w");
 fwrite($configfile, $installstring);
 fclose($configfile);
+
+mysql_close($con);
  
 ?>
 <h1>SHTracker: Install Complete</h1>
