@@ -1,4 +1,14 @@
-<!-- SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker) -->
+<?php
+
+// SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
+
+//Security check, check if config exists
+if (file_exists("../config.php")) {
+    header("Location: ../admin");
+    exit;
+}
+
+?>
 <html>
 <head>
 <title>SHTracker: Installer</title>
@@ -8,11 +18,6 @@
 </head>
 <body>
 <?php
-
-//Security check
-if (file_exists("../config.php")) {
-    die("<h1>SHTracker: Error</h1><p>SHTracker has already been installed! If you wish to reinstall SHTracker, please delete config.php from your server and run this script again.</p><hr /><p><a href=\"../admin\">Go To Admin Home</a></p></body></html>"); 
-}
 
 //Get path to script
 $currenturl = $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
