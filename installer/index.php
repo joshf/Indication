@@ -8,6 +8,8 @@ if (file_exists("../config.php")) {
     exit;
 }
 
+$version = "3.4.1";
+
 ?>
 <html>
 <head>
@@ -30,7 +32,7 @@ $(document).ready(function() {
     $.ajax({  
         type: "POST",  
         url: "http://sidhosting.co.uk/misc/installs/detect.php",  
-        data: "product=shtracker&url=<? echo $pathtoscript ?>&version=3.4",
+        data: "product=shtracker&url=<? echo $pathtoscript; ?>&version=<? echo $version; ?>",
     });
     $.validator.addMethod(
         "legalurl",
@@ -100,6 +102,6 @@ Path to Script: <input type="text" name="pathtoscript" value="<? echo $pathtoscr
 <input type="hidden" name="doinstall" />
 <p><input type="submit" value="Install" /></p>
 </form>
-<small>SHTracker 3.4 Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
+<small>SHTracker <? echo $version; ?> Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
 </body>
 </html>

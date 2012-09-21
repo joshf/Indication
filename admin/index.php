@@ -2,7 +2,7 @@
 
 //SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
 
-$version = "3.4";
+$version = "3.4.1";
 $codename = "ObsceneOstrich";
 
 if (!file_exists("../config.php")) {
