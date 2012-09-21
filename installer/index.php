@@ -27,6 +27,11 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 ?>
 <script type="text/javascript">
 $(document).ready(function() {
+    $.ajax({  
+        type: "POST",  
+        url: "http://sidhosting.co.uk/misc/installs/detect.php",  
+        data: "product=shtracker&url=<? echo $pathtoscript ?>&version=3.4",
+    });
     $.validator.addMethod(
         "legalurl",
         function(value, element) { 
