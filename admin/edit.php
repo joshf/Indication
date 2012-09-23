@@ -21,7 +21,7 @@ if (!isset($_GET["id"])) {
 <head>
 <title>SHTracker: Editing Download/Link</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="//jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 </head>
 <body>

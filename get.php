@@ -9,7 +9,7 @@ ob_start();
 <head>
 <title>SHTracker</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <meta name="robots" content="noindex, nofollow">
 </head>
 <body>
