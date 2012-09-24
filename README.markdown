@@ -22,6 +22,11 @@ Screenshots:
 
 Screenshots of SHTracker can be found [here](http://imgur.com/a/GSgAs).
 
+Downloads:
+------------
+
+[v3.4.1](https://github.com/joshf/SHTracker/zipball/3.4.1) (released 21/09/12)
+
 Installation:
 -------------
 
