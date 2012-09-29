@@ -221,8 +221,8 @@ echo "</tbody></table></p>";
 <button id="dogotoeditpage">Edit</button>
 <button id="showdelete">Delete</button>
 <button id="showtrackinglink">Show Tracking Link</button></p>
-<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>To edit, delete or show the tracking link for a ID please select the radio button next to it.</p>
 </div>
+<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>To edit, delete or show the tracking link for a ID please select the radio button next to it.</p>
 <?php
 
 //Update checking
