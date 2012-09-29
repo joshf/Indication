@@ -42,13 +42,8 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <script type="text/javascript">
 $(document).ready(function() {
     /* jQuery UI buttons */
-    $("#dogotoaddpage").button();
-    $("#dogotoeditpage").button();
-    $("#showdelete").button();
-    $("#showtrackinglink").button();
-    $("#dorefresh").button();
-    $("#dogotosettingspage").button();
-    $("#showlogout").button();
+    $("#adminfunctions").buttonset();
+    $("#userfunctions").buttonset();
     /* End */
     /* DataTables */
     $("#downloads").dataTable({
@@ -216,11 +211,13 @@ if ($version < $remoteversion) {
 <div id="downloaddeletedmessage" class="ui-state-highlight ui-corner-all" style="display: none; padding: 0 .7em;">
 <p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span><b>Info:</b> Download deleted!</p>
 </div>
+<div id="adminfunctions">
 <p><button id="dogotoaddpage">Add</button>
 <button id="dogotoeditpage">Edit</button>
 <button id="showdelete">Delete</button>
 <button id="showtrackinglink">Show Tracking Link</button></p>
 <p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>To edit, delete or show the tracking link for a ID please select the radio button next to it.</p>
+</div>
 <?php
 
 $getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM Data");
@@ -234,10 +231,11 @@ echo "<p><b>Total Downloads: </b>" . $resulttotalnumberofdownloads["SUM(count)"]
 mysql_close($con);
 
 ?>
-<hr />
+<div id="userfunctions"
 <p><button id="dorefresh">Refresh</button>
 <button id="dogotosettingspage">Settings</button>
 <button id="showlogout">Logout</button></p>
+</div>
 <small>SHTracker <? echo $version; ?> "<? echo $codename; ?>" Copyright <a href="http://sidhosting.co.uk" target="_blank">Josh Fradley</a> <? echo date("Y"); ?></small>
 </body>
 </html>
