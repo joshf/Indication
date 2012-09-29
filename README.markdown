@@ -5,7 +5,7 @@ SHTracker is a PHP click counter which can also be used as a download counter. Y
 
 The script uses SQL databases. It comes with an admin panel where you can view how many times a link has been clicked. You can also easily add, edit or remove links using the included admin panel. SHTracker can also display the current click count on any web page.
 
-#### Current Version: 3.4.1 "ObsceneOstrich"
+#### Current Version: 3.4.2 "ObsceneOstrich"
 
 Features:
 ---------
@@ -25,7 +25,7 @@ Screenshots of SHTracker can be found [here](http://imgur.com/a/GSgAs).
 Downloads:
 ------------
 
-[v3.4.1](https://github.com/joshf/SHTracker/zipball/3.4.1) (released 21/09/12)
+[v3.4.2](https://github.com/joshf/SHTracker/zipball/3.4.2) (released 29/09/12)
 
 Installation:
 -------------
