@@ -4,6 +4,7 @@
 
 $version = "3.4.1";
 $codename = "ObsceneOstrich";
+$rev = "342";
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
@@ -76,8 +77,10 @@ $(document).ready(function() {
     $("#dogotoeditpage").click(function() {
         if (!is_selected) {
             $("#noidselectedmessage").show("fast");
+            $("#adminfunctions").hide("fast");
             setTimeout(function(){
                 $("#noidselectedmessage").hide("fast");
+                $("#adminfunctions").show("fast");
             }, 3000); 
         } else {
             window.location = "edit.php?id="+ id +"";
@@ -88,8 +91,10 @@ $(document).ready(function() {
     $("#showdelete").click(function() {
         if (!is_selected) {
             $("#noidselectedmessage").show("fast");
+            $("#adminfunctions").hide("fast");
             setTimeout(function(){
                 $("#noidselectedmessage").hide("fast");
+                $("#adminfunctions").show("fast");
             }, 3000); 
         } else {
             deleteconfirm=confirm("Delete "+ name +"?")
@@ -106,14 +111,18 @@ $(document).ready(function() {
                     data: "id="+ id +"",
                     error: function() {  
                         $("#failuremessage").show("fast");
+                        $("#adminfunctions").hide("fast");
                         setTimeout(function(){
                             $("#failuremessage").hide("fast");
+                            $("#adminfunctions").show("fast");
                         }, 3000); 
                     },
                     success: function() {  
                         $("#downloaddeletedmessage").show("fast");
+                        $("#adminfunctions").hide("fast");
                         setTimeout(function(){
                             $("#downloaddeletedmessage").hide("fast");
+                            $("#adminfunctions").show("fast");
                             window.location.reload()
                         }, 3000);               
                     }	
@@ -128,8 +137,10 @@ $(document).ready(function() {
     $("#showtrackinglink").click(function() {
         if (!is_selected) {
             $("#noidselectedmessage").show("fast");
+            $("#adminfunctions").hide("fast");
             setTimeout(function(){
                 $("#noidselectedmessage").hide("fast");
+                $("#adminfunctions").show("fast");
             }, 3000);
         } else {
             prompt("Tracking link for "+ name +". Press Ctrl/Cmd C to copy to the clipboard:", "<? echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
@@ -192,18 +203,12 @@ while($row = mysql_fetch_assoc($getdownloads)) {
 }
 echo "</tbody></table></p>";
 
-//Update checking
-$remoteversion = file_get_contents("https://raw.github.com/joshf/SHTracker/master/version.txt");
-if ($version < $remoteversion) {
-    echo "<p><div class=\"ui-state-highlight ui-corner-all\" style=\"padding: 0 .7em;\"><p><span class=\"ui-icon ui-icon-refresh\" style=\"float: left; margin-right: .3em;\"></span><b>Info:</b> An update to SHTracker is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/shtracker/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"http://sidhosting.co.uk/misc/shtracker_update.php?v=$version\" target=\"_blank\">here</a> to update.</p></div></p>";
-}
-
 ?>
 <div id="failuremessage" class="ui-state-error ui-corner-all" style="display: none; padding: 0 .7em;">
 <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span><b>Error:</b> Ajax query failed!</p>
 </div>
 <div id="loadingmessage" class="ui-state-highlight ui-corner-all" style="display: none; padding: 0 .7em;">
-<p><img src="http://cdn.cstatic.net/images/spinner.gif" style="float: left; margin-right: .3em;"></span><b>Info:</b> Working...</p>
+<p><span class="ui-icon ui-icon-refresh" style="float: left; margin-right: .3em;"></span><b>Info:</b> Working...</p>
 </div>
 <div id="noidselectedmessage" class="ui-state-error ui-corner-all" style="display: none; padding: 0 .7em;">
 <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span><b>Error:</b> No ID selected!</p>
@@ -219,6 +224,12 @@ if ($version < $remoteversion) {
 <p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>To edit, delete or show the tracking link for a ID please select the radio button next to it.</p>
 </div>
 <?php
+
+//Update checking
+$remoteversion = file_get_contents("https://raw.github.com/joshf/SHTracker/master/version.txt");
+if ($version < $remoteversion) {
+    echo "<p><div class=\"ui-state-highlight ui-corner-all\" style=\"padding: 0 .7em;\"><p><span class=\"ui-icon ui-icon-refresh\" style=\"float: left; margin-right: .3em;\"></span><b>Info:</b> An update to SHTracker is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/shtracker/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"http://sidhosting.co.uk/misc/shtracker_update.php?v=$version\" target=\"_blank\">here</a> to update.</p></div></p>";
+}
 
 $getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM Data");
 $resultnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
@@ -236,6 +247,6 @@ mysql_close($con);
 <button id="dogotosettingspage">Settings</button>
 <button id="showlogout">Logout</button></p>
 </div>
-<small>SHTracker <? echo $version; ?> "<? echo $codename; ?>" Copyright <a href="http://sidhosting.co.uk" target="_blank">Josh Fradley</a> <? echo date("Y"); ?></small>
+<small>SHTracker <? echo $version; ?> (<? echo $rev; ?>) "<? echo $codename; ?>" Copyright <a href="http://sidhosting.co.uk" target="_blank">Josh Fradley</a> <? echo date("Y"); ?></small>
 </body>
 </html>
