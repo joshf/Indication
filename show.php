@@ -19,6 +19,18 @@ if (!$con) {
     
 mysql_select_db(DB_NAME, $con);
 
+//List all downloads
+if (isset($_GET["list"])) {
+    $listdownloads = mysql_query("SELECT * FROM Data");
+    echo "<h1>All Downloads</h1><p>";
+    while($row = mysql_fetch_assoc($listdownloads)) {
+        echo "<b>" . $row["name"] . "</b>: " . $row["count"] . "<br />";
+    }
+    echo "</p></body></html>";
+    mysql_close($con);
+    exit;
+}
+
 $id = mysql_real_escape_string($_GET["id"]);
 
 //Check ID is not blank

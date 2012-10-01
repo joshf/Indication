@@ -52,7 +52,7 @@ This will log the count of the download and redirect users to the file
 
 This script can also be called via $_POST just set the name of the form to id and the value to the id you wish to download
 
-To show the download count for one id only, call http://yoursite.com/SHTracker/show.php?id=mydownload1. To show just the count with no other text add "&plain=true" to the end of the URL. The showing of counts could be done using an include or an iframe (see below)
+To show the download count for one id only, call http://yoursite.com/SHTracker/show.php?id=mydownload1. To show just the count with no other text add "&plain=true" to the end of the URL. Similarly, to list all downloads add "&list=true" to the end of the URL. The showing of counts could be done using an include or an iframe (see below)
 
 **Example codes to show count to a user:**
 
