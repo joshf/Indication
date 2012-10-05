@@ -21,10 +21,10 @@ mysql_select_db(DB_NAME, $con);
 
 //List all downloads
 if (isset($_GET["list"])) {
-    $listdownloads = mysql_query("SELECT * FROM Data");
+    $listdownloads = mysql_query("SELECT name, count FROM Data");
     echo "<h1>All Downloads</h1><p>";
-    while($row = mysql_fetch_assoc($listdownloads)) {
-        echo "<b>" . $row["name"] . "</b>: " . $row["count"] . "<br />";
+    while($info = mysql_fetch_assoc($listdownloads)) {
+        echo "<b>" . $info["name"] . "</b>: " . $info["count"] . "<br />";
     }
     echo "</p></body></html>";
     mysql_close($con);
