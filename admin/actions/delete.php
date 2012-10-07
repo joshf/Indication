@@ -30,6 +30,4 @@ mysql_query("DELETE FROM Data WHERE id = \"$idtodelete\"");
 
 mysql_close($con);
 
-exit;
-
 ?>

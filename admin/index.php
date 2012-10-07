@@ -183,6 +183,12 @@ if (!$does_db_exist) {
 
 $getdownloads = mysql_query("SELECT * FROM Data");
 
+//Update checking
+$remoteversion = file_get_contents("https://raw.github.com/joshf/SHTracker/master/version.txt");
+if ($version < $remoteversion) {
+    echo "<p><div class=\"ui-state-highlight ui-corner-all\" style=\"padding: 0 .7em;\"><p><span class=\"ui-icon ui-icon-refresh\" style=\"float: left; margin-right: .3em;\"></span><b>Info:</b> An update to SHTracker is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/shtracker/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"http://sidhosting.co.uk/misc/shtracker_update.php?v=$version\" target=\"_blank\">here</a> to update.</p></div></p>";
+}
+
 echo "<h1>SHTracker: Downloads for " . WEBSITE . "</h1>
 <p><table id=\"downloads\">
 <thead>
@@ -224,12 +230,6 @@ echo "</tbody></table></p>";
 </div>
 <p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>To edit, delete or show the tracking link for a ID please select the radio button next to it.</p>
 <?php
-
-//Update checking
-$remoteversion = file_get_contents("https://raw.github.com/joshf/SHTracker/master/version.txt");
-if ($version < $remoteversion) {
-    echo "<p><div class=\"ui-state-highlight ui-corner-all\" style=\"padding: 0 .7em;\"><p><span class=\"ui-icon ui-icon-refresh\" style=\"float: left; margin-right: .3em;\"></span><b>Info:</b> An update to SHTracker is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/shtracker/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"http://sidhosting.co.uk/misc/shtracker_update.php?v=$version\" target=\"_blank\">here</a> to update.</p></div></p>";
-}
 
 $getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM Data");
 $resultnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
