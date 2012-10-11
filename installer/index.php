@@ -104,6 +104,6 @@ Path to Script: <input type="text" name="pathtoscript" value="<? echo $pathtoscr
 <input type="hidden" name="doinstall" />
 <p><input type="submit" value="Install" /></p>
 </form>
-<small>SHTracker <? echo $version; ?> Copyright <a href="http://sidhosting.co.uk">Josh Fradley</a> <? echo date("Y"); ?></small>
+<small>SHTracker <? echo $version; ?> Copyright <a href="http://github.com/joshf">Josh Fradley</a> <? echo date("Y"); ?></small>
 </body>
 </html>

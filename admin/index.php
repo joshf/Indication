@@ -4,7 +4,7 @@
 
 $version = "3.4.2";
 $codename = "ObsceneOstrich";
-$rev = "343";
+$rev = "345";
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
@@ -249,6 +249,6 @@ mysql_close($con);
 <button id="dogotosettingspage">Settings</button>
 <button id="showlogout">Logout</button></p>
 </div>
-<small>SHTracker <? echo $version; ?> (<? echo $rev; ?>) "<? echo $codename; ?>" Copyright <a href="http://sidhosting.co.uk" target="_blank">Josh Fradley</a> <? echo date("Y"); ?></small>
+<small>SHTracker <? echo $version; ?> (<? echo $rev; ?>) "<? echo $codename; ?>" Copyright <a href="http://github.com/joshf" target="_blank">Josh Fradley</a> <? echo date("Y"); ?></small>
 </body>
 </html>
