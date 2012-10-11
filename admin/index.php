@@ -1,6 +1,6 @@
 <?php
 
-//SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
+//SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
 
 $version = "3.4.2";
 $codename = "ObsceneOstrich";
@@ -29,6 +29,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <head>
 <title>SHTracker: Admin Home</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" type="text/css" href="../style.css" />
 <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/<? echo JQUERY_THEME; ?>/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.3/css/jquery.dataTables_themeroller.css" />

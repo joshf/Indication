@@ -1,6 +1,6 @@
 <?php
 
-//SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
+//SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
 
 ob_start();
 
@@ -9,9 +9,9 @@ ob_start();
 <head>
 <title>SHTracker</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" type="text/css" href="style.css" />
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<meta name="robots" content="noindex, nofollow">
 </head>
 <body>
 <script type="text/javascript">

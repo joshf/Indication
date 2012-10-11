@@ -1,6 +1,6 @@
 <?php
 
-//SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
+//SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
@@ -36,6 +36,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <head>
 <title>SHTracker: Login</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" type="text/css" href="../style.css" />
 </head>
 <body>

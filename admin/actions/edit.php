@@ -1,6 +1,6 @@
 <?php
 
-//SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
+//SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
 
 require_once("../../config.php");
 
@@ -21,6 +21,7 @@ if (!isset($_POST["id"])) {
 <head>
 <title>SHTracker: Download/Link Edited</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" type="text/css" href="../../style.css" />
 </head>
 <body>

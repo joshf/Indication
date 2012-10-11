@@ -1,8 +1,9 @@
-<!-- SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker) -->
+<!-- SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker) -->
 <html>
 <head>
 <title>SHTracker: Installer</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" type="text/css" href="../style.css" />
 </head>
 <body>

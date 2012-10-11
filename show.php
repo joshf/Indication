@@ -1,11 +1,11 @@
-<!-- SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker) -->
+<!-- SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker) -->
 <html>
 <head>
 <title>SHTracker</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="robots" content="noindex, nofollow">
 <!-- Change the style to match the rest of your site here -->
 <link rel="stylesheet" type="text/css" href="style.css" />
-<meta name="robots" content="noindex, nofollow">
 </head>
 <body>
 <?php

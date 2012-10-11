@@ -1,6 +1,6 @@
 <?php
 
-//SHTracker, Copyright Josh Fradley (http://sidhosting.co.uk/projects/shtracker)
+//SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
 
 require_once("../config.php");
 
@@ -100,6 +100,7 @@ header("Location: " . $_SERVER["REQUEST_URI"] . "");
 <head>
 <title>SHTracker: Settings</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" type="text/css" href="../style.css" />
 </head>
 <body>
