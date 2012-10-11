@@ -14,6 +14,7 @@ $version = "3.4.2";
 <html>
 <head>
 <title>SHTracker: Installer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="../style.css" />
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="//jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>

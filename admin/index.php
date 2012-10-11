@@ -28,6 +28,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <html> 
 <head>
 <title>SHTracker: Admin Home</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="../style.css" />
 <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/<? echo JQUERY_THEME; ?>/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.3/css/jquery.dataTables_themeroller.css" />

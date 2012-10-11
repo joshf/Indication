@@ -8,6 +8,7 @@ ob_start();
 <html>
 <head>
 <title>SHTracker</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="style.css" />
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <meta name="robots" content="noindex, nofollow">

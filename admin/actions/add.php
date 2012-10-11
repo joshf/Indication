@@ -16,6 +16,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <html> 
 <head>
 <title>SHTracker: Download/Link Added</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="../../style.css" />
 </head>
 <body>

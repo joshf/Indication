@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>SHTracker</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Change the style to match the rest of your site here -->
 <link rel="stylesheet" type="text/css" href="style.css" />
 <meta name="robots" content="noindex, nofollow">
