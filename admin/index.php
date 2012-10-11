@@ -2,7 +2,7 @@
 
 //SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
 
-$version = "3.4.2";
+$version = "3.4.3";
 $codename = "ObsceneOstrich";
 $rev = "345";
 
