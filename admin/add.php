@@ -25,7 +25,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <body>
 <script type="text/javascript">
 $(document).ready(function() {
-    $("input:checkbox[name=passwordprotectstate]").click(function() {
+    $("#passwordprotectstate").click(function() {
         $("#passwordentry").toggle(this.checked);
     });
     $.validator.addMethod(
@@ -80,7 +80,7 @@ $(document).ready(function() {
 <p>ID: <input type="text" size="50" name="id" /></p>
 <p>URL: <input type="text" size="50" name="url" /></p>
 <p>Count: <input type="text" size="50" name="count" value="0" /></p>
-<p>Enable password protection? <input type="checkbox" name="passwordprotectstate" /></p>
+<p>Enable password protection? <input type="checkbox" id="passwordprotectstate" name="passwordprotectstate" /></p>
 <div id="passwordentry" style="display: none">
 <p><i>Please enter a password:</i> <input type="password" name="password" /></p>
 </div>

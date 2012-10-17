@@ -29,7 +29,7 @@ if (!isset($_GET["id"])) {
 <body>
 <script type="text/javascript">
 $(document).ready(function() {
-    $("input:checkbox[name=passwordprotectstate]").click(function() {
+    $("#passwordprotectstate").click(function() {
         $("#passwordentry").toggle(this.checked);
     });
     $.validator.addMethod(
@@ -120,9 +120,9 @@ while($row = mysql_fetch_assoc($getidinfo)) {
 $checkifprotected = mysql_query("SELECT protect FROM Data WHERE id = \"$idtoedit\"");
 $checkifprotectedresult = mysql_fetch_assoc($checkifprotected); 
 if ($checkifprotectedresult["protect"] == "1") { 
-    echo "<p>Enable password protection? <input type=\"checkbox\" name=\"passwordprotectstate\" checked=\"yes\" /></p>";
+    echo "<p>Enable password protection? <input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\" checked=\"yes\" /></p>";
 } else {
-    echo "<p>Enable password protection? <input type=\"checkbox\" name=\"passwordprotectstate\" /></p>";
+    echo "<p>Enable password protection? <input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\" /></p>";
 }
 
 ?>

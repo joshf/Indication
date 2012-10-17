@@ -4,7 +4,7 @@
 
 $version = "3.4.3";
 $codename = "ObsceneOstrich";
-$rev = "345";
+$rev = "347";
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
@@ -185,12 +185,6 @@ if (!$does_db_exist) {
 
 $getdownloads = mysql_query("SELECT * FROM Data");
 
-//Update checking
-$remoteversion = file_get_contents("https://raw.github.com/joshf/SHTracker/master/version.txt");
-if ($version < $remoteversion) {
-    echo "<p><div class=\"ui-state-highlight ui-corner-all\" style=\"padding: 0 .7em;\"><p><span class=\"ui-icon ui-icon-refresh\" style=\"float: left; margin-right: .3em;\"></span><b>Info:</b> An update to SHTracker is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/shtracker/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"http://sidhosting.co.uk/misc/shtracker_update.php?v=$version\" target=\"_blank\">here</a> to update.</p></div></p>";
-}
-
 echo "<h1>SHTracker: Downloads for " . WEBSITE . "</h1>
 <p><table id=\"downloads\">
 <thead>
@@ -210,6 +204,14 @@ while($row = mysql_fetch_assoc($getdownloads)) {
     echo "</tr>";
 }
 echo "</tbody></table></p>";
+
+//Update checking
+$remoteversion = file_get_contents("https://raw.github.com/joshf/SHTracker/master/version.txt");
+if (preg_match("/^[0-9.-]{1,}$/", $remoteversion)) {
+    if ($version < $remoteversion) {
+        echo "<p><div class=\"ui-state-highlight ui-corner-all\" style=\"padding: 0 .7em;\"><p><span class=\"ui-icon ui-icon-refresh\" style=\"float: left; margin-right: .3em;\"></span><b>Info:</b> An update to SHTracker is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/shtracker/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"http://sidhosting.co.uk/misc/shtracker_update.php?v=$version\" target=\"_blank\">here</a> to update.</p></div></p>";
+    }
+}
 
 ?>
 <div id="failuremessage" class="ui-state-error ui-corner-all" style="display: none; padding: 0 .7em;">
