@@ -4,7 +4,7 @@
 
 $version = "3.4.3";
 $codename = "ObsceneOstrich";
-$rev = "347";
+$rev = "350";
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
@@ -32,10 +32,10 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" type="text/css" href="../style.css" />
 <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/<? echo JQUERY_THEME; ?>/jquery-ui.css" />
-<link rel="stylesheet" type="text/css" href="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.3/css/jquery.dataTables_themeroller.css" />
+<link rel="stylesheet" type="text/css" href="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables_themeroller.css" />
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
-<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.3/jquery.dataTables.js"></script>
+<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.js"></script>
 </head>
 <body>
 <!--[if IE]>
@@ -209,7 +209,7 @@ echo "</tbody></table></p>";
 $remoteversion = file_get_contents("https://raw.github.com/joshf/SHTracker/master/version.txt");
 if (preg_match("/^[0-9.-]{1,}$/", $remoteversion)) {
     if ($version < $remoteversion) {
-        echo "<p><div class=\"ui-state-highlight ui-corner-all\" style=\"padding: 0 .7em;\"><p><span class=\"ui-icon ui-icon-refresh\" style=\"float: left; margin-right: .3em;\"></span><b>Info:</b> An update to SHTracker is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/shtracker/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"http://sidhosting.co.uk/misc/shtracker_update.php?v=$version\" target=\"_blank\">here</a> to update.</p></div></p>";
+        echo "<p><div class=\"ui-state-highlight ui-corner-all\" style=\"padding: 0 .7em;\"><p><span class=\"ui-icon ui-icon-refresh\" style=\"float: left; margin-right: .3em;\"></span><b>Info:</b> An update to SHTracker is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/SHTracker/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"http://sidhosting.co.uk/misc/shtracker_update.php?v=$version\" target=\"_blank\">here</a> to update.</p></div></p>";
     }
 }
 
