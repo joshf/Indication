@@ -4,7 +4,7 @@
 
 $version = "3.4.3";
 $codename = "ObsceneOstrich";
-$rev = "350";
+$rev = "351";
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
@@ -78,12 +78,7 @@ $(document).ready(function() {
     /* Edit */
     $("#dogotoeditpage").click(function() {
         if (!is_selected) {
-            $("#noidselectedmessage").show("fast");
-            $("#adminfunctions").hide("fast");
-            setTimeout(function(){
-                $("#noidselectedmessage").hide("fast");
-                $("#adminfunctions").show("fast");
-            }, 3000); 
+            alert("No ID selected!");
         } else {
             window.location = "edit.php?id="+ id +"";
         }
@@ -92,41 +87,20 @@ $(document).ready(function() {
     /* Delete */
     $("#showdelete").click(function() {
         if (!is_selected) {
-            $("#noidselectedmessage").show("fast");
-            $("#adminfunctions").hide("fast");
-            setTimeout(function(){
-                $("#noidselectedmessage").hide("fast");
-                $("#adminfunctions").show("fast");
-            }, 3000); 
+            alert("No ID selected!");
         } else {
             deleteconfirm=confirm("Delete "+ name +"?")
             if (deleteconfirm==true) {
-                $("#loadingmessage").ajaxStart(function() {
-                    $(this).show();
-                });
-                $("#loadingmessage").ajaxStop(function() {
-                    $(this).hide();
-                });
                 $.ajax({  
                     type: "POST",  
                     url: "actions/delete.php",  
                     data: "id="+ id +"",
                     error: function() {  
-                        $("#failuremessage").show("fast");
-                        $("#adminfunctions").hide("fast");
-                        setTimeout(function(){
-                            $("#failuremessage").hide("fast");
-                            $("#adminfunctions").show("fast");
-                        }, 3000); 
+                        alert("Ajax query failed!");
                     },
                     success: function() {  
-                        $("#downloaddeletedmessage").show("fast");
-                        $("#adminfunctions").hide("fast");
-                        setTimeout(function(){
-                            $("#downloaddeletedmessage").hide("fast");
-                            $("#adminfunctions").show("fast");
-                            window.location.reload()
-                        }, 3000);               
+                        alert("Download "+ name +" deleted!");
+                        window.location.reload();          
                     }	
                 });
             } else {
@@ -138,12 +112,7 @@ $(document).ready(function() {
     /* Tracking Link */
     $("#showtrackinglink").click(function() {
         if (!is_selected) {
-            $("#noidselectedmessage").show("fast");
-            $("#adminfunctions").hide("fast");
-            setTimeout(function(){
-                $("#noidselectedmessage").hide("fast");
-                $("#adminfunctions").show("fast");
-            }, 3000);
+            alert("No ID selected!");
         } else {
             prompt("Tracking link for "+ name +". Press Ctrl/Cmd C to copy to the clipboard:", "<? echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
         } 
@@ -214,18 +183,6 @@ if (preg_match("/^[0-9.-]{1,}$/", $remoteversion)) {
 }
 
 ?>
-<div id="failuremessage" class="ui-state-error ui-corner-all" style="display: none; padding: 0 .7em;">
-<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span><b>Error:</b> Ajax query failed!</p>
-</div>
-<div id="loadingmessage" class="ui-state-highlight ui-corner-all" style="display: none; padding: 0 .7em;">
-<p><span class="ui-icon ui-icon-refresh" style="float: left; margin-right: .3em;"></span><b>Info:</b> Working...</p>
-</div>
-<div id="noidselectedmessage" class="ui-state-error ui-corner-all" style="display: none; padding: 0 .7em;">
-<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span><b>Error:</b> No ID selected!</p>
-</div>
-<div id="downloaddeletedmessage" class="ui-state-highlight ui-corner-all" style="display: none; padding: 0 .7em;">
-<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span><b>Info:</b> Download deleted!</p>
-</div>
 <div id="adminfunctions">
 <p><button id="dogotoaddpage">Add</button>
 <button id="dogotoeditpage">Edit</button>
