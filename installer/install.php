@@ -13,6 +13,8 @@ if (!isset($_POST["doinstall"])) {
     die("<h1>SHTracker: Error</h1><p>This installer can not be called directly!</p><hr /><p><a href=\"../installer\">Go To Installer</a></p></body></html>");
 }
 
+$version = $POST["version"];
+
 //Get new settings from POST
 $dbhost = $_POST["dbhost"];
 $dbuser = $_POST["dbuser"];
@@ -82,7 +84,10 @@ fwrite($configfile, $installstring);
 fclose($configfile);
 
 mysql_close($con);
- 
+
+//Log
+fopen("http://sidhosting.co.uk/misc/installs/detect.php?product=shtracker&version=$version&url=$pathtoscript", "r");
+
 ?>
 <h1>SHTracker: Install Complete</h1>
 <p>SHTracker has been successfully installed. Please delete the "installer" folder from your server, as it poses a potential security risk!</p>

@@ -31,11 +31,6 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 ?>
 <script type="text/javascript">
 $(document).ready(function() {
-    $.ajax({  
-        type: "POST",  
-        url: "http://sidhosting.co.uk/misc/installs/detect.php",  
-        data: "product=shtracker&url=<? echo $pathtoscript; ?>&version=<? echo $version; ?>",
-    });
     $.validator.addMethod(
         "legalurl",
         function(value, element) { 
@@ -102,6 +97,7 @@ Confirm Password: <input type="password" name="adminpasswordconfirm" /><br />
 Website Name: <input type="text" name="website" /><br />
 Path to Script: <input type="text" name="pathtoscript" value="<? echo $pathtoscript; ?>" /><br />
 <input type="hidden" name="doinstall" />
+<input type="hidden" name="version" value="<? echo $version; ?>" />
 <p><input type="submit" value="Install" /></p>
 </form>
 <small>SHTracker <? echo $version; ?> Copyright <a href="http://github.com/joshf">Josh Fradley</a> <? echo date("Y"); ?></small>
