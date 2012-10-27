@@ -45,7 +45,9 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <script type="text/javascript">
 $(document).ready(function() {
     /* jQuery UI buttons */
+    $("#adminfunctions").css("font-size", "0.6em");
     $("#adminfunctions").buttonset();
+    $("#userfunctions").css("font-size", "0.6em");
     $("#userfunctions").buttonset();
     /* End */
     /* DataTables */
