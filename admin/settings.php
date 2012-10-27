@@ -132,13 +132,15 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 <p><b>jQuery Theme:</b></p>
 <?php
 
-echo "<p>Current theme: <b>" . ucfirst($currentjquerytheme) . "</b></p>";
-
 $themes = array("base", "black-tie", "blitzer", "cupertino", "dark-hive", "dot-luv", "eggplant", "excite-bike", "flick", "hot-sneaks", "humanity", "le-frog", "mint-choc", "overcast", "pepper-grinder", "redmond", "smoothness", "south-street", "start", "sunny", "swanky-purse", "trontastic", "ui-darkness", "ui-lightness", "vader");
 
 echo "<p><select name=\"jquerytheme\">";
 foreach ($themes as $value) {
-    echo "<option value=\"$value\">". ucfirst($value) . "</option>";
+    if ($value == $currentjquerytheme) {
+        echo "<option value=\"$value\" selected>". ucfirst($value) . "</option>";
+    } else {
+        echo "<option value=\"$value\">". ucfirst($value) . "</option>";
+    }
 }
 echo "</select></p>";
 
