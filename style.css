@@ -77,6 +77,10 @@ label.error {
     vertical-align: middle; 
 }
 
+.ui-button-text {
+    font-size: 0.6em;
+}
+
 .highlight-row { 
     background-color: #dddddd !important; 
 }
