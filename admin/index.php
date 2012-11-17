@@ -2,9 +2,9 @@
 
 //SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
 
-$version = "3.4.3";
+$version = "3.4.4";
 $codename = "ObsceneOstrich";
-$rev = "356";
+$rev = "360";
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
