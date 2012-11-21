@@ -32,10 +32,9 @@ if (isset($_GET["list"])) {
     exit;
 }
 
-$id = mysql_real_escape_string($_GET["id"]);
-
-//Check ID is not blank
-if (empty($id)) {
+if (isset($_GET["id"])) {
+    $id = mysql_real_escape_string($_GET["id"]);
+} else {
     die("<h1>SHTracker: Error</h1><p>ID cannot be blank.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 

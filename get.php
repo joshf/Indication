@@ -45,15 +45,12 @@ if (!$does_db_exist) {
 
 mysql_select_db(DB_NAME, $con);
 
-//Accept POST or GET
+//Get the ID from $_GET OR $_POST
 if (isset($_GET["id"])) {
     $id = mysql_real_escape_string($_GET["id"]);
-} else {
+} elseif (isset($_POST["id"])) {
     $id = mysql_real_escape_string($_POST["id"]);
-}
-
-//Check ID is not blank
-if (empty($id)) {
+} else {
     die("<h1>SHTracker: Error</h1><p>ID cannot be blank.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
