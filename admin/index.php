@@ -78,7 +78,7 @@ $(document).ready(function() {
     /* Edit */
     $("#dogotoeditpage").click(function() {
         if (!is_selected) {
-            alert("No ID selected!");
+            alert("No download selected!");
         } else {
             window.location = "edit.php?id="+ id +"";
         }
@@ -87,7 +87,7 @@ $(document).ready(function() {
     /* Delete */
     $("#showdelete").click(function() {
         if (!is_selected) {
-            alert("No ID selected!");
+            alert("No download selected!");
         } else {
             deleteconfirm=confirm("Delete "+ name +"?")
             if (deleteconfirm==true) {
@@ -112,7 +112,7 @@ $(document).ready(function() {
     /* Tracking Link */
     $("#showtrackinglink").click(function() {
         if (!is_selected) {
-            alert("No ID selected!");
+            alert("No download selected!");
         } else {
             prompt("Tracking link for "+ name +". Press Ctrl/Cmd C to copy to the clipboard:", "<? echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
         } 
