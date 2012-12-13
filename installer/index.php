@@ -17,7 +17,7 @@ $version = "3.4.4";
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" type="text/css" href="../style.css" />
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="//jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 </head>
 <body>
@@ -33,11 +33,11 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 $(document).ready(function() {
     $.validator.addMethod(
         "legalurl",
-        function(value, element) { 
+        function(value, element) {
             return this.optional(element) || /^[a-zA-Z0-9.?=:#_\-/\-]+$/.test(value);
         },
         "Please enter a valid URL."
-    ); 
+    );
     $("#installform").validate({
         rules: {
             adminpassword: {

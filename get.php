@@ -11,11 +11,11 @@ ob_start();
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" type="text/css" href="style.css" />
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 </head>
 <body>
 <script type="text/javascript">
-$(document).ready(function() { 
+$(document).ready(function() {
     var count = 5;
     countdown = setInterval(function(){
         $("#counterplaceholder").html("<p><i>Your download will be ready in " + count + " second(s)</i></p>");
@@ -56,8 +56,8 @@ if (isset($_GET["id"])) {
 
 //Check if ID exists
 $getinfo = mysql_query("SELECT name, url FROM Data WHERE id = \"$id\"");
-$getinforesult = mysql_fetch_assoc($getinfo); 
-if ($getinforesult == 0) { 
+$getinforesult = mysql_fetch_assoc($getinfo);
+if ($getinforesult == 0) {
     die("<h1>SHTracker: Error</h1><p>ID does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
@@ -75,8 +75,8 @@ if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
 
 //Check if download is password protected
 $checkifprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$id\"");
-$checkifprotectedresult = mysql_fetch_assoc($checkifprotected); 
-if ($checkifprotectedresult["protect"] == "1") { 
+$checkifprotectedresult = mysql_fetch_assoc($checkifprotected);
+if ($checkifprotectedresult["protect"] == "1") {
     if (isset($_POST["password"])) {
         if (sha1($_POST["password"]) != $checkifprotectedresult["password"]) {
             die("<h1>SHTracker: Error</h1><p>Incorrect password.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
@@ -84,7 +84,7 @@ if ($checkifprotectedresult["protect"] == "1") {
             setcookie("shtrackerhasauthed_$idclean", time()+900, time()+900);
         }
     } elseif (isset($_COOKIE["shtrackerhasauthed_$idclean"])) {
-        $time = ($_COOKIE["shtrackerhasauthed_$idclean"]-time()) / 60; 
+        $time = ($_COOKIE["shtrackerhasauthed_$idclean"]-time()) / 60;
         $timeleft = ceil($time);
         echo "<small><b>Notice:</b> your download session wll expire in $timeleft minutes...</small>";
     } else {
@@ -102,9 +102,9 @@ if ($checkifprotectedresult["protect"] == "1") {
 
 //Check if we should show ads
 $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$id\"");
-$checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
-if ($checkifadsshowresult["showads"] == "1") { 
-    $adcode = htmlspecialchars_decode(AD_CODE); 
+$checkifadsshowresult = mysql_fetch_assoc($checkifadsshow);
+if ($checkifadsshowresult["showads"] == "1") {
+    $adcode = htmlspecialchars_decode(AD_CODE);
     die("<h1>Downloading " . $getinforesult["name"] . "</h1><p>" . $adcode . "</p><p><div id=\"counterplaceholder\"></div></p><p><button id=\"downloadbutton\" style=\"display: none\" onClick=\"window.location = '" . $getinforesult["url"] . "'\">Get Download</button></p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 

@@ -23,7 +23,7 @@ mysql_select_db(DB_NAME, $con);
 //List all downloads
 if (isset($_GET["list"])) {
     $listdownloads = mysql_query("SELECT name, count FROM Data");
-    echo "<h1>All Downloads</h1><p>";
+    echo "<h1>All Downloads for " . WEBSITE . "</h1><p>";
     while($info = mysql_fetch_assoc($listdownloads)) {
         echo "<b>" . $info["name"] . "</b>: " . $info["count"] . "<br />";
     }
@@ -38,16 +38,16 @@ if (isset($_GET["id"])) {
     die("<h1>SHTracker: Error</h1><p>ID cannot be blank.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
-//If ID exists show count or else die
+//If ID exists, show count or else die
 $showinfo = mysql_query("SELECT name, count FROM Data WHERE id = \"$id\"");
-$showresult = mysql_fetch_assoc($showinfo); 
-if ($showresult != 0) { 
+$showresult = mysql_fetch_assoc($showinfo);
+if ($showresult != 0) {
     if (isset($_GET["plain"])) {
         echo $showresult["count"];
     } else {
         echo "<p>" . $showresult["name"] . " has been downloaded " . $showresult["count"] . " time(s).</p>";
     }
-} else { 
+} else {
     die("<h1>SHTracker: Error</h1><p>ID does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
