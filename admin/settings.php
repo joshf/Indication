@@ -143,6 +143,7 @@ foreach ($themes as $value) {
     }
 }
 echo "</select></p>";
+
 ?>
 <p><input type="submit" name="Save" value="Save" /></p>
 </form>
