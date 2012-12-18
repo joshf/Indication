@@ -25,11 +25,11 @@ if (!isset($_POST["id"])) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
 <style>
-	body {
-		padding-top: 60px;
-	}
+    body {
+        padding-top: 60px;
+    }
 </style>
-<link href="../../resources/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -37,7 +37,7 @@ if (!isset($_POST["id"])) {
 </head>
 <body>
 <!-- Nav start -->
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
 <a class="btw btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -51,6 +51,7 @@ if (!isset($_POST["id"])) {
 <li><a href="../index.php">Home</a></li>
 <li class="divider-vertical"></li>
 <li><a href="../add.php">Add</a></li>
+<li><a href="#">Edit</a></li>
 <li class="divider-vertical"></li>
 <li><a href="../settings.php">Settings</a></li>
 <li><a href="../logout.php">Logout</a></li>
@@ -89,12 +90,12 @@ $newurl = strtolower($newurl);
 
 //Failsafes
 if (empty($newname) || empty($newid) || empty($newurl)) {
-    die("<h1>SHTracker: Error</h1><p>One or more fields are empty.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    die("<div class=\"alert alert-error\"><p><b>Error:</b> One or more fields are empty.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 if (isset($_POST["passwordprotectstate"])) {
     if (!isset($_POST["password"])) {
-        die("<h1>SHTracker: Error</h1><p>Password is missing...</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+        die("<div class=\"alert alert-error\"><p><b>Error:</b> Password is missing.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
     } 
     $getprotectinfo = mysql_query("SELECT password FROM Data WHERE id = \"$idtoedit\"");
     $getprotectinforesult = mysql_fetch_assoc($getprotectinfo); 

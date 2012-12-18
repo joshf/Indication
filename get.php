@@ -4,43 +4,54 @@
 
 ob_start();
 
+require_once("config.php");
+
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
 <title>SHTracker</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="robots" content="noindex, nofollow">
-<link rel="stylesheet" type="text/css" href="style.css" />
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
+<style>
+    body {
+        padding-top: 60px;
+    }
+</style>
+<link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 </head>
 <body>
-<script type="text/javascript">
-$(document).ready(function() {
-    var count = 5;
-    countdown = setInterval(function(){
-        $("#counterplaceholder").html("<p><i>Your download will be ready in " + count + " second(s)</i></p>");
-        if (count <= 0) {
-            clearInterval(countdown);
-            $("#counterplaceholder").fadeOut("fast");
-            $("#downloadbutton").delay(300).fadeIn("fast");
-        }
-        count--;
-    }, 1000);
-});
-</script>
+<!-- Nav start -->
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<a class="brand" href="#">SHTracker</a>
+</div>
+</div>
+</div>
+<!-- Nav end -->
+<!-- Content start -->
+<div class="container">
+<div class="page-header">
+<h1><? echo WEBSITE; ?></h1>
+</div>		
 <?php
 
 //Connect to database
-require_once("config.php");
-
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
-    die("<h1>SHTracker: Error</h1><p>Could not connect to database: " . mysql_error() . ". Check your database settings are correct.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    die("<div class=\"alert alert-error\"><p><b>Error:</b> Could not connect to database (" . mysql_error() . "). Check your database settings are correct.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 $does_db_exist = mysql_select_db(DB_NAME, $con);
 if (!$does_db_exist) {
-    die("<h1>SHTracker: Error</h1><p>Could not connect to database: " . mysql_error() . ". Check your database settings are correct.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    die("<div class=\"alert alert-error\"><p><b>Error:</b> Database does not exist (" . mysql_error() . "). Check your database settings are correct.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 mysql_select_db(DB_NAME, $con);
@@ -51,14 +62,14 @@ if (isset($_GET["id"])) {
 } elseif (isset($_POST["id"])) {
     $id = mysql_real_escape_string($_POST["id"]);
 } else {
-    die("<h1>SHTracker: Error</h1><p>ID cannot be blank.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    die("<div class=\"alert alert-error\"><p><b>Error:</b> ID cannot be blank.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 //Check if ID exists
 $getinfo = mysql_query("SELECT name, url FROM Data WHERE id = \"$id\"");
 $getinforesult = mysql_fetch_assoc($getinfo);
 if ($getinforesult == 0) {
-    die("<h1>SHTracker: Error</h1><p>ID does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    die("<div class=\"alert alert-error\"><p><b>Error:</b> ID does not exist.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 //Cookies don't like dots
@@ -79,7 +90,7 @@ $checkifprotectedresult = mysql_fetch_assoc($checkifprotected);
 if ($checkifprotectedresult["protect"] == "1") {
     if (isset($_POST["password"])) {
         if (sha1($_POST["password"]) != $checkifprotectedresult["password"]) {
-            die("<h1>SHTracker: Error</h1><p>Incorrect password.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+            die("<div class=\"alert alert-error\"><p><b>Error:</b> Incorrect password.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
         } else {
             setcookie("shtrackerhasauthed_$idclean", time()+900, time()+900);
         }
@@ -88,13 +99,13 @@ if ($checkifprotectedresult["protect"] == "1") {
         $timeleft = ceil($time);
         echo "<small><b>Notice:</b> your download session wll expire in $timeleft minutes...</small>";
     } else {
-        die("<h1>Downloading " . $getinforesult["name"] . "</h1>
+        die("<h3>Downloading " . $getinforesult["name"] . "</h3>
         <form method=\"post\">
         <p>To access this download please enter the password you were given.</p>
         <p>Password: <input type=\"password\" name=\"password\" /></p>
-        <input type=\"submit\" value=\"Get Download\" /></form>
-        <hr />
-        <p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p>
+        <input type=\"submit\" class=\"btn btn-success\" value=\"Get Download\" /></form>
+        <p><a href=\"javascript:history.go(-1)\" class=\"btn\">&larr; Go Back</a></p>
+        </div>
         </body>
         </html>");
     }
@@ -105,7 +116,7 @@ $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$id\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow);
 if ($checkifadsshowresult["showads"] == "1") {
     $adcode = htmlspecialchars_decode(AD_CODE);
-    die("<h1>Downloading " . $getinforesult["name"] . "</h1><p>" . $adcode . "</p><p><div id=\"counterplaceholder\"></div></p><p><button id=\"downloadbutton\" style=\"display: none\" onClick=\"window.location = '" . $getinforesult["url"] . "'\">Get Download</button></p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    die("<h4>Downloading " . $getinforesult["name"] . "</h4><p>" . $adcode . "</p><p><button class=\"btn btn-success\" onClick=\"window.location = '" . $getinforesult["url"] . "'\">Get Download</button></p><p><a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p></div></body></html>");
 }
 
 mysql_close($con);
@@ -116,5 +127,7 @@ ob_end_flush();
 exit;
 
 ?>
+</div>
+<!-- Content end -->
 </body>
 </html>

@@ -8,8 +8,8 @@ $uniquekey = UNIQUE_KEY;
 
 session_start();
 if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
-	header("Location: login.php");
-	exit; 
+    header("Location: login.php");
+    exit; 
 }
 
 ?>
@@ -22,10 +22,10 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <link href="../../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
 <style>
     body {
-	   padding-top: 60px;
-    }  
+        padding-top: 60px;
+    }
     label.error {
-	   color: #ff0000;
+        color: #ff0000;
     }
 </style>
 <link href="../../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
@@ -36,7 +36,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 </head>
 <body>
 <!-- Nav start -->
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
 <a class="btw btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -50,6 +50,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <li><a href="../index.php">Home</a></li>
 <li class="divider-vertical"></li>
 <li class="active"><a href="../add.php">Add</a></li>
+<li><a href="#">Edit</a></li>
 <li class="divider-vertical"></li>
 <li><a href="../settings.php">Settings</a></li>
 <li><a href="../logout.php">Logout</a></li>
@@ -86,21 +87,21 @@ $url = strtolower($url);
 
 //Failsafes
 if (empty($name) || empty($id) || empty($url)) {
-    die("<p>One or more fields are empty.</p><p><a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p></body></html>");
+    die("<div class=\"alert alert-error\"><p><b>Error:</b> One or more fields are empty.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 //Check if ID exists
 $checkid = mysql_query("SELECT id FROM Data WHERE id = \"$id\"");
 $resultcheckid = mysql_fetch_assoc($checkid); 
-if ($resultcheckid != 0) { 
-    die("<p>ID <b>$id</b> already exists.</p><p><a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p></body></html>");
+if ($resultcheckid != 0) {
+    die("<div class=\"alert alert-error\"><p><b>Error:</b> ID $id already exists.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>"); 
 }
 
 if (isset($_POST["passwordprotectstate"])) {
     $protect = "1";
     $inputtedpassword = mysql_real_escape_string($_POST["password"]);
     if (empty($inputtedpassword)) {
-        die("<p>Password is missing...</p><p><a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p></body></html>");
+        die("<div class=\"alert alert-error\"><p><b>Error:</b> Password is missing.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></body></html>"); 
     }
     $password = sha1($inputtedpassword);
 } else {
@@ -136,58 +137,6 @@ mysql_close($con);
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="../../resources/bootstrap/js/bootstrap.js"></script>
 <script src="../../resources/bootstrap/js/bootstrap-collapse.js"></script>
-<script src="//jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	$("#passwordprotectstate").click(function() {
-		$("#passwordentry").toggle(this.checked);
-	});
-	$.validator.addMethod(
-		"legalname",
-		function(value, element) {
-			return this.optional(element) || /^[a-zA-Z0-9()._\-\s]+$/.test(value);
-		},
-		"Illegal character. Only points, spaces, underscores or dashes are allowed."
-	);
-	$.validator.addMethod(
-		"legalid",
-		function(value, element) {
-			return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
-		},
-		"Illegal character. Only points, underscores or dashes are allowed."
-	); 
-	$.validator.addMethod(
-		"legalurl",
-		function(value, element) { 
-			return this.optional(element) || /^[a-zA-Z0-9.?=:#_\-/\-]+$/.test(value);
-		},
-		"Illegal character. Please use a valid URL or directory path."
-	); 
-	$("#addform").validate({
-		rules: {
-			downloadname: {
-				required: true,
-				legalname: true
-			},
-			id: {
-				required: true,
-				legalid: true
-			},
-			url: {
-				required: true,
-				legalurl: true
-			},
-			count: {
-				digits: true
-			},
-			password: {
-				required: true,
-				minlength: 6
-			},
-		}
-	});
-});
-</script>
 <!-- Javascript end -->
 </body>
 </html>
