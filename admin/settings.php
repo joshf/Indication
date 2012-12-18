@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 
 //SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
@@ -97,21 +96,26 @@ header("Location: " . $_SERVER["REQUEST_URI"] . "");
 }
 
 ?>
-<html> 
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
 <title>SHTracker: Settings</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="robots" content="noindex, nofollow">
-<link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
 <style>
-    html, body {
-        padding-top: 30px;
-        height: 100%;
-    }
+	body {
+		padding-top: 60px;
+	}
 </style>
 <link href="../resources/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 </head>
 <body>
+<!-- Nav start -->
 <div class="navbar navbar-inverse navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
@@ -123,8 +127,10 @@ header("Location: " . $_SERVER["REQUEST_URI"] . "");
 <a class="brand" href="#">SHTracker</a>
 <div class="nav-collapse collapse">
 <ul class="nav">
-<li><a href="index.php">Downloads</a></li>
+<li><a href="index.php">Home</a></li>
+<li class="divider-vertical"></li>
 <li><a href="add.php">Add</a></li>
+<li class="divider-vertical"></li>
 <li class="active"><a href="settings.php">Settings</a></li>
 <li><a href="logout.php">Logout</a></li>
 </ul>
@@ -132,6 +138,8 @@ header("Location: " . $_SERVER["REQUEST_URI"] . "");
 </div>
 </div>
 </div>
+<!-- Nav end -->
+<!-- Content start -->
 <div class="container">
 <div class="page-header">
 <h1>Settings</h1>
@@ -160,9 +168,9 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
     <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\" checked/> Disabled</p>";
 }
 ?>
-<p><input class="btn" type="submit" name="Save" value="Save" /></p>
+<button type="submit" class="btn btn-primary" name="save">Save Changes</button>
 </form>
-<p><b>Database Backup</b><p>
+<p><h4>Database Backup</h4><p>
 <?
 
 if (isset($_GET["backup"])) {
@@ -201,5 +209,11 @@ if (isset($_GET["backup"])) {
 
 ?>
 </div>
+<!-- Content end -->
+<!-- Javascript start -->	
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="../resources/bootstrap/js/bootstrap.js"></script>
+<script src="../resources/bootstrap/js/bootstrap-collapse.js"></script>
+<!-- Javascript end -->
 </body>
 </html>

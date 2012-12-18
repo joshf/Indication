@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 
 //SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
@@ -9,83 +8,38 @@ $uniquekey = UNIQUE_KEY;
 
 session_start();
 if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
-    header("Location: login.php");
-    exit; 
+	header("Location: login.php");
+	exit; 
 }
 
 if (!isset($_GET["id"])) {
-    header("Location: ../admin");
+	header("Location: ../admin");
 }
 
 ?>
-<html> 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>SHTracker: Editing Download/Link</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="robots" content="noindex, nofollow">
-<link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet">
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script type="text/javascript" src="//jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+<meta charset="utf-8">
+<title>SHTracker: Edit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
 <style>
-    html, body {
-        padding-top: 30px;
-        height: 100%;
-    }
+	body {
+		padding-top: 60px;
+	}
+	label.error {
+		color: #ff0000;
+	}
 </style>
-<link href="../resources/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 </head>
-<script type="text/javascript">
-$(document).ready(function() {
-    $("#passwordprotectstate").click(function() {
-        $("#passwordentry").toggle(this.checked);
-    });
-    $.validator.addMethod(
-        "legalname",
-        function(value, element) {
-            return this.optional(element) || /^[a-zA-Z0-9()._\-\s]+$/.test(value);
-        },
-        "Illegal character. Only points, spaces, underscores or dashes are allowed."
-    );
-    $.validator.addMethod(
-        "legalid",
-        function(value, element) {
-            return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
-        },
-        "Illegal character. Only points, underscores or dashes are allowed."
-    );
-    $.validator.addMethod(
-        "legalurl",
-        function(value, element) { 
-            return this.optional(element) || /^[a-zA-Z0-9.?=:#_\-/\-]+$/.test(value);
-        },
-        "Illegal character. Please use a valid URL or directory path."
-    ); 
-    $("#editform").validate({
-        rules: {
-            downloadname: {
-                required: true,
-                legalname: true
-            },
-            id: {
-                required: true,
-                legalid: true
-            },
-            url: {
-                required: true,
-                legalurl: true
-            },
-            count: {
-                digits: true
-            },
-            password: {
-                required: true,
-                minlength: 6
-            },
-        }
-    });
-});
-</script>
 <body>
+<!-- Nav start -->   
 <div class="navbar navbar-inverse navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
@@ -97,8 +51,10 @@ $(document).ready(function() {
 <a class="brand" href="#">SHTracker</a>
 <div class="nav-collapse collapse">
 <ul class="nav">
-<li class="active"><a href="index.php">Downloads</a></li>
+<li class="active"><a href="index.php">Home</a></li>
+<li class="divider-vertical"></li>
 <li><a href="add.php">Add</a></li>
+<li class="divider-vertical"></li>
 <li><a href="settings.php">Settings</a></li>
 <li><a href="logout.php">Logout</a></li>
 </ul>
@@ -106,11 +62,13 @@ $(document).ready(function() {
 </div>
 </div>
 </div>
-<div id="wrap">
+<!-- Nav end -->   
+<!-- Content start -->   
 <div class="container">
 <div class="page-header">
-<h1>Edit></h1>
+<h1>Edit</h1>
 </div>
+<p>Not sure about this one...</p>
 <?php
 
 //Connect to database
@@ -118,7 +76,7 @@ require_once("../config.php");
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
-    die("Could not connect: " . mysql_error());
+	die("Could not connect: " . mysql_error());
 }
 
 mysql_select_db(DB_NAME, $con);
@@ -129,32 +87,31 @@ $idtoedit = mysql_real_escape_string($_GET["id"]);
 $doesidexist = mysql_query("SELECT id FROM Data WHERE id = \"$idtoedit\"");
 $doesidexistresult = mysql_fetch_assoc($doesidexist); 
 if ($doesidexistresult == 0) { 
-    die("<h1>SHTracker: Error</h1><p>ID does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+	die("<h1>SHTracker: Error</h1><p>ID does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
 $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$idtoedit\"");
 $resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
 
 ?>
-<p>Please edit any values you wish.</p>
-<form action="actions/edit.php" method="post" id="editform">
+<form action="actions/edit.php" method="post" id="editform"><fieldset>
 <?php
 
 $getidinfo = mysql_query("SELECT * FROM Data WHERE id = \"$idtoedit\"");
 while($row = mysql_fetch_assoc($getidinfo)) {
-    echo "<p>Name: <input type=\"text\" size=\"50\" name=\"downloadname\" value=\"" . $row["name"] . "\" /></p>";
-    echo "<p>ID: <input type=\"text\" size=\"50\" name=\"id\" value=\"" . $row["id"] . "\" /></p>";
-    echo "<p>URL: <input type=\"text\" size=\"50\" name=\"url\" value=\"" . $row["url"] . "\" /></p>";
-    echo "<p>Count: <input type=\"text\" size=\"50\" name=\"count\" value=\"" . $row["count"] . "\" /></p>";
+	echo "<label>Name</label><input type=\"text\" size=\"50\" name=\"downloadname\" value=\"" . $row["name"] . "\" /></p>";
+	echo "<label>ID</label><input type=\"text\" size=\"50\" name=\"id\" value=\"" . $row["id"] . "\" /></p>";
+	echo "<label>URL</label><input type=\"text\" size=\"50\" name=\"url\" value=\"" . $row["url"] . "\" /></p>";
+	echo "<label>Count</label><input type=\"text\" size=\"50\" name=\"count\" value=\"" . $row["count"] . "\" /></p>";
 }
 
 //Check if download is protected
 $checkifprotected = mysql_query("SELECT protect FROM Data WHERE id = \"$idtoedit\"");
 $checkifprotectedresult = mysql_fetch_assoc($checkifprotected); 
 if ($checkifprotectedresult["protect"] == "1") { 
-    echo "<p>Enable password protection? <input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\" checked=\"yes\" /></p>";
+	echo "<p>Enable password protection? <input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\" checked=\"yes\" /></p>";
 } else {
-    echo "<p>Enable password protection? <input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\" /></p>";
+	echo "<p>Enable password protection? <input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\" /></p>";
 }
 
 ?>
@@ -167,17 +124,76 @@ if ($checkifprotectedresult["protect"] == "1") {
 $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$idtoedit\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
 if ($checkifadsshowresult["showads"] == "1") { 
-    echo "<p>Show Ads? <input type=\"checkbox\" name=\"showadsstate\" checked=\"yes\" /></p>";
+	echo "<p>Show Ads? <input type=\"checkbox\" name=\"showadsstate\" checked=\"yes\" /></p>";
 } else {
-    echo "<p>Show Ads? <input type=\"checkbox\" name=\"showadsstate\" /></p>";
+	echo "<p>Show Ads? <input type=\"checkbox\" name=\"showadsstate\" /></p>";
 }
 
 mysql_close($con);
 
 ?>
+<span class="help-block">Make any changes you wish then click save changes.</span>
 <input type="hidden" name="idtoedit" value="<? echo $idtoedit; ?>" />
-<p><input class="btn" type="submit" value="Update" /></p>
+<button type="submit" class="btn btn-primary">Save changes</button></fieldset>
 </form>
 </div>
+<!-- Content end -->
+<!-- Javascript start -->	
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="../resources/bootstrap/js/bootstrap-collapse.js"></script>
+<script src="//jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#passwordprotectstate").click(function() {
+		$("#passwordentry").toggle(this.checked);
+	});
+	$.validator.addMethod(
+		"legalname",
+		function(value, element) {
+			return this.optional(element) || /^[a-zA-Z0-9()._\-\s]+$/.test(value);
+		},
+		"Illegal character. Only points, spaces, underscores or dashes are allowed."
+	);
+	$.validator.addMethod(
+		"legalid",
+		function(value, element) {
+			return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
+		},
+		"Illegal character. Only points, underscores or dashes are allowed."
+	);
+	$.validator.addMethod(
+		"legalurl",
+		function(value, element) { 
+			return this.optional(element) || /^[a-zA-Z0-9.?=:#_\-/\-]+$/.test(value);
+		},
+		"Illegal character. Please use a valid URL or directory path."
+	); 
+	$("#editform").validate({
+		rules: {
+			downloadname: {
+				required: true,
+				legalname: true
+			},
+			id: {
+				required: true,
+				legalid: true
+			},
+			url: {
+				required: true,
+				legalurl: true
+			},
+			count: {
+				digits: true
+			},
+			password: {
+				required: true,
+				minlength: 6
+			},
+		}
+	});
+});
+</script>
+<!-- Javascript end -->
 </body>
 </html>
+
