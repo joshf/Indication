@@ -8,8 +8,8 @@ $uniquekey = UNIQUE_KEY;
 
 session_start();
 if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
-	header("Location: login.php");
-	exit; 
+    header("Location: login.php");
+    exit; 
 }
 
 ?>
@@ -22,10 +22,10 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
 <style>
     body {
-	   padding-top: 60px;
+        padding-top: 60px;
     }  
     label.error {
-	   color: #ff0000;
+        color: #ff0000;
     }
 </style>
 <link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
@@ -85,53 +85,53 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <script src="//jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#passwordprotectstate").click(function() {
-		$("#passwordentry").toggle(this.checked);
-	});
-	$.validator.addMethod(
-		"legalname",
-		function(value, element) {
-			return this.optional(element) || /^[a-zA-Z0-9()._\-\s]+$/.test(value);
-		},
-		"Illegal character. Only points, spaces, underscores or dashes are allowed."
-	);
-	$.validator.addMethod(
-		"legalid",
-		function(value, element) {
-			return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
-		},
-		"Illegal character. Only points, underscores or dashes are allowed."
-	); 
-	$.validator.addMethod(
-		"legalurl",
-		function(value, element) { 
-			return this.optional(element) || /^[a-zA-Z0-9.?=:#_\-/\-]+$/.test(value);
-		},
-		"Illegal character. Please use a valid URL or directory path."
-	); 
-	$("#addform").validate({
-		rules: {
-			downloadname: {
-				required: true,
-				legalname: true
-			},
-			id: {
-				required: true,
-				legalid: true
-			},
-			url: {
-				required: true,
-				legalurl: true
-			},
-			count: {
-				digits: true
-			},
-			password: {
-				required: true,
-				minlength: 6
-			},
-		}
-	});
+    $("#passwordprotectstate").click(function() {
+       $("#passwordentry").toggle(this.checked);
+    });
+    $.validator.addMethod(
+        "legalname",
+        function(value, element) {
+            return this.optional(element) || /^[a-zA-Z0-9()._\-\s]+$/.test(value);
+        },
+        "Illegal character. Only points, spaces, underscores or dashes are allowed."
+    );
+    $.validator.addMethod(
+        "legalid",
+        function(value, element) {
+            return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
+        },
+        "Illegal character. Only points, underscores or dashes are allowed."
+    );
+    $.validator.addMethod(
+       "legalurl",
+       function(value, element) { 
+           return this.optional(element) || /^[a-zA-Z0-9.?=:#_\-/\-]+$/.test(value);
+        },
+        "Illegal character. Please use a valid URL or directory path."
+    ); 
+    $("#addform").validate({
+        rules: {
+            downloadname: {
+                required: true,
+                legalname: true
+            },
+            id: {
+                required: true,
+                legalid: true
+            },
+            url: {
+                required: true,
+                legalurl: true
+            },
+            count: {
+                digits: true
+            },
+            password: {
+                required: true,
+                minlength: 6
+            },
+        }
+    });
 });
 </script>
 <!-- Javascript end -->

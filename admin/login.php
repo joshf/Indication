@@ -38,7 +38,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <title>SHTracker: Login</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="robots" content="noindex, nofollow">
-<link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
 <style type="text/css">
     body {
         padding-top: 40px;
@@ -61,15 +61,14 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
     .form-signin .form-signin-heading, .form-signin .checkbox {
         margin-bottom: 10px;
     }
-    .form-signin input[type="text"],
-    .form-signin input[type="password"] {
+    .form-signin input[type="text"], .form-signin input[type="password"] {
         font-size: 16px;
         height: auto;
         margin-bottom: 15px;
         padding: 7px 9px;
     }
 </style>
-<link href="../resources/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -87,7 +86,7 @@ if (isset($_GET["login_error"])) {
 <input type="text" class="input-block-level" name="user" placeholder="Username">
 <input type="password" class="input-block-level" name="password" placeholder="Password">
 <label class="checkbox">
-<input type="checkbox" value="remember-me"> Remember Me
+<input type="checkbox" value="rememberme"> Remember Me?
 </label>
 <button type="submit" class="btn btn-large btn-primary">Sign In</button>
 </form>

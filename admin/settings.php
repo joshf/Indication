@@ -23,7 +23,7 @@ $currentcountuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
 $currentadcode = htmlspecialchars_decode(AD_CODE); 
 $currentjquerytheme = JQUERY_THEME;
 
-if (isset($_POST["Save"])) {
+if (isset($_POST["save"])) {
 
 //Get new settings from POST
 $adminuser = $_POST["adminuser"];
@@ -104,11 +104,11 @@ header("Location: " . $_SERVER["REQUEST_URI"] . "");
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
 <style>
-	body {
-		padding-top: 60px;
-	}
+    body {
+	   padding-top: 60px;
+    }
 </style>
-<link href="../resources/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -180,9 +180,9 @@ if (isset($_GET["backup"])) {
     if (!$con) {
         die("Could not connect: " . mysql_error());
     }
-
+    
     mysql_select_db(DB_NAME, $con);
-
+    
     $getdata = mysql_query("SELECT * FROM Data");
     $string = "CREATE TABLE Data (
     name VARCHAR(100) NOT NULL,
@@ -194,14 +194,14 @@ if (isset($_GET["backup"])) {
     showads TINYINT(1) NOT NULL default \"0\",
     PRIMARY KEY (id)
     ) ENGINE = MYISAM; \n\nINSERT INTO Data (name, id, url, count, protect, password, showads) VALUES ";
-
+    
     while($row = mysql_fetch_assoc($getdata)) {
         $string .= "('" . $row["name"] . "', '" . $row["id"] . "', '" . $row["url"] . "', '" . $row["count"] . "', '" . $row["protect"] . "', '" . $row["password"] . "', '" . $row["showads"] . "'), ";
     }
-
+    
     //Remove last comma
     $datastring = substr_replace($string, "", -2);
-
+    
     echo "<p>Copy this somewhere safe and use your database admin tool to run as a SQL query.</p><p><textarea cols=\"80\" rows=\"16\">$datastring</textarea></p>"; 
 } else {
     echo "<p><button class=\"btn\" onClick=\"window.location = 'settings.php?backup'\">Backup Database</button></p>";

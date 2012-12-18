@@ -8,12 +8,12 @@ $uniquekey = UNIQUE_KEY;
 
 session_start();
 if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
-	header("Location: login.php");
-	exit; 
+    header("Location: login.php");
+    exit; 
 }
 
 if (!isset($_GET["id"])) {
-	header("Location: ../admin");
+    header("Location: ../admin");
 }
 
 ?>
@@ -25,12 +25,12 @@ if (!isset($_GET["id"])) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
 <style>
-	body {
-		padding-top: 60px;
-	}
-	label.error {
-		color: #ff0000;
-	}
+    body {
+        padding-top: 60px;
+    }
+    label.error {
+	   color: #ff0000;
+    }
 </style>
 <link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -87,7 +87,7 @@ $idtoedit = mysql_real_escape_string($_GET["id"]);
 $doesidexist = mysql_query("SELECT id FROM Data WHERE id = \"$idtoedit\"");
 $doesidexistresult = mysql_fetch_assoc($doesidexist); 
 if ($doesidexistresult == 0) { 
-	die("<h1>SHTracker: Error</h1><p>ID does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    die("<h1>SHTracker: Error</h1><p>ID does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
 }
 
 $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$idtoedit\"");
@@ -99,19 +99,19 @@ $resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
 
 $getidinfo = mysql_query("SELECT * FROM Data WHERE id = \"$idtoedit\"");
 while($row = mysql_fetch_assoc($getidinfo)) {
-	echo "<label>Name</label><input type=\"text\" size=\"50\" name=\"downloadname\" value=\"" . $row["name"] . "\" /></p>";
-	echo "<label>ID</label><input type=\"text\" size=\"50\" name=\"id\" value=\"" . $row["id"] . "\" /></p>";
-	echo "<label>URL</label><input type=\"text\" size=\"50\" name=\"url\" value=\"" . $row["url"] . "\" /></p>";
-	echo "<label>Count</label><input type=\"text\" size=\"50\" name=\"count\" value=\"" . $row["count"] . "\" /></p>";
+    echo "<label>Name</label><input type=\"text\" size=\"50\" name=\"downloadname\" value=\"" . $row["name"] . "\" /></p>";
+    echo "<label>ID</label><input type=\"text\" size=\"50\" name=\"id\" value=\"" . $row["id"] . "\" /></p>";
+    echo "<label>URL</label><input type=\"text\" size=\"50\" name=\"url\" value=\"" . $row["url"] . "\" /></p>";
+    echo "<label>Count</label><input type=\"text\" size=\"50\" name=\"count\" value=\"" . $row["count"] . "\" /></p>";
 }
 
 //Check if download is protected
 $checkifprotected = mysql_query("SELECT protect FROM Data WHERE id = \"$idtoedit\"");
 $checkifprotectedresult = mysql_fetch_assoc($checkifprotected); 
 if ($checkifprotectedresult["protect"] == "1") { 
-	echo "<p>Enable password protection? <input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\" checked=\"yes\" /></p>";
+    echo "<p>Enable password protection? <input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\" checked=\"yes\" /></p>";
 } else {
-	echo "<p>Enable password protection? <input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\" /></p>";
+    echo "<p>Enable password protection? <input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\" /></p>";
 }
 
 ?>
@@ -124,9 +124,9 @@ if ($checkifprotectedresult["protect"] == "1") {
 $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$idtoedit\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
 if ($checkifadsshowresult["showads"] == "1") { 
-	echo "<p>Show Ads? <input type=\"checkbox\" name=\"showadsstate\" checked=\"yes\" /></p>";
+    echo "<p>Show Ads? <input type=\"checkbox\" name=\"showadsstate\" checked=\"yes\" /></p>";
 } else {
-	echo "<p>Show Ads? <input type=\"checkbox\" name=\"showadsstate\" /></p>";
+    echo "<p>Show Ads? <input type=\"checkbox\" name=\"showadsstate\" /></p>";
 }
 
 mysql_close($con);
@@ -144,56 +144,55 @@ mysql_close($con);
 <script src="//jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#passwordprotectstate").click(function() {
-		$("#passwordentry").toggle(this.checked);
-	});
-	$.validator.addMethod(
-		"legalname",
-		function(value, element) {
-			return this.optional(element) || /^[a-zA-Z0-9()._\-\s]+$/.test(value);
-		},
-		"Illegal character. Only points, spaces, underscores or dashes are allowed."
-	);
-	$.validator.addMethod(
-		"legalid",
-		function(value, element) {
+    $("#passwordprotectstate").click(function() {
+	   $("#passwordentry").toggle(this.checked);
+    });
+    $.validator.addMethod(
+        "legalname",
+        function(value, element) {
+            return this.optional(element) || /^[a-zA-Z0-9()._\-\s]+$/.test(value);
+        },
+        "Illegal character. Only points, spaces, underscores or dashes are allowed."
+    );
+    $.validator.addMethod(
+        "legalid",
+        function(value, element) {
 			return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
 		},
 		"Illegal character. Only points, underscores or dashes are allowed."
 	);
 	$.validator.addMethod(
-		"legalurl",
-		function(value, element) { 
-			return this.optional(element) || /^[a-zA-Z0-9.?=:#_\-/\-]+$/.test(value);
-		},
-		"Illegal character. Please use a valid URL or directory path."
-	); 
-	$("#editform").validate({
-		rules: {
-			downloadname: {
-				required: true,
-				legalname: true
-			},
-			id: {
-				required: true,
-				legalid: true
-			},
-			url: {
-				required: true,
-				legalurl: true
-			},
-			count: {
-				digits: true
-			},
-			password: {
-				required: true,
-				minlength: 6
-			},
-		}
-	});
+	   "legalurl",
+	   function(value, element) { 
+    	   return this.optional(element) || /^[a-zA-Z0-9.?=:#_\-/\-]+$/.test(value);
+        },
+        "Illegal character. Please use a valid URL or directory path."
+    ); 
+    $("#editform").validate({
+        rules: {
+            downloadname: {
+                required: true,
+                legalname: true
+            },
+            id: {
+                required: true,
+                legalid: true
+            },
+            url: {
+                required: true,
+                legalurl: true
+            },
+            count: {
+                digits: true
+            },
+            password: {
+                required: true,
+                minlength: 6
+            },
+        }
+    });
 });
 </script>
 <!-- Javascript end -->
 </body>
 </html>
-
