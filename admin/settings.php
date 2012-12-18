@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 
 //SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
@@ -94,17 +95,47 @@ fclose($configfile);
 header("Location: " . $_SERVER["REQUEST_URI"] . "");
 
 }
- 
+
 ?>
-<html>
+<html> 
 <head>
 <title>SHTracker: Settings</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="robots" content="noindex, nofollow">
-<link rel="stylesheet" type="text/css" href="../style.css" />
+<link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet">
+<style>
+    html, body {
+        padding-top: 30px;
+        height: 100%;
+    }
+</style>
+<link href="../resources/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 <body>
-<h1>SHTracker: Settings</h1>
+<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<a class="btw btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="#">SHTracker</a>
+<div class="nav-collapse collapse">
+<ul class="nav">
+<li><a href="index.php">Downloads</a></li>
+<li><a href="add.php">Add</a></li>
+<li class="active"><a href="settings.php">Settings</a></li>
+<li><a href="logout.php">Logout</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="page-header">
+<h1>Settings</h1>
+</div>
 <form method="post">
 <p><b>Admin Details:</b></p>
 <p>User: <input type="text" name="adminuser" value="<? echo $currentadminuser; ?>" /><br />
@@ -129,37 +160,21 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
     <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\" checked/> Disabled</p>";
 }
 ?>
-<p><b>jQuery Theme:</b></p>
-<?php
-
-$themes = array("base", "black-tie", "blitzer", "cupertino", "dark-hive", "dot-luv", "eggplant", "excite-bike", "flick", "hot-sneaks", "humanity", "le-frog", "mint-choc", "overcast", "pepper-grinder", "redmond", "smoothness", "south-street", "start", "sunny", "swanky-purse", "trontastic", "ui-darkness", "ui-lightness", "vader");
-
-echo "<p><select name=\"jquerytheme\">";
-foreach ($themes as $value) {
-    if ($value == $currentjquerytheme) {
-        echo "<option value=\"$value\" selected>". ucfirst($value) . "</option>";
-    } else {
-        echo "<option value=\"$value\">". ucfirst($value) . "</option>";
-    }
-}
-echo "</select></p>";
-
-?>
-<p><input type="submit" name="Save" value="Save" /></p>
+<p><input class="btn" type="submit" name="Save" value="Save" /></p>
 </form>
 <p><b>Database Backup</b><p>
 <?
 
 if (isset($_GET["backup"])) {
-    
+
     //Connect to database    
     $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
     if (!$con) {
         die("Could not connect: " . mysql_error());
     }
-    
+
     mysql_select_db(DB_NAME, $con);
-    
+
     $getdata = mysql_query("SELECT * FROM Data");
     $string = "CREATE TABLE Data (
     name VARCHAR(100) NOT NULL,
@@ -171,21 +186,20 @@ if (isset($_GET["backup"])) {
     showads TINYINT(1) NOT NULL default \"0\",
     PRIMARY KEY (id)
     ) ENGINE = MYISAM; \n\nINSERT INTO Data (name, id, url, count, protect, password, showads) VALUES ";
-        
+
     while($row = mysql_fetch_assoc($getdata)) {
         $string .= "('" . $row["name"] . "', '" . $row["id"] . "', '" . $row["url"] . "', '" . $row["count"] . "', '" . $row["protect"] . "', '" . $row["password"] . "', '" . $row["showads"] . "'), ";
     }
-    
+
     //Remove last comma
     $datastring = substr_replace($string, "", -2);
-    
+
     echo "<p>Copy this somewhere safe and use your database admin tool to run as a SQL query.</p><p><textarea cols=\"80\" rows=\"16\">$datastring</textarea></p>"; 
 } else {
-    echo "<p><button onClick=\"window.location = 'settings.php?backup'\">Backup Database</button></p>";
+    echo "<p><button class=\"btn\" onClick=\"window.location = 'settings.php?backup'\">Backup Database</button></p>";
 }
 
 ?>
-<hr />
-<p><a href="../admin">&larr; Go Back</a></p>
+</div>
 </body>
 </html>

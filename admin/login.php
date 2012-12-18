@@ -37,32 +37,61 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <title>SHTracker: Login</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="robots" content="noindex, nofollow">
-<link rel="stylesheet" type="text/css" href="../style.css" />
+<link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+<style type="text/css">
+  body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+  }
+
+  .form-signin {
+    max-width: 300px;
+    padding: 19px 29px 29px;
+    margin: 0 auto 20px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+       -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  }
+  .form-signin .form-signin-heading,
+  .form-signin .checkbox {
+    margin-bottom: 10px;
+  }
+  .form-signin input[type="text"],
+  .form-signin input[type="password"] {
+    font-size: 16px;
+    height: auto;
+    margin-bottom: 15px;
+    padding: 7px 9px;
+  }
+</style>
+<link href="../bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 <body>
-<div id="loginform">
-<h1>SHTracker</h1>
+<div class="container">
+<form class="form-signin" method="post">
+<h2 class="form-signin-heading">SHTracker</h2>
 <?php 
 
 if (isset($_GET["login_error"])) {
-    echo "<p class=\"loginerror\">Incorrect password or username!</p>";
+    echo "<div class=\"alert alert-error\"><a class=\"close\" data-dismiss=\"alert\">×</a>Incorrect username or password.</div>";
 } elseif (isset($_GET["logged_out"])) {
-    echo "<p class=\"loggedout\">You have been logged out!</p>";
-} else {
-    echo "<p style=\"font-size: 14px;\">Welcome back! Please login</p>";
+    echo "<div class=\"alert alert-success\"><a class=\"close\" data-dismiss=\"alert\">×</a>Successfully logged out.</div>";
 }
 
 ?>
-<form method="post">
-<label for="user">User</label><br />
-<input type="text" name="user" id="user" style="width: 190px; text-align: center;" /><br />
-<label for="password">Password</label><br />
-<input type="password" name="password" id="password" style="width: 190px; text-align: center;" /><br />
-<p><input type="checkbox" name="rememberme"> Remember Me?</p>
-<p><input type="submit" value="Login" /></p>
+<input type="text" class="input-block-level" name="user" placeholder="Username">
+<input type="password" class="input-block-level" name="password" placeholder="Password">
+<label class="checkbox">
+<input type="checkbox" value="remember-me"> Remember me
+</label>
+<button class="btn btn-large btn-primary" type="submit">Sign in</button>
 </form>
-<p class="loginfooter"><a href="http://<?php echo $_SERVER["HTTP_HOST"]; ?>">&larr; Back to <?php echo WEBSITE; ?></a></p>
-<p class="loginfooter">Copyright Josh Fradley <? echo date("Y"); ?></p>
 </div>
 </body>
 </html>

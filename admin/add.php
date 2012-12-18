@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 
 //SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
@@ -20,7 +21,14 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <meta name="robots" content="noindex, nofollow">
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="//jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
-<link rel="stylesheet" type="text/css" href="../style.css" />
+<link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet">
+<style>
+    html, body {
+        padding-top: 30px;
+        height: 100%;
+    }
+</style>
+<link href="../resources/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 <body>
 <script type="text/javascript">
@@ -74,20 +82,43 @@ $(document).ready(function() {
     });
 });
 </script>
-<h1>SHTracker: Add A Download/Link</h1>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<a class="btw btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="#">SHTracker</a>
+<div class="nav-collapse collapse">
+<ul class="nav">
+<li><a href="index.php">Downloads</a></li>
+<li class="active"><a href="add.php">Add</a></li>
+<li><a href="settings.php">Settings</a></li>
+<li><a href="logout.php">Logout</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="page-header">
+<h1>Add</h1>
+</div>
 <form action="actions/add.php" method="post" id="addform">
-<p>Name: <input type="text" size="50" name="downloadname" /></p>
-<p>ID: <input type="text" size="50" name="id" /></p>
-<p>URL: <input type="text" size="50" name="url" /></p>
-<p>Count: <input type="text" size="50" name="count" value="0" /></p>
+<p><b>Name:</b> <input type="text" size="50" name="downloadname" /></p>
+<p><b>ID:</b> <input type="text" size="50" name="id" /></p>
+<p><b>URL:</b> <input type="text" size="50" name="url" /></p>
+<p><b>Count:</b> <input type="text" size="50" name="count" value="0" /></p>
 <p>Enable password protection? <input type="checkbox" id="passwordprotectstate" name="passwordprotectstate" /></p>
 <div id="passwordentry" style="display: none">
 <p><i>Please enter a password:</i> <input type="password" name="password" /></p>
 </div>
 <p>Show Ads? <input type="checkbox" name="showadsstate" /></p>
-<input type="submit" value="Add" />
+<input class="btn" type="submit" value="Add" />
 </form>
-<hr />
-<p><a href="../admin">&larr; Go Back</a></p>
+</div>
 </body>
 </html>

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 
 //SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
@@ -22,11 +23,17 @@ if (!isset($_GET["id"])) {
 <title>SHTracker: Editing Download/Link</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="robots" content="noindex, nofollow">
-<link rel="stylesheet" type="text/css" href="../style.css" />
+<link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet">
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="//jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+<style>
+    html, body {
+        padding-top: 30px;
+        height: 100%;
+    }
+</style>
+<link href="../resources/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 </head>
-<body>
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
@@ -78,6 +85,32 @@ $(document).ready(function() {
     });
 });
 </script>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<a class="btw btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="#">SHTracker</a>
+<div class="nav-collapse collapse">
+<ul class="nav">
+<li class="active"><a href="index.php">Downloads</a></li>
+<li><a href="add.php">Add</a></li>
+<li><a href="settings.php">Settings</a></li>
+<li><a href="logout.php">Logout</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="wrap">
+<div class="container">
+<div class="page-header">
+<h1>Edit></h1>
+</div>
 <?php
 
 //Connect to database
@@ -103,7 +136,6 @@ $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$idtoedit\"
 $resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
 
 ?>
-<h1>SHTracker: Editing Download/Link <? echo $resultnameofdownload["name"]; ?></h1>
 <p>Please edit any values you wish.</p>
 <form action="actions/edit.php" method="post" id="editform">
 <?php
@@ -144,9 +176,8 @@ mysql_close($con);
 
 ?>
 <input type="hidden" name="idtoedit" value="<? echo $idtoedit; ?>" />
-<p><input type="submit" value="Update" /></p>
+<p><input class="btn" type="submit" value="Update" /></p>
 </form>
-<hr />
-<p><a href="../admin">&larr; Go Back</a></p>
+</div>
 </body>
 </html>
