@@ -8,19 +8,56 @@ if (file_exists("../config.php")) {
     exit;
 }
 
-$version = "3.4.4";
+$version = "4.0beta";
 
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
 <title>SHTracker: Installer</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="robots" content="noindex, nofollow">
-<link rel="stylesheet" type="text/css" href="../style.css" />
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript" src="//jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
+<style>
+    body {
+        padding-top: 60px;
+    }
+    #footer {
+        background-color: #f5f5f5;
+    }
+    @media (max-width: 767px) {
+        #footer {
+            margin-left: -20px;
+            margin-right: -20px;
+            padding-left: 20px;
+			padding-right: 20px;
+        }
+    }
+    label.error {
+            color: #ff0000;
+    }
+</style>
+<link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 </head>
 <body>
+<!-- Nav start -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<a class="brand" href="#">SHTracker</a>
+</div>
+</div>
+</div>
+<!-- Nav end -->
+<!-- Content start -->
+<div class="container">
+<div class="page-header">
+<h1>Installer</h1>
+</div>
 <?php
 
 //Get path to script
@@ -28,7 +65,36 @@ $currenturl = $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
 $pathtoscriptwithslash = "http://" . substr($currenturl, 0, strpos($currenturl, "installer"));
 $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 
-?>
+?>		
+<form action="install.php" method="post" id="installform" >
+<p><b>Database Settings:</b></p>
+Host: <input type="text" name="dbhost" value="localhost" /><br />
+User: <input type="text" name="dbuser" /><br />
+Password: <input type="password" name="dbpassword" /><br />
+Name: <input type="text" name="dbname" /><br />
+<p><b>Admin Details:</b></p>
+User: <input type="text" name="adminuser" /><br />
+Email: <input type="text" name="adminemail" /><br />
+Password: <input type="password" name="adminpassword" id="adminpassword" /><br />
+Confirm Password: <input type="password" name="adminpasswordconfirm" /><br />
+<p><b>Other Settings:</b></p>
+Website Name: <input type="text" name="website" /><br />
+Path to Script: <input type="text" name="pathtoscript" value="<? echo $pathtoscript; ?>" /><br />
+<input type="hidden" name="doinstall" />
+<p><input type="submit" class="btn" value="Install" /></p>
+</form>
+</div>
+<!-- Content end -->
+<!-- Footer start -->	
+<div id="footer">
+<div class="container">
+<p class="muted credit">SHTracker <? echo $version; ?> Copyright <a href="http://github.com/joshf" target="_blank">Josh Fradley</a> <? echo date("Y"); ?>. Uses Twitter Bootstrap.</p>
+</div>
+</div>
+<!-- Footer end -->
+<!-- Javascript start -->	
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="//jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $.validator.addMethod(
@@ -80,25 +146,6 @@ $(document).ready(function() {
     });
 });
 </script>
-<h1>SHTracker: Installer</h1>
-<p><i>All fields are required!</i></p>
-<form action="install.php" method="post" id="installform" >
-<p><b>Database Settings:</b></p>
-Host: <input type="text" name="dbhost" value="localhost" /><br />
-User: <input type="text" name="dbuser" /><br />
-Password: <input type="password" name="dbpassword" /><br />
-Name: <input type="text" name="dbname" /><br />
-<p><b>Admin Details:</b></p>
-User: <input type="text" name="adminuser" /><br />
-Email: <input type="text" name="adminemail" /><br />
-Password: <input type="password" name="adminpassword" id="adminpassword" /><br />
-Confirm Password: <input type="password" name="adminpasswordconfirm" /><br />
-<p><b>Other Settings:</b></p>
-Website Name: <input type="text" name="website" /><br />
-Path to Script: <input type="text" name="pathtoscript" value="<? echo $pathtoscript; ?>" /><br />
-<input type="hidden" name="doinstall" />
-<p><input type="submit" value="Install" /></p>
-</form>
-<small>SHTracker <? echo $version; ?> Copyright <a href="http://github.com/joshf">Josh Fradley</a> <? echo date("Y"); ?></small>
+<!-- Javascript end -->
 </body>
 </html>

@@ -1,16 +1,53 @@
 <!-- SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker) -->
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
 <title>SHTracker: Installer</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="robots" content="noindex, nofollow">
-<link rel="stylesheet" type="text/css" href="../style.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
+<link href="../resources/datatables/DT_bootstrap.css" type="text/css" rel="stylesheet">
+<style>
+    body {
+        padding-top: 60px;
+    }
+    #footer {
+        background-color: #f5f5f5;
+    }
+    @media (max-width: 767px) {
+        #footer {
+            margin-left: -20px;
+            margin-right: -20px;
+            padding-left: 20px;
+			padding-right: 20px;
+        }
+    }
+</style>
+<link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 </head>
 <body>
+<!-- Nav start -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<a class="brand" href="#">SHTracker</a>
+</div>
+</div>
+</div>
+<!-- Nav end -->
+<!-- Content start -->
+<div class="container">
+<div class="page-header">
+<h1>Installer</h1>
+</div>		
 <?php
 
 if (!isset($_POST["doinstall"])) {
-    die("<h1>SHTracker: Error</h1><p>This installer can not be called directly!</p><hr /><p><a href=\"../installer\">Go To Installer</a></p></body></html>");
+    die("<p>This installer can not be called directly!</p><p><a href=\"../installer\" class=\"btn\">Go To Installer</a></p></body></html>");
 }
 
 //Get new settings from POST
@@ -52,13 +89,13 @@ define(\"JQUERY_THEME\", \"flick\");
 //Check if we can connect
 $con = mysql_connect($dbhost, $dbuser, $dbpassword);
 if (!$con) {
-    die("<h1>SHTracker: Install Failed</h1><p>Could not connect to database: " . mysql_error() . ". Please go back and try again.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    die("<p>Could not connect to database: " . mysql_error() . ". Please go back and try again.</p><p><a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p></body></html>");
 }
 
 //Check if database exists
 $does_db_exist = mysql_select_db($dbname, $con);
 if (!$does_db_exist) {
-    die("<h1>SHTracker: Install Failed</h1><p>Database does not exist: " . mysql_error() . ". Please go back and try again.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    die("<p>Database does not exist: " . mysql_error() . ". Please go back and try again.</p><p><a href=\"javascript:history.go(-1)\ class=\"btn\">Go Back</a></p></body></html>");
 }
 
 //Create Data table
@@ -86,6 +123,15 @@ mysql_close($con);
 ?>
 <h1>SHTracker: Install Complete</h1>
 <p>SHTracker has been successfully installed. Please delete the "installer" folder from your server, as it poses a potential security risk!</p>
-<p><a href="../admin">Go To Login</a></p>
+<p><a href="../login.php" class="btn">Go To Login</a></p>
+</div>
+<!-- Content end -->
+<!-- Footer start -->	
+<div id="footer">
+<div class="container">
+<p class="muted credit">SHTracker <? echo $version; ?> (<? echo $rev; ?>) "<? echo $codename; ?>" Copyright <a href="http://github.com/joshf" target="_blank">Josh Fradley</a> <? echo date("Y"); ?>. Uses Twitter Bootstrap.</p>
+</div>
+</div>
+<!-- Footer end -->
 </body>
 </html>
