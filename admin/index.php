@@ -57,7 +57,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 </head>
 <body>
 <!-- Nav start -->
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
 <a class="btw btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -71,6 +71,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <li class="active"><a href="index.php">Home</a></li>
 <li class="divider-vertical"></li>
 <li><a href="add.php">Add</a></li>
+<li><a href="#">Edit</a></li>
 <li class="divider-vertical"></li>
 <li><a href="settings.php">Settings</a></li>
 <li><a href="logout.php">Logout</a></li>
@@ -89,17 +90,25 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
-    die("<p>Could not connect to database: " . mysql_error() . ". Check your database settings are correct.</p></body></html>");
+    die("<div class=\"alert alert-error\"><p><b>Error:</b> Could not connect to database (" . mysql_error() . "). Check your database settings are correct.</p></div></div></body></html>");
 }
 
 $does_db_exist = mysql_select_db(DB_NAME, $con);
 if (!$does_db_exist) {
-    die("<p>Could not connect to database: " . mysql_error() . ". Check your database settings are correct.</p></body></html>");
+    die("<div class=\"alert alert-error\"><p><b>Error:</b> Database does not exist (" . mysql_error() . "). Check your database settings are correct.</p></div></div></body></html>");
 }
 
 $getdownloads = mysql_query("SELECT * FROM Data");
 
-echo "<p><table id=\"downloads\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"table table-striped table-bordered\">
+//Update checking
+$remoteversion = file_get_contents("https://raw.github.com/joshf/SHTracker/master/version.txt");
+if (preg_match("/^[0-9.-]{1,}$/", $remoteversion)) {
+    if ($version < $remoteversion) {
+        echo "<div class=\"alert\"><b>Update:</b> An update to SHTracker is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/SHTracker/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"https://github.com/joshf/SHTracker/wiki/Updating-SHTracker\" target=\"_blank\">here</a> for information on how to update.</div>";
+    }
+}
+
+echo "<table id=\"downloads\" class=\"table table-striped table-bordered\">
 <thead>
 <tr>
 <th>ID</th>
@@ -116,33 +125,25 @@ while($row = mysql_fetch_assoc($getdownloads)) {
     echo "<td>" . $row["count"] . "</td>";
     echo "</tr>";
 }
-echo "</tbody></table></p>";
-
-//Update checking
-$remoteversion = file_get_contents("https://raw.github.com/joshf/SHTracker/master/version.txt");
-if (preg_match("/^[0-9.-]{1,}$/", $remoteversion)) {
-    if ($version < $remoteversion) {
-        echo "<p><div class=\"alert alert-block\"><h4>Update:</h4> An update to SHTracker is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/SHTracker/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"https://github.com/joshf/SHTracker/wiki/Updating-SHTracker\" target=\"_blank\">here</a> for information on how to update.</div></p>";
-    }
-}
+echo "</tbody></table>";
 
 ?>
-<p><div class="btn-group">
+<div class="btn-group">
 <button id="edit" class="btn">Edit</button>
 <button id="delete" class="btn">Delete</button>
-<button id="trackinglink" class="btn">Show Tracking Link</button></div></p>
+<button id="trackinglink" class="btn">Show Tracking Link</button></div>
 <p><div class="alert alert-info">   
-<strong>Info:</strong> To edit, delete or show the tracking link for a ID please select the radio button next to it.  
-</div></p>
+<strong>Info:</strong> To edit, delete or show the tracking link for a download please select the radio button next to it.  
+</div>
 <?php
 
 $getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM Data");
 $resultnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
-echo "<p><h4>Number of Downloads: </h4>" . $resultnumberofdownloads["COUNT(id)"] . "</p>";
+echo "<h4>Number of Downloads: </h4>" . $resultnumberofdownloads["COUNT(id)"] . "";
 
 $gettotalnumberofdownloads = mysql_query("SELECT SUM(count) FROM Data");
 $resulttotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
-echo "<p><h4>Total Downloads: </h4>" . $resulttotalnumberofdownloads["SUM(count)"] . "</p>";
+echo "<h4>Total Downloads: </h4>" . $resulttotalnumberofdownloads["SUM(count)"] . "";
 
 mysql_close($con);
 
@@ -178,11 +179,11 @@ $(document).ready(function() {
         "sPaginationType": "bootstrap",
         "aoColumns": [{
             "bSortable": false
-            },
-            null,
-            null,
-            null
-            ], 
+        },
+        null,
+        null,
+        null
+        ], 
     });
     $.extend($.fn.dataTableExt.oStdClasses, {
         "sSortable": "header"
@@ -194,8 +195,8 @@ $(document).ready(function() {
             alert("No download selected!");
         } else {
             window.location = "edit.php?id="+ id +"";
-		}
-	});
+        }
+    });
     /* End */
     /* Delete */
     $("#delete").click(function() {
@@ -227,7 +228,7 @@ $(document).ready(function() {
         if (!is_selected) {
             alert("No download selected!");
         } else {
-		  prompt("Tracking link for "+ name +". Press Ctrl/Cmd C to copy to the clipboard:", "<? echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
+            prompt("Tracking link for "+ name +". Press Ctrl/Cmd C to copy to the clipboard:", "<? echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
         } 
     });
     /* End */

@@ -29,7 +29,7 @@ if (!isset($_GET["id"])) {
         padding-top: 60px;
     }
     label.error {
-	   color: #ff0000;
+        color: #ff0000;
     }
 </style>
 <link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
@@ -40,7 +40,7 @@ if (!isset($_GET["id"])) {
 </head>
 <body>
 <!-- Nav start -->   
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
 <a class="btw btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -51,9 +51,10 @@ if (!isset($_GET["id"])) {
 <a class="brand" href="#">SHTracker</a>
 <div class="nav-collapse collapse">
 <ul class="nav">
-<li class="active"><a href="index.php">Home</a></li>
+<li><a href="index.php">Home</a></li>
 <li class="divider-vertical"></li>
 <li><a href="add.php">Add</a></li>
+<li class="active"><a href="#">Edit</a></li>
 <li class="divider-vertical"></li>
 <li><a href="settings.php">Settings</a></li>
 <li><a href="logout.php">Logout</a></li>
@@ -68,7 +69,7 @@ if (!isset($_GET["id"])) {
 <div class="page-header">
 <h1>Edit</h1>
 </div>
-<p>Not sure about this one...</p>
+<p>FIXME: USE PROPER SIZING AKA BOOTSTRAP, DOES THIS LOOK RIGHT?</p>
 <?php
 
 //Connect to database
@@ -76,7 +77,7 @@ require_once("../config.php");
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
-	die("Could not connect: " . mysql_error());
+    die("Could not connect: " . mysql_error());
 }
 
 mysql_select_db(DB_NAME, $con);
@@ -86,8 +87,8 @@ $idtoedit = mysql_real_escape_string($_GET["id"]);
 //Check if ID exists
 $doesidexist = mysql_query("SELECT id FROM Data WHERE id = \"$idtoedit\"");
 $doesidexistresult = mysql_fetch_assoc($doesidexist); 
-if ($doesidexistresult == 0) { 
-    die("<h1>SHTracker: Error</h1><p>ID does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+if ($doesidexistresult == 0) {
+    die("<div class=\"alert alert-error\"><p><b>Error:</b> ID does not exist.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>"); 
 }
 
 $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$idtoedit\"");
@@ -99,10 +100,10 @@ $resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
 
 $getidinfo = mysql_query("SELECT * FROM Data WHERE id = \"$idtoedit\"");
 while($row = mysql_fetch_assoc($getidinfo)) {
-    echo "<label>Name</label><input type=\"text\" size=\"50\" name=\"downloadname\" value=\"" . $row["name"] . "\" /></p>";
-    echo "<label>ID</label><input type=\"text\" size=\"50\" name=\"id\" value=\"" . $row["id"] . "\" /></p>";
-    echo "<label>URL</label><input type=\"text\" size=\"50\" name=\"url\" value=\"" . $row["url"] . "\" /></p>";
-    echo "<label>Count</label><input type=\"text\" size=\"50\" name=\"count\" value=\"" . $row["count"] . "\" /></p>";
+    echo "<p><label>Name</label><input type=\"text\" size=\"50\" name=\"downloadname\" value=\"" . $row["name"] . "\" /></p>";
+    echo "<p><label>ID</label><input type=\"text\" size=\"50\" name=\"id\" value=\"" . $row["id"] . "\" /></p>";
+    echo "<p><label>URL</label><input type=\"text\" size=\"50\" name=\"url\" value=\"" . $row["url"] . "\" /></p>";
+    echo "<p><label>Count</label><input type=\"text\" size=\"50\" name=\"count\" value=\"" . $row["count"] . "\" /></p>";
 }
 
 //Check if download is protected
@@ -145,7 +146,7 @@ mysql_close($con);
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
-	   $("#passwordentry").toggle(this.checked);
+        $("#passwordentry").toggle(this.checked);
     });
     $.validator.addMethod(
         "legalname",
@@ -157,14 +158,14 @@ $(document).ready(function() {
     $.validator.addMethod(
         "legalid",
         function(value, element) {
-			return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
-		},
-		"Illegal character. Only points, underscores or dashes are allowed."
-	);
-	$.validator.addMethod(
-	   "legalurl",
-	   function(value, element) { 
-    	   return this.optional(element) || /^[a-zA-Z0-9.?=:#_\-/\-]+$/.test(value);
+            return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
+        },
+        "Illegal character. Only points, underscores or dashes are allowed."
+    );
+    $.validator.addMethod(
+        "legalurl",
+        function(value, element) { 
+            return this.optional(element) || /^[a-zA-Z0-9.?=:#_\-/\-]+$/.test(value);
         },
         "Illegal character. Please use a valid URL or directory path."
     ); 

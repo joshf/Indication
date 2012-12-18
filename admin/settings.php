@@ -105,7 +105,7 @@ header("Location: " . $_SERVER["REQUEST_URI"] . "");
 <link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
 <style>
     body {
-	   padding-top: 60px;
+        padding-top: 60px;
     }
 </style>
 <link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
@@ -116,7 +116,7 @@ header("Location: " . $_SERVER["REQUEST_URI"] . "");
 </head>
 <body>
 <!-- Nav start -->
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
 <a class="btw btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -130,6 +130,7 @@ header("Location: " . $_SERVER["REQUEST_URI"] . "");
 <li><a href="index.php">Home</a></li>
 <li class="divider-vertical"></li>
 <li><a href="add.php">Add</a></li>
+<li><a href="#">Edit</a></li>
 <li class="divider-vertical"></li>
 <li class="active"><a href="settings.php">Settings</a></li>
 <li><a href="logout.php">Logout</a></li>

@@ -23,7 +23,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <style>
     body {
         padding-top: 60px;
-    }  
+    }
     label.error {
         color: #ff0000;
     }
@@ -36,7 +36,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 </head>
 <body>
 <!-- Nav start -->
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
 <a class="btw btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -50,6 +50,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <li><a href="index.php">Home</a></li>
 <li class="divider-vertical"></li>
 <li class="active"><a href="add.php">Add</a></li>
+<li><a href="#">Edit</a></li>
 <li class="divider-vertical"></li>
 <li><a href="settings.php">Settings</a></li>
 <li><a href="logout.php">Logout</a></li>
@@ -65,10 +66,11 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <h1>Add</h1>
 </div>
 <form action="actions/add.php" method="post" id="addform">
+<p>FIXME: USE PROPER SIZING AKA BOOTSTRAP</p>
 <p><input type="text" size="50" name="downloadname" placeholder="Name" /></p>
 <p><input type="text" size="50" name="id" placeholder="ID" /></p>
 <p><input type="text" size="50" name="url" placeholder="URL" /></p>
-<input type="text" size="50" name="count" placeholder="Count" value="0" /></p>
+<p><input type="text" size="50" name="count" placeholder="Count" value="0" /></p>
 <p>Enable password protection? <input type="checkbox" id="passwordprotectstate" name="passwordprotectstate" /></p>
 <div id="passwordentry" style="display: none">
 <p><i>Please enter a password:</i> <input type="password" name="password" /></p>
@@ -86,7 +88,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
-       $("#passwordentry").toggle(this.checked);
+        $("#passwordentry").toggle(this.checked);
     });
     $.validator.addMethod(
         "legalname",
@@ -103,9 +105,9 @@ $(document).ready(function() {
         "Illegal character. Only points, underscores or dashes are allowed."
     );
     $.validator.addMethod(
-       "legalurl",
-       function(value, element) { 
-           return this.optional(element) || /^[a-zA-Z0-9.?=:#_\-/\-]+$/.test(value);
+        "legalurl",
+        function(value, element) { 
+            return this.optional(element) || /^[a-zA-Z0-9.?=:#_\-/\-]+$/.test(value);
         },
         "Illegal character. Please use a valid URL or directory path."
     ); 
