@@ -16,6 +16,7 @@ $version = "4.0beta";
 <head>
 <meta charset="utf-8">
 <title>SHTracker: Installer</title>
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
 <style>
@@ -30,11 +31,11 @@ $version = "4.0beta";
             margin-left: -20px;
             margin-right: -20px;
             padding-left: 20px;
-			padding-right: 20px;
+            padding-right: 20px;
         }
     }
     label.error {
-            color: #ff0000;
+        color: #ff0000;
     }
 </style>
 <link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
@@ -45,7 +46,7 @@ $version = "4.0beta";
 </head>
 <body>
 <!-- Nav start -->
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
 <a class="brand" href="#">SHTracker</a>
@@ -67,21 +68,21 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 
 ?>		
 <form action="install.php" method="post" id="installform" >
-<p><b>Database Settings:</b></p>
+<h4>Database Settings:</h4>
 Host: <input type="text" name="dbhost" value="localhost" /><br />
 User: <input type="text" name="dbuser" /><br />
 Password: <input type="password" name="dbpassword" /><br />
 Name: <input type="text" name="dbname" /><br />
-<p><b>Admin Details:</b></p>
+<h4>Admin Details:</h4>
 User: <input type="text" name="adminuser" /><br />
 Email: <input type="text" name="adminemail" /><br />
 Password: <input type="password" name="adminpassword" id="adminpassword" /><br />
 Confirm Password: <input type="password" name="adminpasswordconfirm" /><br />
-<p><b>Other Settings:</b></p>
+<h4>Other Settings:</h4>
 Website Name: <input type="text" name="website" /><br />
 Path to Script: <input type="text" name="pathtoscript" value="<? echo $pathtoscript; ?>" /><br />
 <input type="hidden" name="doinstall" />
-<p><input type="submit" class="btn" value="Install" /></p>
+<p><input type="submit" class="btn btn-primary" value="Install" /></p>
 </form>
 </div>
 <!-- Content end -->

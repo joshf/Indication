@@ -148,7 +148,8 @@ echo "<h4>Total Downloads: </h4>" . $resulttotalnumberofdownloads["SUM(count)"] 
 mysql_close($con);
 
 ?>
-<hr/>
+<br />
+<br />
 </div>
 <!-- Content end -->
 <!-- Footer start -->	
