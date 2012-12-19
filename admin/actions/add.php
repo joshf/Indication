@@ -24,9 +24,6 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
     body {
         padding-top: 60px;
     }
-    label.error {
-        color: #ff0000;
-    }
 </style>
 <link href="../../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -97,6 +94,7 @@ if ($resultcheckid != 0) {
     die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>ID $id already exists.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
+//Make sure a password is set if the checkbox was enabled
 if (isset($_POST["passwordprotectstate"])) {
     $protect = "1";
     $inputtedpassword = mysql_real_escape_string($_POST["password"]);

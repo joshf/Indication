@@ -33,10 +33,10 @@ if (isset($_POST["password"]) && isset($_POST["user"])) {
 if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
 <title>SHTracker: Login</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="robots" content="noindex, nofollow">
 <link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
 <style type="text/css">

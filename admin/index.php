@@ -131,10 +131,11 @@ echo "</tbody></table>";
 <div class="btn-group">
 <button id="edit" class="btn">Edit</button>
 <button id="delete" class="btn">Delete</button>
-<button id="trackinglink" class="btn">Show Tracking Link</button></div>
+<button id="trackinglink" class="btn">Show Tracking Link</button>
+</div>
 <p><div class="alert alert-info">   
 <strong>Info:</strong> To edit, delete or show the tracking link for a download please select the radio button next to it.  
-</div>
+</div></p>
 <?php
 
 $getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM Data");

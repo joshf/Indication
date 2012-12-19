@@ -14,13 +14,13 @@ require_once("config.php");
 <title>SHTracker</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
+<link href="resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
 <style>
     body {
         padding-top: 60px;
     }
 </style>
-<link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
+<link href="resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -46,12 +46,12 @@ require_once("config.php");
 //Connect to database
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
-    die("<div class=\"alert alert-error\"><p><b>Error:</b> Could not connect to database (" . mysql_error() . "). Check your database settings are correct.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
+    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Could not connect to database (" . mysql_error() . "). Check your database settings are correct..</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 $does_db_exist = mysql_select_db(DB_NAME, $con);
 if (!$does_db_exist) {
-    die("<div class=\"alert alert-error\"><p><b>Error:</b> Database does not exist (" . mysql_error() . "). Check your database settings are correct.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
+    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Database does not exist (" . mysql_error() . "). Check your database settings are correct..</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 mysql_select_db(DB_NAME, $con);
@@ -62,14 +62,14 @@ if (isset($_GET["id"])) {
 } elseif (isset($_POST["id"])) {
     $id = mysql_real_escape_string($_POST["id"]);
 } else {
-    die("<div class=\"alert alert-error\"><p><b>Error:</b> ID cannot be blank.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
+    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>ID cannot be blank.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 //Check if ID exists
 $getinfo = mysql_query("SELECT name, url FROM Data WHERE id = \"$id\"");
 $getinforesult = mysql_fetch_assoc($getinfo);
 if ($getinforesult == 0) {
-    die("<div class=\"alert alert-error\"><p><b>Error:</b> ID does not exist.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
+    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>ID does not exist.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 //Cookies don't like dots
@@ -90,21 +90,21 @@ $checkifprotectedresult = mysql_fetch_assoc($checkifprotected);
 if ($checkifprotectedresult["protect"] == "1") {
     if (isset($_POST["password"])) {
         if (sha1($_POST["password"]) != $checkifprotectedresult["password"]) {
-            die("<div class=\"alert alert-error\"><p><b>Error:</b> Incorrect password.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
+            die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Incorrect password.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
         } else {
             setcookie("shtrackerhasauthed_$idclean", time()+900, time()+900);
         }
     } elseif (isset($_COOKIE["shtrackerhasauthed_$idclean"])) {
         $time = ($_COOKIE["shtrackerhasauthed_$idclean"]-time()) / 60;
         $timeleft = ceil($time);
-        echo "<small><b>Notice:</b> your download session wll expire in $timeleft minutes...</small>";
+        echo "<div class=\"alert alert-info\"><b>Notice:</b> your download session wll expire in $timeleft minutes...</div>";
     } else {
         die("<h3>Downloading " . $getinforesult["name"] . "</h3>
         <form method=\"post\">
         <p>To access this download please enter the password you were given.</p>
-        <p>Password: <input type=\"password\" name=\"password\" /></p>
-        <input type=\"submit\" class=\"btn btn-success\" value=\"Get Download\" /></form>
-        <p><a href=\"javascript:history.go(-1)\" class=\"btn\">&larr; Go Back</a></p>
+        <p>Password: <input type=\"password\" name=\"password\"></p>
+        <input type=\"submit\" class=\"btn btn-success\" value=\"Get Download\"></form>
+        <p><a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p>
         </div>
         </body>
         </html>");

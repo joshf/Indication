@@ -87,7 +87,7 @@ $idtoedit = mysql_real_escape_string($_GET["id"]);
 $doesidexist = mysql_query("SELECT id FROM Data WHERE id = \"$idtoedit\"");
 $doesidexistresult = mysql_fetch_assoc($doesidexist); 
 if ($doesidexistresult == 0) {
-    die("<div class=\"alert alert-error\"><p><b>Error:</b> ID does not exist.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>"); 
+    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>ID does not exist.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$idtoedit\"");
@@ -104,7 +104,7 @@ while($row = mysql_fetch_assoc($getidinfo)) {
     echo "<label for=\"downloadname\">Name</label><input type=\"text\" id=\"downloadname\" name=\"downloadname\" value=\"" . $row["name"] . "\" placeholder=\"Type a name...\">";
     echo "<label for=\"id\">ID</label><input type=\"text\" id=\"id\" name=\"id\" value=\"" . $row["id"] . "\" placeholder=\"Type an ID...\">";
     echo "<label for=\"url\">URL</label><input type=\"text\" id=\"url\" name=\"url\" value=\"" . $row["url"] . "\" placeholder=\"Type a URL...\">";
-    echo "<label for=\"count\">Count</label><input type=\"text\" id=\"count\" name=\"count\" value=\"" . $row["count"] . "\" placeholder=\"Type an initial count...\">";
+    echo "<label for=\"count\">Count</label><input type=\"text\" id=\"count\" name=\"count\" value=\"" . $row["count"] . "\" placeholder=\"Type a count...\">";
 }
 
 echo "<label class=\"checkbox\">";

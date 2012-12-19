@@ -51,7 +51,7 @@ if (!isset($_POST["id"])) {
 <li><a href="../index.php">Home</a></li>
 <li class="divider-vertical"></li>
 <li><a href="../add.php">Add</a></li>
-<li><a href="#">Edit</a></li>
+<li class="active"><a href="#">Edit</a></li>
 <li class="divider-vertical"></li>
 <li><a href="../settings.php">Settings</a></li>
 <li><a href="../logout.php">Logout</a></li>
@@ -93,6 +93,7 @@ if (empty($newname) || empty($newid) || empty($newurl)) {
     die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>One or more fields are empty.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
+//Make sure a password is set if the checkbox was enabled
 if (isset($_POST["passwordprotectstate"])) {
     if (!isset($_POST["password"])) {
         die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Password is missing.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
