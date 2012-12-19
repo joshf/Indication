@@ -90,12 +90,12 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
-    die("<div class=\"alert alert-error\"><p><b>Error:</b> Could not connect to database (" . mysql_error() . "). Check your database settings are correct.</p></div></div></body></html>");
+    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Could not connect to database (" . mysql_error() . "). Check your database settings are correct..</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 $does_db_exist = mysql_select_db(DB_NAME, $con);
 if (!$does_db_exist) {
-    die("<div class=\"alert alert-error\"><p><b>Error:</b> Database does not exist (" . mysql_error() . "). Check your database settings are correct.</p></div></div></body></html>");
+    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Database does not exist (" . mysql_error() . "). Check your database settings are correct..</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 $getdownloads = mysql_query("SELECT * FROM Data");
@@ -104,7 +104,7 @@ $getdownloads = mysql_query("SELECT * FROM Data");
 $remoteversion = file_get_contents("https://raw.github.com/joshf/SHTracker/master/version.txt");
 if (preg_match("/^[0-9.-]{1,}$/", $remoteversion)) {
     if ($version < $remoteversion) {
-        echo "<div class=\"alert\"><b>Update:</b> An update to SHTracker is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/SHTracker/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"https://github.com/joshf/SHTracker/wiki/Updating-SHTracker\" target=\"_blank\">here</a> for information on how to update.</div>";
+        echo "<div class=\"alert\"><h4 class=\"alert-heading\">Update</h4><p>An update to SHTracker is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/SHTracker/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"https://github.com/joshf/SHTracker/wiki/Updating-SHTracker\" target=\"_blank\">here</a> for information on how to update.</p></div>";
     }
 }
 
@@ -139,11 +139,11 @@ echo "</tbody></table>";
 
 $getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM Data");
 $resultnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
-echo "<h4>Number of Downloads: </h4>" . $resultnumberofdownloads["COUNT(id)"] . "";
+echo "<h4>Number of Downloads: </h4><span class=\"badge\">" . $resultnumberofdownloads["COUNT(id)"] . "</span>";
 
 $gettotalnumberofdownloads = mysql_query("SELECT SUM(count) FROM Data");
 $resulttotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
-echo "<h4>Total Downloads: </h4>" . $resulttotalnumberofdownloads["SUM(count)"] . "";
+echo "<h4>Total Downloads: </h4><span class=\"badge\">" . $resulttotalnumberofdownloads["SUM(count)"] . "</span>";
 
 mysql_close($con);
 
