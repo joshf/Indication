@@ -69,7 +69,6 @@ if (!isset($_GET["id"])) {
 <div class="page-header">
 <h1>Edit</h1>
 </div>
-<p>FIXME: USE PROPER SIZING AKA BOOTSTRAP, DOES THIS LOOK RIGHT?</p>
 <?php
 
 //Connect to database
@@ -95,101 +94,64 @@ $getnameofdownload = mysql_query("SELECT name FROM Data WHERE id = \"$idtoedit\"
 $resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
 
 ?>
-<form action="actions/edit.php" method="post" id="editform"><fieldset>
+<form action="actions/edit.php" method="post">
+<fieldset>
+<legend>Editing <? echo $resultnameofdownload["name"]; ?></legend>
 <?php
 
 $getidinfo = mysql_query("SELECT * FROM Data WHERE id = \"$idtoedit\"");
 while($row = mysql_fetch_assoc($getidinfo)) {
-    echo "<p><label>Name</label><input type=\"text\" size=\"50\" name=\"downloadname\" value=\"" . $row["name"] . "\" /></p>";
-    echo "<p><label>ID</label><input type=\"text\" size=\"50\" name=\"id\" value=\"" . $row["id"] . "\" /></p>";
-    echo "<p><label>URL</label><input type=\"text\" size=\"50\" name=\"url\" value=\"" . $row["url"] . "\" /></p>";
-    echo "<p><label>Count</label><input type=\"text\" size=\"50\" name=\"count\" value=\"" . $row["count"] . "\" /></p>";
+    echo "<label for=\"downloadname\">Name</label><input type=\"text\" id=\"downloadname\" name=\"downloadname\" value=\"" . $row["name"] . "\" placeholder=\"Type a name...\">";
+    echo "<label for=\"id\">ID</label><input type=\"text\" id=\"id\" name=\"id\" value=\"" . $row["id"] . "\" placeholder=\"Type an ID...\">";
+    echo "<label for=\"url\">URL</label><input type=\"text\" id=\"url\" name=\"url\" value=\"" . $row["url"] . "\" placeholder=\"Type a URL...\">";
+    echo "<label for=\"count\">Count</label><input type=\"text\" id=\"count\" name=\"count\" value=\"" . $row["count"] . "\" placeholder=\"Type an initial count...\">";
 }
 
-//Check if download is protected
-$checkifprotected = mysql_query("SELECT protect FROM Data WHERE id = \"$idtoedit\"");
-$checkifprotectedresult = mysql_fetch_assoc($checkifprotected); 
-if ($checkifprotectedresult["protect"] == "1") { 
-    echo "<p>Enable password protection? <input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\" checked=\"yes\" /></p>";
-} else {
-    echo "<p>Enable password protection? <input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\" /></p>";
-}
-
-?>
-<div id="passwordentry" style="display: none">
-<p><i>Please enter a password:</i> <input type="password" name="password" /></p>
-</div>
-<?
-
+echo "<label class=\"checkbox\">";
+    
 //Check if we should show ads
 $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$idtoedit\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
 if ($checkifadsshowresult["showads"] == "1") { 
-    echo "<p>Show Ads? <input type=\"checkbox\" name=\"showadsstate\" checked=\"yes\" /></p>";
+    echo "<input type=\"checkbox\" id=\"showadsstate\" name=\"showadsstate\" checked=\"checked\"> Show Ads?";
 } else {
-    echo "<p>Show Ads? <input type=\"checkbox\" name=\"showadsstate\" /></p>";
+    echo "<input type=\"checkbox\" id=\"showadsstate\"  name=\"showadsstate\"> Show Ads?";
+}
+
+echo "</label><label class=\"checkbox\">";
+    
+//Check if download is protected
+$checkifprotected = mysql_query("SELECT protect FROM Data WHERE id = \"$idtoedit\"");
+$checkifprotectedresult = mysql_fetch_assoc($checkifprotected); 
+if ($checkifprotectedresult["protect"] == "1") { 
+    echo "<input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\" checked=\"checked\"> Enable password protection?";
+} else {
+    echo "<input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\"> Enable password protection?";
 }
 
 mysql_close($con);
 
 ?>
-<span class="help-block">Make any changes you wish then click save changes.</span>
+</label>
 <input type="hidden" name="idtoedit" value="<? echo $idtoedit; ?>" />
-<button type="submit" class="btn btn-primary">Save changes</button></fieldset>
+<input type="hidden" id="password" name="password">
+<button type="submit" class="btn btn-primary">Submit</button>
+</fieldset>
 </form>
 </div>
 <!-- Content end -->
 <!-- Javascript start -->	
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap-collapse.js"></script>
-<script src="//jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
-        $("#passwordentry").toggle(this.checked);
-    });
-    $.validator.addMethod(
-        "legalname",
-        function(value, element) {
-            return this.optional(element) || /^[a-zA-Z0-9()._\-\s]+$/.test(value);
-        },
-        "Illegal character. Only points, spaces, underscores or dashes are allowed."
-    );
-    $.validator.addMethod(
-        "legalid",
-        function(value, element) {
-            return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
-        },
-        "Illegal character. Only points, underscores or dashes are allowed."
-    );
-    $.validator.addMethod(
-        "legalurl",
-        function(value, element) { 
-            return this.optional(element) || /^[a-zA-Z0-9.?=:#_\-/\-]+$/.test(value);
-        },
-        "Illegal character. Please use a valid URL or directory path."
-    ); 
-    $("#editform").validate({
-        rules: {
-            downloadname: {
-                required: true,
-                legalname: true
-            },
-            id: {
-                required: true,
-                legalid: true
-            },
-            url: {
-                required: true,
-                legalurl: true
-            },
-            count: {
-                digits: true
-            },
-            password: {
-                required: true,
-                minlength: 6
-            },
+        password = prompt("Enter a password","");
+        if (password != "" && password != null) {
+            $("#password").val(password);
+            $("#passwordprotectstate").prop("checked", true);
+        } else {
+            $("#passwordprotectstate").prop("checked", false);
         }
     });
 });

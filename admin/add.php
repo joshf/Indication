@@ -65,18 +65,26 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <div class="page-header">
 <h1>Add</h1>
 </div>
-<form action="actions/add.php" method="post" id="addform">
-<p>FIXME: USE PROPER SIZING AKA BOOTSTRAP</p>
-<p><input type="text" size="50" name="downloadname" placeholder="Name" /></p>
-<p><input type="text" size="50" name="id" placeholder="ID" /></p>
-<p><input type="text" size="50" name="url" placeholder="URL" /></p>
-<p><input type="text" size="50" name="count" placeholder="Count" value="0" /></p>
-<p>Enable password protection? <input type="checkbox" id="passwordprotectstate" name="passwordprotectstate" /></p>
-<div id="passwordentry" style="display: none">
-<p><i>Please enter a password:</i> <input type="password" name="password" /></p>
-</div>
-<p>Show Ads? <input type="checkbox" name="showadsstate" /></p>
-<button type="submit" class="btn btn-primary">Add</button>			
+<form action="actions/add.php" method="post">
+<fieldset>
+<legend>Add a download or link</legend>
+<label for="downloadname">Name</label>
+<input type="text" id="downloadname" name="downloadname" placeholder="Type a name...">
+<label for="id">ID</label>
+<input type="text" id="id" name="id" placeholder="Type an ID...">
+<label for="url">URL</label>
+<input type="text" id="url" name="url" placeholder="Type a URL...">
+<label for="count">Count</label>
+<input type="text" id="count" name="count" placeholder="Type an initial count...">
+<label class="checkbox">
+<input type="checkbox" id="showadsstate" name="showadsstate"> Show ads?
+</label>
+<label class="checkbox">
+<input type="checkbox" id="passwordprotectstate" name="passwordprotectstate"> Enable password protection?
+</label>
+<input type="hidden" id="password" name="password">
+<button type="submit" class="btn btn-primary">Submit</button>
+</fieldset>
 </form>
 </div>
 <!-- Content end -->
@@ -84,54 +92,15 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.js"></script>
 <script src="../resources/bootstrap/js/bootstrap-collapse.js"></script>
-<script src="//jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
-        $("#passwordentry").toggle(this.checked);
-    });
-    $.validator.addMethod(
-        "legalname",
-        function(value, element) {
-            return this.optional(element) || /^[a-zA-Z0-9()._\-\s]+$/.test(value);
-        },
-        "Illegal character. Only points, spaces, underscores or dashes are allowed."
-    );
-    $.validator.addMethod(
-        "legalid",
-        function(value, element) {
-            return this.optional(element) || /^[a-zA-Z0-9._-]+$/.test(value);
-        },
-        "Illegal character. Only points, underscores or dashes are allowed."
-    );
-    $.validator.addMethod(
-        "legalurl",
-        function(value, element) { 
-            return this.optional(element) || /^[a-zA-Z0-9.?=:#_\-/\-]+$/.test(value);
-        },
-        "Illegal character. Please use a valid URL or directory path."
-    ); 
-    $("#addform").validate({
-        rules: {
-            downloadname: {
-                required: true,
-                legalname: true
-            },
-            id: {
-                required: true,
-                legalid: true
-            },
-            url: {
-                required: true,
-                legalurl: true
-            },
-            count: {
-                digits: true
-            },
-            password: {
-                required: true,
-                minlength: 6
-            },
+        password = prompt("Enter a password","");
+        if (password != "" && password != null) {
+            $("#password").val(password);
+            $("#passwordprotectstate").prop("checked", true);
+        } else {
+            $("#passwordprotectstate").prop("checked", false);
         }
     });
 });
