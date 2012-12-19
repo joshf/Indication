@@ -87,21 +87,21 @@ $url = strtolower($url);
 
 //Failsafes
 if (empty($name) || empty($id) || empty($url)) {
-    die("<div class=\"alert alert-error\"><p><b>Error:</b> One or more fields are empty.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
+    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>One or more fields are empty.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 //Check if ID exists
 $checkid = mysql_query("SELECT id FROM Data WHERE id = \"$id\"");
 $resultcheckid = mysql_fetch_assoc($checkid); 
 if ($resultcheckid != 0) {
-    die("<div class=\"alert alert-error\"><p><b>Error:</b> ID $id already exists.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>"); 
+    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>ID $id already exists.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 if (isset($_POST["passwordprotectstate"])) {
     $protect = "1";
     $inputtedpassword = mysql_real_escape_string($_POST["password"]);
     if (empty($inputtedpassword)) {
-        die("<div class=\"alert alert-error\"><p><b>Error:</b> Password is missing.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></body></html>"); 
+        die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Password is missing.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
     }
     $password = sha1($inputtedpassword);
 } else {

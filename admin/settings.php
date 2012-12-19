@@ -91,7 +91,7 @@ fwrite($configfile, $settingsstring);
 fclose($configfile);
 
 //Show updated values
-header("Location: " . $_SERVER["REQUEST_URI"] . "");
+header("Location: " . $_SERVER["REQUEST_URI"] . "?updated=true");
 
 }
 
@@ -145,7 +145,14 @@ header("Location: " . $_SERVER["REQUEST_URI"] . "");
 <div class="page-header">
 <h1>Settings</h1>
 </div>
-<p>FIXME: Give a notice when user updates settings</p>
+<?php
+
+if (isset($_GET["updated"])) {
+    echo "<div class=\"alert alert-info\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><b>Info:</b> Settings updated.</div>";
+    
+}
+
+?>
 <form method="post">
 <p><b>Admin Details:</b></p>
 <p>User: <input type="text" name="adminuser" value="<? echo $currentadminuser; ?>" /><br />

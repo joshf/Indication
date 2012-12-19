@@ -90,12 +90,12 @@ $newurl = strtolower($newurl);
 
 //Failsafes
 if (empty($newname) || empty($newid) || empty($newurl)) {
-    die("<div class=\"alert alert-error\"><p><b>Error:</b> One or more fields are empty.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
+    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>One or more fields are empty.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 if (isset($_POST["passwordprotectstate"])) {
     if (!isset($_POST["password"])) {
-        die("<div class=\"alert alert-error\"><p><b>Error:</b> Password is missing.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
+        die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Password is missing.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
     } 
     $getprotectinfo = mysql_query("SELECT password FROM Data WHERE id = \"$idtoedit\"");
     $getprotectinforesult = mysql_fetch_assoc($getprotectinfo); 

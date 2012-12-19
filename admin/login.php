@@ -71,15 +71,16 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
 </head>
 <body>
+<!-- Content start -->
 <div class="container">
 <form class="form-signin" method="post">
 <h2 class="form-signin-heading">SHTracker</h2>
 <?php 
 
 if (isset($_GET["login_error"])) {
-    echo "<div class=\"alert alert-error\">Incorrect username or password.</div>";
+    echo "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>Incorrect username or password.</div>";
 } elseif (isset($_GET["logged_out"])) {
-    echo "<div class=\"alert alert-success\">Successfully logged out.</div>";
+    echo "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>Successfully logged out.</div>";
 }
 
 ?>
@@ -91,6 +92,11 @@ if (isset($_GET["login_error"])) {
 <button type="submit" class="btn btn-large btn-primary">Sign In</button>
 </form>
 </div>
+<!-- Content end -->
+<!-- Javascript start -->	
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="../resources/bootstrap/js/bootstrap.js"></script>
+<!-- Javascript end -->
 </body>
 </html>
 <?php
