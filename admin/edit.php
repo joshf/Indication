@@ -146,12 +146,13 @@ mysql_close($con);
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
-        password = prompt("Enter a password","");
-        if (password != "" && password != null) {
-            $("#password").val(password);
-            $("#passwordprotectstate").prop("checked", true);
-        } else {
-            $("#passwordprotectstate").prop("checked", false);
+        if ($("#passwordprotectstate").prop("checked") == true) {
+            password = prompt("Enter a password","");
+            if (password != "" && password != null) {
+                $("#password").val(password);
+            } else {
+                $("#passwordprotectstate").prop("checked", false);
+            }
         }
     });
 });
