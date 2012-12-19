@@ -113,9 +113,9 @@ echo "<label class=\"checkbox\">";
 $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$idtoedit\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
 if ($checkifadsshowresult["showads"] == "1") { 
-    echo "<input type=\"checkbox\" id=\"showadsstate\" name=\"showadsstate\" checked=\"checked\"> Show Ads?";
+    echo "<input type=\"checkbox\" id=\"showadsstate\" name=\"showadsstate\" checked=\"checked\"> Show ads?";
 } else {
-    echo "<input type=\"checkbox\" id=\"showadsstate\"  name=\"showadsstate\"> Show Ads?";
+    echo "<input type=\"checkbox\" id=\"showadsstate\"  name=\"showadsstate\"> Show ads?";
 }
 
 echo "</label><label class=\"checkbox\">";

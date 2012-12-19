@@ -108,7 +108,7 @@ if (preg_match("/^[0-9.-]{1,}$/", $remoteversion)) {
     }
 }
 
-echo "<table id=\"downloads\" class=\"table table-striped table-bordered\">
+echo "<table id=\"downloads\" class=\"table table-striped table-bordered table-condensed\">
 <thead>
 <tr>
 <th>ID</th>
