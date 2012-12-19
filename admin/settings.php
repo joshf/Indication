@@ -153,30 +153,36 @@ if (isset($_GET["updated"])) {
 
 ?>
 <form method="post">
-<h4>Admin Details:</h4>
-<p>User: <input type="text" name="adminuser" value="<? echo $currentadminuser; ?>" /><br />
-Email: <input type="text" name="adminemail" value="<? echo $currentadminemail; ?>" /><br />
-Password: <input type="password" name="adminpassword" value="<? echo $currentadminpassword; ?>" /></p>
-<h4>Other settings:</h4>
-<p>Website Name: <input type="text" name="website" value="<? echo $currentwebsite; ?>" /><br />
-Path to Script: <input type="text" name="pathtoscript" value="<? echo $currentpathtoscript; ?>" /></p>
-<h4>Ad Code:</h4>
-<p>Show an advert before user can continue to their download. This can be changed on a per download basis.</p>
-<small><b>N.B:</b> On some server configurations using html code here may produce errors.</small>
-<p><textarea cols="80" rows="8" name="adcode"><? echo $currentadcode; ?></textarea></p>
-<h4>Count Unique Visitors Only:</h4>
-<p>This settings allows you to make sure an individual users' clicks are only counted once.</p>
+<fieldset>
+<legend>Admin Details</legend>
+<label for="adminuser">Admin User</label>
+<input type="text" id="adminuser" name="adminuser" value="<? echo $currentadminuser; ?>">
+<label for="adminpassword">Admin Password</label>
+<input type="password" id="adminpassword" name="adminpassword" value="<? echo $currentadminpassword; ?>">
+<legend>Other Settings</legend>
+<label for="website">Website</label>
+<input type="text" id="website" name="website" value="<? echo $currentwebsite; ?>">
+<label for="pathtoscript">Path to Script</label>
+<input type="text" id="pathtoscript" name="pathtoscript" value="<? echo $currentpathtoscript; ?>">
+<legend>Ad Code</legend>
+<span class="help-block">Show an advert before user can continue to their download. This can be changed on a per download basis.</span>
+<div class="alert alert-info"><b>N.B:</b> On some server configurations using html code here may produce errors.</div>
+<textarea name="adcode"><? echo $currentadcode; ?></textarea>
+<legend>Count Unique Visitors Only:</legend>
+<span class="help-block">This settings allows you to make sure an individual users' clicks are only counted once.</span>
 <?php
 if ($currentcountuniqueonlystate == "Enabled" ) {
-    echo "<p>Hours to consider a user unique: <input type=\"text\" name=\"countuniqueonlytime\" value=\"$currentcountuniqueonlytime\" /></p>
-    <p><input type=\"radio\" name=\"countuniqueonlystate\" value=\"Enabled\" checked/> Enabled<br />
-    <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\" /> Disabled</p>";
+    echo "<label for=\"countuniqueonlytime\">Time to consider user unique</label>
+    <input type=\"text\" id=\"countuniqueonlytime\" name=\"countuniqueonlytime\" value=\"$currentcountuniqueonlytime\">
+    <p><input type=\"radio\" id=\"countuniqueonlystate\" name=\"countuniqueonlystate\" value=\"Enabled\" checked=\"checked\"> Enabled<br />
+    <input type=\"radio\" id=\"countuniqueonlystate\" name=\"countuniqueonlystate\" value=\"Disabled\"> Disabled</p>";
 } else {
-    echo "<p><input type=\"radio\" name=\"countuniqueonlystate\" value=\"Enabled\" /> Enabled<br />
-    <input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\" checked/> Disabled</p>";
+    echo "<p><input type=\"radio\" id=\"countuniqueonlystate\" name=\"countuniqueonlystate\" value=\"Enabled\"> Enabled<br />
+    <input type=\"radio\" id=\"countuniqueonlystate\" name=\"countuniqueonlystate\" value=\"Disabled\" checked=\"checked\"> Disabled</p>";
 }
 ?>
-<button type="submit" class="btn btn-primary" name="save">Save Changes</button>
+<p><button type="submit" name="save" class="btn btn-primary">Save Changes</button></p>
+</fieldset>
 </form>
 <h3>Database Backup</h3>
 <?
