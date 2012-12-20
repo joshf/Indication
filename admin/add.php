@@ -24,9 +24,6 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
     body {
         padding-top: 60px;
     }
-    label.error {
-        color: #ff0000;
-    }
 </style>
 <link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -66,25 +63,46 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <h1>Add</h1>
 </div>
 <form action="actions/add.php" method="post">
-<fieldset>
-<legend>Add a download or link</legend>
-<label for="downloadname">Name</label>
-<input type="text" id="downloadname" name="downloadname" placeholder="Type a name...">
-<label for="id">ID</label>
-<input type="text" id="id" name="id" placeholder="Type an ID...">
-<label for="url">URL</label>
-<input type="text" id="url" name="url" placeholder="Type a URL...">
-<label for="count">Count</label>
-<input type="text" id="count" name="count" placeholder="Type an initial count...">
+<div class="control-group">
+<label class="control-label" for="downloadname">Name</label>
+<div class="controls">
+<input type="text" id="downloadname" name="downloadname" placeholder="Type a name..." required>
+</div>
+</div>
+<div class="control-group">
+<label class="control-label" for="id">ID</label>
+<div class="controls">
+<input type="text" id="id" name="id" placeholder="Type an ID..." required>
+</div>
+</div>
+<div class="control-group">
+<label class="control-label" for="url">URL</label>
+<div class="controls">
+<input type="text" id="url" name="url" placeholder="Type a URL..." required>
+</div>
+</div>
+<div class="control-group">
+<label class="control-label" for="count">Count</label>
+<div class="controls">
+<input type="number" id="count" name="count" placeholder="Type an initial count...">
+</div>
+</div>
+<div class="control-group">
+<div class="controls">
 <label class="checkbox">
 <input type="checkbox" id="showadsstate" name="showadsstate"> Show ads?
 </label>
+</div>
+</div>
+<div class="control-group">
+<div class="controls">
 <label class="checkbox">
 <input type="checkbox" id="passwordprotectstate" name="passwordprotectstate"> Enable password protection?
 </label>
 <input type="hidden" id="password" name="password">
 <button type="submit" class="btn btn-primary">Submit</button>
-</fieldset>
+</div>
+</div>
 </form>
 </div>
 <!-- Content end -->
@@ -92,6 +110,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.js"></script>
 <script src="../resources/bootstrap/js/bootstrap-collapse.js"></script>
+<script src="https://raw.github.com/ReactiveRaven/jqBootstrapValidation/1.3.4/jqBootstrapValidation.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
@@ -103,6 +122,9 @@ $(document).ready(function() {
                 $("#passwordprotectstate").prop("checked", false);
             }
         }
+    });
+    $(function() { 
+        $("input").not("[type=submit]").jqBootstrapValidation(); 
     });
 });
 </script>

@@ -28,9 +28,6 @@ if (!isset($_GET["id"])) {
     body {
         padding-top: 60px;
     }
-    label.error {
-        color: #ff0000;
-    }
 </style>
 <link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -95,19 +92,17 @@ $resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
 
 ?>
 <form action="actions/edit.php" method="post">
-<fieldset>
-<legend>Editing <? echo $resultnameofdownload["name"]; ?></legend>
 <?php
 
 $getidinfo = mysql_query("SELECT * FROM Data WHERE id = \"$idtoedit\"");
 while($row = mysql_fetch_assoc($getidinfo)) {
-    echo "<label for=\"downloadname\">Name</label><input type=\"text\" id=\"downloadname\" name=\"downloadname\" value=\"" . $row["name"] . "\" placeholder=\"Type a name...\">";
-    echo "<label for=\"id\">ID</label><input type=\"text\" id=\"id\" name=\"id\" value=\"" . $row["id"] . "\" placeholder=\"Type an ID...\">";
-    echo "<label for=\"url\">URL</label><input type=\"text\" id=\"url\" name=\"url\" value=\"" . $row["url"] . "\" placeholder=\"Type a URL...\">";
-    echo "<label for=\"count\">Count</label><input type=\"text\" id=\"count\" name=\"count\" value=\"" . $row["count"] . "\" placeholder=\"Type a count...\">";
+    echo "<div class=\"control-group\"><label class=\"control-label\" for=\"downloadname\">Name</label><div class=\"controls\"><input type=\"text\" id=\"downloadname\" name=\"downloadname\" value=\"" . $row["name"] . "\" placeholder=\"Type a name...\" required></div></div>";
+    echo "<div class=\"control-group\"><label class=\"control-label\" for=\"id\">ID</label><div class=\"controls\"><input type=\"text\" id=\"id\" name=\"id\" value=\"" . $row["id"] . "\" placeholder=\"Type an ID...\" required></div></div>";
+    echo "<div class=\"control-group\"><label class=\"control-label\" for=\"id\">URL</label><div class=\"controls\"><input type=\"text\" id=\"url\" name=\"url\" value=\"" . $row["url"] . "\" placeholder=\"Type a URL...\" required></div></div>";
+    echo "<div class=\"control-group\"><label class=\"control-label\" for=\"count\">Count</label><div class=\"controls\"><input type=\"number\" id=\"count\" name=\"count\" value=\"" . $row["count"] . "\" placeholder=\"Type a count...\"></div></div>";
 }
 
-echo "<label class=\"checkbox\">";
+echo "<div class=\"control-group\"><div class=\"controls\"><label class=\"checkbox\">";
     
 //Check if we should show ads
 $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$idtoedit\"");
@@ -118,7 +113,7 @@ if ($checkifadsshowresult["showads"] == "1") {
     echo "<input type=\"checkbox\" id=\"showadsstate\"  name=\"showadsstate\"> Show ads?";
 }
 
-echo "</label><label class=\"checkbox\">";
+echo "</label></div></div><div class=\"control-group\"><div class=\"controls\"><label class=\"checkbox\">";
     
 //Check if download is protected
 $checkifprotected = mysql_query("SELECT protect FROM Data WHERE id = \"$idtoedit\"");
@@ -136,13 +131,16 @@ mysql_close($con);
 <input type="hidden" name="idtoedit" value="<? echo $idtoedit; ?>" />
 <input type="hidden" id="password" name="password">
 <button type="submit" class="btn btn-primary">Submit</button>
-</fieldset>
+</div>
+</div>
 </form>
 </div>
 <!-- Content end -->
 <!-- Javascript start -->	
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="../resources/bootstrap/js/bootstrap.js"></script>
 <script src="../resources/bootstrap/js/bootstrap-collapse.js"></script>
+<script src="https://raw.github.com/ReactiveRaven/jqBootstrapValidation/1.3.4/jqBootstrapValidation.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
@@ -155,8 +153,12 @@ $(document).ready(function() {
             }
         }
     });
+    $(function() { 
+        $("input").not("[type=submit]").jqBootstrapValidation(); 
+    });
 });
 </script>
+<!-- Javascript end -->
 <!-- Javascript end -->
 </body>
 </html>

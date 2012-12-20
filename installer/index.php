@@ -69,27 +69,67 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 ?>	
 <form action="install.php" method="post">
 <fieldset>
-<legend>Database Settings</legend>
-<label for="dbhost">Database Host</label>
-<input type="text" id="dbhost" name="dbhost" value="localhost" placeholder="Type a database host...">
-<label for="dbuser">Database User</label>
-<input type="text" id="dbuser" name="dbuser" placeholder="Type a database user...">
-<label for="dbpassword">Database Password</label>
-<input type="password" id="dbpassword" name="dbpassword" placeholder="Type a database password...">
-<label for="dbname">Database Name</label>
-<input type="text" id="dbname" name="dbname" placeholder="Type a database name...">
-<legend>Admin Details</legend>
-<label for="adminuser">Admin User</label>
-<input type="text" id="adminuser" name="adminuser" placeholder="Type a username...">
-<label for="adminpassword">Password</label>
-<input type="password" id="adminpassword" name="adminpassword" placeholder="Type a password...">
-<legend>Other Settings</legend>
-<label for="website">Website Name</label>
-<input type="text" id="website" name="website" placeholder="Type your websites name..">
-<label for="pathtoscript">Path to Script</label>
-<input type="text" id="pathtoscript" name="pathtoscript" value="<? echo $pathtoscript; ?>" placeholder="Type where SHTracker is installed...">
+<h4>Database Settings</h4>
+<div class="control-group">
+<label class="control-label" for="dbhost">Database Host</label>
+<div class="controls">
+<input type="text" id="dbhost" name="dbhost" value="localhost" placeholder="Type a database host..." required>
+</div>
+</div>
+<div class="control-group">
+<label class="control-label" for="dbuser">Database User</label>
+<div class="controls">
+<input type="text" id="dbuser" name="dbuser" placeholder="Type a database user..." required>
+</div>
+</div>
+<div class="control-group">
+<label class="control-label" for="dbpassword">Database Password</label>
+<div class="controls">
+<input type="password" id="dbpassword" name="dbpassword" placeholder="Type a database password..." required>
+</div>
+</div>
+<div class="control-group">
+<label class="control-label" for="dbname">Database Name</label>
+<div class="controls">
+<input type="text" id="dbname" name="dbname" placeholder="Type a database name..." required>
+</div>
+</div>
+<h4>Admin Details</h4>
+<div class="control-group">
+<label class="control-label" for="adminuser">Admin User</label>
+<div class="controls">
+<input type="text" id="adminuser" name="adminuser" placeholder="Type a username..." required>
+</div>
+</div>
+<div class="control-group">
+<label class="control-label" for="adminpassword">Password</label>
+<div class="controls">
+<input type="password" id="adminpassword" name="adminpassword" placeholder="Type a password..." required>
+</div>
+</div>
+<div class="control-group">
+<label class="control-label" for="adminpasswordconfirm">Confirm Password</label>
+<div class="controls">
+<input type="password" id="adminpasswordconfirm" name="adminpasswordconfirm" placeholder="Type your again password..." data-validation-match-match="adminpassword" required>
+</div>
+</div>
+<h4>Other Settings</h4>
+<div class="control-group">
+<label class="control-label" for="website">Website Name</label>
+<div class="controls">
+<input type="text" id="website" name="website" required placeholder="Type your websites name..">
+</div>
+</div>
+<div class="control-group">
+<label class="control-label" for="pathtoscript">Path to Script</label>
+<div class="controls">
+<input type="text" id="pathtoscript" name="pathtoscript" value="<? echo $pathtoscript; ?>" placeholder="Type where SHTracker is installed..." required>
 <input type="hidden" name="doinstall">
-<p><input type="submit" class="btn btn-primary" value="Install"></p>
+<div class="form-actions">
+<input type="submit" class="btn btn-primary" value="Install">
+</div>
+</div>
+</div>
 </fieldset>
 </form>
 </div>
@@ -101,5 +141,16 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 </div>
 </div>
 <!-- Footer end -->
+<!-- Javascript start -->	
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="https://raw.github.com/ReactiveRaven/jqBootstrapValidation/1.3.4/jqBootstrapValidation.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $(function() { 
+        $("input").not("[type=submit]").jqBootstrapValidation();
+    });
+});
+</script>
+<!-- Javascript end -->
 </body>
 </html>
