@@ -34,9 +34,6 @@ $version = "4.0beta";
             padding-right: 20px;
         }
     }
-    label.error {
-        color: #ff0000;
-    }
 </style>
 <link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -68,7 +65,6 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 
 ?>	
 <form action="install.php" method="post">
-<fieldset>
 <h4>Database Settings</h4>
 <div class="control-group">
 <label class="control-label" for="dbhost">Database Host</label>
@@ -117,20 +113,19 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 <div class="control-group">
 <label class="control-label" for="website">Website Name</label>
 <div class="controls">
-<input type="text" id="website" name="website" required placeholder="Type your websites name..">
+<input type="text" id="website" name="website" required placeholder="Type your websites name...">
 </div>
 </div>
 <div class="control-group">
 <label class="control-label" for="pathtoscript">Path to Script</label>
 <div class="controls">
 <input type="text" id="pathtoscript" name="pathtoscript" value="<? echo $pathtoscript; ?>" placeholder="Type where SHTracker is installed..." required>
-<input type="hidden" name="doinstall">
+</div>
+</div>
 <div class="form-actions">
+<input type="hidden" name="doinstall">
 <input type="submit" class="btn btn-primary" value="Install">
 </div>
-</div>
-</div>
-</fieldset>
 </form>
 </div>
 <!-- Content end -->

@@ -36,7 +36,7 @@
 <?php
 
 if (!isset($_POST["doinstall"])) {
-    die("<div class=\"alert alert-info\"><p><b>Info:</b> This installer can not be called directly!</p><p><a class=\"btn btn-info\" href=\"../installer\">Go To Installer</a></p></div></div></body></html>");
+    die("<div class=\"alert alert-info\"><h4 class=\"alert-heading\">Info</h4><p>This installer cannot be called directly!</p><p><a class=\"btn btn-info\" href=\"../installer\">Go To Installer</a></p></div></div></body></html>");
 }
 
 //Get new settings from POST
@@ -78,13 +78,13 @@ define(\"JQUERY_THEME\", \"flick\");
 //Check if we can connect
 $con = mysql_connect($dbhost, $dbuser, $dbpassword);
 if (!$con) {
-    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Could not connect to database (" . mysql_error() . "). Check your database settings are correct.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
+    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Install Failed</h4><p>Error: Could not connect to database (" . mysql_error() . "). Check your database settings are correct.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 //Check if database exists
 $does_db_exist = mysql_select_db($dbname, $con);
 if (!$does_db_exist) {
-    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Database does not exist (" . mysql_error() . "). Check your database settings are correct.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
+    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Install Failed</h4><p>Error: Database does not exist (" . mysql_error() . "). Check your database settings are correct.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 //Create Data table
@@ -110,8 +110,9 @@ fclose($configfile);
 mysql_close($con);
 
 ?>
-<p>SHTracker has been successfully installed. Please delete the "installer" folder from your server, as it poses a potential security risk!</p>
+<div class="alert alert-success"><h4 class="alert-heading">Install Complete</h4><p>SHTracker has been successfully installed. Please delete the "installer" folder from your server, as it poses a potential security risk!</p>
 <p><a href="../admin/login.php" class="btn btn-success">Go To Login</a></p>
+</div>
 </div>
 <!-- Content end -->
 </body>
