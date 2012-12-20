@@ -99,9 +99,11 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <label class="checkbox">
 <input type="checkbox" id="passwordprotectstate" name="passwordprotectstate"> Enable password protection?
 </label>
-<input type="hidden" id="password" name="password">
-<button type="submit" class="btn btn-primary">Submit</button>
 </div>
+</div>
+<div class="form-actions">
+<input type="hidden" id="password" name="password">
+<button type="submit" class="btn btn-primary">Add</button>
 </div>
 </form>
 </div>
@@ -110,7 +112,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.js"></script>
 <script src="../resources/bootstrap/js/bootstrap-collapse.js"></script>
-<script src="https://raw.github.com/ReactiveRaven/jqBootstrapValidation/1.3.4/jqBootstrapValidation.js"></script>
+<script src="//raw.github.com/ReactiveRaven/jqBootstrapValidation/1.3.4/jqBootstrapValidation.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {

@@ -14,10 +14,6 @@ require_once("../config.php");
 
 $uniquekey = UNIQUE_KEY;
 
-if (isset($_GET["nojs"])) {
-    die("<!DOCTYPE html><html><head><title>SHTracker: Error</title><link href=\"../resources/bootstrap/css/bootstrap.css\" type=\"text/css\" rel=\"stylesheet\" /></head><body><p style=\"padding-left: 5px;\">Please enable JavaScript to use SHTracker. For instructions on how to do this, see <a href=\"http://www.activatejavascript.org\">here</a>.</p></body></html>");
-}
-
 session_start();
 if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
     header("Location: login.php");
@@ -84,9 +80,13 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <!-- Content start -->
 <div class="container">
 <div class="page-header">
-<h1>All Downloads</h1>
+<h1>All Downloads for <? echo WEBSITE; ?></h1>
 </div>		
 <?php
+
+if (isset($_GET["nojs"])) {
+    die("<div class=\"alert alert-info\"><h4 class=\"alert-heading\">Error</h4><p>Please enable JavaScript to use SHTracker. For instructions on how to do this, see <a href=\"http://www.activatejavascript.org\">here</a>. Once done click continue.</p><p><a class=\"btn btn-info\" href=\"index.php\">Continue</a></p></div></div></body></html>");
+}
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {

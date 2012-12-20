@@ -102,8 +102,11 @@ if ($checkifprotectedresult["protect"] == "1") {
         die("<h3>Downloading " . $getinforesult["name"] . "</h3>
         <form method=\"post\">
         <p>To access this download please enter the password you were given.</p>
-        <p>Password: <input type=\"password\" name=\"password\"></p>
-        <input type=\"submit\" class=\"btn btn-success\" value=\"Get Download\"></form>
+        <div class=\"input-append\">
+        <input class=\"span2\" type=\"text\" id=\"password\" name=\"password\">
+        <button class=\"btn btn-success\" type=\"submit\">Get Download</button>
+        </div>
+        </form>
         <p><a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p>
         </div>
         </body>
@@ -116,7 +119,7 @@ $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$id\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow);
 if ($checkifadsshowresult["showads"] == "1") {
     $adcode = htmlspecialchars_decode(AD_CODE);
-    die("<h4>Downloading " . $getinforesult["name"] . "</h4><p>" . $adcode . "</p><p><button class=\"btn btn-success\" onClick=\"window.location = '" . $getinforesult["url"] . "'\">Start Download</button></p><p><a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p></div></body></html>");
+    die("<h4>Downloading " . $getinforesult["name"] . "</h4><p>" . $adcode . "</p><p><button class=\"btn btn-success\" onClick=\"window.location = '" . $getinforesult["url"] . "'\">Start Download</button> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p></div></body></html>");
 }
 
 mysql_close($con);

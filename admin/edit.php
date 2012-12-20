@@ -128,10 +128,12 @@ mysql_close($con);
 
 ?>
 </label>
+</div>
+</div>
+<div class="form-actions">
 <input type="hidden" name="idtoedit" value="<? echo $idtoedit; ?>" />
 <input type="hidden" id="password" name="password">
-<button type="submit" class="btn btn-primary">Submit</button>
-</div>
+<button type="submit" class="btn btn-primary">Update</button>
 </div>
 </form>
 </div>
@@ -140,7 +142,7 @@ mysql_close($con);
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.js"></script>
 <script src="../resources/bootstrap/js/bootstrap-collapse.js"></script>
-<script src="https://raw.github.com/ReactiveRaven/jqBootstrapValidation/1.3.4/jqBootstrapValidation.js"></script>
+<script src="//raw.github.com/ReactiveRaven/jqBootstrapValidation/1.3.4/jqBootstrapValidation.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {

@@ -84,17 +84,31 @@ if (isset($_GET["login_error"])) {
 }
 
 ?>
-<input type="text" class="input-block-level" name="user" placeholder="Username">
-<input type="password" class="input-block-level" name="password" placeholder="Password">
+<div class="control-group">
+<label class="control-label" for="user">User</label>
+<div class="controls">
+<input type="text" id="user" name="user" class="input-block-level" placeholder="Username...">
+</div>
+</div>
+<div class="control-group">
+<label class="control-label" for="password">Password</label>
+<div class="controls">
+<input type="password" id="password" name="password" class="input-block-level" placeholder="Password...">
+</div>
+</div>
+<div class="control-group">
+<div class="controls">
 <label class="checkbox">
 <input type="checkbox" value="rememberme"> Remember Me?
 </label>
+</div>
+</div>
 <button type="submit" class="btn btn-large btn-primary">Sign In</button>
 </form>
 </div>
 <!-- Content end -->
-<!-- Javascript start -->	
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<!-- Javascript start -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>	
 <script src="../resources/bootstrap/js/bootstrap.js"></script>
 <!-- Javascript end -->
 </body>

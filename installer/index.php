@@ -138,7 +138,7 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 <!-- Footer end -->
 <!-- Javascript start -->	
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="https://raw.github.com/ReactiveRaven/jqBootstrapValidation/1.3.4/jqBootstrapValidation.js"></script>
+<script src="//raw.github.com/ReactiveRaven/jqBootstrapValidation/1.3.4/jqBootstrapValidation.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $(function() { 
