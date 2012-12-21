@@ -65,6 +65,7 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 
 ?>	
 <form action="install.php" method="post">
+<fieldset>
 <h4>Database Settings</h4>
 <div class="control-group">
 <label class="control-label" for="dbhost">Database Host</label>
@@ -126,6 +127,7 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 <input type="hidden" name="doinstall">
 <input type="submit" class="btn btn-primary" value="Install">
 </div>
+</fieldset>
 </form>
 </div>
 <!-- Content end -->
