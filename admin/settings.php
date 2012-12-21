@@ -21,7 +21,6 @@ $currentpathtoscript = PATH_TO_SCRIPT;
 $currentcountuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
 $currentcountuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
 $currentadcode = htmlspecialchars_decode(AD_CODE); 
-$currentjquerytheme = JQUERY_THEME;
 
 if (isset($_POST["save"])) {
 
@@ -51,7 +50,6 @@ if (isset($_POST["adcode"])) {
         $adcode = htmlspecialchars($_POST["adcode"]);
     }
 }
-$jquerytheme = $_POST["jquerytheme"];
 
 //Remember previous settings
 if (empty($adcode)) {
@@ -81,7 +79,6 @@ define(\"COUNT_UNIQUE_ONLY_STATE\", \"$countuniqueonlystate\");
 define(\"COUNT_UNIQUE_ONLY_TIME\", \"$countuniqueonlytime\");
 define(\"UNIQUE_KEY\", \"$uniquekey\");
 define(\"AD_CODE\", \"$adcode\");
-define(\"JQUERY_THEME\", \"$jquerytheme\");
 
 ?>";
 
@@ -91,7 +88,7 @@ fwrite($configfile, $settingsstring);
 fclose($configfile);
 
 //Show updated values
-header("Location: " . $_SERVER["REQUEST_URI"] . "?updated=true");
+header("Location: settings.php?updated=true");
 
 }
 
