@@ -46,6 +46,11 @@ $dbpassword = $_POST["dbpassword"];
 $dbname = $_POST["dbname"];
 $adminuser = $_POST["adminuser"];
 $adminemail= $_POST["adminemail"];
+if (empty($_POST["adminpassword"])) {
+    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Install Failed</h4><p>Error: No admin password set.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
+} else {
+    $adminpassword = sha1($_POST["adminpassword"]);
+}
 $adminpassword = sha1($_POST["adminpassword"]);
 $website = $_POST["website"];
 $pathtoscript = $_POST["pathtoscript"];
