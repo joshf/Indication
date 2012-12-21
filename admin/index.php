@@ -68,7 +68,8 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <li class="divider-vertical"></li>
 <li><a href="add.php">Add</a></li>
 <li><a href="#">Edit</a></li>
-<li class="divider-vertical"></li>
+</ul>
+<ul class="nav pull-right">
 <li><a href="settings.php">Settings</a></li>
 <li><a href="logout.php">Logout</a></li>
 </ul>
@@ -119,7 +120,7 @@ echo "<table id=\"downloads\" class=\"table table-striped table-bordered table-c
 
 while($row = mysql_fetch_assoc($getdownloads)) {
     echo "<tr>";
-    echo "<td><input name=\"id\" type=\"radio\" value=\"" . $row["id"] . "\" /></td>";
+    echo "<td><input name=\"id\" type=\"radio\" value=\"" . $row["id"] . "\"></td>";
     echo "<td>" . $row["name"] . "</td>";
     echo "<td>" . $row["url"] . "</td>";
     echo "<td>" . $row["count"] . "</td>";
@@ -133,9 +134,11 @@ echo "</tbody></table>";
 <button id="delete" class="btn">Delete</button>
 <button id="trackinglink" class="btn">Show Tracking Link</button>
 </div>
-<p><div class="alert alert-info">   
+<br>
+<br>
+<div class="alert alert-info">   
 <strong>Info:</strong> To edit, delete or show the tracking link for a download please select the radio button next to it.  
-</div></p>
+</div>
 <?php
 
 $getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM Data");
@@ -149,8 +152,8 @@ echo "<h4>Total Downloads: </h4><span class=\"badge\">" . $resulttotalnumberofdo
 mysql_close($con);
 
 ?>
-<br />
-<br />
+<br>
+<br>
 </div>
 <!-- Content end -->
 <!-- Footer start -->	
