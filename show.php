@@ -1,13 +1,25 @@
+<!DOCTYPE html>
 <!-- SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker) -->
-<html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
 <title>SHTracker</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="robots" content="noindex, nofollow">
-<!-- Change the style to match the rest of your site here -->
-<link rel="stylesheet" type="text/css" href="style.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    p {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #333333;
+    }
+</style>
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 </head>
 <body>
+<!-- Content start -->
 <?php
 
 //Connect to database
@@ -17,15 +29,15 @@ $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
     die("Could not connect: " . mysql_error());
 }
-    
+
 mysql_select_db(DB_NAME, $con);
 
 //List all downloads
 if (isset($_GET["list"])) {
     $listdownloads = mysql_query("SELECT name, count FROM Data");
-    echo "<h1>All Downloads for " . WEBSITE . "</h1><p>";
+    echo "<p>";
     while($info = mysql_fetch_assoc($listdownloads)) {
-        echo "<b>" . $info["name"] . "</b>: " . $info["count"] . "<br />";
+        echo "<b>" . $info["name"] . "</b>: " . $info["count"] . "<br>";
     }
     echo "</p></body></html>";
     mysql_close($con);
@@ -35,7 +47,7 @@ if (isset($_GET["list"])) {
 if (isset($_GET["id"])) {
     $id = mysql_real_escape_string($_GET["id"]);
 } else {
-    die("<h1>SHTracker: Error</h1><p>ID cannot be blank.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    die("<p><b>Error:</b> ID cannot be blank.</p></body></html>");
 }
 
 //If ID exists, show count or else die
@@ -48,11 +60,12 @@ if ($showresult != 0) {
         echo "<p>" . $showresult["name"] . " has been downloaded " . $showresult["count"] . " time(s).</p>";
     }
 } else {
-    die("<h1>SHTracker: Error</h1><p>ID does not exist.</p><hr /><p><a href=\"javascript:history.go(-1)\">&larr; Go Back</a></p></body></html>");
+    die("<p><b>Error:</b> ID does not exist.</p></body></html>");
 }
 
 mysql_close($con);
 
 ?>
+<!-- Content end -->
 </body>
 </html>
