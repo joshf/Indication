@@ -36,7 +36,7 @@ if (!isset($_GET["id"])) {
 <![endif]-->
 </head>
 <body>
-<!-- Nav start -->   
+<!-- Nav start -->
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
@@ -52,7 +52,8 @@ if (!isset($_GET["id"])) {
 <li class="divider-vertical"></li>
 <li><a href="add.php">Add</a></li>
 <li class="active"><a href="#">Edit</a></li>
-<li class="divider-vertical"></li>
+</ul>
+<ul class="nav pull-right">
 <li><a href="settings.php">Settings</a></li>
 <li><a href="logout.php">Logout</a></li>
 </ul>
@@ -60,7 +61,7 @@ if (!isset($_GET["id"])) {
 </div>
 </div>
 </div>
-<!-- Nav end -->   
+<!-- Nav end -->
 <!-- Content start -->   
 <div class="container">
 <div class="page-header">
@@ -92,6 +93,7 @@ $resultnameofdownload = mysql_fetch_assoc($getnameofdownload);
 
 ?>
 <form action="actions/edit.php" method="post">
+<fieldset>
 <?php
 
 $getidinfo = mysql_query("SELECT * FROM Data WHERE id = \"$idtoedit\"");
@@ -135,6 +137,7 @@ mysql_close($con);
 <input type="hidden" id="password" name="password">
 <button type="submit" class="btn btn-primary">Update</button>
 </div>
+</fieldset>
 </form>
 </div>
 <!-- Content end -->

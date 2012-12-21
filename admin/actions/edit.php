@@ -52,7 +52,8 @@ if (!isset($_POST["id"])) {
 <li class="divider-vertical"></li>
 <li><a href="../add.php">Add</a></li>
 <li class="active"><a href="#">Edit</a></li>
-<li class="divider-vertical"></li>
+</ul>
+<ul class="nav pull-right">
 <li><a href="../settings.php">Settings</a></li>
 <li><a href="../logout.php">Logout</a></li>
 </ul>

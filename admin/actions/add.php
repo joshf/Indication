@@ -48,7 +48,8 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <li class="divider-vertical"></li>
 <li class="active"><a href="../add.php">Add</a></li>
 <li><a href="#">Edit</a></li>
-<li class="divider-vertical"></li>
+</ul>
+<ul class="nav pull-right">
 <li><a href="../settings.php">Settings</a></li>
 <li><a href="../logout.php">Logout</a></li>
 </ul>
