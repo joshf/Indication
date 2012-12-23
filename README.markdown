@@ -13,14 +13,16 @@ Features:
 * Password protect downloads
 * Count unique visitors to avoid multiple counts from same user
 * Supports displaying of ads before user is redirected to download
-* Full admin panel, enhanced with jQuery
+* Full admin panel
 * Display download counts to users
-* Wide selection of themes
+* Themed by Twitter Bootstrap
+* Sort and search download through the use of DataTables
+* Works well and mobile due to a responsive layout
 
 Screenshots:
 ------------
 
-Screenshots of SHTracker can be found [here](http://imgur.com/a/GSgAs).
+Screenshots of SHTracker can be found [here](http://imgur.com/a/7aQPl).
 
 Downloads:
 ------------
@@ -35,7 +37,7 @@ Installation:
 -------------
 
 1. Create a new database using your web hosts control panel (for instructions on how to do this please contact your web host)
-2. Download and unzip SHTracker.zip
+2. Download and unzip SHTracker-xxxx.zip
 3. Upload the SHTracker folder to your server via FTP or your hosts control panel
 4. Open up http://yoursite.com/SHTracker/installer in your browser and enter your database/user details
 5. Delete the "installer" folder from your server

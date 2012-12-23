@@ -233,7 +233,7 @@ $(document).ready(function() {
         if (!is_selected) {
             alert("No download selected!");
         } else {
-            prompt("Tracking link for "+ name +". Press Ctrl/Cmd C to copy to the clipboard:", "<? echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
+            prompt("Tracking link for selected download. Press Ctrl/Cmd C to copy to the clipboard:", "<? echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
         } 
     });
     /* End */

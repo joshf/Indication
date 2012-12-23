@@ -99,18 +99,7 @@ if ($checkifprotectedresult["protect"] == "1") {
         $timeleft = ceil($time);
         echo "<div class=\"alert alert-info\"><b>Notice:</b> your download session wll expire in $timeleft minutes...</div>";
     } else {
-        die("<h3>Downloading " . $getinforesult["name"] . "</h3>
-        <form method=\"post\">
-        <p>To access this download please enter the password you were given.</p>
-        <div class=\"input-append\">
-        <input class=\"span2\" type=\"text\" id=\"password\" name=\"password\">
-        <button class=\"btn btn-success\" type=\"submit\">Get Download</button>
-        </div>
-        </form>
-        <p><a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p>
-        </div>
-        </body>
-        </html>");
+        die("<h3>Downloading " . $getinforesult["name"] . "</h3><form method=\"post\"><p>To access this download please enter the password you were given.</p><p><input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Enter password...\"></p><input type=\"submit\" class=\"btn btn-success\" value=\"Get Download\"> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></form></div></body></html>");
     }
 }
 
