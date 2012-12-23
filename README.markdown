@@ -17,7 +17,7 @@ Features:
 * Display download counts to users
 * Themed by Twitter Bootstrap
 * Sort and search download through the use of DataTables
-* Works well and mobile due to a responsive layout
+* Works well on mobile due to a responsive layout
 
 Screenshots:
 ------------
