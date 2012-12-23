@@ -2,8 +2,8 @@
 
 //SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
 
-$version = "4.0beta";
-$codename = "PoignantPony";
+$version = "4.0";
+$codename = "PanickyPanda";
 $rev = "400";
 
 if (!file_exists("../config.php")) {

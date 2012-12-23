@@ -8,7 +8,7 @@ if (file_exists("../config.php")) {
     exit;
 }
 
-$version = "4.0beta";
+$version = "4.0";
 
 ?>
 <!DOCTYPE html>
