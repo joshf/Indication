@@ -4,7 +4,7 @@
 
 $version = "4.0";
 $codename = "PanickyPanda";
-$rev = "403";
+$rev = "404";
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
@@ -30,8 +30,20 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
 <link href="../resources/datatables/DT_bootstrap.css" type="text/css" rel="stylesheet">
 <style>
+    html, body {
+        height: 100%;
+    }
     body {
         padding-top: 60px;
+    }
+    #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        margin: 0 auto -40px;
+    }
+    #push, #footer {
+        height: 40px;
     }
     #footer {
         background-color: #f5f5f5;
@@ -43,6 +55,9 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
             padding-left: 20px;
 			padding-right: 20px;
         }
+    }
+    .container .credit {
+        margin: 10px 0;
     }
 </style>
 <link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
@@ -79,6 +94,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 </div>
 <!-- Nav end -->
 <!-- Content start -->
+<div id="wrap">
 <div class="container">
 <div class="page-header">
 <h1>All Downloads for <? echo WEBSITE; ?></h1>
@@ -155,6 +171,8 @@ mysql_close($con);
 <br>
 <br>
 </div>
+<div id="push"></div>
+</div>
 <!-- Content end -->
 <!-- Footer start -->	
 <div id="footer">
@@ -208,7 +226,7 @@ $(document).ready(function() {
         if (!is_selected) {
             alert("No download selected!");
         } else {
-            deleteconfirm=confirm("Delete?")
+            deleteconfirm=confirm("Delete this download?")
             if (deleteconfirm==true) {
                 $.ajax({  
                     type: "POST",  
