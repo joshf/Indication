@@ -120,7 +120,7 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 <div class="control-group">
 <label class="control-label" for="pathtoscript">Path to Script</label>
 <div class="controls">
-<input type="text" id="pathtoscript" name="pathtoscript" value="<? echo $pathtoscript; ?>" placeholder="Type where SHTracker is installed..." required>
+<input type="text" id="pathtoscript" name="pathtoscript" value="<? echo $pathtoscript; ?>" placeholder="Type where SHTracker is installed..." pattern="(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-?]*)*\/?" data-validation-pattern-message="Please enter a valid URL" required>
 </div>
 </div>
 <div class="form-actions">
