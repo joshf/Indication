@@ -8,8 +8,6 @@ if (file_exists("../config.php")) {
     exit;
 }
 
-$version = "4.0";
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,17 +20,6 @@ $version = "4.0";
 <style>
     body {
         padding-top: 60px;
-    }
-    #footer {
-        background-color: #f5f5f5;
-    }
-    @media (max-width: 767px) {
-        #footer {
-            margin-left: -20px;
-            margin-right: -20px;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
     }
 </style>
 <link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
@@ -131,13 +118,6 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 </form>
 </div>
 <!-- Content end -->
-<!-- Footer start -->	
-<div id="footer">
-<div class="container">
-<p class="muted credit">SHTracker <? echo $version; ?> Copyright <a href="http://github.com/joshf" target="_blank">Josh Fradley</a> <? echo date("Y"); ?>. Uses Twitter Bootstrap.</p>
-</div>
-</div>
-<!-- Footer end -->
 <!-- Javascript start -->	
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="//raw.github.com/ReactiveRaven/jqBootstrapValidation/1.3.4/jqBootstrapValidation.js"></script>

@@ -4,7 +4,7 @@
 
 $version = "4.0";
 $codename = "PanickyPanda";
-$rev = "400";
+$rev = "403";
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
@@ -159,7 +159,7 @@ mysql_close($con);
 <!-- Footer start -->	
 <div id="footer">
 <div class="container">
-<p class="muted credit">SHTracker <? echo $version; ?> (<? echo $rev; ?>) "<? echo $codename; ?>" Copyright <a href="http://github.com/joshf" target="_blank">Josh Fradley</a> <? echo date("Y"); ?>. Uses Twitter Bootstrap.</p>
+<p class="muted credit">SHTracker <? echo $version; ?> (<? echo $rev; ?>) "<? echo $codename; ?>" Copyright <a href="http://github.com/joshf" target="_blank">Josh Fradley</a> <? echo date("Y"); ?>. Themed by <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>.</p>
 </div>
 </div>
 <!-- Footer end -->
