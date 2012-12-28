@@ -25,13 +25,7 @@ if (isset($_POST["save"])) {
 
 //Get new settings from POST
 $adminuser = $_POST["adminuser"];
-if (empty($adminuser)) {
-    $adminuser = $currentadminuser;
-}
 $adminpassword = $_POST["adminpassword"];
-if (empty($adminpassword)) {
-    $adminpassword = $currentadminpassword;
-}
 if ($adminpassword != $currentadminpassword) {
     $adminpassword = sha1($adminpassword);
 }
@@ -153,26 +147,26 @@ if (isset($_GET["updated"])) {
 <div class="control-group">
 <label class="control-label" for="adminuser">Admin User</label>
 <div class="controls">
-<input type="text" id="adminuser" name="adminuser" value="<? echo $currentadminuser; ?>" placeholder="Enter a admin user...">
+<input type="text" id="adminuser" name="adminuser" value="<? echo $currentadminuser; ?>" placeholder="Enter a admin user..." required>
 </div>
 </div>
 <div class="control-group">
 <label class="control-label" for="adminpassword">Admin Password</label>
 <div class="controls">
-<input type="password" id="adminpassword" name="adminpassword" value="<? echo $currentadminpassword; ?>" placeholder="Enter a admin password...">
+<input type="password" id="adminpassword" name="adminpassword" value="<? echo $currentadminpassword; ?>" placeholder="Enter a admin password..." required>
 </div>
 </div>
 <h4>Other Settings</h4>
 <div class="control-group">
 <label class="control-label" for="website">Website</label>
 <div class="controls">
-<input type="text" id="website" name="website" value="<? echo $currentwebsite; ?>" placeholder="Enter your websites name...">
+<input type="text" id="website" name="website" value="<? echo $currentwebsite; ?>" placeholder="Enter your websites name..." required>
 </div>
 </div>
 <div class="control-group">
 <label class="control-label" for="pathtoscript">Path to Script</label>
 <div class="controls">
-<input type="text" id="pathtoscript" name="pathtoscript" value="<? echo $currentpathtoscript; ?>" placeholder="Type where SHTracker is installed...">
+<input type="text" id="pathtoscript" name="pathtoscript" value="<? echo $currentpathtoscript; ?>" placeholder="Type where SHTracker is installed..." pattern="(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-?]*)*\/?" data-validation-pattern-message="Please enter a valid URL" required>
 </div>
 </div>
 <h4>Ad Code</h4>
@@ -202,7 +196,7 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 <div class="control-group">
 <label class="textarea" for="countuniqueonlytime">Time to consider user unique</label>
 <div class="controls">
-<input type="text" id="countuniqueonlytime" name="countuniqueonlytime" value="<? echo $currentcountuniqueonlytime; ?>" placeholder="Enter a time...">
+<input type="number" id="countuniqueonlytime" name="countuniqueonlytime" value="<? echo $currentcountuniqueonlytime; ?>" placeholder="Enter a time..." required>
 </div>
 </div>
 <div class="form-actions">
@@ -216,6 +210,14 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.js"></script>
 <script src="../resources/bootstrap/js/bootstrap-collapse.js"></script>
+<script src="//raw.github.com/ReactiveRaven/jqBootstrapValidation/1.3.4/jqBootstrapValidation.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $(function() { 
+        $("input").not("[type=submit]").jqBootstrapValidation();
+    });
+});
+</script>
 <!-- Javascript end -->
 </body>
 </html>
