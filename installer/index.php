@@ -88,7 +88,7 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 <div class="control-group">
 <label class="control-label" for="adminpassword">Password</label>
 <div class="controls">
-<input type="password" id="adminpassword" name="adminpassword" placeholder="Type a password..." required>
+<input type="password" id="adminpassword" name="adminpassword" placeholder="Type a password..." minlength="6" required>
 </div>
 </div>
 <div class="control-group">

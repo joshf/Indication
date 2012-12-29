@@ -180,7 +180,6 @@ if (isset($_GET["updated"])) {
 <h4>Count Unique Visitors Only</h4>
 <p>This settings allows you to make sure an individual users' clicks are only counted once.</p>
 <div class="control-group">
-<label class="control-label">Enable/Disable</label>
 <div class="controls">
 <?php
 if ($currentcountuniqueonlystate == "Enabled" ) {
