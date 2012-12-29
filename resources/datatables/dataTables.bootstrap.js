@@ -56,7 +56,7 @@ $.extend( $.fn.dataTableExt.oPagination, {
 			var iListLength = 5;
 			var oPaging = oSettings.oInstance.fnPagingInfo();
 			var an = oSettings.aanFeatures.p;
-			var i, j, sClass, iStart, iEnd, iHalf=Math.floor(iListLength/2);
+			var i, ien, j, sClass, iStart, iEnd, iHalf=Math.floor(iListLength/2);
 
 			if ( oPaging.iTotalPages < iListLength) {
 				iStart = 1;
@@ -73,7 +73,7 @@ $.extend( $.fn.dataTableExt.oPagination, {
 				iEnd = iStart + iListLength - 1;
 			}
 
-			for ( i=0, iLen=an.length ; i<iLen ; i++ ) {
+			for ( i=0, ien=an.length ; i<ien ; i++ ) {
 				// Remove the middle elements
 				$('li:gt(0)', an[i]).filter(':not(:last)').remove();
 
@@ -144,14 +144,3 @@ if ( $.fn.DataTable.TableTools ) {
 	} );
 }
 
-
-/* Table initialisation */
-$(document).ready(function() {
-	$('#example').dataTable( {
-		"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-		"sPaginationType": "bootstrap",
-		"oLanguage": {
-			"sLengthMenu": "_MENU_ records per page"
-		}
-	} );
-} );

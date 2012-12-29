@@ -28,7 +28,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <title>SHTracker</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
-<link href="../resources/datatables/DT_bootstrap.css" type="text/css" rel="stylesheet">
+<link href="../resources/datatables/dataTables.bootstrap.css" type="text/css" rel="stylesheet">
 <style>
     html, body {
         height: 100%;
@@ -185,7 +185,7 @@ mysql_close($con);
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.js"></script>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.js"></script>
-<script src="../resources/datatables/DT_bootstrap.js"></script>
+<script src="../resources/datatables/dataTables.bootstrap.js"></script>
 <script src="../resources/bootstrap/js/bootstrap-collapse.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -205,11 +205,12 @@ $(document).ready(function() {
         },
         null,
         null,
-        null
-        ], 
+        null,
+        ] 
     });
     $.extend($.fn.dataTableExt.oStdClasses, {
-        "sSortable": "header"
+        "sSortable": "header",
+        "sWrapper": "dataTables_wrapper form-inline"
     });
     /* End */
     /* Edit */
