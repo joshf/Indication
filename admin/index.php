@@ -159,16 +159,15 @@ echo "</tbody></table>";
 
 $getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM Data");
 $resultnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
-echo "<h4>Number of Downloads: </h4><span class=\"badge\">" . $resultnumberofdownloads["COUNT(id)"] . "</span>";
+echo "Number of Downloads: <span class=\"badge\">" . $resultnumberofdownloads["COUNT(id)"] . "</span><br>";
 
 $gettotalnumberofdownloads = mysql_query("SELECT SUM(count) FROM Data");
 $resulttotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
-echo "<h4>Total Downloads: </h4><span class=\"badge\">" . $resulttotalnumberofdownloads["SUM(count)"] . "</span>";
+echo "Total Downloads: <span class=\"badge\">" . $resulttotalnumberofdownloads["SUM(count)"] . "</span>";
 
 mysql_close($con);
 
 ?>
-<br>
 <br>
 </div>
 <div id="push"></div>
