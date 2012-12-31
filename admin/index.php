@@ -181,11 +181,10 @@ mysql_close($con);
 </div>
 <!-- Footer end -->
 <!-- Javascript start -->	
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.js"></script>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.js"></script>
 <script src="../resources/datatables/dataTables.bootstrap.js"></script>
-<script src="../resources/bootstrap/js/bootstrap-collapse.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     /* Table selection */

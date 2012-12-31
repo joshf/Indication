@@ -108,7 +108,7 @@ if (isset($_GET["login_error"])) {
 </div>
 <!-- Content end -->
 <!-- Javascript start -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>	
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>	
 <script src="../resources/bootstrap/js/bootstrap.js"></script>
 <!-- Javascript end -->
 </body>

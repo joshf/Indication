@@ -116,5 +116,9 @@ mysql_close($con);
 </div>
 </div>
 <!-- Content end -->
+<!-- Javascript start -->	
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="../resources/bootstrap/js/bootstrap.js"></script>
+<!-- Javascript end -->
 </body>
 </html>
