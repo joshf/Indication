@@ -1,9 +1,9 @@
 SHTracker Readme
 ================
 
-SHTracker is a PHP click counter which can also be used as a download counter. You can use it to track the number of times a link has been clicked or the number of times a file has been downloaded. SHTracker can also be used to hide affiliate links.
+SHTracker is a PHP download counter. You can use it to track the number of times a link has been clicked or the number of times a file has been downloaded. SHTracker can also be used to hide affiliate links.
 
-The script uses SQL databases. It comes with an admin panel where you can view how many times a link has been clicked. You can also easily add, edit or remove links using the included admin panel. SHTracker can also display the current click count on any web page.
+The script uses SQL databases. It comes with an admin panel where you can view how many times a link has been clicked. You can also easily add, edit or remove links using the panel. SHTracker can also display the current count for a download on any web page.
 
 #### Current Version: 4.0 "PanickyPanda"
 
@@ -11,6 +11,7 @@ Features:
 ---------
 
 * Password protect downloads
+* Can be used to track links
 * Count unique visitors to avoid multiple counts from same user
 * Supports displaying of ads before user is redirected to download
 * Full admin panel
@@ -55,6 +56,8 @@ The main script is called like this: /get.php?id=mydownload1
 Replace ID with the ID name/number of your URL, for example: http://yoursite.com/SHTracker/get.php?id=mydownload1
 
 So instead of linking to http://yoursite.com/some/directory/mydownload1.zip, link to http://yoursite.com/SHTracker/get.php?id=mydownload1
+
+To find this this URL select the download and click "Show Tracking Link"
 
 This will log the count of the download and redirect users to the file
 
