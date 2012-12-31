@@ -102,7 +102,7 @@ body {
 <?php
 
 if (isset($_GET["nojs"])) {
-    die("<div class=\"alert alert-info\"><h4 class=\"alert-heading\">Error</h4><p>Please enable JavaScript to use SHTracker. For instructions on how to do this, see <a href=\"http://www.activatejavascript.org\">here</a>. Once done click continue.</p><p><a class=\"btn btn-info\" href=\"index.php\">Continue</a></p></div></div></body></html>");
+    die("<div class=\"alert alert-info\"><h4 class=\"alert-heading\">Error</h4><p>Please enable JavaScript to use SHTracker. For instructions on how to do this, see <a href=\"http://www.activatejavascript.org\" target=\"_blank\">here</a>. Once done click continue.</p><p><a class=\"btn btn-info\" href=\"index.php\">Continue</a></p></div></div></body></html>");
 }
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
@@ -121,7 +121,7 @@ $getdownloads = mysql_query("SELECT * FROM Data");
 $remoteversion = file_get_contents("https://raw.github.com/joshf/SHTracker/master/version.txt");
 if (preg_match("/^[0-9.-]{1,}$/", $remoteversion)) {
     if ($version < $remoteversion) {
-        echo "<div class=\"alert\"><h4 class=\"alert-heading\">Update</h4><p>An update to SHTracker is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/SHTracker/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"https://github.com/joshf/SHTracker/wiki/Updating-SHTracker\" target=\"_blank\">here</a> for information on how to update.</p></div>";
+        echo "<div class=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Update</h4><p>An update to SHTracker is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/SHTracker/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"https://github.com/joshf/SHTracker/wiki/Updating-SHTracker\" target=\"_blank\">here</a> for information on how to update.</p></div>";
     }
 }
 
@@ -163,7 +163,11 @@ echo "Number of Downloads: <span class=\"badge\">" . $resultnumberofdownloads["C
 
 $gettotalnumberofdownloads = mysql_query("SELECT SUM(count) FROM Data");
 $resulttotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
-echo "Total Downloads: <span class=\"badge\">" . $resulttotalnumberofdownloads["SUM(count)"] . "</span>";
+if ($resulttotalnumberofdownloads["SUM(count)"] > "1") {
+    echo "Total Downloads: <span class=\"badge\">" . $resulttotalnumberofdownloads["SUM(count)"] . "</span>";
+} else {
+    echo "Total Downloads: <span class=\"badge\">0</span>";
+}
 
 mysql_close($con);
 

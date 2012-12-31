@@ -49,6 +49,7 @@ if (!$con) {
     die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Could not connect to database (" . mysql_error() . "). Check your database settings are correct.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
+//Check database exists
 $does_db_exist = mysql_select_db(DB_NAME, $con);
 if (!$does_db_exist) {
     die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Database does not exist (" . mysql_error() . "). Check your database settings are correct.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
@@ -108,7 +109,7 @@ $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$id\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow);
 if ($checkifadsshowresult["showads"] == "1") {
     $adcode = htmlspecialchars_decode(AD_CODE);
-    die("<h4>Downloading " . $getinforesult["name"] . "</h4><p>" . $adcode . "</p><p><button class=\"btn btn-success\" onClick=\"window.location = '" . $getinforesult["url"] . "'\">Start Download</button> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p></div></body></html>");
+    die("<h3>Downloading " . $getinforesult["name"] . "</h3><p>" . $adcode . "</p><p><button class=\"btn btn-success\" onClick=\"window.location = '" . $getinforesult["url"] . "'\">Start Download</button> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p></div></body></html>");
 }
 
 mysql_close($con);

@@ -35,20 +35,17 @@ $countuniqueonlystate = $_POST["countuniqueonlystate"];
 if (isset($_POST["countuniqueonlytime"])) {
     $countuniqueonlytime = $_POST["countuniqueonlytime"];
 }
-if (isset($_POST["adcode"])) {
+if (isset($_POST["advertcode"])) {
     if (get_magic_quotes_gpc()) {
-        $adcode = stripslashes(htmlspecialchars($_POST["adcode"]));
+        $adcode = stripslashes(htmlspecialchars($_POST["advertcode"]));
     } else {
-        $adcode = htmlspecialchars($_POST["adcode"]);
+        $adcode = htmlspecialchars($_POST["advertcode"]);
     }
 }
 
 //Remember previous settings
 if (empty($adcode)) {
     $adcode = $currentadcode;
-}
-if (empty($countuniqueonlytime)) {
-    $countuniqueonlytime = $currentcountuniqueonlytime;
 }
 
 $settingsstring = "<?php
@@ -121,7 +118,7 @@ body {
 <li><a href="#">Edit</a></li>
 </ul>
 <ul class="nav pull-right">
-<li><a href="settings.php">Settings</a></li>
+<li class="active"><a href="settings.php">Settings</a></li>
 <li><a href="logout.php">Logout</a></li>
 </ul>
 </div>
@@ -147,13 +144,13 @@ if (isset($_GET["updated"])) {
 <div class="control-group">
 <label class="control-label" for="adminuser">Admin User</label>
 <div class="controls">
-<input type="text" id="adminuser" name="adminuser" value="<? echo $currentadminuser; ?>" placeholder="Enter a admin user..." required>
+<input type="text" id="adminuser" name="adminuser" value="<? echo $currentadminuser; ?>" placeholder="Enter a username..." required>
 </div>
 </div>
 <div class="control-group">
 <label class="control-label" for="adminpassword">Admin Password</label>
 <div class="controls">
-<input type="password" id="adminpassword" name="adminpassword" value="<? echo $currentadminpassword; ?>" placeholder="Enter a admin password..." required>
+<input type="password" id="adminpassword" name="adminpassword" value="<? echo $currentadminpassword; ?>" placeholder="Enter a password..." required>
 </div>
 </div>
 <h4>Other Settings</h4>
@@ -166,7 +163,7 @@ if (isset($_GET["updated"])) {
 <div class="control-group">
 <label class="control-label" for="pathtoscript">Path to Script</label>
 <div class="controls">
-<input type="text" id="pathtoscript" name="pathtoscript" value="<? echo $currentpathtoscript; ?>" placeholder="Type where SHTracker is installed..." pattern="(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-?]*)*\/?" data-validation-pattern-message="Please enter a valid URL" required>
+<input type="text" id="pathtoscript" name="pathtoscript" value="<? echo $currentpathtoscript; ?>" placeholder="Type the path to SHTracker..." pattern="(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-?]*)*\/?" data-validation-pattern-message="Please enter a valid URL" required>
 </div>
 </div>
 <h4>Ad Code</h4>
@@ -174,7 +171,7 @@ if (isset($_GET["updated"])) {
 <div class="alert alert-warning"><b>Warning:</b> On some server configurations using HTML code here may produce errors.</div>
 <div class="control-group">
 <div class="controls">
-<textarea name="adcode" placeholder="Enter a ad code..."><? echo $currentadcode; ?></textarea>
+<textarea id="advertcode" name="advertcode" placeholder="Enter a ad code..."><? echo $currentadcode; ?></textarea>
 </div>
 </div>
 <h4>Count Unique Visitors Only</h4>
@@ -183,17 +180,17 @@ if (isset($_GET["updated"])) {
 <div class="controls">
 <?php
 if ($currentcountuniqueonlystate == "Enabled" ) {
-    echo "<label class=\"radio\"><input type=\"radio\" name=\"countuniqueonlystate\" value=\"Enabled\" checked=\"checked\"> Enabled</label>
-          <label class=\"radio\"><input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\"> Disabled</label>";    
+    echo "<label class=\"radio\"><input type=\"radio\" id=\"countuniqueonlystateenable\" name=\"countuniqueonlystate\" value=\"Enabled\" checked=\"checked\"> Enabled</label>
+          <label class=\"radio\"><input type=\"radio\" id=\"countuniqueonlystatedisable\" name=\"countuniqueonlystate\" value=\"Disabled\"> Disabled</label>";    
 } else {
-  echo "<label class=\"radio\"><input type=\"radio\" name=\"countuniqueonlystate\" value=\"Enabled\"> Enabled</label>
-    <label class=\"radio\"><input type=\"radio\" name=\"countuniqueonlystate\" value=\"Disabled\" checked=\"checked\"> Disabled</label>";   
+  echo "<label class=\"radio\"><input type=\"radio\" id=\"countuniqueonlystateenable\" name=\"countuniqueonlystate\" value=\"Enabled\"> Enabled</label>
+    <label class=\"radio\"><input type=\"radio\" id=\"countuniqueonlystatedisable\" name=\"countuniqueonlystate\" value=\"Disabled\" checked=\"checked\"> Disabled</label>";   
 }   
 ?> 
 </div>  
 </div>
 <div class="control-group">
-<label class="textarea" for="countuniqueonlytime">Time to consider user unique</label>
+<label class="control-label" for="countuniqueonlytime">Time to consider user unique</label>
 <div class="controls">
 <input type="number" id="countuniqueonlytime" name="countuniqueonlytime" value="<? echo $currentcountuniqueonlytime; ?>" placeholder="Enter a time..." required>
 </div>
