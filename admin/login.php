@@ -99,7 +99,7 @@ if (isset($_GET["login_error"])) {
 <div class="control-group">
 <div class="controls">
 <label class="checkbox">
-<input type="checkbox" value="rememberme"> Remember Me?
+<input type="checkbox" id="rememberme" name="rememberme"> Remember Me?
 </label>
 </div>
 </div>
