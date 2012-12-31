@@ -92,9 +92,9 @@ header("Location: settings.php?updated=true");
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
 <style>
-    body {
-        padding-top: 60px;
-    }
+body {
+    padding-top: 60px;
+}
 </style>
 <link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->

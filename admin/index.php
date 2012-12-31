@@ -30,35 +30,35 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
 <link href="../resources/datatables/dataTables.bootstrap.css" type="text/css" rel="stylesheet">
 <style>
-    html, body {
-        height: 100%;
-    }
-    body {
-        padding-top: 60px;
-    }
-    #wrap {
-        min-height: 100%;
-        height: auto !important;
-        height: 100%;
-        margin: 0 auto -40px;
-    }
-    #push, #footer {
-        height: 40px;
-    }
+html, body {
+    height: 100%;
+}
+body {
+    padding-top: 60px;
+}
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -40px;
+}
+#push, #footer {
+    height: 40px;
+}
+#footer {
+    background-color: #f5f5f5;
+}
+@media (max-width: 767px) {
     #footer {
-        background-color: #f5f5f5;
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
-    @media (max-width: 767px) {
-        #footer {
-            margin-left: -20px;
-            margin-right: -20px;
-            padding-left: 20px;
-			padding-right: 20px;
-        }
-    }
-    .container .credit {
-        margin: 10px 0;
-    }
+}
+.container .credit {
+    margin: 10px 0;
+}
 </style>
 <link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
