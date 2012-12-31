@@ -120,6 +120,11 @@ $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
         if ($("#passwordprotectstate").prop("checked") == true) {
             password = prompt("Enter a password","");
+            passwordconfirm = prompt("Confirm password","");
+            if (password != passwordconfirm) {
+                alert("Passwords do not match");
+                return false   
+            }
             if (password != "" && password != null) {
                 $("#password").val(password);
             } else {
