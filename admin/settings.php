@@ -32,9 +32,7 @@ if ($adminpassword != $currentadminpassword) {
 $website = $_POST["website"];
 $pathtoscript = $_POST["pathtoscript"];
 $countuniqueonlystate = $_POST["countuniqueonlystate"];
-if (isset($_POST["countuniqueonlytime"])) {
-    $countuniqueonlytime = $_POST["countuniqueonlytime"];
-}
+$countuniqueonlytime = $_POST["countuniqueonlytime"];
 if (isset($_POST["advertcode"])) {
     if (get_magic_quotes_gpc()) {
         $adcode = stripslashes(htmlspecialchars($_POST["advertcode"]));
