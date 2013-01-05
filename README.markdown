@@ -5,7 +5,7 @@ SHTracker is a PHP download counter. You can use it to track the number of times
 
 The script uses SQL databases. It comes with an admin panel where you can view how many times a link has been clicked. You can also easily add, edit or remove links using the panel. SHTracker can also display the current count for a download on any web page.
 
-#### Current Version: 4.0 "PanickyPanda"
+#### Current Version: 4.0.1 "PanickyPanda"
 
 Features:
 ---------
@@ -27,6 +27,8 @@ Screenshots of SHTracker can be found [here](http://imgur.com/a/7aQPl).
 
 Downloads:
 ------------
+
+[v4.0.1](https://github.com/joshf/SHTracker/zipball/4.0.1) (released 31/12/12)
 
 [v4.0](https://github.com/joshf/SHTracker/zipball/4.0) (released 23/12/12)
 

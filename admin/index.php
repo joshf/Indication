@@ -2,9 +2,9 @@
 
 //SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
 
-$version = "4.0";
+$version = "4.0.1";
 $codename = "PanickyPanda";
-$rev = "404";
+$rev = "410";
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
