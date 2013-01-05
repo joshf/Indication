@@ -3,7 +3,7 @@ SHTracker Readme
 
 SHTracker is a PHP download counter. You can use it to track the number of times a link has been clicked or the number of times a file has been downloaded. SHTracker can also be used to hide affiliate links.
 
-The script uses SQL databases. It comes with an admin panel where you can view how many times a link has been clicked. You can also easily add, edit or remove links using the panel. SHTracker can also display the current count for a download on any web page.
+The script uses SQL databases. It comes with an admin panel where you can view how many times a download has been accessed. You can also easily add, edit or remove downloads using the panel. SHTracker can also display the current count for a download on any web page.
 
 #### Current Version: 4.0.1 "PanickyPanda"
 
@@ -16,9 +16,9 @@ Features:
 * Supports displaying of ads before user is redirected to download
 * Full admin panel
 * Display download counts to users
-* Themed by Twitter Bootstrap
-* Sort and search download through the use of DataTables
-* Works well on mobile due to a responsive layout
+* Themed by Twitter Bootstrap, offers a choice of themes
+* Sort and search downloads through the use of DataTables
+* Works well on mobile devices due to a responsive layout
 
 Screenshots:
 ------------
@@ -47,7 +47,7 @@ Installation:
 4. Open up http://yoursite.com/SHTracker/installer in your browser and enter your database/user details
 5. Delete the "installer" folder from your server
 6. Login to the admin panel using the username and password you set during the install process
-7. Add your links/downloads
+7. Add your downloads
 8. SHTracker should now be set up
 
 Usage:
@@ -59,22 +59,22 @@ Replace ID with the ID name/number of your URL, for example: http://yoursite.com
 
 So instead of linking to http://yoursite.com/some/directory/mydownload1.zip, link to http://yoursite.com/SHTracker/get.php?id=mydownload1
 
-To find this this URL select the download and click "Show Tracking Link"
+To find this URL select the download and click the "Show Tracking Link" button
 
-This will log the count of the download and redirect users to the file
+This will log the count of the download and redirect users to the file or web page
 
-This script can also be called via $_POST just set the name of the form to id and the value to the id you wish to download
+This script can also be called via $_POST just set the name of the form to ID and the value to the ID you wish to download
 
-To show the download count for one id only, call http://yoursite.com/SHTracker/show.php?id=mydownload1. To show just the count with no other text add "&plain=true" to the end of the URL. Similarly, to list all downloads add "&list=true" to the end of the URL. The showing of counts could be done using an include or an iframe (see below)
+To show the download count for one ID only, call http://yoursite.com/SHTracker/display.php?id=mydownload1. To show just the count with no other text add "&plain=true" to the end of the URL. This could be done by linking directly to display.php, using an iframe or by using a PHP include
 
-**Example codes to show count to a user:**
+**Examples:**
 
-Normal:
+With formatting:
 
 ```php
 <?php
 $_GET["id"] = "download1";
-include("SHTracker/show.php");
+include("SHTracker/display.php");
 ?>
 ```
 
@@ -84,22 +84,22 @@ Without formatting:
 <?php
 $_GET["id"] = "download1";
 $_GET["plain"] = "true";
-include("SHTracker/show.php");
+include("SHTracker/display.php");
 ?>
 ```
 
 OR:
 
-Normal:
+With formatting:
 
 ```html
-<iframe src="SHTracker/show.php?id=download1"></iframe>
+<iframe src="SHTracker/display.php?id=download1"></iframe>
 ```
 
 Without formatting:
 
 ```html
-<iframe src="SHTracker/show.php?id=download1&plain=true"></iframe>
+<iframe src="SHTracker/display.php?id=download1&plain=true"></iframe>
 ```
 
 Administration:

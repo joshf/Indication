@@ -17,7 +17,7 @@ require_once("config.php");
 <?php
 
 if (THEME == "default") {
-    echo "<link href=\"../resources/bootstrap/css/bootstrap.css\" type=\"text/css\" rel=\"stylesheet\">\n";  
+    echo "<link href=\"resources/bootstrap/css/bootstrap.css\" type=\"text/css\" rel=\"stylesheet\">\n";  
 } else {
     echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.1.1/" . THEME . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
 }
@@ -75,7 +75,7 @@ if (isset($_GET["id"])) {
 }
 
 //Check if ID exists
-$getinfo = mysql_query("SELECT name, url FROM Data WHERE id = \"$id\"");
+$getinfo = mysql_query("SELECT name, url, count FROM Data WHERE id = \"$id\"");
 $getinforesult = mysql_fetch_assoc($getinfo);
 if ($getinforesult == 0) {
     die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>ID does not exist.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
@@ -108,7 +108,7 @@ if ($checkifprotectedresult["protect"] == "1") {
         $timeleft = ceil($time);
         echo "<div class=\"alert alert-info\"><b>Notice:</b> your download session wll expire in $timeleft minutes...</div>";
     } else {
-        die("<h3>Downloading " . $getinforesult["name"] . "</h3><form method=\"post\"><p>To access this download please enter the password you were given.</p><p><input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Enter password...\"></p><input type=\"submit\" class=\"btn btn-success\" value=\"Get Download\"> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></form></div></body></html>");
+        die("<h3>Downloading " . $getinforesult["name"] . "</h3><p><span class=\"label label-info\">" . $getinforesult["count"] . " downloads</span></p><p>To access this download please enter the password you were given.</p><form method=\"post\"><p><input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Enter password...\"></p><input type=\"submit\" class=\"btn btn-success\" value=\"Get Download\"> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></form></div></body></html>");
     }
 }
 
@@ -117,7 +117,7 @@ $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$id\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow);
 if ($checkifadsshowresult["showads"] == "1") {
     $adcode = htmlspecialchars_decode(AD_CODE);
-    die("<h3>Downloading " . $getinforesult["name"] . "</h3><p>" . $adcode . "</p><p><button class=\"btn btn-success\" onClick=\"window.location = '" . $getinforesult["url"] . "'\">Start Download</button> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p></div></body></html>");
+    die("<h3>Downloading " . $getinforesult["name"] . "</h3><p><span class=\"label label-info\">" . $getinforesult["count"] . " downloads</span></p><p>" . $adcode . "</p><p><button class=\"btn btn-success\" onClick=\"window.location = '" . $getinforesult["url"] . "'\">Start Download</button> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p></div></body></html>");
 }
 
 mysql_close($con);
