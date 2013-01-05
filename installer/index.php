@@ -17,7 +17,7 @@ if (file_exists("../config.php")) {
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
-<style>
+<style type="text/css">
 body {
     padding-top: 60px;
 }

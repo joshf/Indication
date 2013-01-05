@@ -37,7 +37,7 @@ if (THEME == "default") {
 
 ?>
 <link href="../resources/datatables/dataTables.bootstrap.css" type="text/css" rel="stylesheet">
-<style>
+<style type="text/css">
 body {
     padding-top: 60px;
 }

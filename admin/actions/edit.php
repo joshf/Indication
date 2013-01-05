@@ -32,10 +32,10 @@ if (THEME == "default") {
 }
 
 ?>
-<style>
-    body {
-        padding-top: 60px;
-    }
+<style type="text/css">
+body {
+    padding-top: 60px;
+}
 </style>
 <link href="../../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
