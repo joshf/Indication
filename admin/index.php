@@ -27,7 +27,15 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <meta charset="utf-8">
 <title>SHTracker</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
+<?php
+
+if (THEME == "default") {
+    echo "<link href=\"../resources/bootstrap/css/bootstrap.css\" type=\"text/css\" rel=\"stylesheet\">\n";  
+} else {
+    echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.1.1/" . THEME . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
+}
+
+?>
 <link href="../resources/datatables/dataTables.bootstrap.css" type="text/css" rel="stylesheet">
 <style>
 body {

@@ -19,7 +19,8 @@ $currentwebsite = WEBSITE;
 $currentpathtoscript = PATH_TO_SCRIPT;
 $currentcountuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
 $currentcountuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
-$currentadcode = htmlspecialchars_decode(AD_CODE); 
+$currentadcode = htmlspecialchars_decode(AD_CODE);
+$currenttheme = THEME; 
 
 if (isset($_POST["save"])) {
 
@@ -40,6 +41,7 @@ if (isset($_POST["advertcode"])) {
         $adcode = htmlspecialchars($_POST["advertcode"]);
     }
 }
+$theme = $_POST["theme"];
 
 //Remember previous settings
 if (empty($adcode)) {
@@ -65,6 +67,7 @@ define(\"COUNT_UNIQUE_ONLY_STATE\", \"$countuniqueonlystate\");
 define(\"COUNT_UNIQUE_ONLY_TIME\", \"$countuniqueonlytime\");
 define(\"UNIQUE_KEY\", \"$uniquekey\");
 define(\"AD_CODE\", \"$adcode\");
+define(\"THEME\", \"$theme\");
 
 ?>";
 
@@ -85,7 +88,15 @@ header("Location: settings.php?updated=true");
 <meta charset="utf-8">
 <title>SHTracker: Settings</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
+<?php
+
+if (THEME == "default") {
+    echo "<link href=\"../resources/bootstrap/css/bootstrap.css\" type=\"text/css\" rel=\"stylesheet\">\n";  
+} else {
+    echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.1.1/" . THEME . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
+}
+
+?>
 <style>
 body {
     padding-top: 60px;
@@ -186,6 +197,26 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 }   
 ?> 
 </div>  
+</div>
+<h4>Theme</h4>
+<p>Themes are provided by BootSwatch, for previews of each theme see <a href="http://bootswatch.com" target="_blank">here</a>. The "Default" theme is included with the SHTracker, the others are hosted on a CDN.</p>
+<div class="control-group">
+<label class="control-label" for="theme">Select a theme</label>
+<div class="controls">
+<?php
+$themes = array("default", "amelia", "cerulean", "cosmo", "cyborg", "journal", "readable", "simplex", "slate", "spacelab", "spruce", "superhero", "united");
+
+echo "<select id=\"theme\" name=\"theme\">";
+foreach ($themes as $value) {
+    if ($value == $currenttheme) {
+        echo "<option value=\"$value\" selected=\"selected\">". ucfirst($value) . "</option>";
+    } else {
+        echo "<option value=\"$value\">". ucfirst($value) . "</option>";
+    }
+}
+echo "</select>";
+?>
+</div>
 </div>
 <div class="control-group">
 <label class="control-label" for="countuniqueonlytime">Time to consider user unique</label>
