@@ -14,7 +14,7 @@ if (!$con) {
 //Check database exists
 $does_db_exist = mysql_select_db(DB_NAME, $con);
 if (!$does_db_exist) {
-    die("Error:</b> Database does not exist (" . mysql_error() . "). Check your database settings are correct.");
+    die("Error: Database does not exist (" . mysql_error() . "). Check your database settings are correct.");
 }
 
 mysql_select_db(DB_NAME, $con);
@@ -26,7 +26,7 @@ if (isset($_GET["id"])) {
 }
 
 //If ID exists, show count or else die
-$showinfo = mysql_query("SELECT name, count FROM Data WHERE id = \"$id\"");
+$showinfo = mysql_query("SELECT count FROM Data WHERE id = \"$id\"");
 $showresult = mysql_fetch_assoc($showinfo);
 if ($showresult != 0) {
     echo $showresult["count"];
