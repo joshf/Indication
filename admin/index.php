@@ -136,23 +136,25 @@ echo "</tbody></table>";
 <div class="alert alert-info">   
 <strong>Info:</strong> To edit, delete or show the tracking link for a download please select the radio button next to it.  
 </div>
+<div class="well">
 <?php
 
 $getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM Data");
 $resultnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
-echo "Number of Downloads: <span class=\"badge\">" . $resultnumberofdownloads["COUNT(id)"] . "</span><br>";
+echo "<i class=\"icon-list-alt\"></i> <b>" . $resultnumberofdownloads["COUNT(id)"] . "</b> items<br>";
 
 $gettotalnumberofdownloads = mysql_query("SELECT SUM(count) FROM Data");
 $resulttotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
 if ($resulttotalnumberofdownloads["SUM(count)"] > "1") {
-    echo "Total Downloads: <span class=\"badge\">" . $resulttotalnumberofdownloads["SUM(count)"] . "</span>";
+    echo "<i class=\"icon-download\"></i> <b>" . $resulttotalnumberofdownloads["SUM(count)"] . "</b> total downloads";
 } else {
-    echo "Total Downloads: <span class=\"badge\">0</span>";
+    echo "<i class=\"icon-download\"></i> <b>0</b> total downloads";
 }
 
 mysql_close($con);
 
 ?>
+</div>
 <hr>
 <p class="muted pull-right">SHTracker <? echo $version; ?> (<? echo $rev; ?>) "<? echo $codename; ?>"  &copy; <a href="http://github.com/joshf" target="_blank">Josh Fradley</a> <? echo date("Y"); ?>. Themed by <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>.</p>
 </div>
