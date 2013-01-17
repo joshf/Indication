@@ -4,7 +4,7 @@
 
 $version = "4.0.1";
 $codename = "PanickyPanda";
-$rev = "410";
+$rev = "420";
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
@@ -134,7 +134,7 @@ echo "</tbody></table>";
 <br>
 <br>
 <div class="alert alert-info">   
-<strong>Info:</strong> To edit, delete or show the tracking link for a download please select the radio button next to it.  
+<b>Info:</b> To edit, delete or show the tracking link for a download please select the radio button next to it.  
 </div>
 <div class="well">
 <?php

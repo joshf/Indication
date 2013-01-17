@@ -132,16 +132,17 @@ mysql_query("UPDATE Data SET name = \"$newname\", id = \"$newid\", url = \"$newu
 mysql_close($con);
 
 ?> 
-<p>The download/link <b><? echo $newname; ?></b> has been edited successfully.</p>
+<div class="alert alert-info">
+<b>Info:</b> The download has been edited successfully.
+</div>
 <p><b>Updated Details:</b></p>
 <ul>
-<li>Name : <? echo $newname; ?></li>
-<li>ID : <? echo $newid; ?></li>
-<li>URL : <? echo $newurl; ?></li>
+<li>Name: <? echo $newname; ?></li>
+<li>ID: <? echo $newid; ?></li>
+<li>URL: <? echo $newurl; ?></li>
 </ul>
 <p><b>Tracking Link:</b></p>
 <p><? echo PATH_TO_SCRIPT; ?>/get.php?id=<? echo $newid; ?></p>
-<p><a href="../index.php" class="btn">Go Home</a></p>
 </div>
 <!-- Content end -->
 <!-- Javascript start -->	

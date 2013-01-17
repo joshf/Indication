@@ -128,16 +128,17 @@ VALUES (\"$name\",\"$id\",\"$url\",\"$count\",\"$protect\",\"$password\",\"$show
 mysql_close($con);
 
 ?>
-<p>The download/link <b><? echo $name; ?></b> has been added successfully.</p>
+<div class="alert alert-info">
+<b>Info:</b> The download has been added successfully.
+</div>
 <p><b>Details:</b></p>
 <ul>
-<li>Name : <? echo $name; ?></li>
-<li>ID : <? echo $id; ?></li>
-<li>URL : <? echo $url; ?></li>
+<li>Name: <? echo $name; ?></li>
+<li>ID: <? echo $id; ?></li>
+<li>URL: <? echo $url; ?></li>
 </ul>
 <p><b>Tracking Link:</b></p>
 <p><? echo PATH_TO_SCRIPT; ?>/get.php?id=<? echo $id; ?></p>
-<p><a href="../index.php" class="btn">Go Home</a></p>
 </div>
 <!-- Content end -->
 <!-- Javascript start -->
