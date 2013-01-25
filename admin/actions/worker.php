@@ -24,9 +24,15 @@ if (!$con) {
 
 mysql_select_db(DB_NAME, $con);
 
-$idtodelete = mysql_real_escape_string($_POST["id"]);
+$id = mysql_real_escape_string($_POST["id"]);
 
-mysql_query("DELETE FROM Data WHERE id = \"$idtodelete\"");
+$action = $_POST["action"];
+
+if ($action == "delete") {
+	mysql_query("DELETE FROM Data WHERE id = \"$id\"");
+} else {
+    die("Error: Unknown action");
+}
 
 mysql_close($con);
 

@@ -208,8 +208,8 @@ $(document).ready(function() {
             if (deleteconfirm==true) {
                 $.ajax({  
                     type: "POST",  
-                    url: "actions/delete.php",  
-                    data: "id="+ id +"",
+                    url: "actions/worker.php",  
+                    data: "action=delete&id="+ id +"",
                     error: function() {  
                         alert("Ajax query failed!");
                     },
