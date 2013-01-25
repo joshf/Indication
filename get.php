@@ -4,6 +4,10 @@
 
 ob_start();
 
+if (!file_exists("config.php")) {
+    header("Location: installer");
+}
+
 require_once("config.php");
 
 ?>
