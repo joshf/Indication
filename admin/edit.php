@@ -156,7 +156,7 @@ mysql_close($con);
 <!-- Javascript start -->	
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.js"></script>
-<script src="//raw.github.com/ReactiveRaven/jqBootstrapValidation/1.3.6/jqBootstrapValidation.js"></script>
+<script src="../resources/validation/jqBootstrapValidation.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
