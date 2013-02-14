@@ -2,9 +2,9 @@
 
 //SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
 
-$version = "4.0.1";
-$codename = "PanickyPanda";
-$rev = "430";
+$version = "4.1";
+$codename = "QuickQuail";
+$rev = "41";
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");

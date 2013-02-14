@@ -5,7 +5,7 @@ SHTracker is a PHP download counter. You can use it to track the number of times
 
 The script uses SQL databases. It comes with an admin panel where you can view how many times a download has been accessed. You can also easily add, edit or remove downloads using the panel. SHTracker can also display the current count for a download on any web page.
 
-#### Current Version: 4.0.2 "PanickyPanda"
+#### Current Version: 4.1 "QuickQuail"
 
 Features:
 ---------
@@ -28,7 +28,7 @@ Screenshots of SHTracker can be found [here](http://imgur.com/a/7aQPl).
 Downloads:
 ------------
 
-[v4.0.2](https://github.com/joshf/SHTracker/zipball/4.0.2) (released 14/02/13)
+[v4.1](https://github.com/joshf/SHTracker/zipball/4.1) (released 14/02/13)
 
 [v4.0.1](https://github.com/joshf/SHTracker/zipball/4.0.1) (released 05/01/13)
 
@@ -67,41 +67,19 @@ This will log the count of the download and redirect users to the file or web pa
 
 This script can also be called via $_POST just set the name of the form to ID and the value to the ID you wish to download
 
-To show the download count for one ID only, call http://yoursite.com/SHTracker/display.php?id=mydownload1. To show just the count with no other text add "&plain=true" to the end of the URL. This could be done by linking directly to display.php, using an iframe or by using a PHP include
+To show the download count for one ID only, call http://yoursite.com/SHTracker/display.php?id=mydownload1. This could be done by linking directly to display.php, using an iframe or by using a PHP include
 
 **Examples:**
 
-With formatting:
-
 ```php
 <?php
 $_GET["id"] = "download1";
 include("SHTracker/display.php");
 ?>
 ```
-
-Without formatting:
-
-```php
-<?php
-$_GET["id"] = "download1";
-$_GET["plain"] = "true";
-include("SHTracker/display.php");
-?>
-```
-
-OR:
-
-With formatting:
 
 ```html
 <iframe src="SHTracker/display.php?id=download1"></iframe>
-```
-
-Without formatting:
-
-```html
-<iframe src="SHTracker/display.php?id=download1&plain=true"></iframe>
 ```
 
 Administration:
