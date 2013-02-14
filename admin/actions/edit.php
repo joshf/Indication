@@ -32,7 +32,7 @@ if (!isset($_POST["id"])) {
 if (THEME == "default") {
     echo "<link href=\"../../resources/bootstrap/css/bootstrap.css\" type=\"text/css\" rel=\"stylesheet\">\n";  
 } else {
-    echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.1.1/" . THEME . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
+    echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.3.0/" . THEME . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
 }
 
 ?>
@@ -150,7 +150,7 @@ mysql_close($con);
 </div>
 <!-- Content end -->
 <!-- Javascript start -->	
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="../../resources/bootstrap/js/bootstrap.js"></script>
 <!-- Javascript end -->
 </body>

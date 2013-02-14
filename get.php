@@ -23,7 +23,7 @@ require_once("config.php");
 if (THEME == "default") {
     echo "<link href=\"resources/bootstrap/css/bootstrap.css\" type=\"text/css\" rel=\"stylesheet\">\n";  
 } else {
-    echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.1.1/" . THEME . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
+    echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.3.0/" . THEME . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
 }
 
 ?>
@@ -112,7 +112,7 @@ if ($checkifprotectedresult["protect"] == "1") {
             }
                 
         } else {
-            echo "<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Incorrect password.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>";
+            echo "<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Incorrect password.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div>";
         }
     } else {
         echo "<h3>Downloading " . $getinforesult["name"] . "</h3><p><span class=\"label label-info\">" . $getinforesult["count"] . " downloads</span></p><p>To access this download please enter the password you were given.</p><form method=\"post\"><p><input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Enter password...\"></p><input type=\"submit\" class=\"btn btn-success\" value=\"Get Download\"> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></form>";
@@ -130,15 +130,13 @@ mysql_close($con);
 </div>
 <!-- Content end -->
 <!-- Javascript start -->	
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="resources/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    /* Edit */
     $("#startdownload").click(function() {
         window.location = "<?php echo $getinforesult["url"]; ?>";
     });
-    /* End */
 });
 </script>
 <!-- Javascript end -->
