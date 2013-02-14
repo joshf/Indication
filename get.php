@@ -85,54 +85,62 @@ if ($getinforesult == 0) {
     die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>ID does not exist.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
-//Cookies don't like dots
-$idclean = str_replace(".", "_", $id);
-
-if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
-    if (!isset($_COOKIE["shtrackerhasdownloaded_$idclean"])) {
-        mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
-        setcookie("shtrackerhasdownloaded_$idclean", "True", time()+3600*COUNT_UNIQUE_ONLY_TIME);
-    }
-} else {
-    mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
-}
+mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
 
 //Check if download is password protected
 $checkifprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$id\"");
 $checkifprotectedresult = mysql_fetch_assoc($checkifprotected);
-if ($checkifprotectedresult["protect"] == "1") {
-    if (isset($_POST["password"])) {
-        if (sha1($_POST["password"]) != $checkifprotectedresult["password"]) {
-            die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Incorrect password.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
-        } else {
-            setcookie("shtrackerhasauthed_$idclean", time()+900, time()+900);
-        }
-    } elseif (isset($_COOKIE["shtrackerhasauthed_$idclean"])) {
-        $time = ($_COOKIE["shtrackerhasauthed_$idclean"]-time()) / 60;
-        $timeleft = ceil($time);
-        echo "<div class=\"alert alert-info\"><b>Notice:</b> your download session wll expire in $timeleft minutes...</div>";
-    } else {
-        die("<h3>Downloading " . $getinforesult["name"] . "</h3><p><span class=\"label label-info\">" . $getinforesult["count"] . " downloads</span></p><p>To access this download please enter the password you were given.</p><form method=\"post\"><p><input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Enter password...\"></p><input type=\"submit\" class=\"btn btn-success\" value=\"Get Download\"> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></form></div></body></html>");
-    }
-}
 
 //Check if we should show ads
 $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$id\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow);
-if ($checkifadsshowresult["showads"] == "1") {
-    $adcode = htmlspecialchars_decode(AD_CODE);
-    die("<h3>Downloading " . $getinforesult["name"] . "</h3><p><span class=\"label label-info\">" . $getinforesult["count"] . " downloads</span></p><p>" . $adcode . "</p><p><button class=\"btn btn-success\" onClick=\"window.location = '" . $getinforesult["url"] . "'\">Start Download</button> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p></div></body></html>");
+
+if ($checkifprotectedresult["protect"] != "1" && $checkifadsshowresult["showads"] != "1") {
+    header("Location: " . $getinforesult["url"] . "");
+    exit;
 }
 
-mysql_close($con);
-
-//Redirect user to the download
-header("Location: " . $getinforesult["url"] . "");
+if ($checkifprotectedresult["protect"] == "1") {
+    if (isset($_POST["password"])) {
+        if (sha1($_POST["password"]) == $checkifprotectedresult["password"]) {
+            if ($checkifadsshowresult["showads"] == "1") {
+                $adcode = htmlspecialchars_decode(AD_CODE);    
+                echo "<h3>Downloading " . $getinforesult["name"] . "</h3><p><span class=\"label label-info\">" . $getinforesult["count"] . " downloads</span></p><p>" . $adcode . "</p><p><button id=\"startdownload\" class=\"btn btn-success\">Start Download</button> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p>";
+            } else {
+                header("Location: " . $getinforesult["url"] . "");
+                exit;
+            }
+                
+        } else {
+            echo "<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Incorrect password.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>";
+        }
+    } else {
+        echo "<h3>Downloading " . $getinforesult["name"] . "</h3><p><span class=\"label label-info\">" . $getinforesult["count"] . " downloads</span></p><p>To access this download please enter the password you were given.</p><form method=\"post\"><p><input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Enter password...\"></p><input type=\"submit\" class=\"btn btn-success\" value=\"Get Download\"> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></form>";
+    }
+} elseif ($checkifadsshowresult["showads"] == "1")  {
+    $adcode = htmlspecialchars_decode(AD_CODE); 
+    echo "<h3>Downloading " . $getinforesult["name"] . "</h3><p><span class=\"label label-info\">" . $getinforesult["count"] . " downloads</span></p><p>" . $adcode . "</p><p><button id=\"startdownload\" class=\"btn btn-success\">Start Download</button> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p>";
+}
+    
 ob_end_flush();
-exit;
+
+mysql_close($con);
 
 ?>
 </div>
 <!-- Content end -->
+<!-- Javascript start -->	
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="resources/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    /* Edit */
+    $("#startdownload").click(function() {
+        window.location = "<?php echo $getinforesult["url"]; ?>";
+    });
+    /* End */
+});
+</script>
+<!-- Javascript end -->
 </body>
 </html>

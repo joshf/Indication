@@ -4,7 +4,7 @@
 
 $version = "4.0.1";
 $codename = "PanickyPanda";
-$rev = "420";
+$rev = "430";
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
