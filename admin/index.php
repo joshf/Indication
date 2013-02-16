@@ -78,12 +78,12 @@ body {
 <!-- Content start -->
 <div class="container">
 <div class="page-header">
-<h1>All Downloads for <? echo WEBSITE; ?></h1>
+<h1>All Downloads</h1>
 </div>		
 <?php
 
 if (isset($_GET["nojs"])) {
-    die("<div class=\"alert alert-info\"><h4 class=\"alert-heading\">Error</h4><p>Please enable JavaScript to use SHTracker. For instructions on how to do this, see <a href=\"http://www.activatejavascript.org\" target=\"_blank\">here</a>. Once done click continue.</p><p><a class=\"btn btn-info\" href=\"index.php\">Continue</a></p></div></div></body></html>");
+    die("<div class=\"alert alert-info\"><h4 class=\"alert-heading\">Information</h4><p>Please enable JavaScript to use SHTask. For instructions on how to do this, see <a href=\"http://www.activatejavascript.org\" target=\"_blank\">here</a>. Once done click continue.</p><p><a class=\"btn btn-info\" href=\"index.php\">Continue</a></p></div></div></body></html>");
 }
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);

@@ -83,6 +83,7 @@ body {
 <!-- Content start -->
 <div class="container">
 <form class="form-signin" method="post">
+<fieldset>
 <h2 class="form-signin-heading">SHTracker</h2>
 <?php 
 
@@ -113,6 +114,7 @@ if (isset($_GET["login_error"])) {
 </div>
 </div>
 <button type="submit" class="btn btn-large btn-primary">Sign In</button>
+</fieldset>
 </form>
 </div>
 <!-- Content end -->

@@ -30,8 +30,6 @@ $action = $_POST["action"];
 
 if ($action == "delete") {
 	mysql_query("DELETE FROM Data WHERE id = \"$id\"");
-} else {
-    die("Error: Unknown action");
 }
 
 mysql_close($con);

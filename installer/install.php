@@ -36,7 +36,7 @@ body {
 <?php
 
 if (!isset($_POST["doinstall"])) {
-    die("<div class=\"alert alert-info\"><h4 class=\"alert-heading\">Info</h4><p>This installer cannot be called directly.</p><p><a class=\"btn btn-info\" href=\"../installer\">Go To Installer</a></p></div></div></body></html>");
+    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Install Failed</h4><p>Error: Installer called directly.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 //Get new settings from POST

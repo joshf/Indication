@@ -19,6 +19,7 @@ if (isset($_COOKIE["shtrackerrememberme_" . $uniquekey . ""])) {
 }
 
 header("Location: login.php?logged_out=true");
+
 exit;
 
 ?>
