@@ -27,62 +27,39 @@ $currentadcode = htmlspecialchars_decode(AD_CODE);
 $currenttheme = THEME; 
 
 if (isset($_POST["save"])) {
-
-//Get new settings from POST
-$adminuser = $_POST["adminuser"];
-$adminpassword = $_POST["adminpassword"];
-if ($adminpassword != $currentadminpassword) {
-    $adminpassword = sha1($adminpassword);
-}
-$website = $_POST["website"];
-$pathtoscript = $_POST["pathtoscript"];
-$countuniqueonlystate = $_POST["countuniqueonlystate"];
-$countuniqueonlytime = $_POST["countuniqueonlytime"];
-if (isset($_POST["advertcode"])) {
-    if (get_magic_quotes_gpc()) {
-        $adcode = stripslashes(htmlspecialchars($_POST["advertcode"]));
-    } else {
-        $adcode = htmlspecialchars($_POST["advertcode"]);
+    //Get new settings from POST
+    $adminuser = $_POST["adminuser"];
+    $adminpassword = $_POST["adminpassword"];
+    if ($adminpassword != $currentadminpassword) {
+        $adminpassword = sha1($adminpassword);
     }
-}
-$theme = $_POST["theme"];
+    $website = $_POST["website"];
+    $pathtoscript = $_POST["pathtoscript"];
+    $countuniqueonlystate = $_POST["countuniqueonlystate"];
+    $countuniqueonlytime = $_POST["countuniqueonlytime"];
+    if (isset($_POST["advertcode"])) {
+        if (get_magic_quotes_gpc()) {
+            $adcode = stripslashes(htmlspecialchars($_POST["advertcode"]));
+        } else {
+            $adcode = htmlspecialchars($_POST["advertcode"]);
+        }
+    }
+    $theme = $_POST["theme"];
 
-//Remember previous settings
-if (empty($adcode)) {
-    $adcode = $currentadcode;
-}
+    //Remember previous settings
+    if (empty($adcode)) {
+        $adcode = $currentadcode;
+    }
 
-$settingsstring = "<?php
+    $settingsstring = "<?php\n\n//Database Settings\ndefine(\"DB_HOST\", \"" . DB_HOST . "\");\ndefine(\"DB_USER\", \"" . DB_USER . "\");\ndefine(\"DB_PASSWORD\", \"" . DB_PASSWORD . "\");\ndefine(\"DB_NAME\", \"" . DB_NAME . "\");\n\n//Admin Details\ndefine(\"ADMIN_USER\", \"$adminuser\");\ndefine(\"ADMIN_PASSWORD\", \"$adminpassword\");\n\n//Other Settings\ndefine(\"WEBSITE\", \"$website\");\ndefine(\"PATH_TO_SCRIPT\", \"$pathtoscript\");\ndefine(\"COUNT_UNIQUE_ONLY_STATE\", \"$countuniqueonlystate\");\ndefine(\"COUNT_UNIQUE_ONLY_TIME\", \"$countuniqueonlytime\");\ndefine(\"UNIQUE_KEY\", \"$uniquekey\");\ndefine(\"AD_CODE\", \"$adcode\");\ndefine(\"THEME\", \"$theme\");\n\n?>";
 
-//Database Settings
-define(\"DB_HOST\", \"" . DB_HOST . "\");
-define(\"DB_USER\", \"" . DB_USER . "\");
-define(\"DB_PASSWORD\", \"" . DB_PASSWORD . "\");
-define(\"DB_NAME\", \"" . DB_NAME . "\");
+    //Write config
+    $configfile = fopen("../config.php", "w");
+    fwrite($configfile, $settingsstring);
+    fclose($configfile);
 
-//Admin Details
-define(\"ADMIN_USER\", \"$adminuser\");
-define(\"ADMIN_PASSWORD\", \"$adminpassword\");
-
-//Other Settings
-define(\"WEBSITE\", \"$website\");
-define(\"PATH_TO_SCRIPT\", \"$pathtoscript\");
-define(\"COUNT_UNIQUE_ONLY_STATE\", \"$countuniqueonlystate\");
-define(\"COUNT_UNIQUE_ONLY_TIME\", \"$countuniqueonlytime\");
-define(\"UNIQUE_KEY\", \"$uniquekey\");
-define(\"AD_CODE\", \"$adcode\");
-define(\"THEME\", \"$theme\");
-
-?>";
-
-//Write config
-$configfile = fopen("../config.php", "w");
-fwrite($configfile, $settingsstring);
-fclose($configfile);
-
-//Show updated values
-header("Location: settings.php?updated=true");
-
+    //Show updated values
+    header("Location: settings.php?updated=true");
 }
 
 ?>
