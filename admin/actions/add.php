@@ -21,7 +21,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SHTracker: Add</title>
+<title>SHTracker &middot; Add</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php
 

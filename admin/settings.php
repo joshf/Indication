@@ -67,7 +67,7 @@ if (isset($_POST["save"])) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SHTracker: Settings</title>
+<title>SHTracker &middot; Settings</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php
 
