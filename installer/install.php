@@ -78,7 +78,7 @@ define(\"THEME\", \"default\");
 ?>";
 
 //Check if we can connect
-$con = mysql_connect($dbhost, $dbuser, $dbpassword);
+@$con = mysql_connect($dbhost, $dbuser, $dbpassword);
 if (!$con) {
     die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Install Failed</h4><p>Error: Could not connect to database (" . mysql_error() . "). Check your database settings are correct.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }

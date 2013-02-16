@@ -9,7 +9,7 @@ if (!file_exists("config.php")) {
 require_once("config.php");
 
 //Connect to database
-$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+@$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
     die("Error: Could not connect to database (" . mysql_error() . "). Check your database settings are correct.");
 }

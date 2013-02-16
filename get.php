@@ -56,7 +56,7 @@ body {
 <?php
 
 //Connect to database
-$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+@$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
     die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Could not connect to database (" . mysql_error() . "). Check your database settings are correct.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
