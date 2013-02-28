@@ -1,6 +1,6 @@
 <?php
 
-//SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
+//Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
@@ -25,7 +25,7 @@ if (!isset($_GET["id"])) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SHTracker &middot; Edit</title>
+<title>Indication &middot; Edit</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php
 
@@ -57,7 +57,7 @@ body {
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
 </a>
-<a class="brand" href="#">SHTracker</a>
+<a class="brand" href="#">Indication</a>
 <div class="nav-collapse collapse">
 <ul class="nav">
 <li><a href="index.php">Home</a></li>

@@ -1,6 +1,6 @@
 <?php
 
-//SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
+//Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
 require_once("../../config.php");
 

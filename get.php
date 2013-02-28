@@ -1,6 +1,6 @@
 <?php
 
-//SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
+//Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
 ob_start();
 
@@ -15,7 +15,7 @@ require_once("config.php");
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SHTracker</title>
+<title>Indication</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php
@@ -43,7 +43,7 @@ body {
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
-<a class="brand" href="#">SHTracker</a>
+<a class="brand" href="#">Indication</a>
 </div>
 </div>
 </div>

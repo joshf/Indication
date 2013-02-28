@@ -1,6 +1,6 @@
 <?php
 
-//SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
+//Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
@@ -15,7 +15,7 @@ $uniquekey = UNIQUE_KEY;
 session_start();
 
 //If cookie is set, skip login
-if (isset($_COOKIE["shtrackerrememberme_" . $uniquekey . ""])) {
+if (isset($_COOKIE["indicationrememberme_" . $uniquekey . ""])) {
     $_SESSION["is_logged_in_" . $uniquekey . ""] = true;
 }
 
@@ -23,7 +23,7 @@ if (isset($_POST["password"]) && isset($_POST["user"])) {
     if (sha1($_POST["password"]) == $password && $_POST["user"] == $user) {
         $_SESSION["is_logged_in_" . $uniquekey . ""] = true;
             if (isset($_POST["rememberme"])) {
-                setcookie("shtrackerrememberme_" . $uniquekey . "", ADMIN_USER, time()+1209600);
+                setcookie("indicationrememberme_" . $uniquekey . "", ADMIN_USER, time()+1209600);
             }
     } else {
         header("Location: login.php?login_error=true");
@@ -36,7 +36,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SHTracker &middot; Login</title>
+<title>Indication &middot; Login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <?php
@@ -84,7 +84,7 @@ body {
 <div class="container">
 <form class="form-signin" method="post">
 <fieldset>
-<h2 class="form-signin-heading">SHTracker</h2>
+<h2 class="form-signin-heading">Indication</h2>
 <?php 
 
 if (isset($_GET["login_error"])) {

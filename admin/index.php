@@ -1,6 +1,6 @@
 <?php
 
-//SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
+//Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
 $version = "4.1";
 $codename = "QuickQuail";
@@ -25,7 +25,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SHTracker</title>
+<title>Indication</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php
 
@@ -58,7 +58,7 @@ body {
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
 </a>
-<a class="brand" href="#">SHTracker</a>
+<a class="brand" href="#">Indication</a>
 <div class="nav-collapse collapse">
 <ul class="nav">
 <li class="active"><a href="index.php">Home</a></li>
@@ -99,10 +99,10 @@ if (!$does_db_exist) {
 $getdownloads = mysql_query("SELECT * FROM Data");
 
 //Update checking
-$remoteversion = file_get_contents("https://raw.github.com/joshf/SHTracker/master/version.txt");
+$remoteversion = file_get_contents("https://raw.github.com/joshf/Indication/master/version.txt");
 if (preg_match("/^[0-9.-]{1,}$/", $remoteversion)) {
     if ($version < $remoteversion) {
-        echo "<div class=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Update</h4><p>An update to SHTracker is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/SHTracker/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"https://github.com/joshf/SHTracker/wiki/Updating-SHTracker\" target=\"_blank\">here</a> for information on how to update.</p></div>";
+        echo "<div class=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Update</h4><p>An update to Indication is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/Indication/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"https://github.com/joshf/Indication/wiki/Updating-Indication\" target=\"_blank\">here</a> for information on how to update.</p></div>";
     }
 }
 
@@ -156,7 +156,7 @@ mysql_close($con);
 ?>
 </div>
 <hr>
-<p class="muted pull-right">SHTracker <? echo $version; ?> (<? echo $rev; ?>) "<? echo $codename; ?>"  &copy; <a href="http://github.com/joshf" target="_blank">Josh Fradley</a> <? echo date("Y"); ?>. Themed by <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>.</p>
+<p class="muted pull-right">Indication <? echo $version; ?> (<? echo $rev; ?>) "<? echo $codename; ?>"  &copy; <a href="http://github.com/joshf" target="_blank">Josh Fradley</a> <? echo date("Y"); ?>. Themed by <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>.</p>
 </div>
 <!-- Content end -->
 <!-- Javascript start -->	

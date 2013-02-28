@@ -1,6 +1,6 @@
 <?php
 
-//SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
+//Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
@@ -14,8 +14,8 @@ session_start();
 
 unset($_SESSION["is_logged_in_" . $uniquekey . ""]);
 
-if (isset($_COOKIE["shtrackerrememberme_" . $uniquekey . ""])) {
-	setcookie("shtrackerrememberme_" . $uniquekey . "", "", time()-86400);
+if (isset($_COOKIE["indicationrememberme_" . $uniquekey . ""])) {
+	setcookie("indicationrememberme_" . $uniquekey . "", "", time()-86400);
 }
 
 header("Location: login.php?logged_out=true");
