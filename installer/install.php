@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<!-- SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker) -->
+<!-- Indication, Copyright Josh Fradley (http://github.com/joshf/Indication) -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SHTracker &middot; Installer</title>
+<title>Indication &middot; Installer</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
@@ -23,7 +23,7 @@ body {
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
-<a class="brand" href="#">SHTracker</a>
+<a class="brand" href="#">Indication</a>
 </div>
 </div>
 </div>
@@ -112,7 +112,7 @@ fclose($configfile);
 mysql_close($con);
 
 ?>
-<div class="alert alert-success"><h4 class="alert-heading">Install Complete</h4><p>SHTracker has been successfully installed. Please delete the "installer" folder from your server, as it poses a potential security risk!</p>
+<div class="alert alert-success"><h4 class="alert-heading">Install Complete</h4><p>Indication has been successfully installed. Please delete the "installer" folder from your server, as it poses a potential security risk!</p>
 <p><a href="../admin/login.php" class="btn btn-success">Go To Login</a></p>
 </div>
 </div>

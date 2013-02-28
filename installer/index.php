@@ -1,6 +1,6 @@
 <?php
 
-// SHTracker, Copyright Josh Fradley (http://github.com/joshf/SHTracker)
+//Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
 //Security check, check if config exists
 if (file_exists("../config.php")) {
@@ -13,7 +13,7 @@ if (file_exists("../config.php")) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SHTracker &middot; Installer</title>
+<title>Indication &middot; Installer</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../resources/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
@@ -33,7 +33,7 @@ body {
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
-<a class="brand" href="#">SHTracker</a>
+<a class="brand" href="#">Indication</a>
 </div>
 </div>
 </div>
@@ -108,7 +108,7 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 <div class="control-group">
 <label class="control-label" for="pathtoscript">Path to Script</label>
 <div class="controls">
-<input type="text" id="pathtoscript" name="pathtoscript" value="<? echo $pathtoscript; ?>" placeholder="Type the path to SHTracker..." pattern="(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-?]*)*\/?" data-validation-pattern-message="Please enter a valid URL" required>
+<input type="text" id="pathtoscript" name="pathtoscript" value="<? echo $pathtoscript; ?>" placeholder="Type the path to Indication..." pattern="(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-?]*)*\/?" data-validation-pattern-message="Please enter a valid URL" required>
 </div>
 </div>
 <div class="form-actions">
