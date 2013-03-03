@@ -20,8 +20,6 @@ if (!$does_db_exist) {
     die("Error: Database does not exist (" . mysql_error() . "). Check your database settings are correct.");
 }
 
-mysql_select_db(DB_NAME, $con);
-
 if (isset($_GET["id"])) {
     $id = mysql_real_escape_string($_GET["id"]);
 } else {

@@ -67,8 +67,6 @@ if (!$does_db_exist) {
     die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Database does not exist (" . mysql_error() . "). Check your database settings are correct.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
-mysql_select_db(DB_NAME, $con);
-
 //Get the ID from $_GET OR $_POST
 if (isset($_GET["id"])) {
     $id = mysql_real_escape_string($_GET["id"]);
