@@ -28,6 +28,8 @@ Screenshots of Indication can be found [here](http://imgur.com/a/7aQPl).
 Downloads:
 ------------
 
+[v4.1.1](https://github.com/joshf/Indication/zipball/4.1.1) (released 09/03/13)
+
 [v4.1](https://github.com/joshf/Indication/zipball/4.1) (released 14/02/13)
 
 [v4.0.1](https://github.com/joshf/Indication/zipball/4.0.1) (released 05/01/13)

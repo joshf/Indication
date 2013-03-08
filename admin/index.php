@@ -2,9 +2,9 @@
 
 //Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
-$version = "4.1";
+$version = "4.1.1";
 $codename = "QuickQuail";
-$rev = "41";
+$rev = "51";
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
