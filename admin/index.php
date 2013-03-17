@@ -20,6 +20,9 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
     exit; 
 }
 
+//Set cookie so we dont constantly check for updates
+setcookie("indicationhascheckedforupdates", "checkedsuccessfully", time()+604800);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,10 +102,12 @@ if (!$does_db_exist) {
 $getdownloads = mysql_query("SELECT * FROM Data");
 
 //Update checking
-$remoteversion = file_get_contents("https://raw.github.com/joshf/Indication/master/version.txt");
-if (preg_match("/^[0-9.-]{1,}$/", $remoteversion)) {
-    if ($version < $remoteversion) {
-        echo "<div class=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Update</h4><p>An update to Indication is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/Indication/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"https://github.com/joshf/Indication/wiki/Updating-Indication\" target=\"_blank\">here</a> for information on how to update.</p></div>";
+if (!isset($_COOKIE["indicationhascheckedforupdates"])) {
+    $remoteversion = file_get_contents("https://raw.github.com/joshf/Indication/master/version.txt");
+    if (preg_match("/^[0-9.-]{1,}$/", $remoteversion)) {
+        if ($version < $remoteversion) {
+            echo "<div class=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Update</h4><p>An update to Indication is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/Indication/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"https://github.com/joshf/Indication/wiki/Updating-Indication\" target=\"_blank\">here</a> for information on how to update.</p></div>";
+        }
     }
 }
 
