@@ -98,7 +98,7 @@ body {
 <div class="control-group">
 <label class="control-label" for="count">Count</label>
 <div class="controls">
-<input type="number" id="count" name="count" placeholder="Type an initial count...">
+<input type="number" id="count" name="count" placeholder="Type an initial count..." min="0">
 </div>
 </div>
 <div class="control-group">
