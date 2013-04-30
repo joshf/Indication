@@ -97,10 +97,6 @@ $newid = mysql_real_escape_string($_POST["id"]);
 $newurl = mysql_real_escape_string($_POST["url"]);
 $newcount = mysql_real_escape_string($_POST["count"]);
 
-//Convert to lowercase
-$newid = strtolower($newid);
-$newurl = strtolower($newurl);
-
 //Failsafes
 if (empty($newname) || empty($newid) || empty($newurl)) {
     die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>One or more fields are empty.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
