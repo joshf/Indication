@@ -2,7 +2,7 @@
 
 //Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
-$version = "4.1.1";
+$version = "4.1.2";
 $codename = "QuickQuail";
 $rev = "51";
 
