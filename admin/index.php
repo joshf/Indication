@@ -67,7 +67,7 @@ body {
 <li class="active"><a href="index.php">Home</a></li>
 <li class="divider-vertical"></li>
 <li><a href="add.php">Add</a></li>
-<li><a href="edit.php?selectid">Edit</a></li>
+<li><a href="edit.php">Edit</a></li>
 </ul>
 <ul class="nav pull-right">
 <li><a href="settings.php">Settings</a></li>
