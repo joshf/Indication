@@ -21,9 +21,9 @@ $currentadminuser = ADMIN_USER;
 $currentadminpassword = ADMIN_PASSWORD;
 $currentwebsite = WEBSITE;
 $currentpathtoscript = PATH_TO_SCRIPT;
+$currentadcode = htmlspecialchars_decode(AD_CODE);
 $currentcountuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
 $currentcountuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
-$currentadcode = htmlspecialchars_decode(AD_CODE);
 $currenttheme = THEME; 
 
 if (isset($_POST["save"])) {
@@ -35,8 +35,6 @@ if (isset($_POST["save"])) {
     }
     $website = $_POST["website"];
     $pathtoscript = $_POST["pathtoscript"];
-    $countuniqueonlystate = $_POST["countuniqueonlystate"];
-    $countuniqueonlytime = $_POST["countuniqueonlytime"];
     if (isset($_POST["advertcode"])) {
         if (get_magic_quotes_gpc()) {
             $adcode = stripslashes(htmlspecialchars($_POST["advertcode"]));
@@ -44,6 +42,8 @@ if (isset($_POST["save"])) {
             $adcode = htmlspecialchars($_POST["advertcode"]);
         }
     }
+    $countuniqueonlystate = $_POST["countuniqueonlystate"];
+    $countuniqueonlytime = $_POST["countuniqueonlytime"];
     $theme = $_POST["theme"];
 
     //Remember previous settings
@@ -51,7 +51,7 @@ if (isset($_POST["save"])) {
         $adcode = $currentadcode;
     }
 
-    $settingsstring = "<?php\n\n//Database Settings\ndefine(\"DB_HOST\", \"" . DB_HOST . "\");\ndefine(\"DB_USER\", \"" . DB_USER . "\");\ndefine(\"DB_PASSWORD\", \"" . DB_PASSWORD . "\");\ndefine(\"DB_NAME\", \"" . DB_NAME . "\");\n\n//Admin Details\ndefine(\"ADMIN_USER\", \"$adminuser\");\ndefine(\"ADMIN_PASSWORD\", \"$adminpassword\");\n\n//Other Settings\ndefine(\"WEBSITE\", \"$website\");\ndefine(\"PATH_TO_SCRIPT\", \"$pathtoscript\");\ndefine(\"COUNT_UNIQUE_ONLY_STATE\", \"$countuniqueonlystate\");\ndefine(\"COUNT_UNIQUE_ONLY_TIME\", \"$countuniqueonlytime\");\ndefine(\"UNIQUE_KEY\", \"$uniquekey\");\ndefine(\"AD_CODE\", \"$adcode\");\ndefine(\"THEME\", \"$theme\");\n\n?>";
+    $settingsstring = "<?php\n\n//Database Settings\ndefine(\"DB_HOST\", \"" . DB_HOST . "\");\ndefine(\"DB_USER\", \"" . DB_USER . "\");\ndefine(\"DB_PASSWORD\", \"" . DB_PASSWORD . "\");\ndefine(\"DB_NAME\", \"" . DB_NAME . "\");\n\n//Admin Details\ndefine(\"ADMIN_USER\", \"$adminuser\");\ndefine(\"ADMIN_PASSWORD\", \"$adminpassword\");\n\n//Other Settings\ndefine(\"UNIQUE_KEY\", \"$uniquekey\");\ndefine(\"WEBSITE\", \"$website\");\ndefine(\"PATH_TO_SCRIPT\", \"$pathtoscript\");\ndefine(\"AD_CODE\", \"$adcode\");\ndefine(\"COUNT_UNIQUE_ONLY_STATE\", \"$countuniqueonlystate\");\ndefine(\"COUNT_UNIQUE_ONLY_TIME\", \"$countuniqueonlytime\");\ndefine(\"THEME\", \"$theme\");\n\n?>";
 
     //Write config
     $configfile = fopen("../config.php", "w");
@@ -143,7 +143,7 @@ if (isset($_GET["updated"])) {
 <input type="password" id="adminpassword" name="adminpassword" value="<? echo $currentadminpassword; ?>" placeholder="Enter a password..." required>
 </div>
 </div>
-<h4>Other Settings</h4>
+<h4>Site Settings</h4>
 <div class="control-group">
 <label class="control-label" for="website">Website</label>
 <div class="controls">
@@ -179,8 +179,13 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 ?> 
 </div>  
 </div>
+<div class="control-group">
+<label class="control-label" for="countuniqueonlytime">Time to consider a user unique</label>
+<div class="controls">
+<input type="number" id="countuniqueonlytime" name="countuniqueonlytime" value="<? echo $currentcountuniqueonlytime; ?>" placeholder="Enter a time..." required>
+</div>
+</div>
 <h4>Theme</h4>
-<p>Themes are provided by BootSwatch, for previews of each theme see <a href="http://bootswatch.com" target="_blank">here</a>. The "Default" theme is included with the Indication, the others are hosted on a CDN.</p>
 <div class="control-group">
 <label class="control-label" for="theme">Select a theme</label>
 <div class="controls">
@@ -197,12 +202,6 @@ foreach ($themes as $value) {
 }
 echo "</select>";
 ?>
-</div>
-</div>
-<div class="control-group">
-<label class="control-label" for="countuniqueonlytime">Time to consider user unique</label>
-<div class="controls">
-<input type="number" id="countuniqueonlytime" name="countuniqueonlytime" value="<? echo $currentcountuniqueonlytime; ?>" placeholder="Enter a time..." required>
 </div>
 </div>
 <div class="form-actions">
