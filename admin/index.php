@@ -83,11 +83,8 @@ body {
 <div class="page-header">
 <h1>All Downloads</h1>
 </div>		
+<noscript><div class="alert alert-info"><h4 class="alert-heading">Information</h4><p>Please enable JavaScript to use Indication. For instructions on how to do this, see <a href="http://www.activatejavascript.org" target="_blank">here</a>.</p></div></noscript>
 <?php
-
-if (isset($_GET["nojs"])) {
-    die("<div class=\"alert alert-info\"><h4 class=\"alert-heading\">Information</h4><p>Please enable JavaScript to use SHTask. For instructions on how to do this, see <a href=\"http://www.activatejavascript.org\" target=\"_blank\">here</a>. Once done click continue.</p><p><a class=\"btn btn-info\" href=\"index.php\">Continue</a></p></div></div></body></html>");
-}
 
 @$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
@@ -106,7 +103,7 @@ if (!isset($_COOKIE["indicationhascheckedforupdates"])) {
     $remoteversion = file_get_contents("https://raw.github.com/joshf/Indication/master/version.txt");
     if (preg_match("/^[0-9.-]{1,}$/", $remoteversion)) {
         if ($version < $remoteversion) {
-            echo "<div class=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Update</h4><p>An update to Indication is available! Version $remoteversion has been released (you have $version). To see what changes are included see the <a href=\"https://github.com/joshf/Indication/compare/$version...$remoteversion\" target=\"_blank\">changelog</a>. Click <a href=\"https://github.com/joshf/Indication/wiki/Updating-Indication\" target=\"_blank\">here</a> for information on how to update.</p></div>";
+            echo "<div class=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Update</h4><p><a href=\"https://github.com/joshf/Indication/compare/$version...$remoteversion\" target=\"_blank\">Indication $remoteversion</a> is available. <a href=\"https://github.com/joshf/Indication/wiki/Updating-Indication\" target=\"_blank\">Click here to update</a>.</p></div>";
         }
     }
 }
