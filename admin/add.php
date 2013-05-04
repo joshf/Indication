@@ -115,8 +115,15 @@ body {
 </label>
 </div>
 </div>
+<div id="passwordentry" style="display: none;">
+<div class="control-group">
+<label class="control-label" for="password">Password</label>
+<div class="controls">
+<input type="password" id="password" name="password" placeholder="Type a password..." required>
+</div>
+</div>
+</div>
 <div class="form-actions">
-<input type="hidden" id="password" name="password">
 <button type="submit" class="btn btn-primary">Add</button>
 </div>
 </fieldset>
@@ -130,20 +137,8 @@ body {
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
-        if ($("#passwordprotectstate").prop("checked") == true) {
-            password = prompt("Enter a password","");
-            passwordconfirm = prompt("Confirm password","");
-            if (password != passwordconfirm) {
-                alert("Passwords do not match");
-                return false   
-            }
-            if (password != "" && password != null) {
-                $("#password").val(password);
-            } else {
-                $("#passwordprotectstate").prop("checked", false);
-            }
-        }
-    });
+		$("#passwordentry").toggle("fast");
+	});
     $("input").not("[type=submit]").jqBootstrapValidation();
 });
 </script>
