@@ -36,7 +36,7 @@ body {
 <?php
 
 if (!isset($_POST["doinstall"])) {
-    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Install Failed</h4><p>Error: Installer called directly.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
+    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Installer Error</h4><p>Error: Installer called directly.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
 //Get new settings from POST
@@ -52,7 +52,7 @@ if (empty($_POST["adminpassword"])) {
 }
 $website = $_POST["website"];
 $pathtoscript = $_POST["pathtoscript"];
-$uniquekey = str_shuffle("abcdefghijklmnopqrstuvwxyz123456789");
+$uniquekey = md5(microtime().rand());
 
 $installstring = "<?php
 
@@ -113,6 +113,11 @@ mysql_close($con);
 
 ?>
 <div class="alert alert-success"><h4 class="alert-heading">Install Complete</h4><p>Indication has been successfully installed. Please delete the "installer" folder from your server, as it poses a potential security risk!</p>
+<p>Your login details are shown below, please make a note of them.</p>
+<ul>
+<li>User: <? echo $adminuser; ?></li>
+<li>Password: <? echo $_POST["adminpassword"]; ?></li>
+</ul>
 <p><a href="../admin/login.php" class="btn btn-success">Go To Login</a></p>
 </div>
 </div>

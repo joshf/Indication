@@ -88,7 +88,7 @@ if (!$con) {
 mysql_select_db(DB_NAME, $con);
 
 if (!isset($_GET["id"])) {
-	echo "<form action=\"edit.php\" method=\"get\"><fieldset><div class=\"control-group\"><label class=\"control-label\" for=\"id\">ID to edit</label><div class=\"controls\"><select id=\"id\" name=\"id\">";
+	echo "<form action=\"edit.php\" method=\"get\"><fieldset><div class=\"control-group\"><label class=\"control-label\" for=\"id\">Select an ID to edit</label><div class=\"controls\"><select id=\"id\" name=\"id\">";
 	$getids = mysql_query("SELECT id FROM Data");
 	while($row = mysql_fetch_assoc($getids)) {    
     	echo "<option value=\"" . $row["id"] . "\">" . ucfirst($row["id"]) . "</option>";
