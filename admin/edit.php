@@ -150,9 +150,16 @@ mysql_close($con);
 </label>
 </div>
 </div>
+<div id="passwordentry" style="display: none;">
+<div class="control-group">
+<label class="control-label" for="password">Password</label>
+<div class="controls">
+<input type="password" id="password" name="password" placeholder="Type a password..." disabled>
+</div>
+</div>
+</div>
 <div class="form-actions">
 <input type="hidden" name="idtoedit" value="<? echo $idtoedit; ?>" />
-<input type="hidden" id="password" name="password">
 <button type="submit" class="btn btn-primary">Update</button>
 </div>
 </fieldset>
@@ -166,18 +173,15 @@ mysql_close($con);
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
+		/* TODO: Why is this so difficult */
         if ($("#passwordprotectstate").prop("checked") == true) {
-            password = prompt("Enter a password","");
-            passwordconfirm = prompt("Confirm password","");
-            if (password != passwordconfirm) {
-                alert("Passwords do not match");
-                return false   
-            }
-            if (password != "" && password != null) {
-                $("#password").val(password);
-            } else {
-                $("#passwordprotectstate").prop("checked", false);
-            }
+			$("#password").prop("disabled", false);
+			$("#password").prop("required", true);
+			$("#passwordentry").show("fast");
+        } else {
+			$("#passwordentry").hide("fast");
+			$("#password").prop("disabled", true);
+			$("#password").prop("required", false);
         }
     });
     $("input").not("[type=submit]").jqBootstrapValidation(); 
