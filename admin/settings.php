@@ -122,11 +122,9 @@ body {
 <h1>Settings</h1>
 </div>
 <?php
-
 if (isset($_GET["updated"])) {
     echo "<div class=\"alert alert-info\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><b>Info:</b> Settings updated.</div>";
 }
-
 ?>
 <form method="post" autocomplete="off">
 <fieldset>
@@ -165,7 +163,7 @@ if (isset($_GET["updated"])) {
 </div>
 </div>
 <h4>Count Unique Visitors Only</h4>
-<p>This settings allows you to make sure an individual users' clicks are only counted once.</p>
+<p>This settings allows you to make sure an individual user's clicks are only counted once.</p>
 <div class="control-group">
 <div class="controls">
 <?php
