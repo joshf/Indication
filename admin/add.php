@@ -137,15 +137,14 @@ body {
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
-		/* TODO: Why is this so difficult */
         if ($("#passwordprotectstate").prop("checked") == true) {
-			$("#password").prop("disabled", false);
-			$("#password").prop("required", true);
-			$("#passwordentry").show("fast");
+            $("#password").prop("disabled", false);
+            $("#password").prop("required", true);
+            $("#passwordentry").show("fast");
         } else {
-			$("#passwordentry").hide("fast");
-			$("#password").prop("disabled", true);
-			$("#password").prop("required", false);
+            $("#passwordentry").hide("fast");
+            $("#password").prop("disabled", true);
+            $("#password").prop("required", false);
         }
     });
     $("input").not("[type=submit]").jqBootstrapValidation();
