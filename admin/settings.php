@@ -42,7 +42,11 @@ if (isset($_POST["save"])) {
             $adcode = htmlspecialchars($_POST["advertcode"]);
         }
     }
-    $countuniqueonlystate = $_POST["countuniqueonlystate"];
+	if (isset($_POST["countuniqueonlystate"])) {
+		$countuniqueonlystate = "Enabled";
+	} else {
+		$countuniqueonlystate = "Disabled";
+	}
     $countuniqueonlytime = $_POST["countuniqueonlytime"];
     $theme = $_POST["theme"];
 
@@ -84,6 +88,7 @@ body {
 }
 </style>
 <link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
+<link href="../resources/switch/css/bootstrapSwitch.css" type="text/css" rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -166,16 +171,16 @@ if (isset($_GET["updated"])) {
 <p>This settings allows you to make sure an individual user's clicks are only counted once.</p>
 <div class="control-group">
 <div class="controls">
+<div class="switch switch-small" tabindex="0">
 <?php
 if ($currentcountuniqueonlystate == "Enabled" ) {
-    echo "<label class=\"radio\"><input type=\"radio\" id=\"countuniqueonlystateenable\" name=\"countuniqueonlystate\" value=\"Enabled\" checked=\"checked\"> Enabled</label>
-          <label class=\"radio\"><input type=\"radio\" id=\"countuniqueonlystatedisable\" name=\"countuniqueonlystate\" value=\"Disabled\"> Disabled</label>";    
+	echo "<input type=\"checkbox\" id=\"countuniqueonlystate\" name=\"countuniqueonlystate\" checked>";
 } else {
-  echo "<label class=\"radio\"><input type=\"radio\" id=\"countuniqueonlystateenable\" name=\"countuniqueonlystate\" value=\"Enabled\"> Enabled</label>
-    <label class=\"radio\"><input type=\"radio\" id=\"countuniqueonlystatedisable\" name=\"countuniqueonlystate\" value=\"Disabled\" checked=\"checked\"> Disabled</label>";   
-}   
-?> 
-</div>  
+	echo "<input type=\"checkbox\" id=\"countuniqueonlystate\" name=\"countuniqueonlystate\">";
+}
+?>
+</div>
+</div>
 </div>
 <div class="control-group">
 <label class="control-label" for="countuniqueonlytime">Time to consider a user unique</label>
@@ -213,6 +218,7 @@ echo "</select>";
 <script src="../resources/jquery.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.js"></script>
 <script src="../resources/validation/jqBootstrapValidation.js"></script>
+<script src="../resources/switch/js/bootstrapSwitch.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("input").not("[type=submit]").jqBootstrapValidation();
