@@ -11,13 +11,13 @@ Features:
 ---------
 
 * Password protect downloads
-* Can be used to track links
+* Can be used to track links aswell
 * Count unique visitors to avoid multiple counts from same user
 * Supports displaying of ads before user is redirected to download
 * Full admin panel
 * Display download counts to users
-* Themed by Twitter Bootstrap, offers a choice of themes
-* Sort and search downloads through the use of DataTables
+* Themed by Twitter Bootstrap, extra themes available through BootSwatch
+* Sort and search downloads using DataTables
 * Works well on mobile devices due to a responsive layout
 
 Screenshots:
@@ -65,13 +65,13 @@ Replace ID with the ID name/number of your URL, for example: http://yoursite.com
 
 So instead of linking to http://yoursite.com/some/directory/mydownload1.zip, link to http://yoursite.com/Indication/get.php?id=mydownload1
 
-To find this URL select the download and click the "Show Tracking Link" button
+To find this URL select the download and click the "Show Tracking Link" button whilst on the admin page
 
-This will log the count of the download and redirect users to the file or web page
+This will log the count of the download and redirect the user to the file or web page
 
-This script can also be called via $_POST just set the name of the form to ID and the value to the ID you wish to download
+This script can also be called via $_POST just set the name of your form to "id" and the value to the ID you wish to download
 
-To show the download count for one ID only, call http://yoursite.com/Indication/display.php?id=mydownload1. This could be done by linking directly to display.php, using an iframe or by using a PHP include
+To show the download count for an ID, call http://yoursite.com/Indication/display.php?id=mydownload1. This could be done by linking directly to display.php, using an iframe or by using a PHP include
 
 **Examples:**
 
