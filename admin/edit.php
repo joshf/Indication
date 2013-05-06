@@ -24,13 +24,11 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 <title>Indication &middot; Edit</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php
-
 if (THEME == "default") {
     echo "<link href=\"../resources/bootstrap/css/bootstrap.css\" type=\"text/css\" rel=\"stylesheet\">\n";  
 } else {
     echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.3.1/" . THEME . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
 }
-
 ?>
 <style type="text/css">
 body {
@@ -88,13 +86,13 @@ if (!$con) {
 mysql_select_db(DB_NAME, $con);
 
 if (!isset($_GET["id"])) {
-	echo "<form action=\"edit.php\" method=\"get\"><fieldset><div class=\"control-group\"><label class=\"control-label\" for=\"id\">Select an ID to edit</label><div class=\"controls\"><select id=\"id\" name=\"id\">";
-	$getids = mysql_query("SELECT id FROM Data");
-	while($row = mysql_fetch_assoc($getids)) {    
-    	echo "<option value=\"" . $row["id"] . "\">" . ucfirst($row["id"]) . "</option>";
-	}
-	echo "</select></div></div><div class=\"form-actions\"><button type=\"submit\" class=\"btn btn-primary\">Edit</button></div></fieldset></form></div></body></html>";
-	exit;
+    echo "<form action=\"edit.php\" method=\"get\"><fieldset><div class=\"control-group\"><label class=\"control-label\" for=\"id\">Select an ID to edit</label><div class=\"controls\"><select id=\"id\" name=\"id\">";
+    $getids = mysql_query("SELECT id FROM Data");
+    while($row = mysql_fetch_assoc($getids)) {    
+        echo "<option value=\"" . $row["id"] . "\">" . ucfirst($row["id"]) . "</option>";
+    }
+    echo "</select></div></div><div class=\"form-actions\"><button type=\"submit\" class=\"btn btn-primary\">Edit</button></div></fieldset></form></div></body></html>";
+    exit;
 }
 
 $idtoedit = mysql_real_escape_string($_GET["id"]);

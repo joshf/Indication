@@ -44,12 +44,10 @@ body {
 <h1>Installer</h1>
 </div>
 <?php
-
 //Get path to script
 $currenturl = $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
 $pathtoscriptwithslash = "http://" . substr($currenturl, 0, strpos($currenturl, "installer"));
 $pathtoscript = rtrim($pathtoscriptwithslash, "/");
-
 ?>	
 <form action="install.php" method="post">
 <fieldset>

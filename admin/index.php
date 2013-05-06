@@ -31,13 +31,11 @@ setcookie("indicationhascheckedforupdates", "checkedsuccessfully", time()+604800
 <title>Indication</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php
-
 if (THEME == "default") {
     echo "<link href=\"../resources/bootstrap/css/bootstrap.css\" type=\"text/css\" rel=\"stylesheet\">\n";  
 } else {
     echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.3.1/" . THEME . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
 }
-
 ?>
 <link href="../resources/datatables/dataTables.bootstrap.css" type="text/css" rel="stylesheet">
 <style type="text/css">
