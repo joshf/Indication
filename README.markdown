@@ -28,21 +28,21 @@ Screenshots of Indication can be found [here](http://imgur.com/a/7aQPl).
 Downloads:
 ------------
 
-[v4.1.2](https://github.com/joshf/Indication/zipball/4.1.2) (released 01/05/13)
+[v4.1.2](http://sidhosting.co.uk/downloads/get.php?ref=github&id=indication&tag=4.1.2) (released 01/05/13)
 
-[v4.1.1](https://github.com/joshf/Indication/zipball/4.1.1) (released 09/03/13)
+[v4.1.1](http://sidhosting.co.uk/downloads/get.php?ref=github&id=indication&tag=4.1.1) (released 09/03/13)
 
-[v4.1](https://github.com/joshf/Indication/zipball/4.1) (released 14/02/13)
+[v4.1](http://sidhosting.co.uk/downloads/get.php?ref=github&id=indication&tag=4.1) (released 14/02/13)
 
-[v4.0.1](https://github.com/joshf/Indication/zipball/4.0.1) (released 05/01/13)
+[v4.0.1](http://sidhosting.co.uk/downloads/get.php?ref=github&id=indication&tag=4.0.1) (released 05/01/13)
 
-[v4.0](https://github.com/joshf/Indication/zipball/4.0) (released 23/12/12)
+[v4.0](http://sidhosting.co.uk/downloads/get.php?ref=github&id=indication&tag=4.0) (released 23/12/12)
 
-[v3.4.4](https://github.com/joshf/Indication/zipball/3.4.4) (released 17/11/12)
+[v3.4.4](http://sidhosting.co.uk/downloads/get.php?ref=github&id=indication&tag=3.4.4) (released 17/11/12)
 
-[v3.4.3](https://github.com/joshf/Indication/zipball/3.4.3) (released 11/10/12)
+[v3.4.3](http://sidhosting.co.uk/downloads/get.php?ref=github&id=indication&tag=3.4.3) (released 11/10/12)
 
-[v3.4.2](https://github.com/joshf/Indication/zipball/3.4.2) (released 29/09/12)
+[v3.4.2](http://sidhosting.co.uk/downloads/get.php?ref=github&id=indication&tag=3.4.2) (released 29/09/12)
 
 Installation:
 -------------
