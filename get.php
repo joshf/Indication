@@ -81,7 +81,17 @@ if ($getinforesult == 0) {
     die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>ID does not exist.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
-mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
+//Cookies don't like dots
+$idclean = str_replace(".", "_", $id);
+
+if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
+    if (!isset($_COOKIE["shtrackerhasdownloaded_$idclean"])) {
+        mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
+        setcookie("shtrackerhasdownloaded_$idclean", "True", time()+3600*COUNT_UNIQUE_ONLY_TIME);
+    }
+} else {
+    mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
+}
 
 //Check if download is password protected
 $checkifprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$id\"");
