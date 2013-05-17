@@ -7,6 +7,7 @@ if (!isset($_POST["doinstall"])) {
 }
 
 ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
