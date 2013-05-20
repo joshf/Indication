@@ -54,9 +54,9 @@ if (empty($_POST["adminpassword"])) {
 } else {
     $adminpassword = sha1($_POST["adminpassword"]);
 }
+$uniquekey = md5(microtime().rand());
 $website = $_POST["website"];
 $pathtoscript = $_POST["pathtoscript"];
-$uniquekey = md5(microtime().rand());
 
 $installstring = "<?php
 
@@ -71,12 +71,12 @@ define(\"ADMIN_USER\", \"$adminuser\");
 define(\"ADMIN_PASSWORD\", \"$adminpassword\");
 
 //Other Settings
+define(\"UNIQUE_KEY\", \"$uniquekey\");
 define(\"WEBSITE\", \"$website\");
 define(\"PATH_TO_SCRIPT\", \"$pathtoscript\");
+define(\"AD_CODE\", \"\");
 define(\"COUNT_UNIQUE_ONLY_STATE\", \"Disabled\");
 define(\"COUNT_UNIQUE_ONLY_TIME\", \"24\");
-define(\"UNIQUE_KEY\", \"$uniquekey\");
-define(\"AD_CODE\", \"\");
 define(\"THEME\", \"default\");
 
 ?>";
