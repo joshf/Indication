@@ -78,19 +78,19 @@ body {
 <div class="control-group">
 <label class="control-label" for="downloadname">Name</label>
 <div class="controls">
-<input type="text" id="downloadname" name="downloadname" placeholder="Type a name..." required>
+<input type="text" id="downloadname" name="downloadname" placeholder="Type a name..." pattern="([0-9A-Za-z-\\.@:%_\+~#=]+)" required>
 </div>
 </div>
 <div class="control-group">
 <label class="control-label" for="id">ID</label>
 <div class="controls">
-<input type="text" id="id" name="id" placeholder="Type an ID..." required>
+<input type="text" id="id" name="id" placeholder="Type an ID..." pattern="([0-9A-Za-z-\\.@:%_\+~#=]+)" required>
 </div>
 </div>
 <div class="control-group">
 <label class="control-label" for="url">URL</label>
 <div class="controls">
-<input type="text" id="url" name="url" placeholder="Type a URL..." pattern="(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.?~-]*)*\/?" data-validation-pattern-message="Please enter a valid URL" required>
+<input type="text" id="url" name="url" placeholder="Type a URL..." pattern="(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.?~-]*)*\/?" required>
 </div>
 </div>
 <div class="control-group">
@@ -118,6 +118,7 @@ body {
 <label class="control-label" for="password">Password</label>
 <div class="controls">
 <input type="password" id="password" name="password" placeholder="Type a password..." disabled>
+<span class="help-block">It is recommended that your password be at least 6 characters long</span>
 </div>
 </div>
 </div>
