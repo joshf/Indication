@@ -5,7 +5,7 @@ Indication (previously SHTracker) is a PHP download counter. You can use it to t
 
 The script uses SQL databases. It comes with an admin panel where you can view how many times a download has been accessed. You can also easily add, edit or remove downloads using the panel. Indication can also display the current count for a download on any web page.
 
-#### Current Version: 4.1.2 "QuickQuail"
+#### Current Version: 4.1.2
 
 Features:
 ---------
