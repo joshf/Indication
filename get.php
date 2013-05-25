@@ -111,7 +111,7 @@ if ($checkifprotectedresult["protect"] == "1") {
         if (sha1($_POST["password"]) == $checkifprotectedresult["password"]) {
             if ($checkifadsshowresult["showads"] == "1") {
                 $adcode = htmlspecialchars_decode(AD_CODE);    
-                echo "<h3>Downloading " . $getinforesult["name"] . "</h3><p><span class=\"label label-info\">" . $getinforesult["count"] . " downloads</span></p><p>" . $adcode . "</p><p><button id=\"startdownload\" class=\"btn btn-success\">Start Download</button> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p>";
+                echo "<h3>Downloading " . $getinforesult["name"] . "</h3><p><span class=\"label label-info\">" . $getinforesult["count"] . " downloads</span></p><p>" . $adcode . "</p><p><button id=\"getdownload\" class=\"btn btn-success\">Start Download</button> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p>";
             } else {
                 header("Location: " . $getinforesult["url"] . "");
                 exit;
@@ -139,7 +139,7 @@ mysql_close($con);
 <script src="resources/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $("#startdownload").click(function() {
+    $("#getdownload").click(function() {
         window.location = "<?php echo $getinforesult["url"]; ?>";
     });
 });
