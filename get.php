@@ -101,31 +101,53 @@ $checkifprotectedresult = mysql_fetch_assoc($checkifprotected);
 $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$id\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow);
 
-if ($checkifprotectedresult["protect"] != "1" && $checkifadsshowresult["showads"] != "1") {
-    header("Location: " . $getinforesult["url"] . "");
-    exit;
+if ($checkifprotectedresult["protect"] == "1") {
+    $case = "passwordprotected";
 }
 
-if ($checkifprotectedresult["protect"] == "1") {
-    if (isset($_POST["password"])) {
-        if (sha1($_POST["password"]) == $checkifprotectedresult["password"]) {
-            if ($checkifadsshowresult["showads"] == "1") {
-                $adcode = htmlspecialchars_decode(AD_CODE);    
-                echo "<h3>Downloading " . $getinforesult["name"] . "</h3><p><span class=\"label label-info\">" . $getinforesult["count"] . " downloads</span></p><p>" . $adcode . "</p><p><button id=\"getdownload\" class=\"btn btn-success\">Start Download</button> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p>";
-            } else {
-                header("Location: " . $getinforesult["url"] . "");
-                exit;
-            }        
-        } else {
-            echo "<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Incorrect password.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div>";
-        }
-    } else {
-        echo "<h3>Downloading " . $getinforesult["name"] . "</h3><p><span class=\"label label-info\">" . $getinforesult["count"] . " downloads</span></p><p>To access this download please enter the password you were given.</p><form method=\"post\"><p><input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Enter password...\"></p><input type=\"submit\" class=\"btn btn-success\" value=\"Get Download\"> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></form>";
-    }
-} elseif ($checkifadsshowresult["showads"] == "1")  {
-    $adcode = htmlspecialchars_decode(AD_CODE); 
-    echo "<h3>Downloading " . $getinforesult["name"] . "</h3><p><span class=\"label label-info\">" . $getinforesult["count"] . " downloads</span></p><p>" . $adcode . "</p><p><button id=\"startdownload\" class=\"btn btn-success\">Start Download</button> <a href=\"javascript:history.go(-1)\" class=\"btn\">Go Back</a></p>";
+if ($checkifadsshowresult["showads"] == "1") {
+    $case = "showads";
 }
+
+if ($checkifprotectedresult["protect"] == "1" && $checkifadsshowresult["showads"] == "1") {
+    $case = "passwordprotectedandshowads";
+}
+
+if ($checkifprotectedresult["protect"] != "1" && $checkifadsshowresult["showads"] != "1") {
+    $case = "normal";
+}
+
+if (isset($_POST["password"])) {
+    if (sha1($_POST["password"]) == $checkifprotectedresult["password"]) {
+        $case = "passwordcorrect";
+    } else {
+        $case = "passwordincorrect";
+    }
+}
+
+switch ($case) {
+    case "showads":
+        $adcode = htmlspecialchars_decode(AD_CODE); 
+        echo "<h3>" . $getinforesult["name"] . "</h3><p><i class=\"icon-download\"></i> " . $getinforesult["count"] . " downloads</p><div class=\"well\">$adcode</div><fieldset><div class=\"form-actions\"><a class=\"btn btn-primary\" href=\"" . $getinforesult["url"] . "\">Get Download</a><a class=\"btn pull-right\" href=\"javascript:history.go(-1)\">Go Back</a></div></fieldset>";
+        break;
+    case "passwordprotected":
+        echo "<h3>" . $getinforesult["name"] . "</h3><p>This download is password protected, please enter the password you were given</p><form method=\"post\"><fieldset><div class=\"control-group\"><label class=\"control-label\" for=\"password\">Password</label><div class=\"controls\"><input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Password...\"></div></div><div class=\"form-actions\"><button type=\"submit\" class=\"btn btn-primary\">Get Download</button><a class=\"btn pull-right\" href=\"javascript:history.go(-1)\">Go Back</a></div></fieldset></form>";
+        break;
+    case "normal":
+        header("Location: " . $getinforesult["url"] . "");
+        break;
+    case "passwordprotectedandshowads":
+        $adcode = htmlspecialchars_decode(AD_CODE); 
+        echo "<h3>" . $getinforesult["name"] . "</h3><div class=\"well\">$adcode</div><p>This download is password protected, please enter the password you were given</p><form method=\"post\"><fieldset><div class=\"control-group\"><label class=\"control-label\" for=\"password\">Password</label><div class=\"controls\"><input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Password...\"></div></div><div class=\"form-actions\"><button type=\"submit\" class=\"btn btn-primary\">Get Download</button><a class=\"btn pull-right\" href=\"javascript:history.go(-1)\">Go Back</a></div></fieldset></form>";
+        break;
+    case "passwordcorrect":
+        header("Location: " . $getinforesult["url"] . "");
+        break;
+    case "passwordincorrect":
+        echo "<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Incorrect password.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div>";
+        break;
+} 
+
     
 ob_end_flush();
 
@@ -137,13 +159,6 @@ mysql_close($con);
 <!-- Javascript start -->	
 <script src="resources/jquery.js"></script>
 <script src="resources/bootstrap/js/bootstrap.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    $("#getdownload").click(function() {
-        window.location = "<?php echo $getinforesult["url"]; ?>";
-    });
-});
-</script>
 <!-- Javascript end -->
 </body>
 </html>
