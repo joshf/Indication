@@ -5,7 +5,7 @@
 ob_start();
 
 if (!file_exists("config.php")) {
-    header("Location: installer");
+    die("Error: Config file not found! Please contact the site administrator.");
 }
 
 require_once("config.php");
