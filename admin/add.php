@@ -78,7 +78,7 @@ body {
 <div class="control-group">
 <label class="control-label" for="downloadname">Name</label>
 <div class="controls">
-<input type="text" id="downloadname" name="downloadname" placeholder="Type a name..." pattern="([0-9A-Za-z-\\.@:%_\+~#=]+)" required>
+<input type="text" id="downloadname" name="downloadname" placeholder="Type a name..." pattern="([0-9A-Za-z-\\.@:%_\+~#=\s]+)" required>
 </div>
 </div>
 <div class="control-group">
