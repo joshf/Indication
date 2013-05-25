@@ -89,7 +89,7 @@ if (!$does_db_exist) {
 }
 
 if (!isset($_GET["id"])) {
-    echo "<form action=\"edit.php\" method=\"get\"><fieldset><div class=\"control-group\"><label class=\"control-label\" for=\"id\">Select an download to edit</label><div class=\"controls\"><select id=\"id\" name=\"id\">";
+    echo "<form action=\"edit.php\" method=\"get\"><fieldset><div class=\"control-group\"><label class=\"control-label\" for=\"id\">Select a download to edit</label><div class=\"controls\"><select id=\"id\" name=\"id\">";
     $getids = mysql_query("SELECT id, name FROM Data");
     while($row = mysql_fetch_assoc($getids)) {    
         echo "<option value=\"" . $row["id"] . "\">" . ucfirst($row["name"]) . "</option>";
