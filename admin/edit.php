@@ -155,7 +155,7 @@ mysql_close($con);
 <div class="control-group">
 <label class="control-label" for="password">Password</label>
 <div class="controls">
-<input type="password" id="password" name="password" placeholder="Type a password..." disabled>
+<input type="password" id="password" name="password" placeholder="Type a password...">
 </div>
 </div>
 </div>
@@ -175,7 +175,6 @@ mysql_close($con);
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
         if ($("#passwordprotectstate").prop("checked") == true) {
-            $("#password").prop("disabled", false);
             $("#password").prop("required", true);
             $("#passwordentry").show("fast");
         } else {
