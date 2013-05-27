@@ -141,7 +141,6 @@ $(document).ready(function() {
             $("#passwordentry").show("fast");
         } else {
             $("#passwordentry").hide("fast");
-            $("#password").prop("disabled", true);
             $("#password").prop("required", false);
         }
     });
