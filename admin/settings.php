@@ -130,26 +130,26 @@ if (isset($_GET["updated"])) {
 <div class="control-group">
 <label class="control-label" for="adminuser">Admin User</label>
 <div class="controls">
-<input type="text" id="adminuser" name="adminuser" value="<? echo $currentadminuser; ?>" placeholder="Enter a username..." required>
+<input type="text" id="adminuser" name="adminuser" value="<?php echo $currentadminuser; ?>" placeholder="Enter a username..." required>
 </div>
 </div>
 <div class="control-group">
 <label class="control-label" for="adminpassword">Admin Password</label>
 <div class="controls">
-<input type="password" id="adminpassword" name="adminpassword" value="<? echo $currentadminpassword; ?>" placeholder="Enter a password..." required>
+<input type="password" id="adminpassword" name="adminpassword" value="<?php echo $currentadminpassword; ?>" placeholder="Enter a password..." required>
 </div>
 </div>
 <h4>Site Settings</h4>
 <div class="control-group">
 <label class="control-label" for="website">Website</label>
 <div class="controls">
-<input type="text" id="website" name="website" value="<? echo $currentwebsite; ?>" placeholder="Enter your websites name..." required>
+<input type="text" id="website" name="website" value="<?php echo $currentwebsite; ?>" placeholder="Enter your websites name..." required>
 </div>
 </div>
 <div class="control-group">
 <label class="control-label" for="pathtoscript">Path to Script</label>
 <div class="controls">
-<input type="text" id="pathtoscript" name="pathtoscript" value="<? echo $currentpathtoscript; ?>" placeholder="Type the path to Indication..." pattern="(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-?]*)*\/?" data-validation-pattern-message="Please enter a valid URL" required>
+<input type="text" id="pathtoscript" name="pathtoscript" value="<?php echo $currentpathtoscript; ?>" placeholder="Type the path to Indication..." pattern="(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-?]*)*\/?" data-validation-pattern-message="Please enter a valid URL" required>
 </div>
 </div>
 <h4>Ad Code</h4>
@@ -157,14 +157,14 @@ if (isset($_GET["updated"])) {
 <div class="alert alert-warning"><b>Warning:</b> On some server configurations using HTML code here may produce errors.</div>
 <div class="control-group">
 <div class="controls">
-<textarea id="advertcode" name="advertcode" placeholder="Enter a ad code..."><? echo $currentadcode; ?></textarea>
+<textarea id="advertcode" name="advertcode" placeholder="Enter a ad code..."><?php echo $currentadcode; ?></textarea>
 </div>
 </div>
 <h4>Count Unique Visitors Only</h4>
 <p>This settings allows you to make sure an individual user's clicks are only counted once.</p>
 <div class="control-group">
 <div class="controls">
-<?php
+<?phpphp
 if ($currentcountuniqueonlystate == "Enabled" ) {
     echo "<label class=\"radio\"><input type=\"radio\" id=\"countuniqueonlystateenable\" name=\"countuniqueonlystate\" value=\"Enabled\" checked=\"checked\"> Enabled</label>
     <label class=\"radio\"><input type=\"radio\" id=\"countuniqueonlystatedisable\" name=\"countuniqueonlystate\" value=\"Disabled\"> Disabled</label>";    
@@ -178,7 +178,7 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 <div class="control-group">
 <label class="control-label" for="countuniqueonlytime">Time to consider a user unique</label>
 <div class="controls">
-<input type="number" id="countuniqueonlytime" name="countuniqueonlytime" value="<? echo $currentcountuniqueonlytime; ?>" placeholder="Enter a time..." required>
+<input type="number" id="countuniqueonlytime" name="countuniqueonlytime" value="<?php echo $currentcountuniqueonlytime; ?>" placeholder="Enter a time..." required>
 </div>
 </div>
 <h4>Theme</h4>
