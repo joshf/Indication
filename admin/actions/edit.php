@@ -139,7 +139,7 @@ mysql_close($con);
 </ul>
 <p><b>Tracking Link:</b></p>
 <p><?php echo PATH_TO_SCRIPT; ?>/get.php?id=<?php echo $newid; ?></p>
-<p><a class="btn btn-info" href="../admin/index.php">Back To Home</a></p>
+<p><a class="btn btn-info" href="../../admin/index.php">Back To Home</a></p>
 </div>
 </div>
 <!-- Content end -->
