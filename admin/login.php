@@ -78,13 +78,11 @@ body {
 <fieldset>
 <h2 class="form-signin-heading">Indication</h2>
 <?php 
-
 if (isset($_GET["login_error"])) {
     echo "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>Incorrect username or password.</div>";
 } elseif (isset($_GET["logged_out"])) {
     echo "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>Successfully logged out.</div>";
 }
-
 ?>
 <div class="control-group">
 <label class="control-label" for="user">User</label>
