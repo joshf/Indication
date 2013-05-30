@@ -49,7 +49,7 @@ body {
 <!-- Content start -->
 <div class="container">
 <div class="page-header">
-<h1><? echo WEBSITE; ?></h1>
+<h1><?php echo WEBSITE; ?></h1>
 </div>		
 <?php
 

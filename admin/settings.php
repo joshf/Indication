@@ -164,7 +164,7 @@ if (isset($_GET["updated"])) {
 <p>This settings allows you to make sure an individual user's clicks are only counted once.</p>
 <div class="control-group">
 <div class="controls">
-<?phpphp
+<?php
 if ($currentcountuniqueonlystate == "Enabled" ) {
     echo "<label class=\"radio\"><input type=\"radio\" id=\"countuniqueonlystateenable\" name=\"countuniqueonlystate\" value=\"Enabled\" checked=\"checked\"> Enabled</label>
     <label class=\"radio\"><input type=\"radio\" id=\"countuniqueonlystatedisable\" name=\"countuniqueonlystate\" value=\"Disabled\"> Disabled</label>";    

@@ -160,7 +160,7 @@ mysql_close($con);
 </div>
 </div>
 <div class="form-actions">
-<input type="hidden" name="idtoedit" value="<? echo $idtoedit; ?>" />
+<input type="hidden" name="idtoedit" value="<?php echo $idtoedit; ?>" />
 <button type="submit" class="btn btn-primary">Update</button>
 </div>
 </fieldset>

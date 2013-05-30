@@ -133,12 +133,12 @@ mysql_close($con);
 <div class="alert alert-info">
 <h4 class="alert-heading">Download Edited</h4>
 <ul>
-<li>Name: <? echo $newname; ?></li>
-<li>ID: <? echo $newid; ?></li>
-<li>URL: <? echo $newurl; ?></li>
+<li>Name: <?php echo $newname; ?></li>
+<li>ID: <?php echo $newid; ?></li>
+<li>URL: <?php echo $newurl; ?></li>
 </ul>
 <p><b>Tracking Link:</b></p>
-<p><? echo PATH_TO_SCRIPT; ?>/get.php?id=<? echo $newid; ?></p>
+<p><?php echo PATH_TO_SCRIPT; ?>/get.php?id=<?php echo $newid; ?></p>
 <p><a class="btn btn-info" href="../admin/index.php">Back To Home</a></p>
 </div>
 </div>
