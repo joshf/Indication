@@ -61,23 +61,23 @@ $pathtoscript = $_POST["pathtoscript"];
 $installstring = "<?php
 
 //Database Settings
-define(\"DB_HOST\", " . var_export($dbhost, true) . ");
-define(\"DB_USER\", " . var_export($dbuser, true) . ");
-define(\"DB_PASSWORD\", " . var_export($dbpassword, true) . ");
-define(\"DB_NAME\", " . var_export($dbname, true) . ");
+define('DB_HOST', " . var_export($dbhost, true) . ");
+define('DB_USER', " . var_export($dbuser, true) . ");
+define('DB_PASSWORD', " . var_export($dbpassword, true) . ");
+define('DB_NAME', " . var_export($dbname, true) . ");
 
 //Admin Details
-define(\"ADMIN_USER\", " . var_export($adminuser, true) . ");
-define(\"ADMIN_PASSWORD\", " . var_export($adminpassword, true) . ");
+define('ADMIN_USER', " . var_export($adminuser, true) . ");
+define('ADMIN_PASSWORD', " . var_export($adminpassword, true) . ");
 
 //Other Settings
-define(\"UNIQUE_KEY\", " . var_export($uniquekey, true) . ");
-define(\"WEBSITE\", " . var_export($website, true) . ");
-define(\"PATH_TO_SCRIPT\", " . var_export($pathtoscript, true) . ");
-define(\"AD_CODE\", \"\");
-define(\"COUNT_UNIQUE_ONLY_STATE\", \"Disabled\");
-define(\"COUNT_UNIQUE_ONLY_TIME\", \"24\");
-define(\"THEME\", \"default\");
+define('UNIQUE_KEY', " . var_export($uniquekey, true) . ");
+define('WEBSITE', " . var_export($website, true) . ");
+define('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");
+define('AD_CODE', \"\");
+define('COUNT_UNIQUE_ONLY_STATE', \"Disabled\");
+define('COUNT_UNIQUE_ONLY_TIME', \"24\");
+define('THEME', \"default\");
 
 ?>";
 
@@ -98,10 +98,10 @@ $createtable = "CREATE TABLE Data (
 name VARCHAR(100) NOT NULL,
 id VARCHAR(25) NOT NULL,
 url VARCHAR(200) NOT NULL,
-count INT(10) NOT NULL default \"0\",
-protect TINYINT(1) NOT NULL default \"0\",
+count INT(10) NOT NULL default \"0',
+protect TINYINT(1) NOT NULL default \"0',
 password VARCHAR(200),
-showads TINYINT(1) NOT NULL default \"0\",
+showads TINYINT(1) NOT NULL default \"0',
 PRIMARY KEY (id)
 ) ENGINE = MYISAM;";
 
