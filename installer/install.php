@@ -74,10 +74,10 @@ define('ADMIN_PASSWORD', " . var_export($adminpassword, true) . ");
 define('UNIQUE_KEY', " . var_export($uniquekey, true) . ");
 define('WEBSITE', " . var_export($website, true) . ");
 define('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");
-define('AD_CODE', \"\");
-define('COUNT_UNIQUE_ONLY_STATE', \"Disabled\");
-define('COUNT_UNIQUE_ONLY_TIME', \"24\");
-define('THEME', \"default\");
+define('AD_CODE', 'Ad code here...');
+define('COUNT_UNIQUE_ONLY_STATE', 'Enabled');
+define('COUNT_UNIQUE_ONLY_TIME', '24');
+define('THEME', 'default');
 
 ?>";
 
