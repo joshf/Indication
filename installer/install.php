@@ -77,6 +77,7 @@ define('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");
 define('AD_CODE', 'Ad code here...');
 define('COUNT_UNIQUE_ONLY_STATE', 'Enabled');
 define('COUNT_UNIQUE_ONLY_TIME', '24');
+define('IGNORE_ADMIN_STATE', 'Disabled');
 define('THEME', 'default');
 
 ?>";

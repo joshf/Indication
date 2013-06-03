@@ -24,6 +24,7 @@ $currentpathtoscript = PATH_TO_SCRIPT;
 $currentadcode = htmlspecialchars_decode(AD_CODE);
 $currentcountuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
 $currentcountuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
+$currentignoreadminstate = IGNORE_ADMIN_STATE; 
 $currenttheme = THEME; 
 
 if (isset($_POST["save"])) {
@@ -44,6 +45,7 @@ if (isset($_POST["save"])) {
     }
     $countuniqueonlystate = $_POST["countuniqueonlystate"];
     $countuniqueonlytime = $_POST["countuniqueonlytime"];
+    $ignoreadminstate = $_POST["ignoreadminstate"];
     $theme = $_POST["theme"];
 
     //Remember previous settings
@@ -51,7 +53,7 @@ if (isset($_POST["save"])) {
         $adcode = $currentadcode;
     }
 
-    $settingsstring = "<?php\n\n//Database Settings\ndefine('DB_HOST', '" . DB_HOST . "');\ndefine('DB_USER', '" . DB_USER . "');\ndefine('DB_PASSWORD', '" . DB_PASSWORD . "');\ndefine('DB_NAME', '" . DB_NAME . "');\n\n//Admin Details\ndefine('ADMIN_USER', " . var_export($adminuser, true) . ");\ndefine('ADMIN_PASSWORD', " . var_export($adminpassword, true) . ");\n\n//Other Settings\ndefine('UNIQUE_KEY', " . var_export($uniquekey, true) . ");\ndefine('WEBSITE', " . var_export($website, true) . ");\ndefine('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");\ndefine('AD_CODE', " . var_export($adcode, true) . ");\ndefine('COUNT_UNIQUE_ONLY_STATE', " . var_export($countuniqueonlystate, true) . ");\ndefine('COUNT_UNIQUE_ONLY_TIME', " . var_export($countuniqueonlytime, true) . ");\ndefine('THEME', " . var_export($theme, true) . ");\n\n?>";
+    $settingsstring = "<?php\n\n//Database Settings\ndefine('DB_HOST', '" . DB_HOST . "');\ndefine('DB_USER', '" . DB_USER . "');\ndefine('DB_PASSWORD', '" . DB_PASSWORD . "');\ndefine('DB_NAME', '" . DB_NAME . "');\n\n//Admin Details\ndefine('ADMIN_USER', " . var_export($adminuser, true) . ");\ndefine('ADMIN_PASSWORD', " . var_export($adminpassword, true) . ");\n\n//Other Settings\ndefine('UNIQUE_KEY', " . var_export($uniquekey, true) . ");\ndefine('WEBSITE', " . var_export($website, true) . ");\ndefine('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");\ndefine('AD_CODE', " . var_export($adcode, true) . ");\ndefine('COUNT_UNIQUE_ONLY_STATE', " . var_export($countuniqueonlystate, true) . ");\ndefine('COUNT_UNIQUE_ONLY_TIME', " . var_export($countuniqueonlytime, true) . ");\ndefine('IGNORE_ADMIN_STATE', " . var_export($ignoreadminstate, true) . ");\ndefine('THEME', " . var_export($theme, true) . ");\n\n?>";
 
     //Write config
     $configfile = fopen("../config.php", "w");
@@ -180,6 +182,21 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 <div class="controls">
 <input type="number" id="countuniqueonlytime" name="countuniqueonlytime" value="<?php echo $currentcountuniqueonlytime; ?>" placeholder="Enter a time..." required>
 </div>
+</div>
+<h4>Ignore Admin</h4>
+<p>This settings prevents downloads being counted when you are logged in to Indication.</p>
+<div class="control-group">
+<div class="controls">
+<?php
+if ($currentignoreadminstate == "Enabled" ) {
+    echo "<label class=\"radio\"><input type=\"radio\" id=\"ignoreadminstateenable\" name=\"ignoreadminstate\" value=\"Enabled\" checked=\"checked\"> Enabled</label>
+    <label class=\"radio\"><input type=\"radio\" id=\"ignoreadminstatedisable\" name=\"ignoreadminstate\" value=\"Disabled\"> Disabled</label>";    
+} else {
+    echo "<label class=\"radio\"><input type=\"radio\" id=\"ignoreadminstateenable\" name=\"ignoreadminstate\" value=\"Enabled\"> Enabled</label>
+    <label class=\"radio\"><input type=\"radio\" id=\"ignoreadminstatedisable\" name=\"ignoreadminstate\" value=\"Disabled\" checked=\"checked\"> Disabled</label>";   
+}   
+?> 
+</div>  
 </div>
 <h4>Theme</h4>
 <div class="control-group">

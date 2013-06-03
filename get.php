@@ -84,13 +84,19 @@ if ($getinforesult == 0) {
 //Cookies don't like dots
 $idclean = str_replace(".", "_", $id);
 
-if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
-    if (!isset($_COOKIE["indicationhasdownloaded_$idclean"])) {
-        mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
-        setcookie("indicationhasdownloaded_$idclean", "True", time()+3600*COUNT_UNIQUE_ONLY_TIME);
-    }
+//Ignore admin counts if setting has been enabled
+session_start();
+if (IGNORE_ADMIN_STATE == "Enabled" && isset($_SESSION["is_logged_in_" . UNIQUE_KEY . ""])) {
+    echo "<div class=\"alert alert-info\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><b>Info:</b> Currently logged in, downloads will not be counted.</div>";    
 } else {
-    mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
+    if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
+        if (!isset($_COOKIE["indicationhasdownloaded_$idclean"])) {
+            mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
+            setcookie("indicationhasdownloaded_$idclean", "True", time()+3600*COUNT_UNIQUE_ONLY_TIME);
+        }
+    } else {
+        mysql_query("UPDATE Data SET count = count+1 WHERE id = \"$id\"");
+    }
 }
 
 //Check if download is password protected
