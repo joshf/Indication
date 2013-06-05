@@ -1,7 +1,7 @@
 Indication Changelog
 ====================
 
-#### v4.2.1 (released 05/06/13)
+#### v4.2.2 (released 05/06/13)
 
 * Fix installer bug
 
