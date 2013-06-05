@@ -1,8 +1,12 @@
 Indication Changelog
 ====================
 
-#### v4.2.2 (released 05/06/13)
+#### v4.3 (released 05/06/13)
 
+* Allow downloads to be ignored if admin is logged into Indication
+* Update jqBootstrapValidation
+* ZeroClipboard added so we can actually copy the tracking link to the clipboard
+* Use bootstrap modals rather than JavaScript alerts
 * Fix installer bug
 
 #### v4.2.1 (released 31/05/13)
