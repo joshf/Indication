@@ -13,14 +13,14 @@ Indication Changelog
 
 * Add more check to stop blank id's being passed
 * Add quick edit selector
-* Update bootswatch theme versions
+* Update Bootswatch theme versions
 * Better database error messages
 * Redesigned add/edit download feedback pages
 * Add validation to download name and id
 * New mechanism for setting a download password
-* New no javascript message
+* New no JavaScript message
 * Focus login form on page load
-* Use long hand php rather than short hand
+* Use longhand PHP rather than short hand
 * Move some settings around
 * Fix bug where user would be redirected to installer when they should not be
 * Re-add option to only count unique visitors. This was broken in previous releases
@@ -34,13 +34,13 @@ Indication Changelog
 * Improve update checking so we don't check every time you go to admin page
 * Turn autocomplete off for the settings page
 * Don't allow a count below zero
-* Allow tilde's and dashes in URL
+* Allow tildes and dashes in URL
 * Remove auto lowercase conversion
 
 #### v4.1.1 (released 09/03/13)
 SHTracker is now called Indication!
 
-* Silence built in database error, use custom ones
+* Silence built in database error and use custom ones
 * Change Datatables sorting
 * Fix settings indentation
 * Update bootstrap
@@ -48,12 +48,12 @@ SHTracker is now called Indication!
 #### v4.1 (released 14/02/13)
 
 * Add a variety of themes to SHTracker
-* Add config files checks to various files
+* Add config file checks to various files
 * Update add/edit feedback pages
 * Move backend functions to a worker file
 * Use icons in download statistics summary
 * Use local jqboostrapvalidation
-* New way of shwoing download counts
+* New way of showing download counts
 * Updated bootstrap
 
 #### v4.0.1 (released 05/01/13)
@@ -75,10 +75,10 @@ Major rewrite using the Twitter Bootstrap framework. Completely redesigned!
 
 #### v3.4.4 (released 17/11/12)
 
-* Use divs rather tha selectors
+* Use divs rather than selectors
 * Update jQuery
 * Update Datatables
-* Switch to using javascript alerts rather than div messages
+* Switch to using JavaScript alerts rather than div messages
 * Fix bug where them would not be remembered
 
 #### v3.4.3 (released 11/10/12)
@@ -93,5 +93,5 @@ Major rewrite using the Twitter Bootstrap framework. Completely redesigned!
 * Updated jQuery
 * Updated jQueryUI
 * Button sets used rather than individual buttons
-* Buttons are hidden when a info message is displayed
+* Buttons are hidden when an info message is displayed
 * Move help message
