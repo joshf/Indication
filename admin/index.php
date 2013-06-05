@@ -187,18 +187,14 @@ $(document).ready(function() {
     /* End */
     /* Edit */
     $("#edit").click(function() {
-        if (!is_selected) {
-            alert("No download selected!");
-        } else {
+        if (is_selected) {
             window.location = "edit.php?id="+ id +"";
         }
     });
     /* End */
     /* Delete */
     $("#delete").click(function() {
-        if (!is_selected) {
-            alert("No download selected!");
-        } else {
+        if (is_selected) {
             deleteconfirm=confirm("Delete this download?")
             if (deleteconfirm==true) {
                 $.ajax({  
@@ -221,9 +217,7 @@ $(document).ready(function() {
     /* End */
     /* Tracking Link */
     $("#trackinglink").click(function() {
-        if (!is_selected) {
-            alert("No download selected!");
-        } else {
+        if (is_selected) {
             prompt("Tracking link for selected download. Press Ctrl/Cmd C to copy to the clipboard:", "<?php echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
         } 
     });
