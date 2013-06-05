@@ -131,6 +131,32 @@ echo "</tbody></table>";
 </div>
 <br>
 <br>
+<div id="deleteconfirmdialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="dcdheader" aria-hidden="true">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+<h3 id="dcdheader">Confirm Delete</h3>
+</div>
+<div class="modal-body">
+<p>Are you sure you want to delete the selected download?</p>
+</div>
+<div class="modal-footer">
+<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+<button id="deleteconfirm" class="btn btn-primary">Delete</button>
+</div>
+</div>
+<div id="trackinglinkdialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="tldheader" aria-hidden="true">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+<h3 id="tldheader">Tracking Link</h3>
+</div>
+<div class="modal-body">
+<p>Tracking link for the selected download:</p>
+<p><b><?php echo PATH_TO_SCRIPT; ?>/get.php?id=<span id="downloadid"></span></b></p>
+</div>
+<div class="modal-footer">
+<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+</div>
+</div>
 <div class="alert alert-info">   
 <b>Info:</b> To edit, delete or show the tracking link for a download please select the radio button next to it.  
 </div>
@@ -192,33 +218,34 @@ $(document).ready(function() {
         }
     });
     /* End */
-    /* Delete */
+    /* Show Delete Dialog */
     $("#delete").click(function() {
         if (is_selected) {
-            deleteconfirm=confirm("Delete this download?")
-            if (deleteconfirm==true) {
-                $.ajax({  
-                    type: "POST",  
-                    url: "actions/worker.php",  
-                    data: "action=delete&id="+ id +"",
-                    error: function() {  
-                        alert("Ajax query failed!");
-                    },
-                    success: function() {  
-                        alert("Download deleted!");
-                        window.location.reload();      
-                    }	
-                });
-            } else {
-                return false;
-            }
-        } 
+            $("#deleteconfirmdialog").modal("show");
+        }
+    });
+    /* End */
+    /* Delete worker */
+    $("#deleteconfirm").click(function() {
+        $("#deleteconfirmdialog").modal("hide");
+        $.ajax({  
+            type: "POST",  
+            url: "actions/worker.php",  
+            data: "action=delete&id="+ id +"",
+            error: function() {  
+                alert("Ajax query failed!");
+            },
+            success: function() {  
+                window.location.reload();    
+            }	
+        });
     });
     /* End */
     /* Tracking Link */
     $("#trackinglink").click(function() {
         if (is_selected) {
-            prompt("Tracking link for selected download. Press Ctrl/Cmd C to copy to the clipboard:", "<?php echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
+            $("#downloadid").text(id);
+            $("#trackinglinkdialog").modal("show");
         } 
     });
     /* End */
