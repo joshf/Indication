@@ -127,7 +127,7 @@ echo "</tbody></table>";
 <div class="btn-group">
 <button id="edit" class="btn">Edit</button>
 <button id="delete" class="btn">Delete</button>
-<button id="trackinglink" class="btn">Show Tracking Link</button>
+<button id="trackinglink" class="btn">Copy Tracking Link</button>
 </div>
 <br>
 <br>
@@ -150,8 +150,7 @@ echo "</tbody></table>";
 <h3 id="tldheader">Tracking Link</h3>
 </div>
 <div class="modal-body">
-<p>Tracking link for the selected download:</p>
-<p><b><?php echo PATH_TO_SCRIPT; ?>/get.php?id=<span id="downloadid"></span></b></p>
+<p>The tracking link for the selected download has been copied to your clipboard.</p>
 </div>
 <div class="modal-footer">
 <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -188,12 +187,14 @@ mysql_close($con);
 <script src="../resources/bootstrap/js/bootstrap.js"></script>
 <script src="../resources/datatables/jquery.dataTables.js"></script>
 <script src="../resources/datatables/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="../resources/zeroclipboard/ZeroClipboard.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     /* Table selection */
     is_selected = false;
     $("#downloads input[name=id]").click(function() {
         id = $("#downloads input[name=id]:checked").val();
+        clip.setText("<?php echo PATH_TO_SCRIPT; ?>/get.php?id=" + id + "");
         is_selected = true;
     });
     /* End */
@@ -241,12 +242,14 @@ $(document).ready(function() {
         });
     });
     /* End */
-    /* Tracking Link */
-    $("#trackinglink").click(function() {
+    /* Zero Clipboard */
+    var clip = new ZeroClipboard($("#trackinglink"), {
+        moviePath: "../resources/zeroclipboard/ZeroClipboard.swf"
+    });
+    clip.on("complete", function() {
         if (is_selected) {
-            $("#downloadid").text(id);
             $("#trackinglinkdialog").modal("show");
-        } 
+        }
     });
     /* End */
 });
