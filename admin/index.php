@@ -203,11 +203,13 @@ mysql_close($con);
 <script type="text/javascript">
 $(document).ready(function() {
     /* Table selection */
-    is_selected = false;
+    id_selected = false;
     $("#downloads input[name=id]").click(function() {
         id = $("#downloads input[name=id]:checked").val();
-        is_selected = true;
+        id_selected = true;
+        /* Set clipboard text */
         clip.setText("<?php echo PATH_TO_SCRIPT; ?>/get.php?id=" + id + "");
+        /* End */
     });
     /* End */
     /* Datatables */
@@ -226,7 +228,7 @@ $(document).ready(function() {
     /* End */
     /* Edit */
     $("#edit").click(function() {
-        if (is_selected) {
+        if (id_selected == true) {
             window.location = "edit.php?id="+ id +"";
         } else {
             $("#noidselecteddialog").modal("show");    
@@ -235,7 +237,7 @@ $(document).ready(function() {
     /* End */
     /* Show Delete Dialog */
     $("#delete").click(function() {
-        if (is_selected) {
+        if (id_selected == true) {
             $("#deleteconfirmdialog").modal("show");
         } else {
             $("#noidselecteddialog").modal("show");    
@@ -263,7 +265,7 @@ $(document).ready(function() {
         moviePath: "../resources/zeroclipboard/ZeroClipboard.swf"
     });
     clip.on("complete", function() {
-        if (is_selected) {
+        if (id_selected == true) {
             $("#trackinglinkdialog").modal("show");
         } else {
             $("#noidselecteddialog").modal("show");    
