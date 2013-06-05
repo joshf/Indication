@@ -156,6 +156,18 @@ echo "</tbody></table>";
 <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 </div>
 </div>
+<div id="noidselecteddialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="nisdheader" aria-hidden="true">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+<h3 id="nisdheader">Error</h3>
+</div>
+<div class="modal-body">
+<p>No ID selected.</p>
+</div>
+<div class="modal-footer">
+<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+</div>
+</div>
 <div class="alert alert-info">   
 <b>Info:</b> To edit, delete or show the tracking link for a download please select the radio button next to it.  
 </div>
@@ -194,8 +206,8 @@ $(document).ready(function() {
     is_selected = false;
     $("#downloads input[name=id]").click(function() {
         id = $("#downloads input[name=id]:checked").val();
-        clip.setText("<?php echo PATH_TO_SCRIPT; ?>/get.php?id=" + id + "");
         is_selected = true;
+        clip.setText("<?php echo PATH_TO_SCRIPT; ?>/get.php?id=" + id + "");
     });
     /* End */
     /* Datatables */
@@ -216,6 +228,8 @@ $(document).ready(function() {
     $("#edit").click(function() {
         if (is_selected) {
             window.location = "edit.php?id="+ id +"";
+        } else {
+            $("#noidselecteddialog").modal("show");    
         }
     });
     /* End */
@@ -223,6 +237,8 @@ $(document).ready(function() {
     $("#delete").click(function() {
         if (is_selected) {
             $("#deleteconfirmdialog").modal("show");
+        } else {
+            $("#noidselecteddialog").modal("show");    
         }
     });
     /* End */
@@ -249,6 +265,8 @@ $(document).ready(function() {
     clip.on("complete", function() {
         if (is_selected) {
             $("#trackinglinkdialog").modal("show");
+        } else {
+            $("#noidselecteddialog").modal("show");    
         }
     });
     /* End */
