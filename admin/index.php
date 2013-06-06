@@ -264,7 +264,7 @@ $(document).ready(function() {
     var clip = new ZeroClipboard($("#trackinglink"), {
         moviePath: "../resources/zeroclipboard/ZeroClipboard.swf"
     });
-    clip.on("complete", function() {
+    clip.on("complete", function(client, args) {
         if (id_selected == true) {
             $("#trackinglinkdialog").modal("show");
         } else {
