@@ -2,7 +2,7 @@
 
 //Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
-$version = "4.3";
+$version = "4.3.1dev";
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
