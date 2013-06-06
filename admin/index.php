@@ -260,10 +260,23 @@ $(document).ready(function() {
         });
     });
     /* End */
-    /* Zero Clipboard */
+    /* Copy/show tracking Link */
+    no_flash = false;
     var clip = new ZeroClipboard($("#trackinglink"), {
         moviePath: "../resources/zeroclipboard/ZeroClipboard.swf"
     });
+    clip.on("noflash", function(client, args) {
+        no_flash = true;
+    });
+    if (no_flash == true) {
+        $("#trackinglink").click(function() {
+            if (id_selected == true) {
+                prompt("Tracking link for selected download. Press Ctrl/Cmd C to copy to the clipboard:", "<?php echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
+            } else {
+                $("#noidselecteddialog").modal("show");
+            }
+        });
+    }
     clip.on("complete", function(client, args) {
         if (id_selected == true) {
             $("#trackinglinkdialog").modal("show");
