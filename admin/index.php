@@ -107,7 +107,7 @@ if (!isset($_COOKIE["indicationhascheckedforupdates"])) {
 echo "<table id=\"downloads\" class=\"table table-striped table-bordered table-condensed\">
 <thead>
 <tr>
-<th>ID</th>
+<th></th>
 <th>Name</th>
 <th class=\"hidden-phone\">URL</th>
 <th>Count</th>
