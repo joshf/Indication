@@ -109,7 +109,7 @@ echo "<table id=\"downloads\" class=\"table table-striped table-bordered table-c
 <tr>
 <th>ID</th>
 <th>Name</th>
-<th>URL</th>
+<th class=\"hidden-phone\">URL</th>
 <th>Count</th>
 </tr></thead><tbody>";
 
@@ -117,7 +117,7 @@ while($row = mysql_fetch_assoc($getdownloads)) {
     echo "<tr>";
     echo "<td><input name=\"id\" type=\"radio\" value=\"" . $row["id"] . "\"></td>";
     echo "<td>" . $row["name"] . "</td>";
-    echo "<td>" . $row["url"] . "</td>";
+    echo "<td class=\"hidden-phone\">" . $row["url"] . "</td>";
     echo "<td>" . $row["count"] . "</td>";
     echo "</tr>";
 }
