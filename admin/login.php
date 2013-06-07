@@ -76,7 +76,7 @@ body {
 <div class="container">
 <form class="form-signin" method="post">
 <fieldset>
-<h2 class="form-signin-heading">Indication</h2>
+<h2 class="form-signin-heading text-center">Indication</h2>
 <?php 
 if (isset($_GET["login_error"])) {
     echo "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>Incorrect username or password.</div>";
