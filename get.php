@@ -141,6 +141,7 @@ switch ($case) {
         break;
     case "normal":
         header("Location: " . $getinforesult["url"] . "");
+        exit;
         break;
     case "passwordprotectedandshowads":
         $adcode = htmlspecialchars_decode(AD_CODE); 
@@ -148,6 +149,7 @@ switch ($case) {
         break;
     case "passwordcorrect":
         header("Location: " . $getinforesult["url"] . "");
+        exit;
         break;
     case "passwordincorrect":
         echo "<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Incorrect password.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div>";

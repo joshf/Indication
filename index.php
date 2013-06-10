@@ -4,4 +4,6 @@
 
 header("Location: admin");
 
+exit;
+
 ?>

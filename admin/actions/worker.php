@@ -14,6 +14,7 @@ if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
 
 if (!isset($_POST["id"])) {
     header("Location: ../../admin");
+    exit;
 }
 
 //Connect to database

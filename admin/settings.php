@@ -4,6 +4,7 @@
 
 if (!file_exists("../config.php")) {
     header("Location: ../installer");
+    exit;
 }
 
 require_once("../config.php");
@@ -62,6 +63,7 @@ if (isset($_POST["save"])) {
 
     //Show updated values
     header("Location: settings.php?updated=true");
+    exit;
 }
 
 ?>
