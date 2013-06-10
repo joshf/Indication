@@ -83,13 +83,16 @@ To show the download count for an ID, call http://yoursite.com/Indication/displa
 
 ```php
 <?php
-$_GET["id"] = "download1";
-include("Indication/display.php");
+require_once("Indication/config.php");
+
+$id = "download1";
+$count = file_get_contents("" . PATH_TO_SCRIPT . "/display.php?id=$id");
+echo $count;
 ?>
 ```
 
 ```html
-<iframe src="Indication/display.php?id=download1"></iframe>
+<iframe src="Indication/display.php?id=download1" width="80" height="25" frameBorder="0" scrolling="no"></iframe>
 ```
 
 Administration:
