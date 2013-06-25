@@ -28,7 +28,7 @@ Screenshots of Indication can be found [here](http://imgur.com/a/7aQPl).
 Downloads:
 ------------
 
-[v4.3](http://sidhosting.co.uk/downloads/get.php?id=indication) (released 05/05/13)
+[v4.3](http://sidhosting.co.uk/downloads/get.php?id=indication) (released 05/06/13)
 
 [v4.2.1](http://sidhosting.co.uk/downloads/get.php?id=indication&tag=4.2.1) (released 31/05/13)
 
