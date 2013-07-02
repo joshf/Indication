@@ -100,7 +100,7 @@ if (!isset($_COOKIE["indicationhascheckedforupdates"])) {
     $remoteversion = file_get_contents("https://raw.github.com/joshf/Indication/master/version.txt");
     if (preg_match("/^[0-9.-]{1,}$/", $remoteversion)) {
         if ($version < $remoteversion) {
-            echo "<div class=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Update</h4><p><a href=\"https://github.com/joshf/Indication/compare/$version...$remoteversion\" target=\"_blank\">Indication $remoteversion</a> is available. <a href=\"https://github.com/joshf/Indication/wiki/Updating-Indication\" target=\"_blank\">Click here to update</a>.</p></div>";
+            echo "<div class=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Update</h4><p>Indication <a href=\"https://github.com/joshf/Indication/blob/master/CHANGELOG.markdown#v" . str_replace(".", "", $remoteversion) . "\" target=\"_blank\">$remoteversion</a> is available. <a href=\"https://github.com/joshf/Indication/wiki/Updating-Indication\" target=\"_blank\">Click here to update</a>.</p></div>";
         }
     }
 }
