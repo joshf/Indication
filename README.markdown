@@ -5,8 +5,6 @@ Indication (previously SHTracker) is a PHP download counter. You can use it to t
 
 The script uses SQL databases. It comes with an admin panel where you can view how many times a download has been accessed. You can also easily add, edit or remove downloads using the panel. Indication can also display the current count for a download on any web page.
 
-#### Current Version: 4.3
-
 Features:
 ---------
 
@@ -25,30 +23,10 @@ Screenshots:
 
 Screenshots of Indication can be found [here](http://imgur.com/a/7aQPl).
 
-Downloads:
+Releases:
 ------------
 
-[v4.3](http://sidhosting.co.uk/downloads/get.php?id=indication) (released 05/06/13)
-
-[v4.2.1](http://sidhosting.co.uk/downloads/get.php?id=indication&tag=4.2.1) (released 31/05/13)
-
-[v4.2](http://sidhosting.co.uk/downloads/get.php?id=indication&tag=4.2) (released 30/05/13)
-
-[v4.1.2](http://sidhosting.co.uk/downloads/get.php?id=indication&tag=4.1.2) (released 01/05/13)
-
-[v4.1.1](http://sidhosting.co.uk/downloads/get.php?id=indication&tag=4.1.1) (released 09/03/13)
-
-[v4.1](http://sidhosting.co.uk/downloads/get.php?id=indication&tag=4.1) (released 14/02/13)
-
-[v4.0.1](http://sidhosting.co.uk/downloads/get.php?id=indication&tag=4.0.1) (released 05/01/13)
-
-[v4.0](http://sidhosting.co.uk/downloads/get.php?id=indication&tag=4.0) (released 23/12/12)
-
-[v3.4.4](http://sidhosting.co.uk/downloads/get.php?id=indication&tag=3.4.4) (released 17/11/12)
-
-[v3.4.3](http://sidhosting.co.uk/downloads/get.php?id=indication&tag=3.4.3) (released 11/10/12)
-
-[v3.4.2](http://sidhosting.co.uk/downloads/get.php?id=indication&tag=3.4.2) (released 29/09/12)
+Releases of Indication can be found on the the [releases page](https://github.com/joshf/Indication/releases).
 
 Installation:
 -------------
