@@ -1,7 +1,8 @@
 Indication Changelog
 ====================
 
-#### v4.3 (released 05/06/13)
+#### v4.3 
+##### Released 05/06/13
 
 * Allow downloads to be ignored if admin is logged into Indication
 * Update jqBootstrapValidation
@@ -9,11 +10,13 @@ Indication Changelog
 * Use bootstrap modals rather than JavaScript alerts
 * Fix installer bug
 
-#### v4.2.1 (released 31/05/13)
+#### v4.2.1
+##### Released 31/05/13
 
 * Fix security flaw with installer
 
-#### v4.2 (released 30/05/13)
+#### v4.2
+##### Released 30/05/13
 
 * Add more check to stop blank id's being passed
 * Add quick edit selector
@@ -32,7 +35,8 @@ Indication Changelog
 * Generate unique key using new method
 * Update bootstrap 
 
-#### v4.1.2 (released 01/05/13)
+#### v4.1.2
+##### Released 01/05/13
 
 * Sleeker login
 * Improve update checking so we don't check every time you go to admin page
@@ -41,7 +45,8 @@ Indication Changelog
 * Allow tildes and dashes in URL
 * Remove auto lowercase conversion
 
-#### v4.1.1 (released 09/03/13)
+#### v4.1.1
+##### Released 09/03/13
 SHTracker is now called Indication!
 
 * Silence built in database error and use custom ones
@@ -49,7 +54,8 @@ SHTracker is now called Indication!
 * Fix settings indentation
 * Update bootstrap
 
-#### v4.1 (released 14/02/13)
+#### v4.1
+##### Released 14/02/13
 
 * Add a variety of themes to SHTracker
 * Add config file checks to various files
@@ -60,7 +66,8 @@ SHTracker is now called Indication!
 * New way of showing download counts
 * Updated bootstrap
 
-#### v4.0.1 (released 05/01/13)
+#### v4.0.1 
+##### Released 05/01/13
 
 * Updated jQuery
 * Add URL validation
@@ -71,13 +78,15 @@ SHTracker is now called Indication!
 * Minor cosmetic changes to get.php
 * Minor fixes
 
-#### v4.0 (released 23/12/12)
+#### v4.0 
+##### Released 23/12/12
 Major rewrite using the Twitter Bootstrap framework. Completely redesigned!
 
 * Validation done by jqboostrapvalidation
 * Remove need for admin email
 
-#### v3.4.4 (released 17/11/12)
+#### v3.4.4 
+##### Released 17/11/12
 
 * Use divs rather than selectors
 * Update jQuery
@@ -85,14 +94,16 @@ Major rewrite using the Twitter Bootstrap framework. Completely redesigned!
 * Switch to using JavaScript alerts rather than div messages
 * Fix bug where them would not be remembered
 
-#### v3.4.3 (released 11/10/12)
+#### v3.4.3 
+##### Released 11/10/12
 
 * Stop admin pages being indexed
 * Check that database exists before trying to connect in get
 * Add option to list all downloads
 * Remove references to sidhosting.co.uk
 
-#### v3.4.2 (released 29/09/12)
+#### v3.4.2 
+##### Released 29/09/12
 
 * Updated jQuery
 * Updated jQueryUI
