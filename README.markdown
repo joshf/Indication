@@ -1,9 +1,9 @@
 Indication Readme
 ================
 
-Indication (previously SHTracker) is a PHP download counter. You can use it to track the number of times a link has been clicked or the number of times a file has been downloaded. Indication can also be used to hide affiliate links.
+Indication is a PHP download counter. You can use it to track the number of times a link has been clicked or the number of times a file has been downloaded. Indication can also be used to hide affiliate links.
 
-The script uses SQL databases. It comes with an admin panel where you can view how many times a download has been accessed. You can also easily add, edit or remove downloads using the panel. Indication can also display the current count for a download on any web page.
+The script uses a SQL database. It comes with an admin panel where you can view how many times a download has been accessed. You can also easily add, edit or remove downloads using the panel. Indication can also display the current count for a download on any web page.
 
 Features:
 ---------
@@ -17,6 +17,7 @@ Features:
 * Themed by Twitter Bootstrap, extra themes available through BootSwatch
 * Sort and search downloads using DataTables
 * Works well on mobile devices due to a responsive layout
+* Ignore counts when admin is logged in
 
 Screenshots:
 ------------
