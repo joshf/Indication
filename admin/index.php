@@ -36,13 +36,14 @@ if (THEME == "default") {
     echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.3.2/" . THEME . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
 }
 ?>
-<link href="../resources/datatables/dataTables.bootstrap.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 body {
     padding-top: 60px;
 }
 </style>
 <link href="../resources/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
+<link href="../resources/datatables/dataTables.bootstrap.css" type="text/css" rel="stylesheet">
+<link href="../resources/pnotify/jquery.pnotify.default.css" type="text/css" rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -145,30 +146,6 @@ echo "</tbody></table>";
 <button id="deleteconfirm" class="btn btn-primary">Delete</button>
 </div>
 </div>
-<div id="trackinglinkdialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="tldheader" aria-hidden="true">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-<h3 id="tldheader">Tracking Link</h3>
-</div>
-<div class="modal-body">
-<p>The tracking link for the selected download has been copied to your clipboard.</p>
-</div>
-<div class="modal-footer">
-<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-</div>
-</div>
-<div id="noidselecteddialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="nisdheader" aria-hidden="true">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-<h3 id="nisdheader">Error</h3>
-</div>
-<div class="modal-body">
-<p>No ID selected.</p>
-</div>
-<div class="modal-footer">
-<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-</div>
-</div>
 <div class="alert alert-info">   
 <b>Info:</b> To edit, delete or show the tracking link for a download please select the radio button next to it.  
 </div>
@@ -200,7 +177,8 @@ mysql_close($con);
 <script src="../resources/bootstrap/js/bootstrap.js"></script>
 <script src="../resources/datatables/jquery.dataTables.js"></script>
 <script src="../resources/datatables/dataTables.bootstrap.js"></script>
-<script type="text/javascript" src="../resources/zeroclipboard/ZeroClipboard.js"></script>
+<script src="../resources/zeroclipboard/ZeroClipboard.js"></script>
+<script src="../resources/pnotify/jquery.pnotify.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     /* Table selection */
@@ -227,12 +205,21 @@ $(document).ready(function() {
         "sWrapper": "dataTables_wrapper form-inline"
     });
     /* End */
+    /* pnotify */
+    $.pnotify.defaults.width = "200px";
+    $.pnotify.defaults.history = false;
+    $.pnotify.defaults.delay = "1500"; 
+    /* End */  
     /* Edit */
     $("#edit").click(function() {
         if (id_selected == true) {
             window.location = "edit.php?id="+ id +"";
         } else {
-            $("#noidselecteddialog").modal("show");    
+            $.pnotify({
+                title: "Info",
+                text: "No ID selected",
+                type: "info"
+            });    
         }
     });
     /* End */
@@ -241,22 +228,37 @@ $(document).ready(function() {
         if (id_selected == true) {
             $("#deleteconfirmdialog").modal("show");
         } else {
-            $("#noidselecteddialog").modal("show");    
+            $.pnotify({
+                title: "Info",
+                text: "No ID selected",
+                type: "info"
+            });
         }
     });
     /* End */
     /* Delete worker */
     $("#deleteconfirm").click(function() {
         $("#deleteconfirmdialog").modal("hide");
-        $.ajax({  
+        $.ajax({
             type: "POST",  
             url: "actions/worker.php",  
             data: "action=delete&id="+ id +"",
-            error: function() {  
-                alert("Ajax query failed!");
+            error: function() {
+                $.pnotify({
+                    title: "Error",
+                    text: "AJAX call failed",
+                    type: "error"
+                });                
             },
-            success: function() {  
-                window.location.reload();    
+            success: function() { 
+                $.pnotify({
+                    title: "Info",
+                    text: "Download deleted",
+                    type: "info",
+                    after_close: function(pnotify) {
+                        window.location.reload();
+                    }
+                }); 
             }	
         });
     });
@@ -274,15 +276,27 @@ $(document).ready(function() {
             if (id_selected == true) {
                 prompt("Tracking link for selected download. Press Ctrl/Cmd C to copy to the clipboard:", "<?php echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
             } else {
-                $("#noidselecteddialog").modal("show");
+                $.pnotify({
+                    title: "Info",
+                    text: "No ID selected",
+                    type: "info"
+                });
             }
         });
     }
     clip.on("complete", function(client, args) {
         if (id_selected == true) {
-            $("#trackinglinkdialog").modal("show");
+            $.pnotify({
+                title: "Info",
+                text: "Tracking link copied to your clipboard",
+                type: "info"
+            });
         } else {
-            $("#noidselecteddialog").modal("show");    
+            $.pnotify({
+                title: "Info",
+                text: "No ID selected",
+                type: "info"
+            });
         }
     });
     /* End */
