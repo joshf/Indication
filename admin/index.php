@@ -195,10 +195,10 @@ $(document).ready(function() {
     $("#downloads").dataTable({
         "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
         "sPaginationType": "bootstrap",
-        "aoColumnDefs": [{ 
-            "bSortable": false, 
-            "aTargets": [0] 
-        }] 
+        "aoColumnDefs": [{
+            "bSortable": false,
+            "aTargets": [0]
+        }]
     });
     $.extend($.fn.dataTableExt.oStdClasses, {
         "sSortable": "header",
@@ -219,7 +219,7 @@ $(document).ready(function() {
                 title: "Info",
                 text: "No ID selected",
                 type: "info"
-            });    
+            });
         }
     });
     /* End */
@@ -240,17 +240,17 @@ $(document).ready(function() {
     $("#deleteconfirm").click(function() {
         $("#deleteconfirmdialog").modal("hide");
         $.ajax({
-            type: "POST",  
-            url: "actions/worker.php",  
+            type: "POST",
+            url: "actions/worker.php",
             data: "action=delete&id="+ id +"",
             error: function() {
                 $.pnotify({
                     title: "Error",
                     text: "AJAX call failed",
                     type: "error"
-                });                
+                });
             },
-            success: function() { 
+            success: function() {
                 $.pnotify({
                     title: "Info",
                     text: "Download deleted",
@@ -258,8 +258,8 @@ $(document).ready(function() {
                     after_close: function(pnotify) {
                         window.location.reload();
                     }
-                }); 
-            }	
+                });
+            }
         });
     });
     /* End */
