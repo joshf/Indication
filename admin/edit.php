@@ -95,9 +95,11 @@ if (!isset($_GET["id"])) {
     while($row = mysql_fetch_assoc($getids)) {    
         echo "<option value=\"" . $row["id"] . "\">" . ucfirst($row["name"]) . "</option>";
     }
-    echo "</select></div></div><div class=\"form-actions\"><button type=\"submit\" class=\"btn btn-primary\">Edit</button></div></fieldset></form></div></body></html>";
-    exit;
-}
+    echo "</select></div></div><div class=\"form-actions\"><button type=\"submit\" class=\"btn btn-primary\">Edit</button></div></fieldset></form>";
+} else {
+
+?>
+<?php
 
 $idtoedit = mysql_real_escape_string($_GET["id"]);
 
@@ -166,6 +168,9 @@ mysql_close($con);
 </div>
 </fieldset>
 </form>
+<?php
+}
+?>
 </div>
 <!-- Content end -->
 <!-- Javascript start -->	
