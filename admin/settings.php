@@ -33,7 +33,8 @@ if (isset($_POST["save"])) {
     $adminuser = $_POST["adminuser"];
     $adminpassword = $_POST["adminpassword"];
     if ($adminpassword != $currentadminpassword) {
-        $adminpassword = sha1($adminpassword);
+        $hashedpassword = hash("sha256", $adminpassword);
+        $adminpassword = hash("sha256", SALT . $hashedpassword);
     }
     $website = $_POST["website"];
     $pathtoscript = $_POST["pathtoscript"];
