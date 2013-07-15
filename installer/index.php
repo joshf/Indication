@@ -17,16 +17,26 @@ if (file_exists("../config.php")) {
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../resources/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-<link href="../resources/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 body {
     padding-top: 60px;
 }
 </style>
+<link href="../resources/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
+<!-- Javascript start -->
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
+<script src="../resources/jquery.min.js"></script>
+<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="../resources/validation/jqBootstrapValidation.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("input").not("[type=submit]").jqBootstrapValidation();
+});
+</script>
+<!-- Javascript end -->
 </head>
 <body>
 <!-- Nav start -->
@@ -117,15 +127,5 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 </form>
 </div>
 <!-- Content end -->
-<!-- Javascript start -->	
-<script src="../resources/jquery.min.js"></script>
-<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
-<script src="../resources/validation/jqBootstrapValidation.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    $("input").not("[type=submit]").jqBootstrapValidation();
-});
-</script>
-<!-- Javascript end -->
 </body>
 </html>
