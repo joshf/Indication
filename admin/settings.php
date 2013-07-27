@@ -210,7 +210,7 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 <div class="control-group">
 <label class="control-label" for="countuniqueonlytime">Time to consider a user unique</label>
 <div class="controls">
-<input type="number" id="countuniqueonlytime" name="countuniqueonlytime" value="<?php echo $currentcountuniqueonlytime; ?>" placeholder="Enter a time..." required>
+<input type="number" id="countuniqueonlytime" name="countuniqueonlytime" value="<?php echo $currentcountuniqueonlytime; ?>" placeholder="Enter a time..." min="0" required>
 </div>
 </div>
 <h4>Ignore Admin</h4>

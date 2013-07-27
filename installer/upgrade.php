@@ -136,7 +136,7 @@ mysql_close($con);
 ?>
 <div class="alert alert-success">
 <h4 class="alert-heading">Upgrade Complete</h4>
-<p>Indication has been successfully upgraded. Because Indication 1.5 uses salt password hashing, your password is now <b><?php echo $temppassword; ?></b>. Please change it to something more memorable as soon as possible using the settings page.<p><a href="../admin/login.php" class="btn btn-success">Go To Login</a></p>
+<p>Indication has been successfully upgraded. Because Indication <?php echo $version; ?> uses salt password hashing, your password is now <b><?php echo $temppassword; ?></b>. Please change it to something more memorable as soon as possible using the settings page.<p><a href="../admin/login.php" class="btn btn-success">Go To Login</a></p>
 </div>
 </div>
 <!-- Content end -->
