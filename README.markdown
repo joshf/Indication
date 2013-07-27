@@ -79,6 +79,21 @@ Administration:
 
 Open up Indication/admin to add new downloads, view statistics, update existing downloads or delete downloads. The admin panel can also be used to password protect downloads or to show you the tracking link for a download.
 
+Updating:
+---------
+
+1. Before performing an update please make sure you backup your database
+2. Download your config.php file (in the Indication folder) via FTP or your hosts control panel
+3. Delete the Indication folder off your server
+4. Download the latest version of Indication from [here](https://github.com/joshf/Indication/releases)
+5. Unzip the file
+6. Upload the unzipped Indication folder to your server via FTP or your hosts control panel
+7. Upload your config.php file into the Indication folder
+4. Open up http://yoursite.com/Indication/installer/upgrade.php in your browser and the upgrade process will start
+9. You should now have the latest version of Indication
+
+N.B: The upgrade will only upgrade from the previous version of Indication (e.g 4.3 to 4.4), it cannot be used to upgrade from a historic version.
+
 Removal:
 --------
 
