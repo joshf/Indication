@@ -80,8 +80,8 @@ if (THEME == "default") {
     echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.3.2/" . THEME . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
 }
 ?>
-<link href="../resources/pnotify/jquery.pnotify.default.css" type="text/css" rel="stylesheet">
 <link href="../resources/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
+<link href="../resources/bootstrap-notify/css/bootstrap-notify.min.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 body {
 	padding-top: 60px;
@@ -99,20 +99,20 @@ body {
 <![endif]-->
 <script src="../resources/jquery.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
-<script src="../resources/validation/jqBootstrapValidation.js"></script>
-<script src="../resources/pnotify/jquery.pnotify.js"></script>
-<script src="../resources/jquery.cookie.js"></script>
+<script src="../resources/validation/jqBootstrapValidation.min.js"></script>
+<script src="../resources/bootstrap-notify/js/bootstrap-notify.min.js"></script>
+<script src="../resources/cookie/jquery.cookie.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $.pnotify.defaults.width = "200px";
-    $.pnotify.defaults.history = false;
-    $.pnotify.defaults.delay = "1500";
     if ($.cookie("settings_updated")) {
-        $.pnotify({
-            title: "Info",
-            text: "Settings updated",
-            type: "info"
-        });
+        $(".top-right").notify({
+            type: "info",
+            transition: "fade",
+            icon: "info-sign",
+            message: {
+                text: "Settings saved!"
+            }
+        }).show();
         $.removeCookie("settings_updated");
     }
     $("form").submit(function() {
@@ -155,6 +155,7 @@ $(document).ready(function() {
 <div class="page-header">
 <h1>Settings</h1>
 </div>
+<div class="notifications top-right"></div>
 <form method="post" autocomplete="off">
 <fieldset>
 <h4>Admin Details</h4>

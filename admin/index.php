@@ -35,9 +35,9 @@ if (THEME == "default") {
     echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.3.2/" . THEME . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
 }
 ?>
-<link href="../resources/pnotify/jquery.pnotify.default.css" type="text/css" rel="stylesheet">
 <link href="../resources/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
 <link href="../resources/datatables/jquery.dataTables-bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="../resources/bootstrap-notify/css/bootstrap-notify.min.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 body {
     padding-top: 60px;
@@ -55,10 +55,11 @@ body {
 <![endif]-->
 <script src="../resources/jquery.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
-<script src="../resources/datatables/jquery.dataTables.js"></script>
-<script src="../resources/datatables/dataTables.bootstrap.js"></script>
-<script src="../resources/zeroclipboard/ZeroClipboard.js"></script>
-<script src="../resources/pnotify/jquery.pnotify.js"></script>
+<script src="../resources/datatables/jquery.dataTables.min.js"></script>
+<script src="../resources/datatables/jquery.dataTables-bootstrap.min.js"></script>
+<script src="../resources/bootstrap-notify/js/bootstrap-notify.min.js"></script>
+<script src="../resources/bootbox/bootbox.min.js"></script>
+<script src="../resources/zeroclipboard/ZeroClipboard.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     /* Table selection */
@@ -84,63 +85,73 @@ $(document).ready(function() {
         "sSortable": "header",
         "sWrapper": "dataTables_wrapper form-inline"
     });
-    /* End */
-    /* pnotify */
-    $.pnotify.defaults.width = "200px";
-    $.pnotify.defaults.history = false;
-    $.pnotify.defaults.delay = "1500"; 
     /* End */  
     /* Edit */
     $("#edit").click(function() {
         if (id_selected == true) {
             window.location = "edit.php?id="+ id +"";
         } else {
-            $.pnotify({
-                title: "Info",
-                text: "No ID selected",
-                type: "info"
-            });
+            $(".top-right").notify({
+                type: "info",
+                transition: "fade",
+                icon: "info-sign",
+                message: {
+                    text: "No ID selected!"
+                }
+            }).show();
         }
     });
     /* End */
-    /* Show Delete Dialog */
+    /* Delete */
     $("#delete").click(function() {
         if (id_selected == true) {
-            $("#deleteconfirmdialog").modal("show");
-        } else {
-            $.pnotify({
-                title: "Info",
-                text: "No ID selected",
-                type: "info"
+            $("body").on("show", ".bootbox", function () {
+                if (!$(".modal-header")[0]) {
+                    $(".bootbox").prepend("<div class=\"modal-header\"><a href=\"javascript:;\" class=\"close\">&times;</a><h3>Confirm Delete</h3></div>");
+                }
             });
+            bootbox.confirm("Are you sure you want to delete the selected download?", "No", "Yes", function(result) {
+                if (result == true) {
+                    $.ajax({
+                        type: "POST",
+                        url: "actions/worker.php",
+                        data: "action=delete&id="+ id +"",
+                        error: function() {
+                            $(".top-right").notify({
+                                type: "error",
+                                transition: "fade",
+                                icon: "warning-sign",
+                                message: {
+                                    text: "Ajax query failed!"
+                                }
+                            }).show();
+                        },
+                        success: function() {
+                            $(".top-right").notify({
+                                type: "success",
+                                transition: "fade",
+                                icon: "ok",
+                                message: {
+                                    text: "Download deleted!"
+                                },
+                                onClosed: function() {
+                                    window.location.reload();
+                                }
+                            }).show();
+                        }
+                    });
+                }
+            });
+        } else {
+            $(".top-right").notify({
+                type: "info",
+                transition: "fade",
+                icon: "info-sign",
+                message: {
+                    text: "No ID selected!"
+                }
+            }).show();
         }
-    });
-    /* End */
-    /* Delete worker */
-    $("#deleteconfirm").click(function() {
-        $("#deleteconfirmdialog").modal("hide");
-        $.ajax({
-            type: "POST",
-            url: "actions/worker.php",
-            data: "action=delete&id="+ id +"",
-            error: function() {
-                $.pnotify({
-                    title: "Error",
-                    text: "AJAX call failed",
-                    type: "error"
-                });
-            },
-            success: function() {
-                $.pnotify({
-                    title: "Info",
-                    text: "Download deleted",
-                    type: "info",
-                    after_close: function(pnotify) {
-                        window.location.reload();
-                    }
-                });
-            }
-        });
     });
     /* End */
     /* Copy/show tracking Link */
@@ -156,27 +167,36 @@ $(document).ready(function() {
             if (id_selected == true) {
                 prompt("Tracking link for selected download. Press Ctrl/Cmd C to copy to the clipboard:", "<?php echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
             } else {
-                $.pnotify({
-                    title: "Info",
-                    text: "No ID selected",
-                    type: "info"
-                });
+                $(".top-right").notify({
+                    type: "info",
+                    transition: "fade",
+                    icon: "info-sign",
+                    message: {
+                        text: "No ID selected!"
+                    }
+                }).show();
             }
         });
     }
     clip.on("complete", function(client, args) {
         if (id_selected == true) {
-            $.pnotify({
-                title: "Info",
-                text: "Tracking link copied to your clipboard",
-                type: "info"
-            });
+            $(".top-right").notify({
+                type: "success",
+                transition: "fade",
+                icon: "info-sign",
+                message: {
+                    text: "Tracking link copied!"
+                }
+            }).show();
         } else {
-            $.pnotify({
-                title: "Info",
-                text: "No ID selected",
-                type: "info"
-            });
+            $(".top-right").notify({
+                type: "info",
+                transition: "fade",
+                icon: "info-sign",
+                message: {
+                    text: "No ID selected!"
+                }
+            }).show();
         }
     });
     /* End */
@@ -215,7 +235,8 @@ $(document).ready(function() {
 <div class="container">
 <div class="page-header">
 <h1>All Downloads</h1>
-</div>		
+</div>
+<div class="notifications top-right"></div>		
 <noscript><div class="alert alert-info"><h4 class="alert-heading">Information</h4><p>Please enable JavaScript to use Indication. For instructions on how to do this, see <a href="http://www.activatejavascript.org" target="_blank">here</a>.</p></div></noscript>
 <?php
 
@@ -268,19 +289,6 @@ echo "</tbody></table>";
 </div>
 <br>
 <br>
-<div id="deleteconfirmdialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="dcdheader" aria-hidden="true">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-<h3 id="dcdheader">Confirm Delete</h3>
-</div>
-<div class="modal-body">
-<p>Are you sure you want to delete the selected download?</p>
-</div>
-<div class="modal-footer">
-<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-<button id="deleteconfirm" class="btn btn-primary">Delete</button>
-</div>
-</div>
 <div class="alert alert-info">   
 <b>Info:</b> To edit, delete or show the tracking link for a download please select the radio button next to it.  
 </div>
