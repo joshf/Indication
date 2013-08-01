@@ -48,7 +48,7 @@ body {
 <![endif]-->
 <script src="../resources/jquery.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
-<script src="../resources/validation/jqBootstrapValidation.js"></script>
+<script src="../resources/validation/jqBootstrapValidation.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
