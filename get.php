@@ -82,7 +82,7 @@ if (isset($_GET["id"])) {
 //Check if ID exists
 $getinfo = mysql_query("SELECT name, url, count FROM Data WHERE id = \"$id\"");
 $getinforesult = mysql_fetch_assoc($getinfo);
-if ($getinforesult == 0) {
+if (mysql_num_rows($getinfo) == 0) {
     die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>ID does not exist.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 
@@ -91,7 +91,7 @@ $idclean = str_replace(".", "_", $id);
 
 //Ignore admin counts if setting has been enabled
 session_start();
-if (IGNORE_ADMIN_STATE == "Enabled" && isset($_SESSION["is_logged_in_" . UNIQUE_KEY . ""])) {
+if (IGNORE_ADMIN_STATE == "Enabled" && isset($_SESSION["indication_user"])) {
     echo "<div class=\"alert alert-info\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><b>Info:</b> Currently logged in, downloads will not be counted.</div>";    
 } else {
     if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
