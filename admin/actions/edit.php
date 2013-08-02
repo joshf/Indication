@@ -44,12 +44,12 @@ if (THEME == "default") {
 <link href="../../resources/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 body {
-	padding-top: 60px;
+    padding-top: 60px;
 }
 @media (max-width: 980px) {
-	body {
-		padding-top: 0;
-	}
+    body {
+        padding-top: 0;
+    }
 }
 </style>
 <!-- Javascript start -->
