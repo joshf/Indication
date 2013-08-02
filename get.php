@@ -10,6 +10,12 @@ if (!file_exists("config.php")) {
 
 require_once("config.php");
 
+//Connect to database
+@$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+if (!$con) {
+    die("Error: Could not connect to database (" . mysql_error() . "). Check your database settings are correct.");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,18 +67,6 @@ body {
 <h1><?php echo WEBSITE; ?></h1>
 </div>		
 <?php
-
-//Connect to database
-@$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-if (!$con) {
-    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Could not connect to database (" . mysql_error() . "). Check your database settings are correct.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
-}
-
-//Check database exists
-$does_db_exist = mysql_select_db(DB_NAME, $con);
-if (!$does_db_exist) {
-    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Database does not exist (" . mysql_error() . "). Check your database settings are correct.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
-}
 
 //Get the ID from $_GET OR $_POST
 if (isset($_GET["id"])) {

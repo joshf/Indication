@@ -14,12 +14,6 @@ if (!$con) {
     die("Error: Could not connect to database (" . mysql_error() . "). Check your database settings are correct.");
 }
 
-//Check database exists
-$does_db_exist = mysql_select_db(DB_NAME, $con);
-if (!$does_db_exist) {
-    die("Error: Database does not exist (" . mysql_error() . "). Check your database settings are correct.");
-}
-
 if (isset($_GET["id"])) {
     $id = mysql_real_escape_string($_GET["id"]);
 } else {
