@@ -19,6 +19,14 @@ if (!isset($_POST["id"])) {
     exit;
 }
 
+//Connect to database
+@$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+if (!$con) {
+    die("Error: Could not connect to database (" . mysql_error() . "). Check your database settings are correct.");
+}
+
+mysql_select_db(DB_NAME, $con);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,14 +99,6 @@ body {
 <h1>Edit</h1>
 </div>		
 <?php
-
-//Connect to database
-@$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-if (!$con) {
-    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Could not connect to database (" . mysql_error() . "). Check your database settings are correct.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
-}
-
-mysql_select_db(DB_NAME, $con);
 
 $idtoedit = mysql_real_escape_string($_POST["idtoedit"]);
 
