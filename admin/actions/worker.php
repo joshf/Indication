@@ -4,10 +4,8 @@
 
 require_once("../../config.php");
 
-$uniquekey = UNIQUE_KEY;
-
 session_start();
-if (!isset($_SESSION["is_logged_in_" . $uniquekey . ""])) {
+if (!isset($_SESSION["indication_user"])) {
     header("Location: ../login.php");
     exit; 
 }

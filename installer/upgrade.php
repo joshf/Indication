@@ -79,7 +79,6 @@ $salt = substr($randsalt, 0, 3);
 $hashedpassword = hash("sha256", $temppassword);
 $adminpassword = hash("sha256", $salt . $hashedpassword);
 
-$uniquekey = UNIQUE_KEY;
 $website = WEBSITE;
 $pathtoscript = PATH_TO_SCRIPT;
 $adcode = AD_CODE;
@@ -102,7 +101,6 @@ define('ADMIN_PASSWORD', " . var_export($adminpassword, true) . ");
 define('SALT', " . var_export($salt, true) . ");
 
 //Other Settings
-define('UNIQUE_KEY', " . var_export($uniquekey, true) . ");
 define('WEBSITE', " . var_export($website, true) . ");
 define('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");
 define('AD_CODE', " . var_export($adcode, true) . ");

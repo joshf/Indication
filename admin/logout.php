@@ -8,14 +8,12 @@ if (!file_exists("../config.php")) {
 
 require_once("../config.php");
 
-$uniquekey = UNIQUE_KEY;
-
 session_start();
 
-unset($_SESSION["is_logged_in_" . $uniquekey . ""]);
+unset($_SESSION["indication_user"]);
 
-if (isset($_COOKIE["indicationrememberme_" . $uniquekey . ""])) {
-	setcookie("indicationrememberme_" . $uniquekey . "", "", time()-86400);
+if (isset($_COOKIE["indication_user_rememberme"])) {
+	setcookie("indication_user_rememberme", "", time()-86400);
 }
 
 header("Location: login.php?logged_out=true");
