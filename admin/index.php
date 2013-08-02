@@ -253,8 +253,6 @@ $(document).ready(function() {
 <noscript><div class="alert alert-info"><h4 class="alert-heading">Information</h4><p>Please enable JavaScript to use Indication. For instructions on how to do this, see <a href="http://www.activatejavascript.org" target="_blank">here</a>.</p></div></noscript>
 <?php
 
-$getdownloads = mysql_query("SELECT * FROM Data");
-
 //Update checking
 if (!isset($_COOKIE["indicationhascheckedforupdates"])) {
     $remoteversion = file_get_contents("https://raw.github.com/joshf/Indication/master/version.txt");
@@ -264,6 +262,8 @@ if (!isset($_COOKIE["indicationhascheckedforupdates"])) {
         }
     }
 }
+
+$getdownloads = mysql_query("SELECT * FROM Data");
 
 echo "<table id=\"downloads\" class=\"table table-striped table-bordered table-condensed\">
 <thead>

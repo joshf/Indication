@@ -46,7 +46,7 @@ body {
 <![endif]-->
 <script src="../resources/jquery.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
-<script src="../resources/validation/jqBootstrapValidation.js"></script>
+<script src="../resources/validation/jqBootstrapValidation.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
@@ -100,7 +100,7 @@ $(document).ready(function() {
 <div class="page-header">
 <h1>Add</h1>
 </div>
-<form action="actions/add.php" method="post">
+<form action="actions/add.php" method="post" autocomplete="off">
 <fieldset>
 <div class="control-group">
 <label class="control-label" for="downloadname">Name</label>
