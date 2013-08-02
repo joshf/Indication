@@ -111,12 +111,16 @@ $(document).ready(function() {
 <?php
 
 if (!isset($_GET["id"])) {
-    echo "<form action=\"edit.php\" method=\"get\"><fieldset><div class=\"control-group\"><label class=\"control-label\" for=\"id\">Select a download to edit</label><div class=\"controls\"><select id=\"id\" name=\"id\">";
-    $getids = mysql_query("SELECT id, name FROM Data");
-    while($row = mysql_fetch_assoc($getids)) {    
-        echo "<option value=\"" . $row["id"] . "\">" . ucfirst($row["name"]) . "</option>";
+	$getids = mysql_query("SELECT id, name FROM Data");
+    if (mysql_num_rows($getids) > 0) {
+        echo "<form action=\"edit.php\" method=\"get\"><fieldset><div class=\"control-group\"><label class=\"control-label\" for=\"id\">Select a download to edit</label><div class=\"controls\"><select id=\"id\" name=\"id\">";
+        while($row = mysql_fetch_assoc($getids)) {
+            echo "<option value=\"" . $row["id"] . "\">" . ucfirst($row["name"]) . "</option>";
+        }
+        echo "</select></div></div><div class=\"form-actions\"><button type=\"submit\" class=\"btn btn-primary\">Edit</button></div></fieldset></form>";
+    } else {
+        die("<div class=\"alert alert-info\"><h4 class=\"alert-heading\">Info</h4><p>No tasks available to edit.</p><p><a class=\"btn btn-info\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
     }
-    echo "</select></div></div><div class=\"form-actions\"><button type=\"submit\" class=\"btn btn-primary\">Edit</button></div></fieldset></form>";
 } else {
 
 ?>
@@ -126,8 +130,7 @@ $idtoedit = mysql_real_escape_string($_GET["id"]);
 
 //Check if ID exists
 $doesidexist = mysql_query("SELECT id FROM Data WHERE id = \"$idtoedit\"");
-$doesidexistresult = mysql_fetch_assoc($doesidexist); 
-if ($doesidexistresult == 0) {
+if (mysql_num_rows($doesidexist) == 0) {
     die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>ID does not exist.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
 

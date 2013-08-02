@@ -16,6 +16,8 @@ if (!$con) {
     die("Error: Could not connect to database (" . mysql_error() . "). Check your database settings are correct.");
 }
 
+mysql_select_db(DB_NAME, $con);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
