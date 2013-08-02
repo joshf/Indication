@@ -29,7 +29,7 @@ body {
 <![endif]-->
 <script src="../resources/jquery.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
-<script src="../resources/validation/jqBootstrapValidation.js"></script>
+<script src="../resources/validation/jqBootstrapValidation.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("input").not("[type=submit]").jqBootstrapValidation();
@@ -124,7 +124,7 @@ $pathtoscriptwithslash = "http://" . substr($currenturl, 0, strpos($currenturl, 
 $pathtoscript = rtrim($pathtoscriptwithslash, "/");	
 
 ?>	
-<form method="post">
+<form method="post" autocomplete="off">
 <fieldset>
 <h4>Database Settings</h4>
 <div class="control-group">
