@@ -129,14 +129,14 @@ $(document).ready(function() {
 <div class="control-group">
 <div class="controls">
 <label class="checkbox">
-<input type="checkbox" id="showadsstate" name="showadsstate"> Show ads?
+<input type="checkbox" id="showadsstate" name="showadsstate"> Show ads
 </label>
 </div>
 </div>
 <div class="control-group">
 <div class="controls">
 <label class="checkbox">
-<input type="checkbox" id="passwordprotectstate" name="passwordprotectstate"> Enable password protection?
+<input type="checkbox" id="passwordprotectstate" name="passwordprotectstate"> Enable password protection
 </label>
 </div>
 </div>

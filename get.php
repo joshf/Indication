@@ -107,15 +107,13 @@ if (IGNORE_ADMIN_STATE == "Enabled" && isset($_SESSION["indication_user"])) {
 //Check if download is password protected
 $checkifprotected = mysql_query("SELECT protect, password FROM Data WHERE id = \"$id\"");
 $checkifprotectedresult = mysql_fetch_assoc($checkifprotected);
-
-//Check if we should show ads
-$checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$id\"");
-$checkifadsshowresult = mysql_fetch_assoc($checkifadsshow);
-
 if ($checkifprotectedresult["protect"] == "1") {
     $case = "passwordprotected";
 }
 
+//Check if we should show ads
+$checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$id\"");
+$checkifadsshowresult = mysql_fetch_assoc($checkifadsshow);
 if ($checkifadsshowresult["showads"] == "1") {
     $case = "showads";
 }

@@ -119,7 +119,7 @@ if (!isset($_GET["id"])) {
         }
         echo "</select></div></div><div class=\"form-actions\"><button type=\"submit\" class=\"btn btn-primary\">Edit</button></div></fieldset></form>";
     } else {
-        die("<div class=\"alert alert-info\"><h4 class=\"alert-heading\">Info</h4><p>No tasks available to edit.</p><p><a class=\"btn btn-info\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
+        die("<div class=\"alert alert-info\"><h4 class=\"alert-heading\">Information</h4><p>No downloads available to edit.</p><p><a class=\"btn btn-info\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
     }
 } else {
 
@@ -153,9 +153,9 @@ echo "<div class=\"control-group\"><div class=\"controls\"><label class=\"checkb
 $checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$idtoedit\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
 if ($checkifadsshowresult["showads"] == "1") { 
-    echo "<input type=\"checkbox\" id=\"showadsstate\" name=\"showadsstate\" checked=\"checked\"> Show ads?";
+    echo "<input type=\"checkbox\" id=\"showadsstate\" name=\"showadsstate\" checked=\"checked\"> Show ads";
 } else {
-    echo "<input type=\"checkbox\" id=\"showadsstate\"  name=\"showadsstate\"> Show ads?";
+    echo "<input type=\"checkbox\" id=\"showadsstate\"  name=\"showadsstate\"> Show ads";
 }
 
 echo "</label></div></div><div class=\"control-group\"><div class=\"controls\"><label class=\"checkbox\">";
@@ -164,9 +164,9 @@ echo "</label></div></div><div class=\"control-group\"><div class=\"controls\"><
 $checkifprotected = mysql_query("SELECT protect FROM Data WHERE id = \"$idtoedit\"");
 $checkifprotectedresult = mysql_fetch_assoc($checkifprotected); 
 if ($checkifprotectedresult["protect"] == "1") { 
-    echo "<input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\" checked=\"checked\"> Enable password protection?";
+    echo "<input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\" checked=\"checked\"> Enable password protection";
 } else {
-    echo "<input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\"> Enable password protection?";
+    echo "<input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\"> Enable password protection";
 }
 
 mysql_close($con);

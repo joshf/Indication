@@ -250,7 +250,7 @@ $(document).ready(function() {
 <h1>All Downloads</h1>
 </div>
 <div class="notifications top-right"></div>		
-<noscript><div class="alert alert-info"><h4 class="alert-heading">Information</h4><p>Please enable JavaScript to use Indication. For instructions on how to do this, see <a href="http://www.activatejavascript.org" target="_blank">here</a>.</p></div></noscript>
+<div class="alert alert-info"><h4 class="alert-heading">Information</h4><p>Please enable JavaScript to use Indication. For instructions on how to do this, see <a href="http://www.activatejavascript.org" target="_blank">here</a>.</p></div>
 <?php
 
 //Update checking
@@ -299,15 +299,15 @@ echo "</tbody></table>";
 <?php
 
 $getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM Data");
-$resultnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
-echo "<i class=\"icon-list-alt\"></i> <b>" . $resultnumberofdownloads["COUNT(id)"] . "</b> items<br>";
+$resultgetnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
+echo "<i class=\"icon-list-alt\"></i> <b>" . $resultgetnumberofdownloads["COUNT(id)"] . "</b> items<br>";
 
 $gettotalnumberofdownloads = mysql_query("SELECT SUM(count) FROM Data");
-$resulttotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
-if ($resulttotalnumberofdownloads["SUM(count)"] > "1") {
-    echo "<i class=\"icon-download\"></i> <b>" . $resulttotalnumberofdownloads["SUM(count)"] . "</b> total downloads";
-} else {
+$resultgettotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
+if (is_null($resultgettotalnumberofdownloads["SUM(count)"])) {
     echo "<i class=\"icon-download\"></i> <b>0</b> total downloads";
+} else {
+    echo "<i class=\"icon-download\"></i> <b>" . $resultgettotalnumberofdownloads["SUM(count)"] . "</b> total downloads";
 }
 
 mysql_close($con);
