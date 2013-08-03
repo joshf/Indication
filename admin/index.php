@@ -250,7 +250,7 @@ $(document).ready(function() {
 <h1>All Downloads</h1>
 </div>
 <div class="notifications top-right"></div>		
-<div class="alert alert-info"><h4 class="alert-heading">Information</h4><p>Please enable JavaScript to use Indication. For instructions on how to do this, see <a href="http://www.activatejavascript.org" target="_blank">here</a>.</p></div>
+<noscript><div class="alert alert-info"><h4 class="alert-heading">Information</h4><p>Please enable JavaScript to use Indication. For instructions on how to do this, see <a href="http://www.activatejavascript.org" target="_blank">here</a>.</p></div></noscript>
 <?php
 
 //Update checking
