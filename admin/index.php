@@ -67,7 +67,6 @@ body {
 <script src="../resources/datatables/jquery.dataTables-bootstrap.min.js"></script>
 <script src="../resources/bootstrap-notify/js/bootstrap-notify.min.js"></script>
 <script src="../resources/bootbox/bootbox.min.js"></script>
-<script src="../resources/zeroclipboard/ZeroClipboard.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     /* Table selection */
@@ -75,9 +74,6 @@ $(document).ready(function() {
     $("#downloads input[name=id]").click(function() {
         id = $("#downloads input[name=id]:checked").val();
         id_selected = true;
-        /* Set clipboard text */
-        clip.setText("<?php echo PATH_TO_SCRIPT; ?>/get.php?id=" + id + "");
-        /* End */
     });
     /* End */
     /* Datatables */
@@ -162,40 +158,10 @@ $(document).ready(function() {
         }
     });
     /* End */
-    /* Copy/show tracking Link */
-    no_flash = false;
-    var clip = new ZeroClipboard($("#trackinglink"), {
-        moviePath: "../resources/zeroclipboard/ZeroClipboard.swf"
-    });
-    clip.on("noflash", function(client, args) {
-        no_flash = true;
-    });
-    if (no_flash == true) {
-        $("#trackinglink").click(function() {
-            if (id_selected == true) {
-                prompt("Tracking link for selected download. Press Ctrl/Cmd C to copy to the clipboard:", "<?php echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
-            } else {
-                $(".top-right").notify({
-                    type: "info",
-                    transition: "fade",
-                    icon: "info-sign",
-                    message: {
-                        text: "No ID selected!"
-                    }
-                }).show();
-            }
-        });
-    }
-    clip.on("complete", function(client, args) {
+    /* Show tracking Link */
+    $("#trackinglink").click(function() {
         if (id_selected == true) {
-            $(".top-right").notify({
-                type: "success",
-                transition: "fade",
-                icon: "info-sign",
-                message: {
-                    text: "Tracking link copied!"
-                }
-            }).show();
+            bootbox.prompt("Tracking Link", "Cancel", "Ok", null, "<?php echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
         } else {
             $(".top-right").notify({
                 type: "info",
