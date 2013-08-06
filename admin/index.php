@@ -113,6 +113,9 @@ $(document).ready(function() {
                 if (!$(".modal-header")[0]) {
                     $(".bootbox").prepend("<div class=\"modal-header\"><a href=\"javascript:;\" class=\"close\">&times;</a><h3>Confirm Delete</h3></div>");
                 }
+                if (!$("form")[0]) {
+                    $(".modal-body p").remove();
+                }
             });
             bootbox.confirm("Are you sure you want to delete the selected download?", "No", "Yes", function(result) {
                 if (result == true) {
@@ -161,6 +164,11 @@ $(document).ready(function() {
     /* Show tracking Link */
     $("#trackinglink").click(function() {
         if (id_selected == true) {
+            $("body").on("show", ".bootbox", function () {
+                if (!$(".modal-body p")[0]) {
+                    $(".bootbox .modal-body").prepend("<p>Press Ctrl/Cmd C to copy to clipboard");
+                }
+            });
             bootbox.prompt("Tracking Link", "Cancel", "Ok", null, "<?php echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
         } else {
             $(".top-right").notify({
