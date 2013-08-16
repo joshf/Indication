@@ -112,7 +112,7 @@ if (empty($name) || empty($id) || empty($url)) {
 }
 
 //Check if ID exists
-$checkid = mysql_query("SELECT id FROM Data WHERE id = \"$id\"");
+$checkid = mysql_query("SELECT `id` FROM `Data` WHERE `id` = \"$id\"");
 $resultcheckid = mysql_fetch_assoc($checkid); 
 if (mysql_num_rows($checkid) != 0) {
     die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>ID $id already exists.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
@@ -137,7 +137,7 @@ if (isset($_POST["showadsstate"])) {
     $showads = "0";
 }
 
-mysql_query("INSERT INTO Data (name, id, url, count, protect, password, showads)
+mysql_query("INSERT INTO `Data` (`name`, `id`, `url`, `count`, `protect`, `password`, `showads`)
 VALUES (\"$name\",\"$id\",\"$url\",\"$count\",\"$protect\",\"$password\",\"$showads\")");
 
 mysql_close($con);

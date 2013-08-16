@@ -23,7 +23,7 @@ if (isset($_GET["id"])) {
 }
 
 //If ID exists, show count or else die
-$showinfo = mysql_query("SELECT count FROM Data WHERE id = \"$id\"");
+$showinfo = mysql_query("SELECT `count` FROM `Data` WHERE `id` = \"$id\"");
 $showinforesult = mysql_fetch_assoc($showinfo);
 if (mysql_num_rows($showinfo) != 0) {
     echo $showinforesult["count"];

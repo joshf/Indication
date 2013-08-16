@@ -237,7 +237,7 @@ if (!isset($_COOKIE["indicationhascheckedforupdates"])) {
     }
 }
 
-$getdownloads = mysql_query("SELECT * FROM Data");
+$getdownloads = mysql_query("SELECT * FROM `Data`");
 
 echo "<table id=\"downloads\" class=\"table table-striped table-bordered table-condensed\">
 <thead>
@@ -272,11 +272,11 @@ echo "</tbody></table>";
 <div class="well">
 <?php
 
-$getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM Data");
+$getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM `Data`");
 $resultgetnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
 echo "<i class=\"icon-list-alt\"></i> <b>" . $resultgetnumberofdownloads["COUNT(id)"] . "</b> items<br>";
 
-$gettotalnumberofdownloads = mysql_query("SELECT SUM(count) FROM Data");
+$gettotalnumberofdownloads = mysql_query("SELECT SUM(count) FROM `Data`");
 $resultgettotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
 if (is_null($resultgettotalnumberofdownloads["SUM(count)"])) {
     echo "<i class=\"icon-download\"></i> <b>0</b> total downloads";

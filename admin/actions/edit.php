@@ -118,7 +118,7 @@ if (isset($_POST["passwordprotectstate"])) {
     if (!isset($_POST["password"])) {
         die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Password is missing.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
     } 
-    $getprotectinfo = mysql_query("SELECT password FROM Data WHERE id = \"$idtoedit\"");
+    $getprotectinfo = mysql_query("SELECT `password` FROM `Data` WHERE `id` = \"$idtoedit\"");
     $getprotectinforesult = mysql_fetch_assoc($getprotectinfo); 
     $inputtedpassword = mysql_real_escape_string($_POST["password"]);
     if (empty($inputtedpassword)) {
@@ -138,7 +138,7 @@ if (isset($_POST["showadsstate"])) {
     $showads = "0";
 }
 
-mysql_query("UPDATE Data SET name = \"$newname\", id = \"$newid\", url = \"$newurl\", count = \"$newcount\", protect = \"$protect\", password = \"$password\", showads = \"$showads\" WHERE id = \"$idtoedit\"");
+mysql_query("UPDATE `Data` SET `name` = \"$newname\", `id` = \"$newid\", `url` = \"$newurl\", `count` = \"$newcount\", `protect` = \"$protect\", `password` = \"$password\", `showads` = \"$showads\" WHERE `id` = \"$idtoedit\"");
 
 mysql_close($con);
 

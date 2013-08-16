@@ -111,8 +111,8 @@ $(document).ready(function() {
 <?php
 
 if (!isset($_GET["id"])) {
-	$getids = mysql_query("SELECT id, name FROM Data");
-    if (mysql_num_rows($getids) > 0) {
+	$getids = mysql_query("SELECT `id`, `name` FROM `Data`");
+    if (mysql_num_rows($getids) != 0) {
         echo "<form action=\"edit.php\" method=\"get\"><fieldset><div class=\"control-group\"><label class=\"control-label\" for=\"id\">Select a download to edit</label><div class=\"controls\"><select id=\"id\" name=\"id\">";
         while($row = mysql_fetch_assoc($getids)) {
             echo "<option value=\"" . $row["id"] . "\">" . ucfirst($row["name"]) . "</option>";
@@ -129,7 +129,7 @@ if (!isset($_GET["id"])) {
 $idtoedit = mysql_real_escape_string($_GET["id"]);
 
 //Check if ID exists
-$doesidexist = mysql_query("SELECT id FROM Data WHERE id = \"$idtoedit\"");
+$doesidexist = mysql_query("SELECT `id` FROM `Data` WHERE `id` = \"$idtoedit\"");
 if (mysql_num_rows($doesidexist) == 0) {
     die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>ID does not exist.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
 }
@@ -139,7 +139,7 @@ if (mysql_num_rows($doesidexist) == 0) {
 <fieldset>
 <?php
 
-$getidinfo = mysql_query("SELECT * FROM Data WHERE id = \"$idtoedit\"");
+$getidinfo = mysql_query("SELECT * FROM `Data` WHERE `id` = \"$idtoedit\"");
 $getidinforesult = mysql_fetch_assoc($getidinfo);
     
 echo "<div class=\"control-group\"><label class=\"control-label\" for=\"downloadname\">Name</label><div class=\"controls\"><input type=\"text\" id=\"downloadname\" name=\"downloadname\" value=\"" . $getidinforesult["name"] . "\" placeholder=\"Type a name...\" pattern=\"([0-9A-Za-z-\\.@:%_\+~#=\s]+)\" required></div></div>";
@@ -150,7 +150,7 @@ echo "<div class=\"control-group\"><label class=\"control-label\" for=\"count\">
 echo "<div class=\"control-group\"><div class=\"controls\"><label class=\"checkbox\">";
     
 //Check if we should show ads
-$checkifadsshow = mysql_query("SELECT showads FROM Data WHERE id = \"$idtoedit\"");
+$checkifadsshow = mysql_query("SELECT `showads` FROM `Data` WHERE `id` = \"$idtoedit\"");
 $checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
 if ($checkifadsshowresult["showads"] == "1") { 
     echo "<input type=\"checkbox\" id=\"showadsstate\" name=\"showadsstate\" checked=\"checked\"> Show ads";
@@ -161,7 +161,7 @@ if ($checkifadsshowresult["showads"] == "1") {
 echo "</label></div></div><div class=\"control-group\"><div class=\"controls\"><label class=\"checkbox\">";
     
 //Check if download is protected
-$checkifprotected = mysql_query("SELECT protect FROM Data WHERE id = \"$idtoedit\"");
+$checkifprotected = mysql_query("SELECT `protect` FROM `Data` WHERE `id` = \"$idtoedit\"");
 $checkifprotectedresult = mysql_fetch_assoc($checkifprotected); 
 if ($checkifprotectedresult["protect"] == "1") { 
     echo "<input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\" checked=\"checked\"> Enable password protection";
