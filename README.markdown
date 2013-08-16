@@ -18,6 +18,7 @@ Features:
 * Sort and search downloads using DataTables
 * Works well on mobile devices due to a responsive layout
 * Ignore counts when admin is logged in
+* Beautiful notifications system via Bootstrap Notify
 
 Screenshots:
 ------------
