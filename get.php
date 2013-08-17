@@ -98,7 +98,7 @@ if (IGNORE_ADMIN_STATE == "Enabled" && isset($_SESSION["indication_user"])) {
     if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
         if (!isset($_COOKIE["indicationhasdownloaded_$idclean"])) {
             mysql_query("UPDATE `Data` SET `count` = `count`+1 WHERE `id` = \"$id\"");
-            setcookie("indicationhasdownloaded_$idclean", "True", time()+3600*COUNT_UNIQUE_ONLY_TIME);
+            setcookie("indicationhasdownloaded_$idclean", time(), time()+3600*COUNT_UNIQUE_ONLY_TIME);
         }
     } else {
         mysql_query("UPDATE `Data` SET `count` = `count`+1 WHERE `id` = \"$id\"");
