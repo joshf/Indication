@@ -125,7 +125,8 @@ if (isset($_POST["passwordprotectstate"])) {
     if (empty($inputtedpassword)) {
         die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Password is missing.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
     }
-    $password = sha1($inputtedpassword);
+    $hashedpassword = hash("sha256", $inputtedpassword);
+    $password = hash("sha256", SALT . $hashedpassword);
 } else {
     $protect = "0";
     $password = "";

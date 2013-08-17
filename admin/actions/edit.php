@@ -124,7 +124,8 @@ if (isset($_POST["passwordprotectstate"])) {
     if (empty($inputtedpassword)) {
         $password = $getprotectinforesult["password"];
     } else {
-        $password = sha1($inputtedpassword);
+        $hashedpassword = hash("sha256", $inputtedpassword);
+        $password = hash("sha256", SALT . $hashedpassword);
     }
     $protect = "1";
 } else {

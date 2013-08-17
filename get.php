@@ -128,7 +128,7 @@ if ($checkifprotectedresult["protect"] != "1" && $checkifadsshowresult["showads"
 }
 
 if (isset($_POST["password"])) {
-    if (sha1($_POST["password"]) == $checkifprotectedresult["password"]) {
+    if (hash("sha256", SALT . hash("sha256", $_POST["password"])) == $checkifprotectedresult["password"]) {
         $case = "passwordcorrect";
     } else {
         $case = "passwordincorrect";
