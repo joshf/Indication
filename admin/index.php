@@ -56,11 +56,118 @@ body {
     }
 }
 </style>
-<!-- Javascript start -->
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
+</head>
+<body>
+<!-- Nav start -->
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="index.php">Indication</a>
+<div class="nav-collapse collapse">
+<ul class="nav">
+<li class="divider-vertical"></li>
+<li><a href="add.php"><i class="icon-plus-sign"></i> Add</a></li>
+<li><a href="edit.php"><i class="icon-edit"></i> Edit</a></li>
+</ul>
+<ul class="nav pull-right">
+<li class="divider-vertical"></li>
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> <?php echo ADMIN_USER; ?> <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li><a href="settings.php"><i class="icon-cog"></i> Settings</a></li>
+<li><a href="logout.php"><i class="icon-off"></i> Logout</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Nav end -->
+<!-- Content start -->
+<div class="container">
+<div class="page-header">
+<h1>All Downloads</h1>
+</div>
+<div class="notifications top-right"></div>		
+<noscript><div class="alert alert-info"><h4 class="alert-heading">Information</h4><p>Please enable JavaScript to use Indication. For instructions on how to do this, see <a href="http://www.activatejavascript.org" target="_blank">here</a>.</p></div></noscript>
+<?php
+
+//Update checking
+if (!isset($_COOKIE["indicationhascheckedforupdates"])) {
+    $remoteversion = file_get_contents("https://raw.github.com/joshf/Indication/master/version.txt");
+    if (preg_match("/^[0-9.-]{1,}$/", $remoteversion)) {
+        if ($version < $remoteversion) {
+            echo "<div class=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Update</h4><p>Indication <a href=\"https://github.com/joshf/Indication/releases/$remoteversion\" target=\"_blank\">$remoteversion</a> is available. <a href=\"https://github.com/joshf/Indication#updating\" target=\"_blank\">Click here to update</a>.</p></div>";
+        }
+    }
+}
+
+$getdownloads = mysql_query("SELECT * FROM `Data`");
+
+echo "<table id=\"downloads\" class=\"table table-striped table-bordered table-condensed\">
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+<th class=\"hidden-phone\">URL</th>
+<th>Count</th>
+</tr></thead><tbody>";
+
+while($row = mysql_fetch_assoc($getdownloads)) {
+    echo "<tr>";
+    echo "<td><input name=\"id\" type=\"radio\" value=\"" . $row["id"] . "\"></td>";
+    echo "<td>" . $row["name"] . "</td>";
+    echo "<td class=\"hidden-phone\">" . $row["url"] . "</td>";
+    echo "<td>" . $row["count"] . "</td>";
+    echo "</tr>";
+}
+echo "</tbody></table>";
+
+?>
+<div class="btn-group">
+<button id="edit" class="btn">Edit</button>
+<button id="delete" class="btn">Delete</button>
+<button id="trackinglink" class="btn">Copy Tracking Link</button>
+</div>
+<br>
+<br>
+<div class="alert alert-info">   
+<b>Info:</b> To edit, delete or show the tracking link for a download please select the radio button next to it.  
+</div>
+<div class="well">
+<?php
+
+$getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM `Data`");
+$resultgetnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
+echo "<i class=\"icon-list-alt\"></i> <b>" . $resultgetnumberofdownloads["COUNT(id)"] . "</b> items<br>";
+
+$gettotalnumberofdownloads = mysql_query("SELECT SUM(count) FROM `Data`");
+$resultgettotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
+if (is_null($resultgettotalnumberofdownloads["SUM(count)"])) {
+    echo "<i class=\"icon-download\"></i> <b>0</b> total downloads";
+} else {
+    echo "<i class=\"icon-download\"></i> <b>" . $resultgettotalnumberofdownloads["SUM(count)"] . "</b> total downloads";
+}
+
+mysql_close($con);
+
+?>
+</div>
+<hr>
+<p class="muted pull-right">Indication <?php echo $version; ?> &copy; <a href="http://github.com/joshf" target="_blank">Josh Fradley</a> <?php echo date("Y"); ?>. Themed by <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>.</p>
+</div>
+<!-- Content end -->
+<!-- Javascript start -->
 <script src="../resources/jquery.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 <script src="../resources/datatables/jquery.dataTables.min.js"></script>
@@ -174,112 +281,5 @@ $(document).ready(function() {
 });
 </script>
 <!-- Javascript end -->
-</head>
-<body>
-<!-- Nav start -->
-<div class="navbar navbar-fixed-top">
-<div class="navbar-inner">
-<div class="container">
-<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-</a>
-<a class="brand" href="index.php">Indication</a>
-<div class="nav-collapse collapse">
-<ul class="nav">
-<li class="divider-vertical"></li>
-<li><a href="add.php"><i class="icon-plus-sign"></i> Add</a></li>
-<li><a href="edit.php"><i class="icon-edit"></i> Edit</a></li>
-</ul>
-<ul class="nav pull-right">
-<li class="divider-vertical"></li>
-<li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> <?php echo ADMIN_USER; ?> <b class="caret"></b></a>
-<ul class="dropdown-menu">
-<li><a href="settings.php"><i class="icon-cog"></i> Settings</a></li>
-<li><a href="logout.php"><i class="icon-off"></i> Logout</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<!-- Nav end -->
-<!-- Content start -->
-<div class="container">
-<div class="page-header">
-<h1>All Downloads</h1>
-</div>
-<div class="notifications top-right"></div>		
-<noscript><div class="alert alert-info"><h4 class="alert-heading">Information</h4><p>Please enable JavaScript to use Indication. For instructions on how to do this, see <a href="http://www.activatejavascript.org" target="_blank">here</a>.</p></div></noscript>
-<?php
-
-//Update checking
-if (!isset($_COOKIE["indicationhascheckedforupdates"])) {
-    $remoteversion = file_get_contents("https://raw.github.com/joshf/Indication/master/version.txt");
-    if (preg_match("/^[0-9.-]{1,}$/", $remoteversion)) {
-        if ($version < $remoteversion) {
-            echo "<div class=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Update</h4><p>Indication <a href=\"https://github.com/joshf/Indication/releases/$remoteversion\" target=\"_blank\">$remoteversion</a> is available. <a href=\"https://github.com/joshf/Indication#updating\" target=\"_blank\">Click here to update</a>.</p></div>";
-        }
-    }
-}
-
-$getdownloads = mysql_query("SELECT * FROM `Data`");
-
-echo "<table id=\"downloads\" class=\"table table-striped table-bordered table-condensed\">
-<thead>
-<tr>
-<th></th>
-<th>Name</th>
-<th class=\"hidden-phone\">URL</th>
-<th>Count</th>
-</tr></thead><tbody>";
-
-while($row = mysql_fetch_assoc($getdownloads)) {
-    echo "<tr>";
-    echo "<td><input name=\"id\" type=\"radio\" value=\"" . $row["id"] . "\"></td>";
-    echo "<td>" . $row["name"] . "</td>";
-    echo "<td class=\"hidden-phone\">" . $row["url"] . "</td>";
-    echo "<td>" . $row["count"] . "</td>";
-    echo "</tr>";
-}
-echo "</tbody></table>";
-
-?>
-<div class="btn-group">
-<button id="edit" class="btn">Edit</button>
-<button id="delete" class="btn">Delete</button>
-<button id="trackinglink" class="btn">Copy Tracking Link</button>
-</div>
-<br>
-<br>
-<div class="alert alert-info">   
-<b>Info:</b> To edit, delete or show the tracking link for a download please select the radio button next to it.  
-</div>
-<div class="well">
-<?php
-
-$getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM `Data`");
-$resultgetnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
-echo "<i class=\"icon-list-alt\"></i> <b>" . $resultgetnumberofdownloads["COUNT(id)"] . "</b> items<br>";
-
-$gettotalnumberofdownloads = mysql_query("SELECT SUM(count) FROM `Data`");
-$resultgettotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
-if (is_null($resultgettotalnumberofdownloads["SUM(count)"])) {
-    echo "<i class=\"icon-download\"></i> <b>0</b> total downloads";
-} else {
-    echo "<i class=\"icon-download\"></i> <b>" . $resultgettotalnumberofdownloads["SUM(count)"] . "</b> total downloads";
-}
-
-mysql_close($con);
-
-?>
-</div>
-<hr>
-<p class="muted pull-right">Indication <?php echo $version; ?> &copy; <a href="http://github.com/joshf" target="_blank">Josh Fradley</a> <?php echo date("Y"); ?>. Themed by <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>.</p>
-</div>
-<!-- Content end -->
 </body>
 </html>

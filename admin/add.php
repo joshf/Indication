@@ -39,29 +39,10 @@ body {
     }
 }
 </style>
-<!-- Javascript start -->
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-<script src="../resources/jquery.min.js"></script>
-<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
-<script src="../resources/validation/jqBootstrapValidation.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    $("#passwordprotectstate").click(function() {
-        if ($("#passwordprotectstate").prop("checked") == true) {
-            $("#password").prop("required", true);
-            $("#passwordentry").show("fast");
-        } else {
-            $("#passwordentry").hide("fast");
-            $("#password").prop("required", false);
-        }
-    });
-    $("input").not("[type=submit]").jqBootstrapValidation();
-});
-</script>
-<!-- Javascript end -->
 </head>
 <body>
 <!-- Nav start -->
@@ -156,5 +137,24 @@ $(document).ready(function() {
 </form>
 </div>
 <!-- Content end -->
+<!-- Javascript start -->
+<script src="../resources/jquery.min.js"></script>
+<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="../resources/validation/jqBootstrapValidation.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#passwordprotectstate").click(function() {
+        if ($("#passwordprotectstate").prop("checked") == true) {
+            $("#password").prop("required", true);
+            $("#passwordentry").show("fast");
+        } else {
+            $("#passwordentry").hide("fast");
+            $("#password").prop("required", false);
+        }
+    });
+    $("input").not("[type=submit]").jqBootstrapValidation();
+});
+</script>
+<!-- Javascript end -->
 </body>
 </html>

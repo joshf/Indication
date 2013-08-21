@@ -18,6 +18,22 @@ if (!$con) {
 
 mysql_select_db(DB_NAME, $con);
 
+//Get the ID from $_GET OR $_POST
+if (isset($_GET["id"])) {
+    $id = mysql_real_escape_string($_GET["id"]);
+} elseif (isset($_POST["id"])) {
+    $id = mysql_real_escape_string($_POST["id"]);
+} else {
+    die("Error: ID cannot be blank.");
+}
+
+//Check if ID exists
+$getinfo = mysql_query("SELECT `name`, `url`, `count` FROM `Data` WHERE `id` = \"$id\"");
+$getinforesult = mysql_fetch_assoc($getinfo);
+if (mysql_num_rows($getinfo) == 0) {
+    die("Error: ID does not exist.");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,14 +60,10 @@ body {
     }
 }
 </style>
-<!-- Javascript start -->
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-<script src="resources/jquery.min.js"></script>
-<script src="resources/bootstrap/js/bootstrap.min.js"></script>
-<!-- Javascript end -->
 </head>
 <body>
 <!-- Nav start -->
@@ -69,22 +81,6 @@ body {
 <h1><?php echo WEBSITE; ?></h1>
 </div>		
 <?php
-
-//Get the ID from $_GET OR $_POST
-if (isset($_GET["id"])) {
-    $id = mysql_real_escape_string($_GET["id"]);
-} elseif (isset($_POST["id"])) {
-    $id = mysql_real_escape_string($_POST["id"]);
-} else {
-    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>ID cannot be blank.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
-}
-
-//Check if ID exists
-$getinfo = mysql_query("SELECT `name`, `url`, `count` FROM `Data` WHERE `id` = \"$id\"");
-$getinforesult = mysql_fetch_assoc($getinfo);
-if (mysql_num_rows($getinfo) == 0) {
-    die("<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>ID does not exist.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div></div></body></html>");
-}
 
 //Cookies don't like dots
 $idclean = str_replace(".", "_", $id);
@@ -167,5 +163,9 @@ mysql_close($con);
 ?>
 </div>
 <!-- Content end -->
+<!-- Javascript start -->
+<script src="resources/jquery.min.js"></script>
+<script src="resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Javascript end -->
 </body>
 </html>
