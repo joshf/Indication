@@ -91,6 +91,16 @@ body {
 </div>
 <?php
 
+//Error display
+if (isset($_GET["error"])) {
+    $error = $_GET["error"];
+    if ($error == "emptyfields") {
+        echo "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Error</h4><p>One or more fields were left empty.</p></div>";
+    } elseif ($error == "emptypassword") {
+        echo "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Error</h4><p>Empty password.</p></div>";
+    }
+}
+
 if (!isset($_GET["id"])) {
 	$getids = mysql_query("SELECT `id`, `name` FROM `Data`");
     if (mysql_num_rows($getids) != 0) {

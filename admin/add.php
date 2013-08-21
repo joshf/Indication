@@ -81,6 +81,21 @@ body {
 <div class="page-header">
 <h1>Add</h1>
 </div>
+<?php
+
+//Error display
+if (isset($_GET["error"])) {
+    $error = $_GET["error"];
+    if ($error == "emptyfields") {
+        echo "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Error</h4><p>One or more fields were left empty.</p></div>";
+    } elseif ($error == "idexists") {
+        echo "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Error</h4><p>ID already exists.</p></div>";
+    } elseif ($error == "emptypassword") {
+        echo "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Error</h4><p>Empty password.</p></div>";
+    }
+}
+
+?>
 <form action="actions/add.php" method="post" autocomplete="off">
 <fieldset>
 <div class="control-group">
