@@ -99,9 +99,9 @@ if (isset($_GET["error"])) {
 <form action="actions/add.php" method="post" autocomplete="off">
 <fieldset>
 <div class="control-group">
-<label class="control-label" for="downloadname">Name</label>
+<label class="control-label" for="name">Name</label>
 <div class="controls">
-<input type="text" id="downloadname" name="downloadname" placeholder="Type a name..." pattern="([0-9A-Za-z-\\.@:%_\+~#=\s]+)" required>
+<input type="text" id="name" name="name" placeholder="Type a name..." pattern="([0-9A-Za-z-\\.@:%_\+~#=\s]+)" required>
 </div>
 </div>
 <div class="control-group">

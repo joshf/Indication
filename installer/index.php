@@ -62,7 +62,6 @@ if (isset($_POST["install"])) {
 	fclose($configfile);
 
 	mysql_close($con);
-
 }
 
 //Get path to script
