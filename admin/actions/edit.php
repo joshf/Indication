@@ -37,14 +37,14 @@ $newcount = mysql_real_escape_string($_POST["count"]);
 
 //Failsafes
 if (empty($newname) || empty($newid) || empty($newurl)) {
-    header("Location: ../add.php?error=emptyfields");
+    header("Location: ../edit.php?id=$idtoedit&error=emptyfields");
     exit;
 }
 
 //Make sure a password is set if the checkbox was enabled
 if (isset($_POST["passwordprotectstate"])) {
     if (!isset($_POST["password"])) {
-        header("Location: ../add.php?error=emptypassword");
+        header("Location: ../edit.php?id=$idtoedit&error=emptypassword");
         exit;
     } 
     $getprotectinfo = mysql_query("SELECT `password` FROM `Data` WHERE `id` = \"$idtoedit\"");
