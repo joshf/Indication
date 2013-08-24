@@ -21,7 +21,7 @@ if (!$does_db_exist) {
 }
 
 //Define Version
-$version = "4.4";
+$version = "4.5dev";
 
 if ($version == VERSION) {
     die("Information: The latest version of Burden is already installed and an upgrade is not required.");
@@ -74,18 +74,8 @@ $dbuser = DB_USER;
 $dbpassword = DB_PASSWORD;
 $dbname = DB_NAME;
 $adminuser = ADMIN_USER;
-
-//$adminpassword = ADMIN_PASSWORD;
-//$salt = SALT;
-
-//Salt and hash passwords
-//From 4.3.1 --> 4.4
-$temppassword = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz123456789"), 0, 6);
-$randsalt = md5(uniqid(rand(), true));
-$salt = substr($randsalt, 0, 3);
-$hashedpassword = hash("sha256", $temppassword);
-$adminpassword = hash("sha256", $salt . $hashedpassword);
-
+$adminpassword = ADMIN_PASSWORD;
+$salt = SALT;
 $website = WEBSITE;
 $pathtoscript = PATH_TO_SCRIPT;
 $adcode = AD_CODE;
@@ -129,7 +119,7 @@ mysql_close($con);
 ?>
 <div class="alert alert-success">
 <h4 class="alert-heading">Upgrade Complete</h4>
-<p>Indication has been successfully upgraded. Because Indication <?php echo $version; ?> uses salt password hashing, your password is now <b><?php echo $temppassword; ?></b>. Please change it to something more memorable as soon as possible using the settings page.<p><a href="../admin/login.php" class="btn btn-success">Go To Login</a></p>
+<p>Indication has been successfully upgraded to version <?php echo $version; ?>.<p><a href="../login.php" class="btn btn-success">Go To Login</a></p>
 </div>
 </div>
 <!-- Content end -->

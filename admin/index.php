@@ -2,7 +2,7 @@
 
 //Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
-$version = "4.4";
+$version = "4.5dev";
 
 if (!file_exists("../config.php")) {
 	die("Error: Config file not found! Please reinstall Indication.");
