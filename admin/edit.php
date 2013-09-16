@@ -135,7 +135,7 @@ $getidinforesult = mysql_fetch_assoc($getidinfo);
     
 echo "<div class=\"control-group\"><label class=\"control-label\" for=\"name\">Name</label><div class=\"controls\"><input type=\"text\" id=\"name\" name=\"name\" value=\"" . $getidinforesult["name"] . "\" placeholder=\"Type a name...\" pattern=\"([0-9A-Za-z-\\.@:%_\+~#=\s]+)\" required></div></div>";
 echo "<div class=\"control-group\"><label class=\"control-label\" for=\"id\">ID</label><div class=\"controls\"><input type=\"text\" id=\"id\" name=\"id\" value=\"" . $getidinforesult["id"] . "\" placeholder=\"Type an ID...\" pattern=\"([0-9A-Za-z-\\.@:%_\+~#=]+)\" required></div></div>";
-echo "<div class=\"control-group\"><label class=\"control-label\" for=\"url\">URL</label><div class=\"controls\"><input type=\"text\" id=\"url\" name=\"url\" value=\"" . $getidinforesult["url"] . "\" placeholder=\"Type a URL...\" pattern=\"(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.?~-]*)*\/?\" required></div></div>";
+echo "<div class=\"control-group\"><label class=\"control-label\" for=\"url\">URL</label><div class=\"controls\"><input type=\"text\" id=\"url\" name=\"url\" value=\"" . $getidinforesult["url"] . "\" placeholder=\"Type a URL...\" pattern=\"(http|ftp|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?\" required></div></div>";
 echo "<div class=\"control-group\"><label class=\"control-label\" for=\"count\">Count</label><div class=\"controls\"><input type=\"number\" id=\"count\" name=\"count\" value=\"" . $getidinforesult["count"] . "\" placeholder=\"Type a count...\" min=\"0\" required></div></div>";
 
 echo "<div class=\"control-group\"><div class=\"controls\"><label class=\"checkbox\">";

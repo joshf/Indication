@@ -113,7 +113,7 @@ if (isset($_GET["error"])) {
 <div class="control-group">
 <label class="control-label" for="url">URL</label>
 <div class="controls">
-<input type="text" id="url" name="url" placeholder="Type a URL..." pattern="(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.?~-]*)*\/?" required>
+<input type="text" id="url" name="url" placeholder="Type a URL..." pattern="(http|ftp|https)://[a-z0-9\-_]+(\.[a-z0-9\-_]+)+([a-z0-9\-\.,@\?^=%&;:/~\+#]*[a-z0-9\-@\?^=%&;/~\+#])?" required>
 </div>
 </div>
 <div class="control-group">
