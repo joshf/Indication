@@ -24,7 +24,7 @@ if (!$does_db_exist) {
 $version = "4.5dev";
 
 if ($version == VERSION) {
-    die("Information: The latest version of Burden is already installed and an upgrade is not required.");
+    die("Information: The latest version of Indication is already installed and an upgrade is not required.");
 }
 
 ?>
