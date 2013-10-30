@@ -10,7 +10,7 @@ require_once("../config.php");
 
 session_start();
 
-unset($_SESSION["indication_user"]);
+session_unset("indication_user");
 
 if (isset($_COOKIE["indication_user_rememberme"])) {
 	setcookie("indication_user_rememberme", "", time()-86400);

@@ -3,7 +3,7 @@
 //Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
 if (!file_exists("../config.php")) {
-	die("Error: Config file not found! Please reinstall Indication.");
+    die("Error: Config file not found! Please reinstall Indication.");
 }
 
 require_once("../config.php");
@@ -14,6 +14,22 @@ if (!isset($_SESSION["indication_user"])) {
     exit; 
 }
 
+//Connect to database
+@$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+if (!$con) {
+	die("Error: Could not connect to database (" . mysql_error() . "). Check your database settings are correct.");
+}
+
+mysql_select_db(DB_NAME, $con);
+
+$getusersettings = mysql_query("SELECT `user`, `theme` FROM `Users` WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
+if (mysql_num_rows($getusersettings) == 0) {
+    session_destroy();
+    header("Location: login.php");
+    exit;
+}
+$resultgetusersettings = mysql_fetch_assoc($getusersettings);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,10 +38,10 @@ if (!isset($_SESSION["indication_user"])) {
 <title>Indication &middot; Add</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php
-if (THEME == "default") {
+if ($resultgetusersettings["theme"] == "default") {
     echo "<link href=\"../resources/bootstrap/css/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";  
 } else {
-    echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.3.2/" . THEME . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
+    echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.3.2/" . $resultgetusersettings["theme"] . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
 }
 ?>
 <link href="../resources/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
@@ -65,7 +81,7 @@ body {
 <ul class="nav pull-right">
 <li class="divider-vertical"></li>
 <li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo ADMIN_USER; ?> <b class="caret"></b></a>
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $resultgetusersettings["user"]; ?> <b class="caret"></b></a>
 <ul class="dropdown-menu">
 <li><a href="settings.php">Settings</a></li>
 <li><a href="logout.php">Logout</a></li>

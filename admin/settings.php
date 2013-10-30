@@ -3,7 +3,7 @@
 //Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
 if (!file_exists("../config.php")) {
-	die("Error: Config file not found! Please reinstall Indication.");
+    die("Error: Config file not found! Please reinstall Indication.");
 }
 
 require_once("../config.php");
@@ -12,26 +12,45 @@ session_start();
 if (!isset($_SESSION["indication_user"])) {
     header("Location: login.php");
     exit; 
+} 
+
+//Connect to database
+@$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+if (!$con) {
+    die("Error: Could not connect to database (" . mysql_error() . "). Check your database settings are correct.");
 }
 
+mysql_select_db(DB_NAME, $con);
+
+$getusersettings = mysql_query("SELECT `user`, `password`, `email`, `salt`, `theme` FROM `Users` WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
+if (mysql_num_rows($getusersettings) == 0) {
+    session_destroy();
+    header("Location: login.php");
+    exit;
+}
+$resultgetusersettings = mysql_fetch_assoc($getusersettings);
+
 //Get current settings
-$currentadminuser = ADMIN_USER;
-$currentadminpassword = ADMIN_PASSWORD;
 $currentwebsite = WEBSITE;
 $currentpathtoscript = PATH_TO_SCRIPT;
 $currentadcode = htmlspecialchars_decode(AD_CODE);
 $currentcountuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
 $currentcountuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
 $currentignoreadminstate = IGNORE_ADMIN_STATE; 
-$currenttheme = THEME; 
 
 if (isset($_POST["save"])) {
     //Get new settings from POST
-    $adminuser = $_POST["adminuser"];
-    $adminpassword = $_POST["adminpassword"];
-    if ($adminpassword != $currentadminpassword) {
-        $hashedpassword = hash("sha256", $adminpassword);
-        $adminpassword = hash("sha256", SALT . $hashedpassword);
+    //Get new settings from POST
+    $user = $_POST["user"];
+    $password = $_POST["password"];
+    $email = $_POST["email"];
+    $salt = $resultgetusersettings["salt"];
+    if ($password != $resultgetusersettings["password"]) {
+        //Salt and hash passwords
+        $randsalt = md5(uniqid(rand(), true));
+        $salt = substr($randsalt, 0, 3);
+        $hashedpassword = hash("sha256", $password);
+        $password = hash("sha256", $salt . $hashedpassword);
     }
     $website = $_POST["website"];
     $pathtoscript = $_POST["pathtoscript"];
@@ -52,8 +71,11 @@ if (isset($_POST["save"])) {
         $adcode = $currentadcode;
     }
 
-    $settingsstring = "<?php\n\n//Database Settings\ndefine('DB_HOST', '" . DB_HOST . "');\ndefine('DB_USER', '" . DB_USER . "');\ndefine('DB_PASSWORD', '" . DB_PASSWORD . "');\ndefine('DB_NAME', '" . DB_NAME . "');\n\n//Admin Details\ndefine('ADMIN_USER', " . var_export($adminuser, true) . ");\ndefine('ADMIN_PASSWORD', " . var_export($adminpassword, true) . ");\ndefine('SALT', '" . SALT . "');\n\n//Other Settings\ndefine('WEBSITE', " . var_export($website, true) . ");\ndefine('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");\ndefine('AD_CODE', " . var_export($adcode, true) . ");\ndefine('COUNT_UNIQUE_ONLY_STATE', " . var_export($countuniqueonlystate, true) . ");\ndefine('COUNT_UNIQUE_ONLY_TIME', " . var_export($countuniqueonlytime, true) . ");\ndefine('IGNORE_ADMIN_STATE', " . var_export($ignoreadminstate, true) . ");\ndefine('THEME', " . var_export($theme, true) . ");\ndefine('VERSION', '" . VERSION . "');\n\n?>";
+    $settingsstring = "<?php\n\n//Database Settings\ndefine('DB_HOST', '" . DB_HOST . "');\ndefine('DB_USER', '" . DB_USER . "');\ndefine('DB_PASSWORD', '" . DB_PASSWORD . "');\ndefine('DB_NAME', '" . DB_NAME . "');\n\n//Other Settings\ndefine('WEBSITE', " . var_export($website, true) . ");\ndefine('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");\ndefine('AD_CODE', " . var_export($adcode, true) . ");\ndefine('COUNT_UNIQUE_ONLY_STATE', " . var_export($countuniqueonlystate, true) . ");\ndefine('COUNT_UNIQUE_ONLY_TIME', " . var_export($countuniqueonlytime, true) . ");\ndefine('IGNORE_ADMIN_STATE', " . var_export($ignoreadminstate, true) . ");\ndefine('VERSION', '" . VERSION . "');\n\n?>";
 
+    //Update Settings
+    mysql_query("UPDATE Users SET `user` = \"$user\", `password` = \"$password\", `email` = \"$email\", `salt` = \"$salt\", `theme` = \"$theme\" WHERE `user` = \"" . $resultgetusersettings["user"] . "\"");
+    
     //Write config
     $configfile = fopen("../config.php", "w");
     fwrite($configfile, $settingsstring);
@@ -72,10 +94,10 @@ if (isset($_POST["save"])) {
 <title>Indication &middot; Settings</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php
-if (THEME == "default") {
+if ($resultgetusersettings["theme"] == "default") {
     echo "<link href=\"../resources/bootstrap/css/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";  
 } else {
-    echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.3.2/" . THEME . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
+    echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.3.2/" . $resultgetusersettings["theme"] . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
 }
 ?>
 <link href="../resources/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
@@ -116,7 +138,7 @@ body {
 <ul class="nav pull-right">
 <li class="divider-vertical"></li>
 <li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo ADMIN_USER; ?> <b class="caret"></b></a>
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $resultgetusersettings["user"]; ?> <b class="caret"></b></a>
 <ul class="dropdown-menu">
 <li><a href="settings.php">Settings</a></li>
 <li><a href="logout.php">Logout</a></li>
@@ -136,17 +158,23 @@ body {
 <div class="notifications top-right"></div>
 <form method="post" autocomplete="off">
 <fieldset>
-<h4>Admin Details</h4>
+<h4>User Details</h4>
 <div class="control-group">
-<label class="control-label" for="adminuser">Admin User</label>
+<label class="control-label" for="user">User</label>
 <div class="controls">
-<input type="text" id="adminuser" name="adminuser" value="<?php echo $currentadminuser; ?>" placeholder="Enter a username..." required>
+<input type="text" id="user" name="user" value="<?php echo $resultgetusersettings["user"]; ?>" placeholder="Enter a username..." required>
 </div>
 </div>
 <div class="control-group">
-<label class="control-label" for="adminpassword">Admin Password</label>
+<label class="control-label" for="email">Email</label>
 <div class="controls">
-<input type="password" id="adminpassword" name="adminpassword" value="<?php echo $currentadminpassword; ?>" placeholder="Enter a password..." required>
+<input type="email" id="email" name="email" value="<?php echo $resultgetusersettings["email"]; ?>" placeholder="Type an email..." required>
+</div>
+</div>
+<div class="control-group">
+<label class="control-label" for="password">Password</label>
+<div class="controls">
+<input type="password" id="password" name="password" value="<?php echo $resultgetusersettings["password"]; ?>" placeholder="Enter a password..." required>
 </div>
 </div>
 <h4>Site Settings</h4>
@@ -215,7 +243,7 @@ $themes = array("default", "amelia", "cerulean", "cosmo", "cyborg", "flatly", "j
 
 echo "<select id=\"theme\" name=\"theme\">";
 foreach ($themes as $value) {
-    if ($value == $currenttheme) {
+    if ($value == $resultgetusersettings["theme"]) {
         echo "<option value=\"$value\" selected=\"selected\">". ucfirst($value) . "</option>";
     } else {
         echo "<option value=\"$value\">". ucfirst($value) . "</option>";
