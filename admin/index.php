@@ -185,6 +185,23 @@ mysql_close($con);
 <script src="../resources/bootbox/bootbox.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+    /* Set Up Notifications */
+    var show_notification = function(type, icon, text, reload) {
+        $(".top-right").notify({
+            type: type,
+            transition: "fade",
+            icon: icon,
+            message: {
+                text: text
+            },
+            onClosed: function() {
+                if (reload == true) {
+                    window.location.reload();
+                }
+            }
+        }).show();
+    };
+    /* End */
     /* Table selection */
     id_selected = false;
     $("#downloads input[name=id]").click(function() {
@@ -211,14 +228,7 @@ $(document).ready(function() {
         if (id_selected == true) {
             window.location = "edit.php?id="+ id +"";
         } else {
-            $(".top-right").notify({
-                type: "info",
-                transition: "fade",
-                icon: "info-sign",
-                message: {
-                    text: "No ID selected!"
-                }
-            }).show();
+            show_notification("info", "info-sign", "No ID selected!");
         }
     });
     /* End */
@@ -232,40 +242,16 @@ $(document).ready(function() {
                         url: "actions/worker.php",
                         data: "action=delete&id="+ id +"",
                         error: function() {
-                            $(".top-right").notify({
-                                type: "error",
-                                transition: "fade",
-                                icon: "warning-sign",
-                                message: {
-                                    text: "Ajax query failed!"
-                                }
-                            }).show();
+                            show_notification("error", "warning-sign", "Ajax query failed!");
                         },
                         success: function() {
-                            $(".top-right").notify({
-                                type: "success",
-                                transition: "fade",
-                                icon: "ok",
-                                message: {
-                                    text: "Download deleted!"
-                                },
-                                onClosed: function() {
-                                    window.location.reload();
-                                }
-                            }).show();
+                            show_notification("success", "ok", "Download deleted!", true);
                         }
                     });
                 }
             });
         } else {
-            $(".top-right").notify({
-                type: "info",
-                transition: "fade",
-                icon: "info-sign",
-                message: {
-                    text: "No ID selected!"
-                }
-            }).show();
+            show_notification("info", "info-sign", "No ID selected!");
         }
     });
     /* End */
@@ -276,14 +262,7 @@ $(document).ready(function() {
             /* Select form automatically (For Firefox) */
             $(".input-block-level").select();
         } else {
-            $(".top-right").notify({
-                type: "info",
-                transition: "fade",
-                icon: "info-sign",
-                message: {
-                    text: "No ID selected!"
-                }
-            }).show();
+            show_notification("info", "info-sign", "No ID selected!");
         }
     });
     /* End */
