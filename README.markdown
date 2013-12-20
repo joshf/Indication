@@ -20,6 +20,11 @@ Features:
 * Ignore counts when admin is logged in
 * Beautiful notifications system via Bootstrap Notify
 
+Donations:
+------------
+
+If you like Indication and appreciate my hard work a [donation](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UYWJXFX6M4ADW) (no matter how small) would be appreciated. I code in my spare time and make no money formally from my scripts.
+
 Screenshots:
 ------------
 
