@@ -5,7 +5,7 @@
 require_once("../assets/version.php");
 
 if (!file_exists("../config.php")) {
-    header('Location: ../installer');
+    header("Location: ../installer");
     exit;
 }
 
