@@ -35,8 +35,8 @@ if ($version == VERSION) {
 <title>Indication &middot; Upgrade</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../resources/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-<link href="../resources/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
+<link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="../assets/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 body {
     padding-top: 60px;
@@ -53,7 +53,6 @@ body {
 <![endif]-->
 </head>
 <body>
-<!-- Nav start -->
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
@@ -61,8 +60,6 @@ body {
 </div>
 </div>
 </div>
-<!-- Nav end -->
-<!-- Content start -->
 <div class="container">
 <div class="page-header">
 <h1>Upgrade</h1>
@@ -138,10 +135,7 @@ mysql_close($con);
 <p>Indication has been successfully upgraded to version <?php echo $version; ?>.<p><a href="../admin/login.php" class="btn btn-success">Go To Login</a></p>
 </div>
 </div>
-<!-- Content end -->
-<!-- Javascript start -->
-<script src="../resources/jquery.min.js"></script>
-<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
-<!-- Javascript end -->
+<script src="../assets/jquery.min.js"></script>
+<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

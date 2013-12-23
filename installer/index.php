@@ -99,8 +99,8 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 <title>Indication &middot; Installer</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../resources/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-<link href="../resources/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
+<link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="../assets/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 body {
     padding-top: 60px;
@@ -117,7 +117,6 @@ body {
 <![endif]-->
 </head>
 <body>
-<!-- Nav start -->
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
@@ -125,8 +124,6 @@ body {
 </div>
 </div>
 </div>
-<!-- Nav end -->
-<!-- Content start -->
 <div class="container">
 <div class="page-header">
 <h1>Installer</h1>
@@ -212,16 +209,13 @@ if (!isset($_POST["install"])) {
 }
 ?>
 </div>
-<!-- Content end -->
-<!-- Javascript start -->
-<script src="../resources/jquery.min.js"></script>
-<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
-<script src="../resources/validation/jqBootstrapValidation.min.js"></script>
+<script src="../assets/jquery.min.js"></script>
+<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/validation/jqBootstrapValidation.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("input").not("[type=submit]").jqBootstrapValidation();
 });
 </script>
-<!-- Javascript end -->
 </body>
 </html>
