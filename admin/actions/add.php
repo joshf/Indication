@@ -3,7 +3,8 @@
 //Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
 if (!file_exists("../../config.php")) {
-	die("Error: Config file not found! Please reinstall Indication.");
+    header('Location: ../../installer');
+    exit;
 }
 
 require_once("../../config.php");
