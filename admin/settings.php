@@ -22,7 +22,7 @@ if (!$con) {
 
 mysql_select_db(DB_NAME, $con);
 
-$getusersettings = mysql_query("SELECT `user`, `password`, `email`, `salt`, `theme` FROM `Users` WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
+$getusersettings = mysql_query("SELECT `user`, `password`, `email`, `salt` FROM `Users` WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
 if (mysql_num_rows($getusersettings) == 0) {
     session_destroy();
     header("Location: login.php");
@@ -39,7 +39,6 @@ $currentcountuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
 $currentignoreadminstate = IGNORE_ADMIN_STATE; 
 
 if (isset($_POST["save"])) {
-    //Get new settings from POST
     //Get new settings from POST
     $user = $_POST["user"];
     $password = $_POST["password"];
@@ -64,7 +63,6 @@ if (isset($_POST["save"])) {
     $countuniqueonlystate = $_POST["countuniqueonlystate"];
     $countuniqueonlytime = $_POST["countuniqueonlytime"];
     $ignoreadminstate = $_POST["ignoreadminstate"];
-    $theme = $_POST["theme"];
 
     //Remember previous settings
     if (empty($adcode)) {
@@ -74,7 +72,7 @@ if (isset($_POST["save"])) {
     $settingsstring = "<?php\n\n//Database Settings\ndefine('DB_HOST', '" . DB_HOST . "');\ndefine('DB_USER', '" . DB_USER . "');\ndefine('DB_PASSWORD', '" . DB_PASSWORD . "');\ndefine('DB_NAME', '" . DB_NAME . "');\n\n//Other Settings\ndefine('WEBSITE', " . var_export($website, true) . ");\ndefine('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");\ndefine('AD_CODE', " . var_export($adcode, true) . ");\ndefine('COUNT_UNIQUE_ONLY_STATE', " . var_export($countuniqueonlystate, true) . ");\ndefine('COUNT_UNIQUE_ONLY_TIME', " . var_export($countuniqueonlytime, true) . ");\ndefine('IGNORE_ADMIN_STATE', " . var_export($ignoreadminstate, true) . ");\ndefine('VERSION', '" . VERSION . "');\n\n?>";
 
     //Update Settings
-    mysql_query("UPDATE Users SET `user` = \"$user\", `password` = \"$password\", `email` = \"$email\", `salt` = \"$salt\", `theme` = \"$theme\" WHERE `user` = \"" . $resultgetusersettings["user"] . "\"");
+    mysql_query("UPDATE Users SET `user` = \"$user\", `password` = \"$password\", `email` = \"$email\", `salt` = \"$salt\" WHERE `user` = \"" . $resultgetusersettings["user"] . "\"");
     
     //Write config
     $configfile = fopen("../config.php", "w");
@@ -93,13 +91,7 @@ if (isset($_POST["save"])) {
 <meta charset="utf-8">
 <title>Indication &middot; Settings</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<?php
-if ($resultgetusersettings["theme"] == "default") {
-    echo "<link href=\"../assets/bootstrap/css/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";  
-} else {
-    echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.3.2/" . $resultgetusersettings["theme"] . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
-}
-?>
+<link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">  
 <link href="../assets/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
 <link href="../assets/bootstrap-notify/css/bootstrap-notify.min.css" type="text/css" rel="stylesheet">
 <style type="text/css">
@@ -233,25 +225,6 @@ if ($currentignoreadminstate == "Enabled" ) {
 }   
 ?> 
 </div>  
-</div>
-<h4>Theme</h4>
-<div class="control-group">
-<label class="control-label" for="theme">Select a theme</label>
-<div class="controls">
-<?php
-$themes = array("default", "amelia", "cerulean", "cosmo", "cyborg", "flatly", "journal", "readable", "simplex", "slate", "spacelab", "spruce", "superhero", "united");
-
-echo "<select id=\"theme\" name=\"theme\">";
-foreach ($themes as $value) {
-    if ($value == $resultgetusersettings["theme"]) {
-        echo "<option value=\"$value\" selected=\"selected\">". ucfirst($value) . "</option>";
-    } else {
-        echo "<option value=\"$value\">". ucfirst($value) . "</option>";
-    }
-}
-echo "</select>";
-?>
-</div>
 </div>
 <div class="form-actions">
 <button type="submit" name="save" class="btn btn-primary">Save Changes</button>

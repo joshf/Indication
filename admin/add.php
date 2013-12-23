@@ -37,13 +37,7 @@ $resultgetusersettings = mysql_fetch_assoc($getusersettings);
 <meta charset="utf-8">
 <title>Indication &middot; Add</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<?php
-if ($resultgetusersettings["theme"] == "default") {
-    echo "<link href=\"../assets/bootstrap/css/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";  
-} else {
-    echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.3.2/" . $resultgetusersettings["theme"] . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
-}
-?>
+<link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">  
 <link href="../assets/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 body {
@@ -61,7 +55,6 @@ body {
 <![endif]-->
 </head>
 <body>
-<!-- Nav start -->
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
@@ -92,8 +85,6 @@ body {
 </div>
 </div>
 </div>
-<!-- Nav end -->
-<!-- Content start -->
 <div class="container">
 <div class="page-header">
 <h1>Add</h1>
@@ -168,8 +159,6 @@ if (isset($_GET["error"])) {
 </fieldset>
 </form>
 </div>
-<!-- Content end -->
-<!-- Javascript start -->
 <script src="../assets/jquery.min.js"></script>
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="../assets/validation/jqBootstrapValidation.min.js"></script>
@@ -187,6 +176,5 @@ $(document).ready(function() {
     $("input").not("[type=submit]").jqBootstrapValidation();
 });
 </script>
-<!-- Javascript end -->
 </body>
 </html>

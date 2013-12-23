@@ -60,7 +60,6 @@ body {
 <![endif]-->
 </head>
 <body>
-<!-- Nav start -->
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
@@ -68,8 +67,6 @@ body {
 </div>
 </div>
 </div>
-<!-- Nav end -->
-<!-- Content start -->
 <div class="container">
 <div class="page-header">
 <h1><?php echo WEBSITE; ?></h1>
@@ -156,10 +153,7 @@ mysql_close($con);
 
 ?>
 </div>
-<!-- Content end -->
-<!-- Javascript start -->
 <script src="assets/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<!-- Javascript end -->
 </body>
 </html>
