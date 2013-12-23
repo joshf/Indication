@@ -68,15 +68,14 @@ if (isset($_POST["install"])) {
     `password` varchar(200) NOT NULL,
     `salt` varchar(3) NOT NULL,
     `email` varchar(100) NOT NULL,
-    `theme` varchar(20) NOT NULL,
     PRIMARY KEY (`id`)
     ) ENGINE=MyISAM;";
     
     mysql_query($createuserstable);
     
     //Add user
-    mysql_query("INSERT INTO Users (user, password, salt, email, theme)
-    VALUES (\"$user\",\"$password\",\"$salt\",\"$email\",\"default\")");
+    mysql_query("INSERT INTO Users (user, password, salt, email)
+    VALUES (\"$user\",\"$password\",\"$salt\",\"$email\")");
 
     //Write Config
     $configfile = fopen("../config.php", "w");

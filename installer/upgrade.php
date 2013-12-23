@@ -79,7 +79,6 @@ $adcode = AD_CODE;
 $countuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
 $countuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
 $ignoreadminstate = IGNORE_ADMIN_STATE;
-$theme = THEME;
 
 //Second salt for password protection
 $randsalt2 = md5(uniqid(rand(), true));
@@ -112,7 +111,6 @@ $createuserstable = "CREATE TABLE `Users` (
 `password` varchar(200) NOT NULL,
 `salt` varchar(3) NOT NULL,
 `email` varchar(100) NOT NULL,
-`theme` varchar(20) NOT NULL,
 PRIMARY KEY (`id`)
 ) ENGINE=MyISAM;";
 
@@ -120,7 +118,7 @@ mysql_query($createuserstable);
 
 //Add admin user
 mysql_query("INSERT INTO Users (user, password, salt, email, theme)
-VALUES (\"$user\",\"$password\",\"$salt\",\"$user@" . $_SERVER["SERVER_NAME"] . "\",\"$theme\")");
+VALUES (\"$user\",\"$password\",\"$salt\",\"$user@" . $_SERVER["SERVER_NAME"] . "\")");
 
 //Write Config
 $configfile = fopen("../config.php", "w");
