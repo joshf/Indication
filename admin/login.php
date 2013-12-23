@@ -61,8 +61,8 @@ if (!isset($_SESSION["indication_user"])) {
 <title>Indication &middot; Login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<link href="../resources/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-<link href="../resources/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
+<link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="../assets/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 body {
     padding-top: 60px;
@@ -134,8 +134,8 @@ if (isset($_GET["login_error"])) {
 </div>
 <!-- Content end -->
 <!-- Javascript start -->
-<script src="../resources/jquery.min.js"></script>
-<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/jquery.min.js"></script>
+<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("#username").focus();

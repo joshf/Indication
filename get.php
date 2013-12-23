@@ -42,8 +42,8 @@ if (mysql_num_rows($getinfo) == 0) {
 <title>Indication</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="resources/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">  
-<link href="resources/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
+<link href="assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">  
+<link href="assets/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 body {
     padding-top: 60px;
@@ -158,8 +158,8 @@ mysql_close($con);
 </div>
 <!-- Content end -->
 <!-- Javascript start -->
-<script src="resources/jquery.min.js"></script>
-<script src="resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <!-- Javascript end -->
 </body>
 </html>

@@ -46,14 +46,14 @@ $resultgetusersettings = mysql_fetch_assoc($getusersettings);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php
 if ($resultgetusersettings["theme"] == "default") {
-    echo "<link href=\"../resources/bootstrap/css/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";  
+    echo "<link href=\"../assets/bootstrap/css/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";  
 } else {
     echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.3.2/" . $resultgetusersettings["theme"] . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
 }
 ?>
-<link href="../resources/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
-<link href="../resources/datatables/jquery.dataTables-bootstrap.min.css" type="text/css" rel="stylesheet">
-<link href="../resources/bootstrap-notify/css/bootstrap-notify.min.css" type="text/css" rel="stylesheet">
+<link href="../assets/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
+<link href="../assets/datatables/jquery.dataTables-bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="../assets/bootstrap-notify/css/bootstrap-notify.min.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 body {
     padding-top: 60px;
@@ -177,12 +177,12 @@ mysql_close($con);
 </div>
 <!-- Content end -->
 <!-- Javascript start -->
-<script src="../resources/jquery.min.js"></script>
-<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
-<script src="../resources/datatables/jquery.dataTables.min.js"></script>
-<script src="../resources/datatables/jquery.dataTables-bootstrap.min.js"></script>
-<script src="../resources/bootstrap-notify/js/bootstrap-notify.min.js"></script>
-<script src="../resources/bootbox/bootbox.min.js"></script>
+<script src="../assets/jquery.min.js"></script>
+<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/datatables/jquery.dataTables.min.js"></script>
+<script src="../assets/datatables/jquery.dataTables-bootstrap.min.js"></script>
+<script src="../assets/bootstrap-notify/js/bootstrap-notify.min.js"></script>
+<script src="../assets/bootbox/bootbox.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     /* Set Up Notifications */
