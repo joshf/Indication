@@ -17,7 +17,7 @@ if (!isset($_SESSION["indication_user"])) {
 }
 
 //Set cookie so we dont constantly check for updates
-setcookie("indicationhascheckedforupdates", "checkedsuccessfully", time()+604800);
+setcookie("indicationupdatecheck", time(), time()+604800);
 
 @$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
@@ -105,14 +105,14 @@ tr td:last-child {
 </div>
 <div class="container">
 <div class="page-header">
-<h1>All Downloads</h1>
+<h1>Downloads for <?php echo WEBSITE; ?></h1>
 </div>
 <div class="notifications top-right"></div>		
 <noscript><div class="alert alert-info"><h4 class="alert-heading">Information</h4><p>Please enable JavaScript to use Indication. For instructions on how to do this, see <a href="http://www.activatejavascript.org" target="_blank">here</a>.</p></div></noscript>
 <?php
 
 //Update checking
-if (!isset($_COOKIE["indicationhascheckedforupdates"])) {
+if (!isset($_COOKIE["indicationupdatecheck"])) {
     $remoteversion = file_get_contents("https://raw.github.com/joshf/Indication/master/version.txt");
     if (preg_match("/^[0-9.-]{1,}$/", $remoteversion)) {
         if ($version < $remoteversion) {
