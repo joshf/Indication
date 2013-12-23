@@ -59,7 +59,7 @@ body {
 }
 /* Slim down the actions column */
 tr td:last-child {
-    width: 94px;
+    width: 84px;
     white-space: nowrap;
 }
 .btn-toolbar {
