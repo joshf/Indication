@@ -84,6 +84,10 @@ $countuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
 $ignoreadminstate = IGNORE_ADMIN_STATE;
 $theme = THEME;
 
+//Second salt for password protection
+$randsalt2 = md5(uniqid(rand(), true));
+$salt2 = substr($randsalt2, 0, 3);
+
 $updatestring = "<?php
 
 //Database Settings
@@ -93,6 +97,7 @@ define('DB_PASSWORD', " . var_export($dbpassword, true) . ");
 define('DB_NAME', " . var_export($dbname, true) . ");
 
 //Other Settings
+define('SALT', " . var_export($salt2, true) . ");
 define('WEBSITE', " . var_export($website, true) . ");
 define('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");
 define('AD_CODE', " . var_export($adcode, true) . ");
