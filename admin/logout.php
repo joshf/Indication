@@ -10,11 +10,7 @@ require_once("../config.php");
 
 session_start();
 
-session_unset("indication_user");
-
-if (isset($_COOKIE["indication_user_rememberme"])) {
-	setcookie("indication_user_rememberme", "", time()-86400);
-}
+unset($_SESSION["indication_user"]);
 
 header("Location: login.php?logged_out=true");
 
