@@ -17,18 +17,6 @@ if (!$con) {
 }
 
 mysql_select_db(DB_NAME, $con);
-    
-//If cookie is set, skip login
-if (isset($_COOKIE["indication_user_rememberme"])) {
-    $id = $_COOKIE["indication_user_rememberme"];
-    $getid = mysql_query("SELECT `id` FROM `Users` WHERE `id` = \"$id\"");
-    if (mysql_num_rows($getid) == 0) {
-        header("Location: logout.php");
-        exit;
-    }
-    $userinforesult = mysql_fetch_assoc($getid); 
-    $_SESSION["indication_user"] = $userinforesult["id"];
-}
 
 if (isset($_POST["password"]) && isset($_POST["username"])) {
     $username = mysql_real_escape_string($_POST["username"]);
@@ -43,9 +31,6 @@ if (isset($_POST["password"]) && isset($_POST["username"])) {
     $hashedpassword = hash("sha256", $salt . hash("sha256", $password));
     if ($hashedpassword == $userinforesult["password"]) {
         $_SESSION["indication_user"] = $userinforesult["id"];
-        if (isset($_POST["rememberme"])) {
-            setcookie("indication_user_rememberme", $userinforesult["id"], time()+1209600);
-        }
     } else {
         header("Location: login.php?login_error=true");
         exit;
@@ -61,7 +46,7 @@ if (!isset($_SESSION["indication_user"])) {
 <title>Indication &middot; Login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">  
 <link href="../assets/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 body {
@@ -97,7 +82,6 @@ body {
 <![endif]-->
 </head>
 <body>
-<!-- Content start -->
 <div class="container">
 <form class="form-signin" method="post">
 <fieldset>
@@ -112,7 +96,7 @@ if (isset($_GET["login_error"])) {
 <div class="control-group">
 <label class="control-label" for="username">Username</label>
 <div class="controls">
-<input type="text" id="username" name="username" class="input-block-level" placeholder="Username...">
+<input type="text" id="username" name="username" class="input-block-level" placeholder="Username..." autofocus>
 </div>
 </div>
 <div class="control-group">
@@ -121,27 +105,12 @@ if (isset($_GET["login_error"])) {
 <input type="password" id="password" name="password" class="input-block-level" placeholder="Password...">
 </div>
 </div>
-<div class="control-group">
-<div class="controls">
-<label class="checkbox">
-<input type="checkbox" id="rememberme" name="rememberme"> Remember Me
-</label>
-</div>
-</div>
 <button type="submit" class="btn pull-right">Login</button>
 </fieldset>
 </form>
 </div>
-<!-- Content end -->
-<!-- Javascript start -->
 <script src="../assets/jquery.min.js"></script>
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    $("#username").focus();
-});
-</script>
-<!-- Javascript end -->
 </body>
 </html>
 <?php
