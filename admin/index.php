@@ -44,13 +44,7 @@ $resultgetusersettings = mysql_fetch_assoc($getusersettings);
 <meta charset="utf-8">
 <title>Indication</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<?php
-if ($resultgetusersettings["theme"] == "default") {
-    echo "<link href=\"../assets/bootstrap/css/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";  
-} else {
-    echo "<link href=\"//netdna.bootstrapcdn.com/bootswatch/2.3.2/" . $resultgetusersettings["theme"] . "/bootstrap.min.css\" type=\"text/css\" rel=\"stylesheet\">\n";
-}
-?>
+<link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">  
 <link href="../assets/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
 <link href="../assets/datatables/jquery.dataTables-bootstrap.min.css" type="text/css" rel="stylesheet">
 <link href="../assets/bootstrap-notify/css/bootstrap-notify.min.css" type="text/css" rel="stylesheet">
@@ -63,6 +57,15 @@ body {
         padding-top: 0;
     }
 }
+/* Slim down the actions column */
+tr td:last-child {
+    width: 94px;
+    white-space: nowrap;
+}
+.btn-toolbar {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
 </style>
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -70,7 +73,6 @@ body {
 <![endif]-->
 </head>
 <body>
-<!-- Nav start -->
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
@@ -101,8 +103,6 @@ body {
 </div>
 </div>
 </div>
-<!-- Nav end -->
-<!-- Content start -->
 <div class="container">
 <div class="page-header">
 <h1>All Downloads</h1>
@@ -123,34 +123,28 @@ if (!isset($_COOKIE["indicationhascheckedforupdates"])) {
 
 $getdownloads = mysql_query("SELECT * FROM `Data`");
 
-echo "<table id=\"downloads\" class=\"table table-striped table-bordered table-condensed\">
+echo "<table id=\"downloads\" class=\"table table-bordered table-hover table-condensed\">
 <thead>
 <tr>
-<th></th>
 <th>Name</th>
 <th class=\"hidden-phone\">URL</th>
 <th>Count</th>
+<th>Actions</th>
 </tr></thead><tbody>";
 
 while($row = mysql_fetch_assoc($getdownloads)) {
     echo "<tr>";
-    echo "<td><input name=\"id\" type=\"radio\" value=\"" . $row["id"] . "\"></td>";
     echo "<td>" . $row["name"] . "</td>";
     echo "<td class=\"hidden-phone\">" . $row["url"] . "</td>";
     echo "<td>" . $row["count"] . "</td>";
+    echo "<td><div class=\"btn-toolbar\" role=\"toolbar\"><div class=\"btn-group\"><a href=\"edit.php?id=" . $row["id"] . "\" class=\"btn btn-default btn-mini\" role=\"button\"><span class=\"icon-edit\"></span></a><button type=\"button\" class=\"trackinglink btn btn-default btn-mini\" data-id=\"" . $row["id"] . "\"><span class=\"icon-share-alt\"></span></button><button type=\"button\" class=\"delete btn btn-default btn-mini\" data-id=\"" . $row["id"] . "\"><span class=\"icon-trash\"></span></button></div></div></td>";
     echo "</tr>";
 }
 echo "</tbody></table>";
 
 ?>
-<div class="btn-group">
-<button id="edit" class="btn">Edit</button>
-<button id="delete" class="btn">Delete</button>
-<button id="trackinglink" class="btn">Copy Tracking Link</button>
-</div>
-<br>
-<br>
-<div class="alert alert-info">   
+<div class="alert alert-info">
+<button type="button" class="close" data-dismiss="alert">&times;</button>   
 <b>Info:</b> To edit, delete or show the tracking link for a download please select the radio button next to it.  
 </div>
 <div class="well">
@@ -175,8 +169,6 @@ mysql_close($con);
 <hr>
 <p class="muted pull-right">Indication <?php echo $version; ?> &copy; <a href="http://github.com/joshf" target="_blank">Josh Fradley</a> <?php echo date("Y"); ?>. Themed by <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>.</p>
 </div>
-<!-- Content end -->
-<!-- Javascript start -->
 <script src="../assets/jquery.min.js"></script>
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="../assets/datatables/jquery.dataTables.min.js"></script>
@@ -202,72 +194,51 @@ $(document).ready(function() {
         }).show();
     };
     /* End */
-    /* Table selection */
-    id_selected = false;
-    $("#downloads input[name=id]").click(function() {
-        id = $("#downloads input[name=id]:checked").val();
-        id_selected = true;
-    });
-    /* End */
     /* Datatables */
     $("#downloads").dataTable({
         "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
         "sPaginationType": "bootstrap",
-        "aoColumnDefs": [{
-            "bSortable": false,
-            "aTargets": [0]
-        }]
+        "aoColumns": [
+            null,
+            null,
+            null,
+            {"bSortable": false}
+        ]
     });
     $.extend($.fn.dataTableExt.oStdClasses, {
         "sSortable": "header",
         "sWrapper": "dataTables_wrapper form-inline"
     });
     /* End */  
-    /* Edit */
-    $("#edit").click(function() {
-        if (id_selected == true) {
-            window.location = "edit.php?id="+ id +"";
-        } else {
-            show_notification("info", "info-sign", "No ID selected!");
-        }
-    });
-    /* End */
     /* Delete */
-    $("#delete").click(function() {
-        if (id_selected == true) {
-            bootbox.confirm("Are you sure you want to delete the selected download?", "No", "Yes", function(result) {
-                if (result == true) {
-                    $.ajax({
-                        type: "POST",
-                        url: "actions/worker.php",
-                        data: "action=delete&id="+ id +"",
-                        error: function() {
-                            show_notification("error", "warning-sign", "Ajax query failed!");
-                        },
-                        success: function() {
-                            show_notification("success", "ok", "Download deleted!", true);
-                        }
-                    });
-                }
-            });
-        } else {
-            show_notification("info", "info-sign", "No ID selected!");
-        }
+    $("table").on("click", ".delete", function() {
+        var id = $(this).data("id");
+        bootbox.confirm("Are you sure you want to delete the selected download?", "No", "Yes", function(result) {
+            if (result == true) {
+                $.ajax({
+                    type: "POST",
+                    url: "actions/worker.php",
+                    data: "action=delete&id="+ id +"",
+                    error: function() {
+                        show_notification("error", "warning-sign", "Ajax query failed!");
+                    },
+                    success: function() {
+                        show_notification("success", "ok", "Download deleted!", true);
+                    }
+                });
+            }
+        });
     });
     /* End */
     /* Show tracking Link */
-    $("#trackinglink").click(function() {
-        if (id_selected == true) {
-            bootbox.prompt("Tracking Link", "Cancel", "Ok", null, "<?php echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
-            /* Select form automatically (For Firefox) */
-            $(".input-block-level").select();
-        } else {
-            show_notification("info", "info-sign", "No ID selected!");
-        }
+    $("table").on("click", ".trackinglink", function() {
+        var id = $(this).data("id");
+        bootbox.prompt("Tracking Link", "Cancel", "Ok", null, "<?php echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
+        /* Select form automatically (For Firefox) */
+        $(".input-block-level").select();
     });
     /* End */
 });
 </script>
-<!-- Javascript end -->
 </body>
 </html>
