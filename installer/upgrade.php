@@ -7,6 +7,8 @@ if (!file_exists("../config.php")) {
     exit;
 }
 
+require_once("../assets/version.php");
+
 require_once("../config.php");
 
 //Check if we can connect
@@ -20,9 +22,6 @@ $does_db_exist = mysql_select_db(DB_NAME, $con);
 if (!$does_db_exist) {
     die("Error: Database does not exist (" . mysql_error() . "). Check your database settings are correct.");
 }
-
-//Define Version
-$version = "4.5dev";
 
 if ($version == VERSION) {
     die("Information: The latest version of Indication is already installed and an upgrade is not required.");
