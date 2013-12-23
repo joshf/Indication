@@ -39,6 +39,7 @@ $resultgetusersettings = mysql_fetch_assoc($getusersettings);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">  
 <link href="../assets/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
+<link href="../assets/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
 <style type="text/css">
 body {
     padding-top: 60px;
@@ -188,6 +189,7 @@ mysql_close($con);
 <script src="../assets/jquery.min.js"></script>
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="../assets/validation/jqBootstrapValidation.min.js"></script>
+<script src="../assets/bootstrap-select/js/bootstrap-select.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
@@ -199,7 +201,10 @@ $(document).ready(function() {
             $("#password").prop("required", false);
         }
     });
-    $("input").not("[type=submit]").jqBootstrapValidation(); 
+    $("input").not("[type=submit]").jqBootstrapValidation();
+    $("select").selectpicker({
+        liveSearch: "true"
+    }); 
 });
 </script>
 </body>
