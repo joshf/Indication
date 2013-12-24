@@ -3,7 +3,7 @@
 //Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
 if (!file_exists("config.php")) {
-    header('Location: installer');
+    header("Location: installer");
     exit;
 }
 

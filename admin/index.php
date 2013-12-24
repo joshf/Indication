@@ -30,7 +30,7 @@ if (!$con) {
     }
 }
 
-$getusersettings = mysql_query("SELECT `user`, `theme` FROM `Users` WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
+$getusersettings = mysql_query("SELECT `user` FROM `Users` WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
 if (mysql_num_rows($getusersettings) == 0) {
     session_destroy();
     header("Location: login.php");
@@ -63,6 +63,7 @@ tr td:last-child {
     width: 84px;
     white-space: nowrap;
 }
+/* Fix weird padding on buttons */
 .btn-toolbar {
     margin-top: 0px;
     margin-bottom: 0px;
