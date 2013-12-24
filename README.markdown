@@ -14,11 +14,10 @@ Features:
 * Supports displaying of ads before user is redirected to download
 * Full admin panel
 * Display download counts to users
-* Themed by Twitter Bootstrap, extra themes available through BootSwatch
 * Sort and search downloads using DataTables
 * Works well on mobile devices due to a responsive layout
 * Ignore counts when admin is logged in
-* Beautiful notifications system via Bootstrap Notify
+* Beautiful notifications system thanks to Bootstrap Notify
 
 Donations:
 ------------
