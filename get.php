@@ -70,7 +70,7 @@ body {
 </div>
 <div class="container">
 <div class="page-header">
-<h1><?php echo WEBSITE; ?></h1>
+<h1><?php echo $getinforesult["name"]; ?></h1>
 </div>		
 <?php
 
@@ -126,10 +126,10 @@ if (isset($_POST["password"])) {
 switch ($case) {
     case "showads":
         $adcode = htmlspecialchars_decode(AD_CODE); 
-        echo "<h3>" . $getinforesult["name"] . " (downloaded " . $getinforesult["count"] . " times)</h3><div class=\"well\">$adcode</div><fieldset><div class=\"form-actions\"><a class=\"btn btn-primary\" href=\"" . $getinforesult["url"] . "\">Get Download</a><a class=\"btn pull-right\" href=\"javascript:history.go(-1)\">Go Back</a></div></fieldset>";
+        echo "<p>$adcode</p><fieldset><div class=\"form-actions\"><a class=\"btn\" href=\"javascript:history.go(-1)\">Go Back</a><a class=\"btn pull-right\" href=\"" . $getinforesult["url"] . "\">Get Download</a></div></fieldset>";
         break;
     case "passwordprotected":
-        echo "<h3>" . $getinforesult["name"] . " (downloaded " . $getinforesult["count"] . " times)</h3><p>This download is password protected, please enter the password you were given</p><form method=\"post\"><fieldset><div class=\"control-group\"><label class=\"control-label\" for=\"password\">Password</label><div class=\"controls\"><input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Password...\"></div></div><div class=\"form-actions\"><button type=\"submit\" class=\"btn btn-primary\">Get Download</button><a class=\"btn pull-right\" href=\"javascript:history.go(-1)\">Go Back</a></div></fieldset></form>";
+        echo "<form method=\"post\"><fieldset><div class=\"control-group\"><label class=\"control-label\" for=\"password\">Password</label><div class=\"controls\"><input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Password...\"></div><div class=\"help-block\">This download is password protected, please enter the password you were given.</div></div><div class=\"form-actions\"><a class=\"btn\" href=\"javascript:history.go(-1)\">Go Back</a><button type=\"submit\" class=\"btn pull-right\">Get Download</button></div></fieldset></form>";
         break;
     case "normal":
         header("Location: " . $getinforesult["url"] . "");
@@ -137,7 +137,7 @@ switch ($case) {
         break;
     case "passwordprotectedandshowads":
         $adcode = htmlspecialchars_decode(AD_CODE); 
-        echo "<h3>" . $getinforesult["name"] . " (downloaded " . $getinforesult["count"] . " times)</h3><div class=\"well\">$adcode</div><p>This download is password protected, please enter the password you were given.</p><form method=\"post\"><fieldset><div class=\"control-group\"><label class=\"control-label\" for=\"password\">Password</label><div class=\"controls\"><input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Password...\"></div></div><div class=\"form-actions\"><button type=\"submit\" class=\"btn btn-primary\">Get Download</button><a class=\"btn pull-right\" href=\"javascript:history.go(-1)\">Go Back</a></div></fieldset></form>";
+        echo "<p>$adcode</p><form method=\"post\"><fieldset><div class=\"control-group\"><label class=\"control-label\" for=\"password\">Password</label><div class=\"controls\"><input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Password...\"></div><div class=\"help-block\">This download is password protected, please enter the password you were given.</div></div><div class=\"form-actions\"><a class=\"btn\" href=\"javascript:history.go(-1)\">Go Back</a><button type=\"submit\" class=\"btn pull-right\">Get Download</button></div></fieldset></form>";
         break;
     case "passwordcorrect":
         header("Location: " . $getinforesult["url"] . "");
