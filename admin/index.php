@@ -62,7 +62,7 @@ a.close.pull-right {
 }
 /* Slim down the actions column */
 tr td:last-child {
-    width: 84px;
+    width: 64px;
     white-space: nowrap;
 }
 </style>
