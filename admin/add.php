@@ -36,44 +36,41 @@ $resultgetusersettings = mysql_fetch_assoc($getusersettings);
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Indication &middot; Add</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">  
-<link href="../assets/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
+<title>Indication &middot; Add</title>
+<link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
 body {
-    padding-top: 60px;
-}
-@media (max-width: 980px) {
-    body {
-        padding-top: 0;
-    }
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 </style>
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
-<div class="navbar-inner">
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
 <div class="container">
-<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+<span class="sr-only">Toggle navigation</span>
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
-</a>
-<a class="brand" href="#">Indication</a>
-<div class="nav-collapse collapse">
-<ul class="nav">
-<li class="divider-vertical"></li>
+</button>
+<a class="navbar-brand" href="#">Indication</a>
+</div>
+<div class="navbar-collapse collapse">
+<ul class="nav navbar-nav">
 <li><a href="index.php">Home</a></li>
 <li class="active"><a href="add.php">Add</a></li>
 <li><a href="edit.php">Edit</a></li>
 </ul>
-<ul class="nav pull-right">
-<li class="divider-vertical"></li>
+<ul class="nav navbar-nav navbar-right">
 <li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $resultgetusersettings["user"]; ?> <b class="caret"></b></a>
 <ul class="dropdown-menu">
@@ -82,7 +79,6 @@ body {
 </ul>
 </li>
 </ul>
-</div>
 </div>
 </div>
 </div>
@@ -96,73 +92,54 @@ body {
 if (isset($_GET["error"])) {
     $error = $_GET["error"];
     if ($error == "emptyfields") {
-        echo "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Error</h4><p>One or more fields were left empty.</p></div>";
+        echo "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><h4 class=\"alert-heading\">Error</h4><p>One or more fields were left empty.</p></div>";
     } elseif ($error == "idexists") {
-        echo "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Error</h4><p>ID already exists.</p></div>";
+        echo "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><h4 class=\"alert-heading\">Error</h4><p>ID already exists.</p></div>";
     } elseif ($error == "emptypassword") {
-        echo "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Error</h4><p>Empty password.</p></div>";
+        echo "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><h4 class=\"alert-heading\">Error</h4><p>Empty password.</p></div>";
     }
 }
 
 ?>
-<form action="actions/add.php" method="post" autocomplete="off">
-<fieldset>
-<div class="control-group">
-<label class="control-label" for="name">Name</label>
-<div class="controls">
-<input type="text" id="name" name="name" placeholder="Type a name..." pattern="([0-9A-Za-z-\\.@:%_\+~#=\s]+)" required>
+<form role="form" action="actions/add.php" method="post" autocomplete="off">
+<div class="form-group">
+<label for="name">Name</label>
+<input type="text" class="form-control" id="name" name="name" placeholder="Type a name..." required>
 </div>
+<div class="form-group">
+<label for="id">ID</label>
+<input type="text" class="form-control" id="id" name="id" placeholder="Type a ID..." required>
 </div>
-<div class="control-group">
-<label class="control-label" for="id">ID</label>
-<div class="controls">
-<input type="text" id="id" name="id" placeholder="Type an ID..." pattern="([0-9A-Za-z-\\.@:%_\+~#=]+)" required>
+<div class="form-group">
+<label for="url">URL</label>
+<input type="text" class="form-control" id="url" name="url" placeholder="Type a URL..." required>
 </div>
+<div class="form-group">
+<label for="count">Count</label>
+<input type="number" class="form-control" id="count" name="count" placeholder="Type an initial count..." min="0">
 </div>
-<div class="control-group">
-<label class="control-label" for="url">URL</label>
-<div class="controls">
-<input type="text" id="url" name="url" placeholder="Type a URL..." pattern="(http|ftp|https)://[a-z0-9\-_]+(\.[a-z0-9\-_]+)+([a-z0-9\-\.,@\?^=%&;:/~\+#]*[a-z0-9\-@\?^=%&;/~\+#])?" required>
-</div>
-</div>
-<div class="control-group">
-<label class="control-label" for="count">Count</label>
-<div class="controls">
-<input type="number" id="count" name="count" placeholder="Type an initial count..." min="0">
-</div>
-</div>
-<div class="control-group">
-<div class="controls">
-<label class="checkbox">
+<div class="checkbox">
+<label>
 <input type="checkbox" id="showadsstate" name="showadsstate"> Show ads
 </label>
 </div>
-</div>
-<div class="control-group">
-<div class="controls">
-<label class="checkbox">
+<div class="checkbox">
+<label>
 <input type="checkbox" id="passwordprotectstate" name="passwordprotectstate"> Enable password protection
 </label>
 </div>
-</div>
 <div id="passwordentry" style="display: none;">
-<div class="control-group">
-<label class="control-label" for="password">Password</label>
-<div class="controls">
-<input type="password" id="password" name="password" placeholder="Type a password...">
-<span class="help-block">It is recommended that your password be at least 6 characters long</span>
+<div class="form-group">
+<label for="password">Password</label>
+<input type="password" class="form-control" id="password" name="password" placeholder="Type a password..." required>
 </div>
 </div>
-</div>
-<div class="form-actions">
-<button type="submit" class="btn btn-primary">Add</button>
-</div>
-</fieldset>
+<button type="submit" class="btn btn-default">Add</button>
 </form>
 </div>
 <script src="../assets/jquery.min.js"></script>
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="../assets/validation/jqBootstrapValidation.min.js"></script>
+<script src="../assets/nod.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("#passwordprotectstate").click(function() {
@@ -174,7 +151,13 @@ $(document).ready(function() {
             $("#password").prop("required", false);
         }
     });
-    $("input").not("[type=submit]").jqBootstrapValidation();
+    var metrics = [
+        ["#name", "presence", "Name cannot be empty"],
+        ["#id", "presence", "ID cannot be empty!"],
+        ["#url", /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/, "Enter a valid URL!"],
+        ["#count", "min-num:1", "Count must be higer than 0"]
+    ];
+    $("form").nod(metrics);
 });
 </script>
 </body>

@@ -43,56 +43,54 @@ $resultgetusersettings = mysql_fetch_assoc($getusersettings);
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Indication</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">  
-<link href="../assets/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
-<link href="../assets/datatables/jquery.dataTables-bootstrap.min.css" type="text/css" rel="stylesheet">
-<link href="../assets/bootstrap-notify/css/bootstrap-notify.min.css" type="text/css" rel="stylesheet">
+<title>Indication</title>
+<link rel="apple-touch-icon" href="../assets/icon.png">
+<link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../assets/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="../assets/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<link href="../assets/bootstrap-notify/css/bootstrap-notify.min.css" rel="stylesheet">
 <style type="text/css">
 body {
-    padding-top: 60px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
-@media (max-width: 980px) {
-    body {
-        padding-top: 0;
-    }
+/* Fix weird notification appearance */
+a.close.pull-right {
+    padding-left: 10px;
 }
 /* Slim down the actions column */
 tr td:last-child {
     width: 84px;
     white-space: nowrap;
 }
-/* Fix weird padding on buttons */
-.btn-toolbar {
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
 </style>
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
-<div class="navbar-inner">
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
 <div class="container">
-<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+<span class="sr-only">Toggle navigation</span>
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
-</a>
-<a class="brand" href="#">Indication</a>
-<div class="nav-collapse collapse">
-<ul class="nav">
-<li class="divider-vertical"></li>
+</button>
+<a class="navbar-brand" href="#">Indication</a>
+</div>
+<div class="navbar-collapse collapse">
+<ul class="nav navbar-nav">
 <li class="active"><a href="index.php">Home</a></li>
 <li><a href="add.php">Add</a></li>
 <li><a href="edit.php">Edit</a></li>
 </ul>
-<ul class="nav pull-right">
-<li class="divider-vertical"></li>
+<ul class="nav navbar-nav navbar-right">
 <li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $resultgetusersettings["user"]; ?> <b class="caret"></b></a>
 <ul class="dropdown-menu">
@@ -104,22 +102,22 @@ tr td:last-child {
 </div>
 </div>
 </div>
-</div>
 <div class="container">
 <div class="page-header">
 <h1>Downloads for <?php echo WEBSITE; ?></h1>
 </div>
-<div class="notifications top-right"></div>		
-<noscript><div class="alert alert-info"><h4 class="alert-heading">Information</h4><p>Please enable JavaScript to use Indication. For instructions on how to do this, see <a href="http://www.activatejavascript.org" target="_blank">here</a>.</p></div></noscript>
+<div class="notifications top-right"></div>	
 <?php
+
+echo "<noscript><div class=\"alert alert-info\"><h4 class=\"alert-heading\">Information</h4><p>Please enable JavaScript to use Indication. For instructions on how to do this, see <a href=\"http://www.activatejavascript.org\" class=\"alert-link\" target=\"_blank\">here</a>.</p></div></noscript>";
 
 //Update checking
 if (!isset($_COOKIE["indicationupdatecheck"])) {
     $remoteversion = file_get_contents("https://raw.github.com/joshf/Indication/master/version.txt");
-    if (version_compare($version, $remoteversion) < 0) {
-        echo "<div class=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><h4 class=\"alert-heading\">Update</h4><p>Indication <a href=\"https://github.com/joshf/Indication/releases/$remoteversion\" target=\"_blank\">$remoteversion</a> is available. <a href=\"https://github.com/joshf/Indication#updating\" target=\"_blank\">Click here to update</a>.</p></div>";
+    if (version_compare($version, $remoteversion) < 0) {            
+        echo "<div class=\"alert alert-warning\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><h4 class=\"alert-heading\">Update</h4><p>Indication <a href=\"https://github.com/joshf/Indication/releases/$remoteversion\" class=\"alert-link\" target=\"_blank\">$remoteversion</a> is available. <a href=\"https://github.com/joshf/Indication#updating\" class=\"alert-link\" target=\"_blank\">Click here for instructions on how to update</a>.</p></div>";
     }
-}
+} 
 
 $getdownloads = mysql_query("SELECT * FROM `Data`");
 
@@ -127,7 +125,7 @@ echo "<table id=\"downloads\" class=\"table table-bordered table-hover table-con
 <thead>
 <tr>
 <th>Name</th>
-<th class=\"hidden-phone\">URL</th>
+<th class=\"hidden-xs\">URL</th>
 <th>Count</th>
 <th>Actions</th>
 </tr></thead><tbody>";
@@ -135,16 +133,16 @@ echo "<table id=\"downloads\" class=\"table table-bordered table-hover table-con
 while($row = mysql_fetch_assoc($getdownloads)) {
     echo "<tr>";
     echo "<td>" . $row["name"] . "</td>";
-    echo "<td class=\"hidden-phone\">" . $row["url"] . "</td>";
+    echo "<td class=\"hidden-xs\">" . $row["url"] . "</td>";
     echo "<td>" . $row["count"] . "</td>";
-    echo "<td><div class=\"btn-toolbar\" role=\"toolbar\"><div class=\"btn-group\"><a href=\"edit.php?id=" . $row["id"] . "\" class=\"btn btn-default btn-mini\" role=\"button\"><span class=\"icon-edit\"></span></a><button type=\"button\" class=\"trackinglink btn btn-default btn-mini\" data-id=\"" . $row["id"] . "\"><span class=\"icon-share-alt\"></span></button><button type=\"button\" class=\"delete btn btn-default btn-mini\" data-id=\"" . $row["id"] . "\"><span class=\"icon-trash\"></span></button></div></div></td>";
+    echo "<td><div class=\"btn-toolbar\" role=\"toolbar\"><div class=\"btn-group\"><a href=\"edit.php?id=" . $row["id"] . "\" class=\"btn btn-default btn-xs\" role=\"button\"><span class=\"glyphicon glyphicon-edit\"></span></a><button type=\"button\" class=\"trackinglink btn btn-default btn-xs\" data-id=\"" . $row["id"] . "\"><span class=\"glyphicon glyphicon-share-alt\"></span></button><button type=\"button\" class=\"delete btn btn-default btn-xs\" data-id=\"" . $row["id"] . "\"><span class=\"glyphicon glyphicon-trash\"></span></button></div></div></td>";
     echo "</tr>";
 }
 echo "</tbody></table>";
 
 ?>
 <div class="alert alert-info">
-<button type="button" class="close" data-dismiss="alert">&times;</button>   
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>   
 <b>Info:</b> To edit, delete or show the tracking link for a download please select the radio button next to it.  
 </div>
 <div class="well">
@@ -152,14 +150,14 @@ echo "</tbody></table>";
 
 $getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM `Data`");
 $resultgetnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
-echo "<i class=\"icon-list-alt\"></i> <b>" . $resultgetnumberofdownloads["COUNT(id)"] . "</b> items<br>";
+echo "<i class=\"glyphicon glyphicon-list-alt\"></i> <b>" . $resultgetnumberofdownloads["COUNT(id)"] . "</b> items<br>";
 
 $gettotalnumberofdownloads = mysql_query("SELECT SUM(count) FROM `Data`");
 $resultgettotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
 if (is_null($resultgettotalnumberofdownloads["SUM(count)"])) {
-    echo "<i class=\"icon-download\"></i> <b>0</b> total downloads";
+    echo "<i class=\"glyphicon glyphicon-download\"></i> <b>0</b> total downloads";
 } else {
-    echo "<i class=\"icon-download\"></i> <b>" . $resultgettotalnumberofdownloads["SUM(count)"] . "</b> total downloads";
+    echo "<i class=\"glyphicon glyphicon-download\"></i> <b>" . $resultgettotalnumberofdownloads["SUM(count)"] . "</b> total downloads";
 }
 
 mysql_close($con);
@@ -167,14 +165,16 @@ mysql_close($con);
 ?>
 </div>
 <hr>
-<p class="muted pull-right">Indication <?php echo $version; ?> &copy; <a href="http://github.com/joshf" target="_blank">Josh Fradley</a> <?php echo date("Y"); ?>. Themed by <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>.</p>
+<div class="footer">
+Indication <?php echo $version; ?> &copy; <a href="http://github.com/joshf" target="_blank">Josh Fradley</a> <?php echo date("Y"); ?>. Themed by <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>.
+</div>
 </div>
 <script src="../assets/jquery.min.js"></script>
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="../assets/datatables/jquery.dataTables.min.js"></script>
-<script src="../assets/datatables/jquery.dataTables-bootstrap.min.js"></script>
+<script src="../assets/datatables/js/jquery.dataTables.min.js"></script>
+<script src="../assets/datatables/js/dataTables.bootstrap.min.js"></script>
+<script src="../assets/bootbox.min.js"></script>
 <script src="../assets/bootstrap-notify/js/bootstrap-notify.min.js"></script>
-<script src="../assets/bootbox/bootbox.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     /* Set Up Notifications */
@@ -196,8 +196,6 @@ $(document).ready(function() {
     /* End */
     /* Datatables */
     $("#downloads").dataTable({
-        "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-        "sPaginationType": "bootstrap",
         "aoColumns": [
             null,
             null,
@@ -205,22 +203,18 @@ $(document).ready(function() {
             {"bSortable": false}
         ]
     });
-    $.extend($.fn.dataTableExt.oStdClasses, {
-        "sSortable": "header",
-        "sWrapper": "dataTables_wrapper form-inline"
-    });
-    /* End */  
+    /* End */
     /* Delete */
     $("table").on("click", ".delete", function() {
         var id = $(this).data("id");
-        bootbox.confirm("Are you sure you want to delete the selected download?", "No", "Yes", function(result) {
+        bootbox.confirm("Are you sure you want to delete this download?", function(result) {
             if (result == true) {
                 $.ajax({
                     type: "POST",
                     url: "actions/worker.php",
                     data: "action=delete&id="+ id +"",
                     error: function() {
-                        show_notification("error", "warning-sign", "Ajax query failed!");
+                        show_notification("danger", "warning-sign", "Ajax query failed!");
                     },
                     success: function() {
                         show_notification("success", "ok", "Download deleted!", true);
@@ -233,9 +227,13 @@ $(document).ready(function() {
     /* Show tracking Link */
     $("table").on("click", ".trackinglink", function() {
         var id = $(this).data("id");
-        bootbox.prompt("Tracking Link", "Cancel", "Ok", null, "<?php echo PATH_TO_SCRIPT; ?>/get.php?id="+ id +"");
-        /* Select form automatically (For Firefox) */
-        $(".input-block-level").select();
+        bootbox.prompt({
+            title: "Tracking Link",
+            value: "<?php echo PATH_TO_SCRIPT; ?>/get.php?id=" + id + "",
+            callback: function(result) {
+              /* This has to be here for some reason */
+            }
+        });        
     });
     /* End */
 });

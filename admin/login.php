@@ -44,19 +44,20 @@ if (!isset($_SESSION["indication_user"])) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Indication &middot; Login</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indication &middot; Login</title>
 <meta name="robots" content="noindex, nofollow">
-<link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">  
-<link href="../assets/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
+<link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 body {
-    padding-top: 60px;
-    background-color: #f5f5f5;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eee;
 }
 .form-signin {
     max-width: 300px;
-    padding: 19px 29px 29px;
+    padding: 10px 30px 50px;
     margin: 0 auto 20px;
     background-color: #fff;
     border: 1px solid #e5e5e5;
@@ -74,7 +75,7 @@ body {
     font-size: 16px;
     height: auto;
     margin-bottom: 5px;
-    padding: 7px 9px;
+    padding: 5px 10px;
 }
 </style>
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -84,30 +85,24 @@ body {
 </head>
 <body>
 <div class="container">
-<form class="form-signin" method="post">
-<fieldset>
-<h2 class="form-signin-heading text-center">Indication</h2>
+<form role="form" class="form-signin" method="post">
+<div class="text-center"><img src="../assets/icon.png" width="75" height="75" alt="Indication Logo"></div>
 <?php 
 if (isset($_GET["login_error"])) {
-    echo "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>Incorrect username or password.</div>";
+    echo "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Incorrect login.</div>";
 } elseif (isset($_GET["logged_out"])) {
-    echo "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>Successfully logged out.</div>";
+    echo "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Successfully logged out.</div>";
 }
 ?>
-<div class="control-group">
-<label class="control-label" for="username">Username</label>
-<div class="controls">
-<input type="text" id="username" name="username" class="input-block-level" placeholder="Username..." autofocus>
+<div class="form-group">
+<label for="username">Username</label>
+<input type="text" class="form-control" id="username" name="username" placeholder="Username..." autofocus>
 </div>
+<div class="form-group">
+<label for="password">Password</label>
+<input type="password" class="form-control" id="password" name="password" placeholder="Password...">
 </div>
-<div class="control-group">
-<label class="control-label" for="password">Password</label>
-<div class="controls">
-<input type="password" id="password" name="password" class="input-block-level" placeholder="Password...">
-</div>
-</div>
-<button type="submit" class="btn pull-right">Login</button>
-</fieldset>
+<button type="submit" class="btn btn-default pull-right">Login</button>
 </form>
 </div>
 <script src="../assets/jquery.min.js"></script>
