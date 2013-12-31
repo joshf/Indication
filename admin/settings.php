@@ -173,7 +173,9 @@ a.close.pull-right {
 </div>
 <h4>Ad Code</h4>
 <p>Show an advert before user can continue to their download. This can be changed on a per download basis.</p>
-<div class="alert alert-warning"><b>Warning:</b> On some server configurations using HTML code here may produce errors.</div>
+<div class="alert alert-warning">
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+<b>Warning:</b> On some server configurations using HTML code here may produce errors.</div>
 <div class="form-group">
 <textarea class="form-control" id="advertcode" name="advertcode" placeholder="Enter a ad code..."><?php echo $currentadcode; ?></textarea>
 </div>
