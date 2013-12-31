@@ -40,31 +40,27 @@ if (mysql_num_rows($getinfo) == 0) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Indication</title>
-<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">  
-<link href="assets/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
+<title>Indication</title>
+<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
 body {
-    padding-top: 60px;
-}
-@media (max-width: 980px) {
-    body {
-        padding-top: 0;
-    }
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 </style>
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
-<div class="navbar-inner">
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
 <div class="container">
-<a class="brand" href="#">Indication</a>
+<div class="navbar-header">
+<a class="navbar-brand" href="#">Indication</a>
 </div>
 </div>
 </div>
@@ -81,7 +77,7 @@ $idclean = str_replace(".", "_", $id);
 session_start();
 
 if (IGNORE_ADMIN_STATE == "Enabled" && isset($_SESSION["indication_user"])) {
-    echo "<div class=\"alert alert-info\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><b>Info:</b> Currently logged in, downloads will not be counted.</div>";    
+    echo "<div class=\"alert alert-info\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><b>Info:</b> Currently logged in, downloads will not be counted.</div>";    
 } else {
     if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
         if (!isset($_COOKIE["indicationhasdownloaded_$idclean"])) {
@@ -126,25 +122,25 @@ if (isset($_POST["password"])) {
 switch ($case) {
     case "showads":
         $adcode = htmlspecialchars_decode(AD_CODE); 
-        echo "<p>$adcode</p><fieldset><div class=\"form-actions\"><a class=\"btn\" href=\"javascript:history.go(-1)\">Go Back</a><a class=\"btn pull-right\" href=\"" . $getinforesult["url"] . "\">Get Download</a></div></fieldset>";
+        echo "<p>$adcode</p><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><a class=\"btn btn-default pull-right\" href=\"" . $getinforesult["url"] . "\">Get Download</a>";
         break;
     case "passwordprotected":
-        echo "<form method=\"post\"><fieldset><div class=\"control-group\"><label class=\"control-label\" for=\"password\">Password</label><div class=\"controls\"><input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Password...\"></div><div class=\"help-block\">This download is password protected, please enter the password you were given.</div></div><div class=\"form-actions\"><a class=\"btn\" href=\"javascript:history.go(-1)\">Go Back</a><button type=\"submit\" class=\"btn pull-right\">Get Download</button></div></fieldset></form>";
+        echo "<form role=\"form\" method=\"post\"><div class=\"form-group\"><label for=\"password\">Password</label><input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"Password...\"><div class=\"help-block\">This download is password protected, please enter the password you were given.</div><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><button type=\"submit\" class=\"btn btn-default pull-right\">Get Download</button></form>";
         break;
     case "normal":
         header("Location: " . $getinforesult["url"] . "");
         exit;
         break;
     case "passwordprotectedandshowads":
-        $adcode = htmlspecialchars_decode(AD_CODE); 
-        echo "<p>$adcode</p><form method=\"post\"><fieldset><div class=\"control-group\"><label class=\"control-label\" for=\"password\">Password</label><div class=\"controls\"><input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Password...\"></div><div class=\"help-block\">This download is password protected, please enter the password you were given.</div></div><div class=\"form-actions\"><a class=\"btn\" href=\"javascript:history.go(-1)\">Go Back</a><button type=\"submit\" class=\"btn pull-right\">Get Download</button></div></fieldset></form>";
+        $adcode = htmlspecialchars_decode(AD_CODE);
+        echo "<p>$adcode</p><form role=\"form\" method=\"post\"><div class=\"form-group\"><label for=\"password\">Password</label><input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"Password...\"><div class=\"help-block\">This download is password protected, please enter the password you were given.</div><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><button type=\"submit\" class=\"btn btn-default pull-right\">Get Download</button></form>";
         break;
     case "passwordcorrect":
         header("Location: " . $getinforesult["url"] . "");
         exit;
         break;
     case "passwordincorrect":
-        echo "<div class=\"alert alert-error\"><h4 class=\"alert-heading\">Error</h4><p>Incorrect password.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div>";
+        echo "<div class=\"alert alert-danger\"><h4 class=\"alert-heading\">Error</h4><p>Incorrect password.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div>";
         break;
 } 
     
