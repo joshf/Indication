@@ -32,31 +32,28 @@ if ($version == VERSION) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Indication &middot; Upgrade</title>
-<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-<link href="../assets/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
+<title>Burden &middot; Upgrade</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
 body {
-    padding-top: 60px;
-}
-@media (max-width: 980px) {
-    body {
-        padding-top: 0;
-    }
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 </style>
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
-<div class="navbar-inner">
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
 <div class="container">
-<a class="brand" href="#">Indication</a>
+<div class="navbar-header">
+<a class="navbar-brand" href="#">Burden</a>
 </div>
 </div>
 </div>

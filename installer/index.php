@@ -95,31 +95,31 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Indication &middot; Installer</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-<link href="../assets/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet">
+<link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
 body {
-    padding-top: 60px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
-@media (max-width: 980px) {
-    body {
-        padding-top: 0;
-    }
-}
+/*.form-control {
+    width: 30%;
+}*/
 </style>
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
-<div class="navbar-inner">
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
 <div class="container">
-<a class="brand" href="#">Indication</a>
+<div class="navbar-header">
+<a class="navbar-brand" href="#">Indication</a>
 </div>
 </div>
 </div>
@@ -130,77 +130,53 @@ body {
 <?php
 if (!isset($_POST["install"])) {
 ?>	
-<form method="post" autocomplete="off">
-<fieldset>
+<form role="form" method="post" autocomplete="off">
 <h4>Database Settings</h4>
-<div class="control-group">
-<label class="control-label" for="dbhost">Database Host</label>
-<div class="controls">
-<input type="text" id="dbhost" name="dbhost" value="localhost" placeholder="Type your database host..." required>
+<div class="form-group">
+<label for="dbhost">Database Host</label>
+<input type="text" class="form-control" id="dbhost" name="dbhost" value="localhost" placeholder="Type your database host..." required>
 </div>
+<div class="form-group">
+<label for="dbuser">Database User</label>
+<input type="text" class="form-control" id="dbuser" name="dbuser" placeholder="Type your database user..." required>
 </div>
-<div class="control-group">
-<label class="control-label" for="dbuser">Database User</label>
-<div class="controls">
-<input type="text" id="dbuser" name="dbuser" placeholder="Type your database user..." required>
+<div class="form-group">
+<label for="dbpassword">Database Password</label>
+<input type="password" class="form-control" id="dbpassword" name="dbpassword" placeholder="Type your database password..." required>
 </div>
-</div>
-<div class="control-group">
-<label class="control-label" for="dbpassword">Database Password</label>
-<div class="controls">
-<input type="password" id="dbpassword" name="dbpassword" placeholder="Type your database password..." required>
-</div>
-</div>
-<div class="control-group">
-<label class="control-label" for="dbname">Database Name</label>
-<div class="controls">
-<input type="text" id="dbname" name="dbname" placeholder="Type your database name..." required>
-</div>
+<div class="form-group">
+<label for="dbname">Database Name</label>
+<input type="text" class="form-control" id="dbname" name="dbname" placeholder="Type your database name..." required>
 </div>
 <h4>User Details</h4>
-<div class="control-group">
-<label class="control-label" for="user">User</label>
-<div class="controls">
-<input type="text" id="user" name="user" placeholder="Type a username..." required>
+<div class="form-group">
+<label for="user">User</label>
+<input type="text" class="form-control" id="user" name="user" placeholder="Type a username..." required>
 </div>
+<div class="form-group">
+<label for="email">Email</label>
+<input type="email" class="form-control" id="email" name="email" placeholder="Type an email..." required>
 </div>
-<div class="control-group">
-<label class="control-label" for="email">Email</label>
-<div class="controls">
-<input type="email" id="email" name="email" placeholder="Type an email..." required>
+<div class="form-group">
+<label for="password">Password</label>
+<input type="password" class="form-control" id="password" name="password" placeholder="Type a password..." required>
 </div>
-</div>
-<div class="control-group">
-<label class="control-label" for="password">Password</label>
-<div class="controls">
-<input type="password" id="password" name="password" placeholder="Type a password..." required>
-</div>
-</div>
-<div class="control-group">
-<label class="control-label" for="passwordconfirm">Confirm Password</label>
-<div class="controls">
-<input type="password" id="passwordconfirm" name="passwordconfirm" placeholder="Type your password again..." data-validation-match-match="password" required>
+<div class="form-group">
+<label for="passwordconfirm">Confirm Password</label>
+<input type="password" class="form-control" id="passwordconfirm" name="passwordconfirm" placeholder="Type your password again..." required>
 <span class="help-block">It is recommended that your password be at least 6 characters long</span>
 </div>
-</div>
 <h4>Other Settings</h4>
-<div class="control-group">
-<label class="control-label" for="website">Website Name</label>
-<div class="controls">
-<input type="text" id="website" name="website" required placeholder="Type your websites name...">
+<div class="form-group">
+<label for="website">Website Name</label>
+<input type="text" class="form-control" id="website" name="website" placeholder="Type your websites name..." required>
 </div>
+<div class="form-group">
+<label for="pathtoscript">Path to Script</label>
+<input type="text" class="form-control" id="pathtoscript" name="pathtoscript" value="<?php echo $pathtoscript; ?>" placeholder="Type the path to Indication..." required>
 </div>
-<div class="control-group">
-<label class="control-label" for="pathtoscript">Path to Script</label>
-<div class="controls">
-<input type="text" id="pathtoscript" name="pathtoscript" value="<?php echo $pathtoscript; ?>" placeholder="Type the path to Indication..." pattern="(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-?]*)*\/?" data-validation-pattern-message="Please enter a valid URL" required>
-</div>
-</div>
-<div class="form-actions">
 <input type="hidden" name="install">
-<input type="submit" class="btn btn-primary" value="Install">
-</div>
-</fieldset>
+<input type="submit" class="btn btn-default" value="Install">
 </form>
 <?php
 } else {
@@ -210,10 +186,22 @@ if (!isset($_POST["install"])) {
 </div>
 <script src="../assets/jquery.min.js"></script>
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="../assets/validation/jqBootstrapValidation.min.js"></script>
+<script src="../assets/nod.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $("input").not("[type=submit]").jqBootstrapValidation();
+    var metrics = [
+        ["#dbhost", "presence", "Database host cannot be empty!"],
+        ["#dbuser", "presence", "Database user cannot be empty!"],
+        ["#dbpassword", "presence", "Database password cannot be empty!"],        
+        ["#dbname", "presence", "Database name cannot be empty!"],
+        ["#user", "presence", "User name cannot be empty!"],
+        ["#email", "email", "Enter a valid email address"],
+        ["#password", "presence", "Passwords should be more than 6 characters"],
+        ["#passwordconfirm", "same-as: #password", "Passwords do not match!"],
+        ["#website", "presence", "Website cannot be empty!"],
+        ["#pathtoscript", /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/, "Enter a valid URL!"],
+    ];
+    $("form").nod(metrics);
 });
 </script>
 </body>
