@@ -191,8 +191,8 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 ?> 
 </div>
 <div class="form-group">
-<label for="countuniqueonlytime">Time to consider a user unique</label>
-<input type="number" class="form-control" id="countuniqueonlytime" name="countuniqueonlytime" value="<?php echo $currentcountuniqueonlytime; ?>" placeholder="Enter a time..." min="0" required>
+<label for="countuniqueonlytime">Time to consider a user unique (hours)</label>
+<input type="number" class="form-control" id="countuniqueonlytime" name="countuniqueonlytime" value="<?php echo $currentcountuniqueonlytime; ?>" placeholder="Enter a time..." required>
 </div>
 <h4>Ignore Admin</h4>
 <p>This settings prevents downloads being counted when you are logged in to Indication.</p>
@@ -236,8 +236,8 @@ $(document).ready(function() {
         ["#email", "email", "Enter a valid email address"],
         ["#password", "presence", "Passwords should be more than 6 characters"],
         ["#website", "presence", "Website cannot be empty!"],
-        ["#pathtoscript", "presence", "Path to script cannot be empty!"]
-    
+        ["#pathtoscript", "presence", "Path to script cannot be empty!"],
+        ["#countuniqueonlytime", "min-num:1", "Time must be higer than 1"]
     ];
     $("form").nod(metrics);
 });

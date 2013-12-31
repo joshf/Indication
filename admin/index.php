@@ -166,7 +166,7 @@ mysql_close($con);
 </div>
 <hr>
 <div class="footer">
-Indication <?php echo $version; ?> &copy; <a href="http://github.com/joshf" target="_blank">Josh Fradley</a> <?php echo date("Y"); ?>. Themed by <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>.
+Indication <?php echo $version; ?> &copy; <a href="http://github.com/joshf" target="_blank">Josh Fradley</a> <?php echo date("Y"); ?>. Themed by <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>.
 </div>
 </div>
 <script src="../assets/jquery.min.js"></script>
@@ -231,9 +231,9 @@ $(document).ready(function() {
             title: "Tracking Link",
             value: "<?php echo PATH_TO_SCRIPT; ?>/get.php?id=" + id + "",
             callback: function(result) {
-              /* This has to be here for some reason */
+                /* This has to be here for some reason */
             }
-        });        
+        });
     });
     /* End */
 });

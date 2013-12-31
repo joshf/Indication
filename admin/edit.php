@@ -133,7 +133,7 @@ $getidinforesult = mysql_fetch_assoc($getidinfo);
 echo "<div class=\"form-group\"><label for=\"name\">Name</label><input type=\"text\" class=\"form-control\" id=\"name\" name=\"name\" value=\"" . $getidinforesult["name"] . "\" placeholder=\"Type a name...\" required></div>";
 echo "<div class=\"form-group\"><label for=\"id\">ID</label><input type=\"text\" class=\"form-control\" id=\"id\" name=\"id\" value=\"" . $getidinforesult["id"] . "\" placeholder=\"Type a ID...\" required></div>";
 echo "<div class=\"form-group\"><label for=\"url\">URL</label><input type=\"text\" class=\"form-control\" id=\"url\" name=\"url\" value=\"" . $getidinforesult["url"] . "\" placeholder=\"Type a URL...\" required></div>";
-echo "<div class=\"form-group\"><label for=\"count\">Count</label><input type=\"number\" class=\"form-control\" id=\"count\" name=\"count\" value=\"" . $getidinforesult["count"] . "\" placeholder=\"Type an initial count...\" min=\"0\"></div>";
+echo "<div class=\"form-group\"><label for=\"count\">Count</label><input type=\"number\" class=\"form-control\" id=\"count\" name=\"count\" value=\"" . $getidinforesult["count"] . "\" placeholder=\"Type an initial count...\"></div>";
 
 
 echo "<div class=\"checkbox\"><label>";

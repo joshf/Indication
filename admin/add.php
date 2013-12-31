@@ -116,7 +116,7 @@ if (isset($_GET["error"])) {
 </div>
 <div class="form-group">
 <label for="count">Count</label>
-<input type="number" class="form-control" id="count" name="count" placeholder="Type an initial count..." min="0">
+<input type="number" class="form-control" id="count" name="count" placeholder="Type an initial count...">
 </div>
 <div class="checkbox">
 <label>
