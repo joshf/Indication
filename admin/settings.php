@@ -39,7 +39,7 @@ $currentcountuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
 $currentcountuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
 $currentignoreadminstate = IGNORE_ADMIN_STATE; 
 
-if (isset($_POST["save"])) {
+if (!empty($_POST)) {
     //Get new settings from POST
     $user = $_POST["user"];
     $password = $_POST["password"];
@@ -209,7 +209,7 @@ if ($currentignoreadminstate == "Enabled" ) {
 }   
 ?> 
 </div>
-<button type="submit" name="save" class="btn btn-default">Save</button>
+<button type="submit" class="btn btn-default">Save</button>
 </form>
 </div>
 <script src="../assets/jquery.min.js"></script>
