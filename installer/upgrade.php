@@ -34,7 +34,7 @@ if ($version == VERSION) {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Burden &middot; Upgrade</title>
+<title>Indication &middot; Upgrade</title>
 <meta name="robots" content="noindex, nofollow">
 <link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
@@ -53,7 +53,7 @@ body {
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
 <div class="container">
 <div class="navbar-header">
-<a class="navbar-brand" href="#">Burden</a>
+<a class="navbar-brand" href="#">Indication</a>
 </div>
 </div>
 </div>
@@ -67,8 +67,6 @@ $dbhost = DB_HOST;
 $dbuser = DB_USER;
 $dbpassword = DB_PASSWORD;
 $dbname = DB_NAME;
-$user = ADMIN_USER;
-$password = ADMIN_PASSWORD;
 $salt = SALT;
 $website = WEBSITE;
 $pathtoscript = PATH_TO_SCRIPT;
@@ -76,10 +74,6 @@ $adcode = AD_CODE;
 $countuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
 $countuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
 $ignoreadminstate = IGNORE_ADMIN_STATE;
-
-//Second salt for password protection
-$randsalt2 = md5(uniqid(rand(), true));
-$salt2 = substr($randsalt2, 0, 3);
 
 $updatestring = "<?php
 
@@ -100,22 +94,6 @@ define('IGNORE_ADMIN_STATE', " . var_export($ignoreadminstate, true) . ");
 define('VERSION', " . var_export($version, true) . ");
 
 ?>";
-
-//Create Users table
-$createuserstable = "CREATE TABLE `Users` (
-`id` smallint(10) NOT NULL AUTO_INCREMENT,
-`user` varchar(20) NOT NULL,
-`password` varchar(200) NOT NULL,
-`salt` varchar(3) NOT NULL,
-`email` varchar(100) NOT NULL,
-PRIMARY KEY (`id`)
-) ENGINE=MyISAM;";
-
-mysql_query($createuserstable);
-
-//Add admin user
-mysql_query("INSERT INTO Users (user, password, salt, email, theme)
-VALUES (\"$user\",\"$password\",\"$salt\",\"$user@" . $_SERVER["SERVER_NAME"] . "\")");
 
 //Write Config
 $configfile = fopen("../config.php", "w");
