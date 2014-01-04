@@ -29,7 +29,7 @@ if (isset($_GET["id"])) {
 }
 
 //Check if ID exists
-$getinfo = mysql_query("SELECT `name`, `url`, `count` FROM `Data` WHERE `id` = \"$id\"");
+$getinfo = mysql_query("SELECT `name`, `url` FROM `Data` WHERE `id` = \"$id\"");
 $getinforesult = mysql_fetch_assoc($getinfo);
 if (mysql_num_rows($getinfo) == 0) {
     die("Error: ID does not exist.");
@@ -43,6 +43,7 @@ if (mysql_num_rows($getinfo) == 0) {
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Indication</title>
+<meta name="robots" content="noindex, nofollow">
 <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
 body {
