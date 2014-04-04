@@ -78,7 +78,7 @@ $idclean = str_replace(".", "_", $id);
 session_start();
 
 if (IGNORE_ADMIN_STATE == "Enabled" && isset($_SESSION["indication_user"])) {
-    echo "<div class=\"alert alert-info\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><b>Info:</b> Currently logged in, downloads will not be counted.</div>";    
+    echo "<div class=\"alert alert-info\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><b>Info:</b> You are currently logged in, downloads will not be counted.</div>";    
 } else {
     if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
         if (!isset($_COOKIE["indicationhasdownloaded_$idclean"])) {
