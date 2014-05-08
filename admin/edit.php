@@ -196,10 +196,10 @@ $(document).ready(function() {
         liveSearch: "true"
     });
     var metrics = [
-        ["#name", "presence", "Name cannot be empty"],
+        ["#name", "presence", "Name cannot be empty!"],
         ["#id", "presence", "ID cannot be empty!"],
         ["#url", /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/, "Enter a valid URL!"],
-        ["#count", "min-num:1", "Count must be higer than 0"]
+        ["#count", "min-num:0", "Count must 0 or higher!"]
     ];
     $("form").nod(metrics);
 });
