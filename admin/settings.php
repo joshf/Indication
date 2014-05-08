@@ -53,7 +53,8 @@ if (!empty($_POST)) {
         $password = hash("sha256", $salt . $hashedpassword);
     }
     $website = $_POST["website"];
-    $pathtoscript = $_POST["pathtoscript"];
+    $pathtoscript = rtrim($_POST["pathtoscript"], "/");	
+    
     if (isset($_POST["advertcode"])) {
         if (get_magic_quotes_gpc()) {
             $adcode = stripslashes(htmlspecialchars($_POST["advertcode"]));
