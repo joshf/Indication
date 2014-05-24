@@ -44,7 +44,7 @@ if (empty($newname) || empty($newid) || empty($newurl)) {
 
 //Make sure a password is set if the checkbox was enabled
 if (isset($_POST["passwordprotectstate"])) {
-    if (!isset($_POST["password"])) {
+    if (empty($_POST["password"])) {
         header("Location: ../edit.php?id=$idtoedit&error=emptypassword");
         exit;
     } 
