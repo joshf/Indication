@@ -181,6 +181,10 @@ mysqli_close($con);
 <script src="../assets/nod.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+    $("select").selectpicker({
+        liveSearch: "true"
+    });
+    <?php if (isset($_GET["id"])) { ?>
     $("#passwordprotectstate").click(function() {
         if ($("#passwordprotectstate").prop("checked") == true) {
             $("#password").prop("required", true);
@@ -190,9 +194,6 @@ $(document).ready(function() {
             $("#password").prop("required", false);
         }
     });
-    $("select").selectpicker({
-        liveSearch: "true"
-    });
     var metrics = [
         ["#name", "presence", "Name cannot be empty!"],
         ["#id", "presence", "ID cannot be empty!"],
@@ -200,6 +201,7 @@ $(document).ready(function() {
         ["#count", "min-num:0", "Count must 0 or higher!"]
     ];
     $("form").nod(metrics);
+    <?php } ?>
 });
 </script>
 </body>
