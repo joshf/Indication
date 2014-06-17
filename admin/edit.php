@@ -16,20 +16,18 @@ if (!isset($_SESSION["indication_user"])) {
 }
 
 //Connect to database
-@$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-if (!$con) {
-    die("Error: Could not connect to database (" . mysql_error() . "). Check your database settings are correct.");
+@$con = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+if (mysqli_connect_errno()) {
+    die("Error: Could not connect to database (" . mysqli_connect_error() . "). Check your database settings are correct.");
 }
 
-mysql_select_db(DB_NAME, $con);
-
-$getusersettings = mysql_query("SELECT `user` FROM `Users` WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
-if (mysql_num_rows($getusersettings) == 0) {
+$getusersettings = mysqli_query($con, "SELECT `user` FROM `Users` WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
+if (mysqli_num_rows($getusersettings) == 0) {
     session_destroy();
     header("Location: login.php");
     exit;
 }
-$resultgetusersettings = mysql_fetch_assoc($getusersettings);
+$resultgetusersettings = mysqli_fetch_assoc($getusersettings);
 
 ?>
 <!DOCTYPE html>
@@ -91,10 +89,10 @@ body {
 
 //Quick edit selector
 if (!isset($_GET["id"])) {
-	$getids = mysql_query("SELECT `id`, `name` FROM `Data`");
-    if (mysql_num_rows($getids) != 0) {
+	$getids = mysqli_query($con, "SELECT `id`, `name` FROM `Data`");
+    if (mysqli_num_rows($getids) != 0) {
         echo "<form role=\"form\" method=\"get\"><div class=\"form-group\"><label for=\"id\">Select a download to edit</label><select class=\"form-control\" id=\"id\" name=\"id\">";
-        while($row = mysql_fetch_assoc($getids)) {
+        while($row = mysqli_fetch_assoc($getids)) {
             echo "<option value=\"" . $row["id"] . "\">" . ucfirst($row["name"]) . "</option>";
         }
         echo "</select></div><button type=\"submit\" class=\"btn btn-default\">Select</button></form>";
@@ -106,11 +104,11 @@ if (!isset($_GET["id"])) {
 ?>
 <?php
 
-$idtoedit = mysql_real_escape_string($_GET["id"]);
+$idtoedit = mysqli_real_escape_string($con, $_GET["id"]);
 
 //Check if ID exists
-$doesidexist = mysql_query("SELECT `id` FROM `Data` WHERE `id` = \"$idtoedit\"");
-if (mysql_num_rows($doesidexist) == 0) {
+$doesidexist = mysqli_query($con, "SELECT `id` FROM `Data` WHERE `id` = \"$idtoedit\"");
+if (mysqli_num_rows($doesidexist) == 0) {
     echo "<div class=\"alert alert-danger\"><h4 class=\"alert-heading\">Error</h4><p>ID does not exist.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div>";
 } else {
 
@@ -127,8 +125,8 @@ if (isset($_GET["error"])) {
 <form role="form" action="actions/edit.php" method="post" autocomplete="off">
 <?php
 
-$getidinfo = mysql_query("SELECT * FROM `Data` WHERE `id` = \"$idtoedit\"");
-$getidinforesult = mysql_fetch_assoc($getidinfo);
+$getidinfo = mysqli_query($con, "SELECT * FROM `Data` WHERE `id` = \"$idtoedit\"");
+$getidinforesult = mysqli_fetch_assoc($getidinfo);
 
 echo "<div class=\"form-group\"><label for=\"name\">Name</label><input type=\"text\" class=\"form-control\" id=\"name\" name=\"name\" value=\"" . $getidinforesult["name"] . "\" placeholder=\"Type a name...\" required></div>";
 echo "<div class=\"form-group\"><label for=\"id\">ID</label><input type=\"text\" class=\"form-control\" id=\"id\" name=\"id\" value=\"" . $getidinforesult["id"] . "\" placeholder=\"Type a ID...\" required></div>";
@@ -139,8 +137,8 @@ echo "<div class=\"form-group\"><label for=\"count\">Count</label><input type=\"
 echo "<div class=\"checkbox\"><label>";
     
 //Check if we should show ads
-$checkifadsshow = mysql_query("SELECT `showads` FROM `Data` WHERE `id` = \"$idtoedit\"");
-$checkifadsshowresult = mysql_fetch_assoc($checkifadsshow); 
+$checkifadsshow = mysqli_query($con, "SELECT `showads` FROM `Data` WHERE `id` = \"$idtoedit\"");
+$checkifadsshowresult = mysqli_fetch_assoc($checkifadsshow); 
 if ($checkifadsshowresult["showads"] == "1") { 
     echo "<input type=\"checkbox\" id=\"showadsstate\" name=\"showadsstate\" checked=\"checked\"> Show ads";
 } else {
@@ -150,15 +148,15 @@ if ($checkifadsshowresult["showads"] == "1") {
 echo "</label></div><div class=\"checkbox\"><label>";
     
 //Check if download is protected
-$checkifprotected = mysql_query("SELECT `protect` FROM `Data` WHERE `id` = \"$idtoedit\"");
-$checkifprotectedresult = mysql_fetch_assoc($checkifprotected); 
+$checkifprotected = mysqli_query($con, "SELECT `protect` FROM `Data` WHERE `id` = \"$idtoedit\"");
+$checkifprotectedresult = mysqli_fetch_assoc($checkifprotected); 
 if ($checkifprotectedresult["protect"] == "1") { 
     echo "<input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\" checked=\"checked\"> Enable password protection";
 } else {
     echo "<input type=\"checkbox\" id=\"passwordprotectstate\" name=\"passwordprotectstate\"> Enable password protection";
 }
 
-mysql_close($con);
+mysqli_close($con);
 
 ?>
 </label>

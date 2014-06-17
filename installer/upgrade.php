@@ -12,15 +12,9 @@ require_once("../assets/version.php");
 require_once("../config.php");
 
 //Check if we can connect
-$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-if (!$con) {
-    die("Error: Could not connect to database (" . mysql_error() . "). Check your database settings are correct.");
-}
-
-//Check if database exists
-$does_db_exist = mysql_select_db(DB_NAME, $con);
-if (!$does_db_exist) {
-    die("Error: Database does not exist (" . mysql_error() . "). Check your database settings are correct.");
+@$con = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbname);
+if (mysqli_connect_errno()) {
+    die("Error: Could not connect to database (" . mysqli_connect_error() . "). Check your database settings are correct.");
 }
 
 if ($version == VERSION) {
@@ -100,7 +94,9 @@ $configfile = fopen("../config.php", "w");
 fwrite($configfile, $updatestring);
 fclose($configfile);
 
-mysql_close($con);
+mysqli_query($con, "ALTER TABLE `Users` ADD `hash` VARCHAR(200) NOT NULL;");
+
+mysqli_close($con);
 
 ?>
 <div class="alert alert-success">

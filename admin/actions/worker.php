@@ -21,14 +21,12 @@ if (!isset($_POST["id"])) {
 }
 
 //Connect to database
-$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-if (!$con) {
-    die("Error: Could not connect to database (" . mysql_error() . "). Check your database settings are correct.");
+@$con = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+if (mysqli_connect_errno()) {
+    die("Error: Could not connect to database (" . mysqli_connect_error() . "). Check your database settings are correct.");
 }
 
-mysql_select_db(DB_NAME, $con);
-
-$id = mysql_real_escape_string($_POST["id"]);
+$id = mysqli_real_escape_string($con, $_POST["id"]);
 
 if (isset($_POST["action"])) {
 	$action = $_POST["action"];
@@ -37,9 +35,9 @@ if (isset($_POST["action"])) {
 }
 
 if ($action == "delete") {
-	mysql_query("DELETE FROM `Data` WHERE `id` = \"$id\"");
+	mysqli_query($con, "DELETE FROM `Data` WHERE `id` = \"$id\"");
 }
 
-mysql_close($con);
+mysqli_close($con);
 
 ?>

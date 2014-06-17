@@ -11,7 +11,7 @@ require_once("../../config.php");
 
 session_start();
 if (!isset($_SESSION["indication_user"])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit; 
 }
 
@@ -21,18 +21,16 @@ if (!isset($_POST["id"])) {
 }
 
 //Connect to database
-@$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-if (!$con) {
-    die("Error: Could not connect to database (" . mysql_error() . "). Check your database settings are correct.");
+@$con = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+if (mysqli_connect_errno()) {
+    die("Error: Could not connect to database (" . mysqli_connect_error() . "). Check your database settings are correct.");
 }
 
-mysql_select_db(DB_NAME, $con);
-
 //Set variables
-$name = mysql_real_escape_string($_POST["name"]);
-$id = mysql_real_escape_string($_POST["id"]);
-$url = mysql_real_escape_string($_POST["url"]);
-$count = mysql_real_escape_string($_POST["count"]);
+$name = mysqli_real_escape_string($con, $_POST["name"]);
+$id = mysqli_real_escape_string($con, $_POST["id"]);
+$url = mysqli_real_escape_string($con, $_POST["url"]);
+$count = mysqli_real_escape_string($con, $_POST["count"]);
 
 //Failsafes
 if (empty($name) || empty($id) || empty($url)) {
@@ -41,9 +39,9 @@ if (empty($name) || empty($id) || empty($url)) {
 }
 
 //Check if ID exists
-$checkid = mysql_query("SELECT `id` FROM `Data` WHERE `id` = \"$id\"");
-$resultcheckid = mysql_fetch_assoc($checkid); 
-if (mysql_num_rows($checkid) != 0) {
+$checkid = mysqli_query($con, "SELECT `id` FROM `Data` WHERE `id` = \"$id\"");
+$resultcheckid = mysqli_fetch_assoc($checkid); 
+if (mysqli_num_rows($checkid) != 0) {
     header("Location: ../add.php?error=idexists");
     exit;
 }
@@ -51,7 +49,7 @@ if (mysql_num_rows($checkid) != 0) {
 //Make sure a password is set if the checkbox was enabled
 if (isset($_POST["passwordprotectstate"])) {
     $protect = "1";
-    $inputtedpassword = mysql_real_escape_string($_POST["password"]);
+    $inputtedpassword = mysqli_real_escape_string($con, $_POST["password"]);
     if (empty($inputtedpassword)) {
         header("Location: ../add.php?error=emptypassword");
         exit;
@@ -69,10 +67,10 @@ if (isset($_POST["showadsstate"])) {
     $showads = "0";
 }
 
-mysql_query("INSERT INTO `Data` (`name`, `id`, `url`, `count`, `protect`, `password`, `showads`)
+mysqli_query($con, "INSERT INTO `Data` (`name`, `id`, `url`, `count`, `protect`, `password`, `showads`)
 VALUES (\"$name\",\"$id\",\"$url\",\"$count\",\"$protect\",\"$password\",\"$showads\")");
 
-mysql_close($con);
+mysqli_close($con);
 
 header("Location: ../index.php");
 

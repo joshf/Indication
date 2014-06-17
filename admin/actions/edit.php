@@ -21,20 +21,18 @@ if (!isset($_POST["id"])) {
 }
 
 //Connect to database
-@$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-if (!$con) {
-    die("Error: Could not connect to database (" . mysql_error() . "). Check your database settings are correct.");
+@$con = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+if (mysqli_connect_errno()) {
+    die("Error: Could not connect to database (" . mysqli_connect_error() . "). Check your database settings are correct.");
 }
 
-mysql_select_db(DB_NAME, $con);
-
-$idtoedit = mysql_real_escape_string($_POST["idtoedit"]);
+$idtoedit = mysqli_real_escape_string($con, $_POST["idtoedit"]);
 
 //Set variables
-$newname = mysql_real_escape_string($_POST["name"]);
-$newid = mysql_real_escape_string($_POST["id"]);
-$newurl = mysql_real_escape_string($_POST["url"]);
-$newcount = mysql_real_escape_string($_POST["count"]);
+$newname = mysqli_real_escape_string($con, $_POST["name"]);
+$newid = mysqli_real_escape_string($con, $_POST["id"]);
+$newurl = mysqli_real_escape_string($con, $_POST["url"]);
+$newcount = mysqli_real_escape_string($con, $_POST["count"]);
 
 //Failsafes
 if (empty($newname) || empty($newid) || empty($newurl)) {
@@ -48,9 +46,9 @@ if (isset($_POST["passwordprotectstate"])) {
         header("Location: ../edit.php?id=$idtoedit&error=emptypassword");
         exit;
     } 
-    $getprotectinfo = mysql_query("SELECT `password` FROM `Data` WHERE `id` = \"$idtoedit\"");
-    $getprotectinforesult = mysql_fetch_assoc($getprotectinfo); 
-    $inputtedpassword = mysql_real_escape_string($_POST["password"]);
+    $getprotectinfo = mysqli_query($con, "SELECT `password` FROM `Data` WHERE `id` = \"$idtoedit\"");
+    $getprotectinforesult = mysqli_fetch_assoc($getprotectinfo); 
+    $inputtedpassword = mysqli_real_escape_string($con, $_POST["password"]);
     if (empty($inputtedpassword)) {
         $password = $getprotectinforesult["password"];
     } else {
@@ -69,9 +67,9 @@ if (isset($_POST["showadsstate"])) {
     $showads = "0";
 }
 
-mysql_query("UPDATE `Data` SET `name` = \"$newname\", `id` = \"$newid\", `url` = \"$newurl\", `count` = \"$newcount\", `protect` = \"$protect\", `password` = \"$password\", `showads` = \"$showads\" WHERE `id` = \"$idtoedit\"");
+mysqli_query($con, "UPDATE `Data` SET `name` = \"$newname\", `id` = \"$newid\", `url` = \"$newurl\", `count` = \"$newcount\", `protect` = \"$protect\", `password` = \"$password\", `showads` = \"$showads\" WHERE `id` = \"$idtoedit\"");
 
-mysql_close($con);
+mysqli_close($con);
 
 header("Location: ../index.php");
 

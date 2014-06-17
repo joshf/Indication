@@ -20,23 +20,19 @@ if (!isset($_SESSION["indication_user"])) {
 //Set cookie so we dont constantly check for updates
 setcookie("indicationupdatecheck", time(), time()+604800);
 
-@$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-if (!$con) {
-    die("Error: Could not connect to database (" . mysql_error() . "). Check your database settings are correct.");
-} else {
-    $does_db_exist = mysql_select_db(DB_NAME, $con);
-    if (!$does_db_exist) {
-        die("Error: Database does not exist (" . mysql_error() . "). Check your database settings are correct.");
-    }
+//Connect to database
+@$con = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+if (mysqli_connect_errno()) {
+    die("Error: Could not connect to database (" . mysqli_connect_error() . "). Check your database settings are correct.");
 }
 
-$getusersettings = mysql_query("SELECT `user` FROM `Users` WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
-if (mysql_num_rows($getusersettings) == 0) {
+$getusersettings = mysqli_query($con, "SELECT `user` FROM `Users` WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
+if (mysqli_num_rows($getusersettings) == 0) {
     session_destroy();
     header("Location: login.php");
     exit;
 }
-$resultgetusersettings = mysql_fetch_assoc($getusersettings);
+$resultgetusersettings = mysqli_fetch_assoc($getusersettings);
 
 ?>
 <!DOCTYPE html>
@@ -119,7 +115,7 @@ if (!isset($_COOKIE["indicationupdatecheck"])) {
     }
 } 
 
-$getdownloads = mysql_query("SELECT * FROM `Data`");
+$getdownloads = mysqli_query($con, "SELECT * FROM `Data`");
 
 echo "<table id=\"downloads\" class=\"table table-bordered table-hover table-condensed\">
 <thead>
@@ -130,7 +126,7 @@ echo "<table id=\"downloads\" class=\"table table-bordered table-hover table-con
 <th>Actions</th>
 </tr></thead><tbody>";
 
-while($row = mysql_fetch_assoc($getdownloads)) {
+while($row = mysqli_fetch_assoc($getdownloads)) {
     echo "<tr>";
     echo "<td>" . $row["name"] . "</td>";
     echo "<td class=\"hidden-xs\">" . $row["url"] . "</td>";
@@ -148,19 +144,19 @@ echo "</tbody></table>";
 <div class="well">
 <?php
 
-$getnumberofdownloads = mysql_query("SELECT COUNT(id) FROM `Data`");
-$resultgetnumberofdownloads = mysql_fetch_assoc($getnumberofdownloads);
+$getnumberofdownloads = mysqli_query($con, "SELECT COUNT(id) FROM `Data`");
+$resultgetnumberofdownloads = mysqli_fetch_assoc($getnumberofdownloads);
 echo "<i class=\"glyphicon glyphicon-list-alt\"></i> <b>" . $resultgetnumberofdownloads["COUNT(id)"] . "</b> items<br>";
 
-$gettotalnumberofdownloads = mysql_query("SELECT SUM(count) FROM `Data`");
-$resultgettotalnumberofdownloads = mysql_fetch_assoc($gettotalnumberofdownloads);
+$gettotalnumberofdownloads = mysqli_query($con, "SELECT SUM(count) FROM `Data`");
+$resultgettotalnumberofdownloads = mysqli_fetch_assoc($gettotalnumberofdownloads);
 if (is_null($resultgettotalnumberofdownloads["SUM(count)"])) {
     echo "<i class=\"glyphicon glyphicon-download\"></i> <b>0</b> total downloads";
 } else {
     echo "<i class=\"glyphicon glyphicon-download\"></i> <b>" . $resultgettotalnumberofdownloads["SUM(count)"] . "</b> total downloads";
 }
 
-mysql_close($con);
+mysqli_close($con);
 
 ?>
 </div>
