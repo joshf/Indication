@@ -6,6 +6,10 @@ session_start();
 
 unset($_SESSION["indication_user"]);
 
+if (isset($_COOKIE["indication_user_rememberme"])) {
+    setcookie("indication_user_rememberme", "", time()-86400);
+}
+
 header("Location: login.php?logged_out=true");
 
 exit;
