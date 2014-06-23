@@ -150,7 +150,7 @@ if (isset($_GET["email_error"])) {
 <label for="username">Email</label>
 <input type="email" class="form-control" id="email" name="email" placeholder="Email..." autofocus>
 </div>
-<button type="submit" class="btn btn-default pull-right">Send Reset Link</button>
+<button type="submit" class="btn btn-primary pull-right">Send Reset Link</button>
 </form>
 </div>
 <script src="../assets/jquery.min.js"></script>
