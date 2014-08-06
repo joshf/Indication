@@ -36,6 +36,8 @@ if (isset($_POST["action"])) {
 
 if ($action == "delete") {
 	mysqli_query($con, "DELETE FROM `Data` WHERE `id` = \"$id\"");
+} else {
+    die("Error: Action not recognised!");
 }
 
 mysqli_close($con);
