@@ -2,12 +2,12 @@
 
 //Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
-if (!file_exists("../config.php")) {
-    header("Location: ../installer");
+if (!file_exists("config.php")) {
+    header("Location: install");
     exit;
 }
 
-require_once("../config.php");
+require_once("config.php");
 
 session_start();
 
@@ -94,7 +94,7 @@ if (isset($_POST["email"])) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Indication &middot; Reset Password</title>
 <meta name="robots" content="noindex, nofollow">
-<link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 body {
     padding-top: 40px;
@@ -114,10 +114,7 @@ body {
     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
     box-shadow: 0 1px 2px rgba(0,0,0,.05);
 }
-.form-signin .form-signin-heading {
-    margin-bottom: 10px;
-}
-.form-signin input[type="text"], .form-signin input[type="password"] {
+.form-signin input[type="email"] {
     font-size: 16px;
     height: auto;
     margin-bottom: 5px;
@@ -132,7 +129,7 @@ body {
 <body>
 <div class="container">
 <form role="form" class="form-signin" method="post">
-<div class="text-center"><img src="../assets/icon.png" width="75" height="75" alt="Indication Logo"></div>
+<div class="text-center"><img src="assets/icon.png" width="75" height="75" alt="Indication Logo"></div>
 <?php 
 if (isset($_GET["email_error"])) {
     echo "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Email does not exist.</div>";
@@ -147,13 +144,16 @@ if (isset($_GET["email_error"])) {
 } 
 ?>
 <div class="form-group">
-<label for="username">Email</label>
+<label for="email">Email</label>
 <input type="email" class="form-control" id="email" name="email" placeholder="Email..." autofocus>
 </div>
-<button type="submit" class="btn btn-primary pull-right">Send Reset Link</button>
+<div class="btn-group pull-right">
+<a href="login.php" class="btn btn-default" role="button">Back</a>
+<button type="submit" class="btn btn-primary">Send Reset Link</button>
+</div>
 </form>
 </div>
-<script src="../assets/jquery.min.js"></script>
-<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

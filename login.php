@@ -2,12 +2,12 @@
 
 //Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
-if (!file_exists("../config.php")) {
-    header("Location: ../installer");
+if (!file_exists("config.php")) {
+    header("Location: install");
     exit;
 }
 
-require_once("../config.php");
+require_once("config.php");
 
 session_start();
 
@@ -44,7 +44,7 @@ if (isset($_POST["password"]) && isset($_POST["username"])) {
         if (isset($_POST["rememberme"])) {
             $hash = substr(str_shuffle(MD5(microtime())), 0, 50);
             mysqli_query($con, "UPDATE `Users` SET `hash` = \"$hash\" WHERE `id` = \"" . $userinforesult["id"] . "\"");
-            setcookie("indication_user_rememberme", $hash, time()+3600*248*7);
+            setcookie("indication_user_rememberme", $hash, time()+3600*24*7);
         }
     } else {
         header("Location: login.php?login_error=true");
@@ -62,7 +62,7 @@ if (!isset($_SESSION["indication_user"])) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Indication &middot; Login</title>
 <meta name="robots" content="noindex, nofollow">
-<link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 body {
     padding-top: 40px;
@@ -82,9 +82,6 @@ body {
     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
     box-shadow: 0 1px 2px rgba(0,0,0,.05);
 }
-.form-signin .form-signin-heading, .form-signin .checkbox {
-    margin-bottom: 10px;
-}
 .form-signin input[type="text"], .form-signin input[type="password"] {
     font-size: 16px;
     height: auto;
@@ -100,7 +97,7 @@ body {
 <body>
 <div class="container">
 <form role="form" class="form-signin" method="post">
-<div class="text-center"><img src="../assets/icon.png" width="75" height="75" alt="Indication Logo"></div>
+<div class="text-center"><img src="assets/icon.png" width="75" height="75" alt="Indication Logo"></div>
 <?php 
 if (isset($_GET["login_error"])) {
     echo "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Incorrect login.</div>";
@@ -127,8 +124,8 @@ if (isset($_GET["login_error"])) {
 </div>
 </form>
 </div>
-<script src="../assets/jquery.min.js"></script>
-<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
 <?php

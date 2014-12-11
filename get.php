@@ -19,15 +19,15 @@ if (mysqli_connect_errno()) {
 
 //Get the ID from $_GET OR $_POST
 if (isset($_GET["id"])) {
-    $id = mysqli_real_escape_string($con, $_GET["id"]);
+    $downloadid = mysqli_real_escape_string($con, $_GET["id"]);
 } elseif (isset($_POST["id"])) {
-    $id = mysqli_real_escape_string($con, $_POST["id"]);
+    $downloadid = mysqli_real_escape_string($con, $_POST["id"]);
 } else {
     die("Error: ID cannot be blank.");
 }
 
 //Check if ID exists
-$getinfo = mysqli_query($con, "SELECT `name`, `url` FROM `Data` WHERE `id` = \"$id\"");
+$getinfo = mysqli_query($con, "SELECT `name`, `url` FROM `Data` WHERE `downloadid` = \"$downloadid\"");
 $getinforesult = mysqli_fetch_assoc($getinfo);
 if (mysqli_num_rows($getinfo) == 0) {
     die("Error: ID does not exist.");
@@ -70,7 +70,7 @@ body {
 <?php
 
 //Cookies don't like dots
-$idclean = str_replace(".", "_", $id);
+$downloadidclean = str_replace(".", "_", $downloadid);
 
 //Ignore admin counts if setting has been enabled
 session_start();
@@ -79,24 +79,24 @@ if (IGNORE_ADMIN_STATE == "Enabled" && isset($_SESSION["indication_user"])) {
     echo "<div class=\"alert alert-info\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><b>Info:</b> You are currently logged in, downloads will not be counted.</div>";    
 } else {
     if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
-        if (!isset($_COOKIE["indicationhasdownloaded_$idclean"])) {
-            mysqli_query($con, "UPDATE `Data` SET `count` = `count`+1 WHERE `id` = \"$id\"");
-            setcookie("indicationhasdownloaded_$idclean", time(), time()+3600*COUNT_UNIQUE_ONLY_TIME);
+        if (!isset($_COOKIE["indicationhasdownloaded_$downloadidclean"])) {
+            mysqli_query($con, "UPDATE `Data` SET `count` = `count`+1 WHERE `downloadid` = \"$downloadid\"");
+            setcookie("indicationhasdownloaded_$downloadidclean", time(), time()+3600*COUNT_UNIQUE_ONLY_TIME);
         }
     } else {
-        mysqli_query($con, "UPDATE `Data` SET `count` = `count`+1 WHERE `id` = \"$id\"");
+        mysqli_query($con, "UPDATE `Data` SET `count` = `count`+1 WHERE `downloadid` = \"$downloadid\"");
     }
 }
 
 //Check if download is password protected
-$checkifprotected = mysqli_query($con, "SELECT `protect`, `password` FROM `Data` WHERE `id` = \"$id\"");
+$checkifprotected = mysqli_query($con, "SELECT `protect`, `password` FROM `Data` WHERE `downloadid` = \"$downloadid\"");
 $checkifprotectedresult = mysqli_fetch_assoc($checkifprotected);
 if ($checkifprotectedresult["protect"] == "1") {
     $case = "passwordprotected";
 }
 
 //Check if we should show ads
-$checkifadsshow = mysqli_query($con, "SELECT `showads` FROM `Data` WHERE `id` = \"$id\"");
+$checkifadsshow = mysqli_query($con, "SELECT `showads` FROM `Data` WHERE `downloadid` = \"$downloadid\"");
 $checkifadsshowresult = mysqli_fetch_assoc($checkifadsshow);
 if ($checkifadsshowresult["showads"] == "1") {
     $case = "showads";

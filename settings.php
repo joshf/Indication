@@ -2,17 +2,17 @@
 
 //Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
-if (!file_exists("../config.php")) {
-    header("Location: ../installer");
+if (!file_exists("config.php")) {
+    header("Location: install");
     exit;
 }
 
-require_once("../config.php");
+require_once("config.php");
 
 session_start();
 if (!isset($_SESSION["indication_user"])) {
     header("Location: login.php");
-    exit; 
+    exit;
 } 
 
 //Connect to database
@@ -21,7 +21,7 @@ if (mysqli_connect_errno()) {
     die("Error: Could not connect to database (" . mysqli_connect_error() . "). Check your database settings are correct.");
 }
 
-$getusersettings = mysqli_query($con, "SELECT `user`, `password`, `email`, `salt` FROM `Users` WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
+$getusersettings = mysqli_query($con, "SELECT `user`, `password`, `email`, `salt`, `api_key` FROM `Users` WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
 if (mysqli_num_rows($getusersettings) == 0) {
     session_destroy();
     header("Location: login.php");
@@ -36,6 +36,7 @@ $currentadcode = htmlspecialchars_decode(AD_CODE);
 $currentcountuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
 $currentcountuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
 $currentignoreadminstate = IGNORE_ADMIN_STATE; 
+
 
 if (!empty($_POST)) {
     //Get new settings from POST
@@ -75,7 +76,7 @@ if (!empty($_POST)) {
     mysqli_query($con, "UPDATE Users SET `user` = \"$user\", `password` = \"$password\", `email` = \"$email\", `salt` = \"$salt\" WHERE `user` = \"" . $resultgetusersettings["user"] . "\"");
     
     //Write config
-    $configfile = fopen("../config.php", "w");
+    $configfile = fopen("config.php", "w");
     fwrite($configfile, $settingsstring);
     fclose($configfile);
 
@@ -94,8 +95,8 @@ mysqli_close($con);
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Indication &middot; Settings</title>
-<link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="../assets/bootstrap-notify/css/bootstrap-notify.min.css" rel="stylesheet">
+<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/bootstrap-notify/css/bootstrap-notify.min.css" rel="stylesheet">
 <style type="text/css">
 body {
     padding-top: 30px;
@@ -113,27 +114,22 @@ a.close.pull-right {
 <![endif]-->
 </head>
 <body>
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 <div class="container">
 <div class="navbar-header">
-<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
 <span class="sr-only">Toggle navigation</span>
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
 </button>
-<a class="navbar-brand" href="#">Indication</a>
+<a class="navbar-brand" href="index.php">Indication</a>
 </div>
-<div class="navbar-collapse collapse">
-<ul class="nav navbar-nav">
-<li><a href="index.php">Home</a></li>
-<li><a href="add.php">Add</a></li>
-<li><a href="edit.php">Edit</a></li>
-</ul>
+<div class="navbar-collapse collapse" id="navbar-collapse">
 <ul class="nav navbar-nav navbar-right">
 <li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $resultgetusersettings["user"]; ?> <b class="caret"></b></a>
-<ul class="dropdown-menu">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo $resultgetusersettings["user"]; ?> <span class="caret"></span></a>
+<ul class="dropdown-menu" role="menu">
 <li><a href="settings.php">Settings</a></li>
 <li><a href="logout.php">Logout</a></li>
 </ul>
@@ -141,7 +137,7 @@ a.close.pull-right {
 </ul>
 </div>
 </div>
-</div>
+</nav>
 <div class="container">
 <div class="page-header">
 <h1>Settings</h1>
@@ -150,15 +146,15 @@ a.close.pull-right {
 <form role="form" method="post" autocomplete="off">
 <h4>User Details</h4>
 <div class="form-group">
-<label for="user">User</label>
+<label class="control-label" for="user">User</label>
 <input type="text" class="form-control" id="user" name="user" value="<?php echo $resultgetusersettings["user"]; ?>" placeholder="Enter a username..." required>
 </div>
 <div class="form-group">
-<label for="email">Email</label>
+<label class="control-label" for="email">Email</label>
 <input type="email" class="form-control" id="email" name="email" value="<?php echo $resultgetusersettings["email"]; ?>" placeholder="Type an email..." required>
 </div>
 <div class="form-group">
-<label for="password">Password</label>
+<label class="control-label" for="password">Password</label>
 <input type="password" class="form-control" id="password" name="password" value="<?php echo $resultgetusersettings["password"]; ?>" placeholder="Enter a password..." required>
 </div>
 <h4>Site Settings</h4>
@@ -210,12 +206,16 @@ if ($currentignoreadminstate == "Enabled" ) {
 </div>
 <button type="submit" class="btn btn-default">Save</button>
 </form>
+<br>
+<h5>API key</h5>
+<p>Your API key is: <div id="api_key"><b><?php echo $resultgetusersettings["api_key"]; ?></b></div></p>
+<button id="generateapikey" class="btn btn-default">Generate New Key</button>
 </div>
-<script src="../assets/jquery.min.js"></script>
-<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="../assets/bootstrap-notify/js/bootstrap-notify.min.js"></script>
-<script src="../assets/jquery.cookie.min.js"></script>
-<script src="../assets/nod.min.js"></script>
+<script src="assets/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/bootstrap-notify/js/bootstrap-notify.min.js"></script>
+<script src="assets/jquery.cookie.min.js"></script>
+<script src="assets/nod.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     if ($.cookie("settings_updated")) {
@@ -241,6 +241,19 @@ $(document).ready(function() {
         ["#countuniqueonlytime", "min-num:1", "Time must be higer than 1"]
     ];
     $("form").nod(metrics);
+    $("#generateapikey").click(function() {
+        $.ajax({
+            type: "POST",
+            url: "worker.php",
+            data: "action=generateapikey",
+            error: function() {
+                $("#api_key").html("<b>Could not generate key. Failed to connect to worker.</b>");
+            },
+            success: function(api_key) {
+                $("#api_key").html("<b>"  + api_key +  "</b>");
+            }
+        });
+    });
 });
 </script>
 </body>
