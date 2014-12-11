@@ -53,7 +53,7 @@ body {
 a.close.pull-right {
     padding-left: 10px;
 }
-.edit, .delete {
+.trackinglink, .edit, .delete {
     cursor: pointer;
 }
 </style>
@@ -118,6 +118,7 @@ if (mysqli_num_rows($getdownloads) != 0) {
     while($row = mysqli_fetch_assoc($getdownloads)) {
         $numberofitems++;
         echo "<li class=\"list-group-item\" id=\"" . $row["id"] . "\" >" . $row["name"] . "<div class=\"pull-right\">";
+        echo "<span class=\"trackinglink glyphicon glyphicon-zoom-in\" data-id=\"" . $row["id"] . "\"></span> ";
         echo "<span class=\"edit glyphicon glyphicon-edit\" data-id=\"" . $row["id"] . "\"></span> ";
         echo "<span class=\"delete glyphicon glyphicon-trash\" data-id=\"" . $row["id"] . "\"></span>";
         echo "</div></li>";
@@ -257,6 +258,7 @@ Indication <?php echo $version; ?> &copy; <a href="http://joshf.co.uk" target="_
 <script src="assets/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/bootstrap-notify/js/bootstrap-notify.min.js"></script>
+<script src="assets/bootbox.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     /* Search */
@@ -425,16 +427,9 @@ $(document).ready(function() {
         });
     });
     /* End */
-    /* Details */
-    $("li").on("click", ".details", function() {
+    /* Tracking Link */
+    $("li").on("click", ".trackinglink", function() {
         var id = $(this).data("id");
-        if ($("#detailsitem"+id).length) {
-            $("#detailsitem"+id).hide("fast");
-            setTimeout(function() {
-                $("#detailsitem"+id).remove();
-            }, 400);            
-            return false;
-        }
         $.ajax({
             type: "POST",
             dataType: "json",
@@ -444,11 +439,13 @@ $(document).ready(function() {
                 show_notification("danger", "warning-sign", "Ajax query failed!");
             },
             success: function(data) {
-                if (data[1] == "") {
-                    data[1] = "<i>No details available</i>";
-                }
-                $("#"+id).append("<div id=\"detailsitem"+ id +"\" style=\"display: none;\"><p><dl><dt>Details</dt><dd>" + data[1] +  "</dd><dt>Due</dt><dd>" + data[5] +  "</dd><dt>Created</dt><dd>" + data[6] +  "</dd></dl></p></div>");
-                $("#detailsitem"+id).show("fast");
+                bootbox.prompt({
+                    title: "Tracking Link",
+                    value: "<?php echo PATH_TO_SCRIPT; ?>/get.php?id=" + data[1] + "",
+                    callback: function(result) {
+                    /* This has to be here for some reason */
+                    }
+                });
             }
         });
     });
