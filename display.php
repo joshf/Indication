@@ -16,13 +16,13 @@ if (mysqli_connect_errno()) {
 }
 
 if (isset($_GET["id"])) {
-    $id = mysqli_real_escape_string($con, $_GET["id"]);
+    $downloadid = mysqli_real_escape_string($con, $_GET["id"]);
 } else {
     die("Error: ID cannot be blank.");
 }
 
 //If ID exists, show count or else die
-$showinfo = mysqli_query($con, "SELECT `count` FROM `Data` WHERE `id` = \"$id\"");
+$showinfo = mysqli_query($con, "SELECT `count` FROM `Data` WHERE `downloadid` = \"$downloadid\"");
 $showinforesult = mysqli_fetch_assoc($showinfo);
 if (mysqli_num_rows($showinfo) != 0) {
     echo $showinforesult["count"];

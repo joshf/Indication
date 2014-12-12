@@ -37,6 +37,7 @@ if (mysqli_num_rows($getinfo) == 0) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<base href="<?php echo PATH_TO_SCRIPT; ?>/">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
