@@ -17,10 +17,6 @@ if (mysqli_connect_errno()) {
     die("Error: Could not connect to database (" . mysqli_connect_error() . "). Check your database settings are correct.");
 }
 
-if ($version == VERSION) {
-    die("Information: The latest version of Indication is already installed and an upgrade is not required.");
-}
-
 //Make sure we start at step 0
 if (!isset($_GET["step"])) {
     header("Location: ?step=0");
@@ -37,22 +33,40 @@ if (!in_array($step, $steps)) {
 //Run upgrade
 if ($step == "1") {
     
+    if ($version == VERSION) {
+        die("Information: The latest version of Indication is already installed and an upgrade is not required.");
+    }
+    
     $dbhost = DB_HOST;
     $dbuser = DB_USER;
     $dbpassword = DB_PASSWORD;
     $dbname = DB_NAME;
+    $salt = SALT;
+    $website = WEBSITE;
+    $pathtoscript = PATH_TO_SCRIPT;
+    $adcode = AD_CODE;
+    $countuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
+    $countuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
+    $ignoreadminstate = IGNORE_ADMIN_STATE;
 
     $updatestring = "<?php
-
+    
     //Database Settings
     define('DB_HOST', " . var_export($dbhost, true) . ");
     define('DB_USER', " . var_export($dbuser, true) . ");
     define('DB_PASSWORD', " . var_export($dbpassword, true) . ");
     define('DB_NAME', " . var_export($dbname, true) . ");
-
+    
     //Other Settings
+    define('SALT', " . var_export($salt2, true) . ");
+    define('WEBSITE', " . var_export($website, true) . ");
+    define('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");
+    define('AD_CODE', " . var_export($adcode, true) . ");
+    define('COUNT_UNIQUE_ONLY_STATE', " . var_export($countuniqueonlystate, true) . ");
+    define('COUNT_UNIQUE_ONLY_TIME', " . var_export($countuniqueonlytime, true) . ");
+    define('IGNORE_ADMIN_STATE', " . var_export($ignoreadminstate, true) . ");
     define('VERSION', " . var_export($version, true) . ");
-
+    
     ?>";
 
     //Write Config
@@ -64,8 +78,8 @@ if ($step == "1") {
     $api_key = substr(str_shuffle(MD5(microtime())), 0, 50);
 
     //Add to table
-    mysqli_query($con, "ALTER TABLE `Users` ADD `api_key` VARCHAR(200) NOT NULL; UPDATE `Users` SET `api_key` = \"$api_key\";");
-
+    mysqli_query($con, "ALTER TABLE `Users` ADD `api_key` VARCHAR(200) NOT NULL; UPDATE `Users` SET `api_key` = \"$api_key\"; ALTER TABLE `Data` CHANGE `id` `downloadid` VARCHAR(25); ALTER TABLE `Data` ADD `id` SMALLINT(10) NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`id`);");
+    
     mysqli_close($con);
 
     //Generate nonce
