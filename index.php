@@ -339,6 +339,17 @@ $(document).ready(function() {
                 $(".form-group:eq(3)").append("<span class=\"help-block\">A URL is required</span>");
             }
             haserrors = true;
+        } else {
+            $(".form-group:eq(3)").removeClass("has-error");
+            $(".help-block").remove();
+            url = $("#url").val();
+            if (!/(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?$/i.test(url)) {
+                if (!$(".form-group:eq(3)").hasClass("has-error")) {
+                    $(".form-group:eq(3)").addClass("has-error");
+                    $(".form-group:eq(3)").append("<span class=\"help-block\">Invalid URL</span>");
+                }
+                haserrors = true;
+            }
         }
         if (haserrors == true) {
             return false;
@@ -406,6 +417,17 @@ $(document).ready(function() {
                 $(".form-group:eq(8)").append("<span class=\"help-block\">A URL is required</span>");
             }
             haserrors = true;
+        } else {
+            $(".form-group:eq(8)").removeClass("has-error");
+            $(".help-block").remove();
+            url = $("#editurl").val();
+            if (!/(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?$/i.test(url)) {
+                if (!$(".form-group:eq(8)").hasClass("has-error")) {
+                    $(".form-group:eq(8)").addClass("has-error");
+                    $(".form-group:eq(8)").append("<span class=\"help-block\">Invalid URL</span>");
+                }
+                haserrors = true;
+            }
         }
         if (haserrors == true) {
             return false;
