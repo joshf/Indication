@@ -46,8 +46,8 @@ if (mysqli_num_rows($getinfo) == 0) {
 <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
 body {
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 </style>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -57,17 +57,7 @@ body {
 <![endif]-->
 </head>
 <body>
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-<div class="container">
-<div class="navbar-header">
-<a class="navbar-brand" href="#">Indication</a>
-</div>
-</div>
-</div>
-<div class="container">
-<div class="page-header">
-<h1><?php echo $getinforesult["name"]; ?></h1>
-</div>		
+<div class="container">		
 <?php
 
 //Cookies don't like dots
@@ -122,25 +112,32 @@ if (isset($_POST["password"])) {
 switch ($case) {
     case "showads":
         $adcode = htmlspecialchars_decode(AD_CODE); 
-        echo "<p>$adcode</p><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><a class=\"btn btn-default pull-right\" href=\"" . $getinforesult["url"] . "\">Get Download</a>";
+        echo "<p>$adcode</p><div class=\"btn-group pull-right\"><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><a class=\"btn btn-primary\" href=\"" . $getinforesult["url"] . "\">Get Download</a></div>";
         break;
     case "passwordprotected":
-        echo "<form role=\"form\" method=\"post\"><div class=\"form-group\"><label for=\"password\">Password</label><input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"Password...\"><div class=\"help-block\">This download is password protected, please enter the password you were given.</div></div><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><button type=\"submit\" class=\"btn btn-default pull-right\">Get Download</button></form>";
+        if (isset($_GET["error"])) {
+            echo "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><b>Error:</b> Incorrect password.</div>";
+        }
+        echo "<form role=\"form\" method=\"post\"><div class=\"form-group\"><label for=\"password\">Password</label><input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"Password...\"><div class=\"help-block\">This download is password protected, please enter the password you were given.</div></div><div class=\"btn-group pull-right\"><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><button type=\"submit\" class=\"btn btn-primary\">Get Download</button></div></form>";
         break;
     case "normal":
         header("Location: " . $getinforesult["url"] . "");
         exit;
         break;
     case "passwordprotectedandshowads":
+        if (isset($_GET["error"])) {
+            echo "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><b>Error:</b> Incorrect password.</div>";
+        }
         $adcode = htmlspecialchars_decode(AD_CODE);
-        echo "<p>$adcode</p><form role=\"form\" method=\"post\"><div class=\"form-group\"><label for=\"password\">Password</label><input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"Password...\"><div class=\"help-block\">This download is password protected, please enter the password you were given.</div></div><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><button type=\"submit\" class=\"btn btn-default pull-right\">Get Download</button></form>";
+        echo "<p>$adcode</p><form role=\"form\" method=\"post\"><div class=\"form-group\"><label for=\"password\">Password</label><input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"Password...\"><div class=\"help-block\">This download is password protected, please enter the password you were given.</div></div><div class=\"btn-group pull-right\"><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><button type=\"submit\" class=\"btn btn-primary\">Get Download</button></div></form>";
         break;
     case "passwordcorrect":
         header("Location: " . $getinforesult["url"] . "");
         exit;
         break;
     case "passwordincorrect":
-        echo "<div class=\"alert alert-danger\"><h4 class=\"alert-heading\">Error</h4><p>Incorrect password.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div>";
+        header("Location: get.php?id=$downloadid&error=true");
+        exit;
         break;
 } 
     
@@ -149,6 +146,9 @@ ob_end_flush();
 mysqli_close($con);
 
 ?>
+<br>
+<h6>Powered by <a href="https://github.com/joshf/Indication" target="_blank">Indication</a>
+<small><?php echo VERSION ?></small></h6>
 </div>
 <script src="assets/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
