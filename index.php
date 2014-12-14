@@ -118,6 +118,7 @@ if (mysqli_num_rows($getdownloads) != 0) {
     while($row = mysqli_fetch_assoc($getdownloads)) {
         $numberofitems++;
         echo "<li class=\"list-group-item\" id=\"" . $row["id"] . "\" >" . $row["name"] . "<div class=\"pull-right\">";
+        echo "<span class=\"badge\">" . $row["count"] . "</span> ";
         echo "<span class=\"trackinglink glyphicon glyphicon-zoom-in\" data-id=\"" . $row["id"] . "\"></span> ";
         echo "<span class=\"edit glyphicon glyphicon-edit\" data-id=\"" . $row["id"] . "\"></span> ";
         echo "<span class=\"delete glyphicon glyphicon-trash\" data-id=\"" . $row["id"] . "\"></span>";
