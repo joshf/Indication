@@ -130,11 +130,7 @@ if (mysqli_num_rows($getdownloads) != 0) {
 echo "</ul>";
 
 ?>
-<button type="button" id="launchaddmodal" class="btn btn-default">Add</button><br><br>
-<div class="alert alert-info">
-<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-<b>Info:</b> To edit, delete or show the tracking link for a download please select the radio button next to it.  
-</div>
+<p><button type="button" id="launchaddmodal" class="btn btn-default">Add</button><br><br>
 <div class="well">
 <?php
 
@@ -366,7 +362,7 @@ $(document).ready(function() {
                 show_notification("danger", "warning-sign", "Ajax query failed!");
             },
             success: function() {
-                show_notification("success", "ok", "Task added!", true);
+                show_notification("success", "ok", "Download added!", true);
                 $("#addformmodal").modal("hide");
             }
         });
@@ -444,7 +440,7 @@ $(document).ready(function() {
                 show_notification("danger", "warning-sign", "Ajax query failed!");
             },
             success: function() {
-                show_notification("success", "ok", "Task edited!", true);
+                show_notification("success", "ok", "Download edited!", true);
                 $("#editformmodal").modal("hide");
             }
         });
@@ -484,7 +480,7 @@ $(document).ready(function() {
                 show_notification("danger", "warning-sign", "Ajax query failed!");
             },
             success: function() {
-                show_notification("success", "ok", "Task deleted!", true);
+                show_notification("success", "ok", "Download deleted!", true);
             }
         });
     });
