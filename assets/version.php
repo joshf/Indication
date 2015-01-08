@@ -3,6 +3,6 @@
 //Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
 //Define version across the script
-$version = "6.0dev";
+$version = "6.0";
 
 ?>
