@@ -14,7 +14,6 @@ Features:
 * Supports displaying of ads before user is redirected to download
 * Full admin panel
 * Display download counts to users
-* Sort and search downloads using DataTables
 * Works well on mobile devices due to a responsive layout
 * Ignore counts when admin is logged in
 * Beautiful notifications system thanks to Bootstrap Notify
@@ -40,7 +39,7 @@ Installation:
 1. Create a new database using your web hosts control panel (for instructions on how to do this please contact your web host)
 2. Download and unzip Indication-xxxx.zip
 3. Upload the Indication folder to your server via FTP or your hosts control panel
-4. Open up http://yoursite.com/Indication/installer in your browser and enter your database/user details
+4. Open up http://yoursite.com/Indication/install in your browser and enter your database/user details
 5. Delete the "installer" folder from your server
 6. Login to the admin panel using the username and password you set during the install process
 7. Add your downloads
@@ -55,7 +54,7 @@ Replace ID with the ID name/number of your URL, for example: http://yoursite.com
 
 So instead of linking to http://yoursite.com/some/directory/mydownload1.zip, link to http://yoursite.com/Indication/get.php?id=mydownload1
 
-To find this URL select the download and click the "Show Tracking Link" button whilst on the admin page
+To find this URL select the download and click the Maginifying glass icon whilst on the admin page
 
 This will log the count of the download and redirect the user to the file or web page
 
@@ -82,7 +81,7 @@ echo $count;
 Administration:
 ---------------
 
-Open up Indication/admin to add new downloads, view statistics, update existing downloads or delete downloads. The admin panel can also be used to password protect downloads or to show you the tracking link for a download.
+Open up Indication to add new downloads, view statistics, update existing downloads or delete downloads. The admin panel can also be used to password protect downloads or to show you the tracking link for a download.
 
 Updating:
 ---------
@@ -94,7 +93,7 @@ Updating:
 5. Unzip the file
 6. Upload the unzipped Indication folder to your server via FTP or your hosts control panel
 7. Upload your config.php file into the Indication folder
-4. Open up http://yoursite.com/Indication/installer/upgrade.php in your browser and the upgrade process will start
+4. Open up http://yoursite.com/Indication/install/upgrade.php in your browser and the upgrade process will start
 9. You should now have the latest version of Indication
 
 N.B: The upgrade will only upgrade from the previous version of Indication (e.g 4.3 to 4.4), it cannot be used to upgrade from a historic version.
