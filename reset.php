@@ -114,7 +114,7 @@ body {
     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
     box-shadow: 0 1px 2px rgba(0,0,0,.05);
 }
-.form-reset input[type="text"] {
+.form-reset input[type="email"] {
     font-size: 16px;
     height: auto;
     margin-bottom: 5px;
