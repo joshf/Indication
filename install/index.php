@@ -50,10 +50,10 @@ if (isset($_POST["step_1"])) {
     }
     
     //Second salt for password protection
-    $randsalt2 = md5(uniqid(rand(), true));
-    $salt2 = substr($randsalt2, 0, 3);
+    $randsalt = md5(uniqid(rand(), true));
+    $salt = substr($randsalt, 0, 3);
     
-    $installstring = "<?php\n\n//Database Settings\ndefine('DB_HOST', " . var_export($dbhost, true) . ");\ndefine('DB_USER', " . var_export($dbuser, true) . ");\ndefine('DB_PASSWORD', " . var_export($dbpassword, true) . ");\ndefine('DB_NAME', " . var_export($dbname, true) . ");\n\n//Other Settings\ndefine('SALT', " . var_export($salt2, true) . ");\ndefine('WEBSITE', " . var_export($website, true) . ");\ndefine('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");\ndefine('AD_CODE', 'Ad code here...');\ndefine('COUNT_UNIQUE_ONLY_STATE', 'Enabled');\ndefine('COUNT_UNIQUE_ONLY_TIME', '24');\ndefine('IGNORE_ADMIN_STATE', 'Disabled');\ndefine('VERSION', " . var_export($version, true) . ");\n\n?>";
+    $installstring = "<?php\n\n//Database Settings\ndefine('DB_HOST', " . var_export($dbhost, true) . ");\ndefine('DB_USER', " . var_export($dbuser, true) . ");\ndefine('DB_PASSWORD', " . var_export($dbpassword, true) . ");\ndefine('DB_NAME', " . var_export($dbname, true) . ");\n\n//Other Settings\ndefine('SALT', " . var_export($salt, true) . ");\ndefine('WEBSITE', " . var_export($website, true) . ");\ndefine('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");\ndefine('AD_CODE', 'Ad code here...');\ndefine('COUNT_UNIQUE_ONLY_STATE', 'Enabled');\ndefine('COUNT_UNIQUE_ONLY_TIME', '24');\ndefine('IGNORE_ADMIN_STATE', 'Disabled');\ndefine('VERSION', " . var_export($version, true) . ");\n\n?>";
 
     //Write Config
     $configfile = fopen("../config.php", "w");
@@ -120,14 +120,8 @@ if (isset($_POST["step_2"])) {
     
     mysqli_query($con, $createuserstable);
     
-    //Check if a user already exists
-    $checkifuserexists = "SELECT user FROM `Users`;";
-    $resultcheckifuserexists = mysqli_query($con, $checkifuserexists);
-    if (mysqli_num_rows($resultcheckifuserexists) == 0) {
-        //Add user
-        mysqli_query($con, "INSERT INTO Users (user, password, salt, email, hash, api_key)
-        VALUES (\"$user\",\"$password\",\"$salt\",\"$email\",\"\",\"$api_key\")");
-    }
+    mysqli_query($con, "INSERT INTO Users (user, password, salt, email, hash, api_key)
+    VALUES (\"$user\",\"$password\",\"$salt\",\"$email\",\"\",\"$api_key\")");
         
     mysqli_close($con);
     

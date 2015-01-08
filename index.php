@@ -95,9 +95,8 @@ a.close.pull-right {
 </nav>
 <div class="container">
 <div class="page-header">
-<h1>Downloads
-<small><?php echo WEBSITE; ?></small></h1>
-</h1></div><div class="notifications top-right"></div>
+<h1>Downloads <small><?php echo WEBSITE; ?></small></h1>
+</div><div class="notifications top-right"></div>
 <noscript><div class="alert alert-info"><h4 class="alert-heading">Information</h4><p>Please enable JavaScript to use Indication. For instructions on how to do this, see <a href="http://www.activatejavascript.org" class="alert-link" target="_blank">here</a>.</p></div></noscript>
 <?php
 
@@ -111,6 +110,7 @@ if (!isset($_COOKIE["indicationupdatecheck"])) {
 
 $getdownloads = mysqli_query($con, "SELECT * FROM `Data`");
 
+//Set counter to zero
 $numberofitems = 0;
 
 echo "<ul class=\"list-group\">";
@@ -130,7 +130,7 @@ if (mysqli_num_rows($getdownloads) != 0) {
 echo "</ul>";
 
 ?>
-<p><button type="button" id="launchaddmodal" class="btn btn-default">Add</button><br><br>
+<button type="button" id="launchaddmodal" class="btn btn-default">Add</button><br><br>
 <div class="well">
 <?php
 
@@ -235,7 +235,7 @@ mysqli_close($con);
 <input type="password" class="form-control" id="editpassword" name="password" placeholder="Type a password..." required>
 </div>
 </div>
-<input type="hidden" id="action" name="action" value="edit">
+<input type="hidden" id="editaction" name="action" value="edit">
 <input type="hidden" id="editid" name="id">
 </form>
 </div>
