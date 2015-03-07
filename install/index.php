@@ -96,7 +96,7 @@ if (isset($_POST["step_2"])) {
     `id` smallint(10) NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(100) NOT NULL,
 	`downloadid` VARCHAR(25) NOT NULL,
-	`url` VARCHAR(200) NOT NULL,
+	`url` VARCHAR(2000) NOT NULL,
 	`count` INT(10) NOT NULL default \"0\",
 	`protect` TINYINT(1) NOT NULL default \"0\",
 	`password` VARCHAR(200),
