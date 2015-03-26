@@ -67,8 +67,8 @@ if (in_array($action, $actions)) {
 if (isset($_POST["name"])) {
     $name = mysqli_real_escape_string($con, $_POST["name"]);
 }
-if (isset($_POST["downloadid"])) {
-    $downloadid = mysqli_real_escape_string($con, $_POST["downloadid"]);
+if (isset($_POST["linkid"])) {
+    $linkid = mysqli_real_escape_string($con, $_POST["linkid"]);
 }
 if (isset($_POST["url"])) {
     $url = mysqli_real_escape_string($con, $_POST["url"]);
@@ -78,12 +78,12 @@ if (isset($_POST["count"])) {
 }
 
 if ($action == "add") {
-    if (empty($downloadid) || empty($url)) {
+    if (empty($linkid) || empty($url)) {
         die("Error: Data was empty!");
     }
 
     //Check if ID exists
-    $checkid = mysqli_query($con, "SELECT `downloadid` FROM `Data` WHERE `downloadid` = \"$downloadid\"");
+    $checkid = mysqli_query($con, "SELECT `linkid` FROM `Data` WHERE `linkid` = \"$linkid\"");
     $resultcheckid = mysqli_fetch_assoc($checkid); 
     if (mysqli_num_rows($checkid) != 0) {
         die("Error: ID Exists!");
@@ -111,10 +111,10 @@ if ($action == "add") {
         $showads = "0";
     }
 
-    mysqli_query($con, "INSERT INTO `Data` (`name`, `downloadid`, `url`, `count`, `protect`, `password`, `showads`)
-    VALUES (\"$name\",\"$downloadid\",\"$url\",\"$count\",\"$protect\",\"$password\",\"$showads\")");
+    mysqli_query($con, "INSERT INTO `Data` (`name`, `linkid`, `url`, `count`, `protect`, `password`, `showads`)
+    VALUES (\"$name\",\"$linkid\",\"$url\",\"$count\",\"$protect\",\"$password\",\"$showads\")");
 } elseif ($action == "edit") {
-    if (empty($downloadid) || empty($url)) {
+    if (empty($linkid) || empty($url)) {
         die("Error: Data was empty!");
     }
     
@@ -145,17 +145,17 @@ if ($action == "add") {
         $showads = "0";
     }
 
-    mysqli_query($con, "UPDATE `Data` SET `name` = \"$name\", `downloadid` = \"$downloadid\", `url` = \"$url\", `count` = \"$count\", `protect` = \"$protect\", `password` = \"$password\", `showads` = \"$showads\" WHERE `id` = \"$id\"");
+    mysqli_query($con, "UPDATE `Data` SET `name` = \"$name\", `linkid` = \"$linkid\", `url` = \"$url\", `count` = \"$count\", `protect` = \"$protect\", `password` = \"$password\", `showads` = \"$showads\" WHERE `id` = \"$id\"");
     
 } elseif ($action == "delete") {
     mysqli_query($con, "DELETE FROM `Data` WHERE `id` = \"$id\"");
 } elseif ($action == "details") {
-    $getdetails = mysqli_query($con, "SELECT `name`, `downloadid`, `url`, `count`, `showads`, `protect`, `password` FROM `Data` WHERE `id` = \"$id\"");
+    $getdetails = mysqli_query($con, "SELECT `name`, `linkid`, `url`, `count`, `showads`, `protect`, `password` FROM `Data` WHERE `id` = \"$id\"");
     $resultgetdetails = mysqli_fetch_assoc($getdetails);
     
     $arr = array();
     $arr[0] = $resultgetdetails["name"];
-    $arr[1] = $resultgetdetails["downloadid"];
+    $arr[1] = $resultgetdetails["linkid"];
     $arr[2] = $resultgetdetails["url"];
     $arr[3] = $resultgetdetails["count"];
     $arr[4] = $resultgetdetails["showads"];

@@ -19,15 +19,15 @@ if (mysqli_connect_errno()) {
 
 //Get the ID from $_GET OR $_POST
 if (isset($_GET["id"])) {
-    $downloadid = mysqli_real_escape_string($con, $_GET["id"]);
+    $linkid = mysqli_real_escape_string($con, $_GET["id"]);
 } elseif (isset($_POST["id"])) {
-    $downloadid = mysqli_real_escape_string($con, $_POST["id"]);
+    $linkid = mysqli_real_escape_string($con, $_POST["id"]);
 } else {
     die("Error: ID cannot be blank.");
 }
 
 //Check if ID exists
-$getinfo = mysqli_query($con, "SELECT `name`, `url` FROM `Data` WHERE `downloadid` = \"$downloadid\"");
+$getinfo = mysqli_query($con, "SELECT `name`, `url` FROM `Data` WHERE `linkid` = \"$linkid\"");
 $getinforesult = mysqli_fetch_assoc($getinfo);
 if (mysqli_num_rows($getinfo) == 0) {
     die("Error: ID does not exist.");
@@ -61,33 +61,33 @@ body {
 <?php
 
 //Cookies don't like dots
-$downloadidclean = str_replace(".", "_", $downloadid);
+$linkidclean = str_replace(".", "_", $linkid);
 
 //Ignore admin counts if setting has been enabled
 session_start();
 
 if (IGNORE_ADMIN_STATE == "Enabled" && isset($_SESSION["indication_user"])) {
-    echo "<div class=\"alert alert-info\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><b>Info:</b> You are currently logged in, downloads will not be counted.</div>";    
+    echo "<div class=\"alert alert-info\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><b>Info:</b> You are currently logged in, links will not be counted.</div>";    
 } else {
     if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
-        if (!isset($_COOKIE["indicationhasdownloaded_$downloadidclean"])) {
-            mysqli_query($con, "UPDATE `Data` SET `count` = `count`+1 WHERE `downloadid` = \"$downloadid\"");
-            setcookie("indicationhasdownloaded_$downloadidclean", time(), time()+3600*COUNT_UNIQUE_ONLY_TIME);
+        if (!isset($_COOKIE["indicationhaslinked_$linkidclean"])) {
+            mysqli_query($con, "UPDATE `Data` SET `count` = `count`+1 WHERE `linkid` = \"$linkid\"");
+            setcookie("indicationhaslinked_$linkidclean", time(), time()+3600*COUNT_UNIQUE_ONLY_TIME);
         }
     } else {
-        mysqli_query($con, "UPDATE `Data` SET `count` = `count`+1 WHERE `downloadid` = \"$downloadid\"");
+        mysqli_query($con, "UPDATE `Data` SET `count` = `count`+1 WHERE `linkid` = \"$linkid\"");
     }
 }
 
-//Check if download is password protected
-$checkifprotected = mysqli_query($con, "SELECT `protect`, `password` FROM `Data` WHERE `downloadid` = \"$downloadid\"");
+//Check if link is password protected
+$checkifprotected = mysqli_query($con, "SELECT `protect`, `password` FROM `Data` WHERE `linkid` = \"$linkid\"");
 $checkifprotectedresult = mysqli_fetch_assoc($checkifprotected);
 if ($checkifprotectedresult["protect"] == "1") {
     $case = "passwordprotected";
 }
 
 //Check if we should show ads
-$checkifadsshow = mysqli_query($con, "SELECT `showads` FROM `Data` WHERE `downloadid` = \"$downloadid\"");
+$checkifadsshow = mysqli_query($con, "SELECT `showads` FROM `Data` WHERE `linkid` = \"$linkid\"");
 $checkifadsshowresult = mysqli_fetch_assoc($checkifadsshow);
 if ($checkifadsshowresult["showads"] == "1") {
     $case = "showads";
@@ -112,13 +112,13 @@ if (isset($_POST["password"])) {
 switch ($case) {
     case "showads":
         $adcode = htmlspecialchars_decode(AD_CODE); 
-        echo "<p>$adcode</p><div class=\"btn-group pull-right\"><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><a class=\"btn btn-primary\" href=\"" . $getinforesult["url"] . "\">Get Download</a></div>";
+        echo "<p>$adcode</p><div class=\"btn-group pull-right\"><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><a class=\"btn btn-primary\" href=\"" . $getinforesult["url"] . "\">Get Link</a></div>";
         break;
     case "passwordprotected":
         if (isset($_GET["error"])) {
             echo "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><b>Error:</b> Incorrect password.</div>";
         }
-        echo "<form role=\"form\" method=\"post\"><div class=\"form-group\"><label for=\"password\">Password</label><input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"Password...\"><div class=\"help-block\">This download is password protected, please enter the password you were given.</div></div><div class=\"btn-group pull-right\"><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><button type=\"submit\" class=\"btn btn-primary\">Get Download</button></div></form>";
+        echo "<form role=\"form\" method=\"post\"><div class=\"form-group\"><label for=\"password\">Password</label><input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"Password...\"><div class=\"help-block\">This link is password protected, please enter the password you were given.</div></div><div class=\"btn-group pull-right\"><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><button type=\"submit\" class=\"btn btn-primary\">Get Link</button></div></form>";
         break;
     case "normal":
         header("Location: " . $getinforesult["url"] . "");
@@ -129,14 +129,14 @@ switch ($case) {
             echo "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><b>Error:</b> Incorrect password.</div>";
         }
         $adcode = htmlspecialchars_decode(AD_CODE);
-        echo "<p>$adcode</p><form role=\"form\" method=\"post\"><div class=\"form-group\"><label for=\"password\">Password</label><input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"Password...\"><div class=\"help-block\">This download is password protected, please enter the password you were given.</div></div><div class=\"btn-group pull-right\"><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><button type=\"submit\" class=\"btn btn-primary\">Get Download</button></div></form>";
+        echo "<p>$adcode</p><form role=\"form\" method=\"post\"><div class=\"form-group\"><label for=\"password\">Password</label><input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"Password...\"><div class=\"help-block\">This link is password protected, please enter the password you were given.</div></div><div class=\"btn-group pull-right\"><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><button type=\"submit\" class=\"btn btn-primary\">Get Link</button></div></form>";
         break;
     case "passwordcorrect":
         header("Location: " . $getinforesult["url"] . "");
         exit;
         break;
     case "passwordincorrect":
-        header("Location: get.php?id=$downloadid&error=true");
+        header("Location: get.php?id=$linkid&error=true");
         exit;
         break;
 } 

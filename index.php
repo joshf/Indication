@@ -78,7 +78,7 @@ a.close.pull-right {
 <div class="navbar-collapse collapse" id="navbar-collapse">
 <div class="navbar-form navbar-left" role="search">
 <div class="form-group">
-<input type="text" class="form-control" id="search" placeholder="Search downloads">
+<input type="text" class="form-control" id="search" placeholder="Search links">
 </div>
 </div>
 <ul class="nav navbar-nav navbar-right">
@@ -95,7 +95,7 @@ a.close.pull-right {
 </nav>
 <div class="container">
 <div class="page-header">
-<h1>Downloads <small><?php echo WEBSITE; ?></small></h1>
+<h1>Links <small><?php echo WEBSITE; ?></small></h1>
 </div><div class="notifications top-right"></div>
 <noscript><div class="alert alert-info"><h4 class="alert-heading">Information</h4><p>Please enable JavaScript to use Indication. For instructions on how to do this, see <a href="http://www.activatejavascript.org" class="alert-link" target="_blank">here</a>.</p></div></noscript>
 <?php
@@ -108,14 +108,14 @@ if (!isset($_COOKIE["indicationupdatecheck"])) {
     }
 }
 
-$getdownloads = mysqli_query($con, "SELECT * FROM `Data`");
+$getlinks = mysqli_query($con, "SELECT * FROM `Data`");
 
 //Set counter to zero
 $numberofitems = 0;
 
 echo "<ul class=\"list-group\">";
-if (mysqli_num_rows($getdownloads) != 0) {
-    while($row = mysqli_fetch_assoc($getdownloads)) {
+if (mysqli_num_rows($getlinks) != 0) {
+    while($row = mysqli_fetch_assoc($getlinks)) {
         $numberofitems++;
         echo "<li class=\"list-group-item\" id=\"" . $row["id"] . "\" >" . $row["name"] . "<div class=\"pull-right\">";
         echo "<span class=\"badge\">" . $row["count"] . "</span> ";
@@ -125,7 +125,7 @@ if (mysqli_num_rows($getdownloads) != 0) {
         echo "</div></li>";
     }
 } else {
-    echo "<li class=\"list-group-item\">No downloads to show</li>";
+    echo "<li class=\"list-group-item\">No links to show</li>";
 }
 echo "</ul>";
 
@@ -134,16 +134,16 @@ echo "</ul>";
 <div class="well">
 <?php
 
-$getnumberofdownloads = mysqli_query($con, "SELECT COUNT(id) FROM `Data`");
-$resultgetnumberofdownloads = mysqli_fetch_assoc($getnumberofdownloads);
-echo "<i class=\"glyphicon glyphicon-list-alt\"></i> <b>" . $numberofitems . "</b> items<br>";
+$getnumberoflinks = mysqli_query($con, "SELECT COUNT(id) FROM `Data`");
+$resultgetnumberoflinks = mysqli_fetch_assoc($getnumberoflinks);
+echo "<i class=\"glyphicon glyphicon glyphicon-list\"></i> <b>" . $numberofitems . "</b> items<br>";
 
-$gettotalnumberofdownloads = mysqli_query($con, "SELECT SUM(count) FROM `Data`");
-$resultgettotalnumberofdownloads = mysqli_fetch_assoc($gettotalnumberofdownloads);
-if (is_null($resultgettotalnumberofdownloads["SUM(count)"])) {
-    echo "<i class=\"glyphicon glyphicon-download\"></i> <b>0</b> total downloads";
+$gettotalnumberoflinks = mysqli_query($con, "SELECT SUM(count) FROM `Data`");
+$resultgettotalnumberoflinks = mysqli_fetch_assoc($gettotalnumberoflinks);
+if (is_null($resultgettotalnumberoflinks["SUM(count)"])) {
+    echo "<i class=\"glyphicon glyphicon-link\"></i> <b>0</b> total clicks";
 } else {
-    echo "<i class=\"glyphicon glyphicon-download\"></i> <b>" . $resultgettotalnumberofdownloads["SUM(count)"] . "</b> total downloads";
+    echo "<i class=\"glyphicon glyphicon-link\"></i> <b>" . $resultgettotalnumberoflinks["SUM(count)"] . "</b> total clicks";
 }
 
 mysqli_close($con);
@@ -156,7 +156,7 @@ mysqli_close($con);
 <div class="modal-content">
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-<h4 class="modal-title" id="addformmodaltitle">Add Download</h4>
+<h4 class="modal-title" id="addformmodaltitle">Add Link</h4>
 </div>
 <div class="modal-body">
 <form id="addform" role="form" autocomplete="off">
@@ -164,7 +164,7 @@ mysqli_close($con);
 <input type="text" class="form-control" id="name" name="name" placeholder="Type a name..." required>
 </div>
 <div class="form-group">
-<input type="text" class="form-control" id="downloadid" name="downloadid" placeholder="Type a ID..." required>
+<input type="text" class="form-control" id="linkid" name="linkid" placeholder="Type a ID..." required>
 </div>
 <div class="form-group">
 <input type="text" class="form-control" id="url" name="url" placeholder="Type a URL..." required>
@@ -204,7 +204,7 @@ mysqli_close($con);
 <div class="modal-content">
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-<h4 class="modal-title" id="editformmodaltitle">Edit Download</h4>
+<h4 class="modal-title" id="editformmodaltitle">Edit Link</h4>
 </div>
 <div class="modal-body">
 <form id="editform" role="form" autocomplete="off">
@@ -212,7 +212,7 @@ mysqli_close($con);
 <input type="text" class="form-control" id="editname" name="name" placeholder="Type a name..." required>
 </div>
 <div class="form-group">
-<input type="text" class="form-control" id="editdownloadid" name="downloadid" placeholder="Type a ID..." required>
+<input type="text" class="form-control" id="editlinkid" name="linkid" placeholder="Type a ID..." required>
 </div>
 <div class="form-group">
 <input type="text" class="form-control" id="editurl" name="url" placeholder="Type a URL..." required>
@@ -272,7 +272,7 @@ $(document).ready(function() {
             }            
         });
         if (count === 0) {
-            $(".list-group").prepend("<li class=\"list-group-item\" id=\"search-error\">No downloads found</li>");
+            $(".list-group").prepend("<li class=\"list-group-item\" id=\"search-error\">No links found</li>");
         }
         document.title = "Indication (" + count + ")";
     });
@@ -323,7 +323,7 @@ $(document).ready(function() {
     });
     $("#add").click(function() {
         var haserrors = false;
-        if ($("#downloadid").val() == "") {
+        if ($("#linkid").val() == "") {
             if (!$(".form-group:eq(2)").hasClass("has-error")) {
                 $(".form-group:eq(2)").addClass("has-error");
                 $(".form-group:eq(2)").append("<span class=\"help-block\">ID cannot be empty</span>");
@@ -362,7 +362,7 @@ $(document).ready(function() {
                 show_notification("danger", "warning-sign", "Ajax query failed!");
             },
             success: function() {
-                show_notification("success", "ok", "Download added!", true);
+                show_notification("success", "ok", "Link added!", true);
                 $("#addformmodal").modal("hide");
             }
         });
@@ -383,7 +383,7 @@ $(document).ready(function() {
                 /* Stop auto checked */
                 $("#editshowadsstate").prop("checked", false);
                 $("#editname").val(data[0]);
-                $("#editdownloadid").val(data[1]);
+                $("#editlinkid").val(data[1]);
                 $("#editurl").val(data[2]);
                 $("#editcount").val(data[3]);
                 if (data[4] == "1") {
@@ -401,7 +401,7 @@ $(document).ready(function() {
     });
     $("#edit").click(function() {
         var haserrors = false;
-        if ($("#editdownloadid").val() == "") {
+        if ($("#editlinkid").val() == "") {
             if (!$(".form-group:eq(7)").hasClass("has-error")) {
                 $(".form-group:eq(7)").addClass("has-error");
                 $(".form-group:eq(7)").append("<span class=\"help-block\">ID cannot be empty</span>");
@@ -440,7 +440,7 @@ $(document).ready(function() {
                 show_notification("danger", "warning-sign", "Ajax query failed!");
             },
             success: function() {
-                show_notification("success", "ok", "Download edited!", true);
+                show_notification("success", "ok", "Link edited!", true);
                 $("#editformmodal").modal("hide");
             }
         });
@@ -460,7 +460,15 @@ $(document).ready(function() {
             success: function(data) {
                 bootbox.prompt({
                     title: "Tracking Link",
-                    value: "<?php echo PATH_TO_SCRIPT; ?>/get.php?id=" + data[1] + "",
+                    <?php
+                    if (CUSTOM_URL_STATE == "Enabled") {
+                        if (CUSTOM_URL != "") {
+                            echo "value: \"" . CUSTOM_URL . "/\" + data[1] + \"\",\n";
+                        }
+                    } else {
+                        echo "value: \"" . PATH_TO_SCRIPT . "/get.php?id=\" + data[1] + \"\",\n";
+                    }
+                    ?>
                     callback: function(result) {
                     /* This has to be here for some reason */
                     }
@@ -480,7 +488,7 @@ $(document).ready(function() {
                 show_notification("danger", "warning-sign", "Ajax query failed!");
             },
             success: function() {
-                show_notification("success", "ok", "Download deleted!", true);
+                show_notification("success", "ok", "Link deleted!", true);
             }
         });
     });

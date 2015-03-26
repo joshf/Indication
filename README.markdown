@@ -1,19 +1,19 @@
 Indication Readme
 ================
 
-Indication is a PHP download counter. You can use it to track the number of times a link has been clicked or the number of times a file has been downloaded. Indication can also be used to hide affiliate links.
+Indication is a PHP link counter. You can use it to track the number of times a link has been clicked or the number of times a file has been linked. Indication can also be used to hide affiliate links.
 
-The script uses a SQL database. It comes with an admin panel where you can view how many times a download has been accessed. You can also easily add, edit or remove downloads using the panel. Indication can also display the current count for a download on any web page.
+The script uses a SQL database. It comes with an admin panel where you can view how many times a link has been accessed. You can also easily add, edit or remove links using the panel. Indication can also display the current count for a link on any web page.
 
 Features:
 ---------
 
-* Password protect downloads
+* Password protect links
 * Can be used to track links aswell
 * Count unique visitors to avoid multiple counts from same user
-* Supports displaying of ads before user is redirected to download
+* Supports displaying of ads before user is redirected to link
 * Full admin panel
-* Display download counts to users
+* Display link counts to users
 * Works well on mobile devices due to a responsive layout
 * Ignore counts when admin is logged in
 * Beautiful notifications system thanks to Bootstrap Notify
@@ -42,25 +42,25 @@ Installation:
 4. Open up http://yoursite.com/Indication/install in your browser and enter your database/user details
 5. Delete the "installer" folder from your server
 6. Login to the admin panel using the username and password you set during the install process
-7. Add your downloads
+7. Add your links
 8. Indication should now be set up
 
 Usage:
 ------
 
-The main script is called like this: /get.php?id=mydownload1
+The main script is called like this: /get.php?id=mylink1
 
-Replace ID with the ID name/number of your URL, for example: http://yoursite.com/Indication/get.php?id=mydownload1
+Replace ID with the ID name/number of your URL, for example: http://yoursite.com/Indication/get.php?id=mylink1
 
-So instead of linking to http://yoursite.com/some/directory/mydownload1.zip, link to http://yoursite.com/Indication/get.php?id=mydownload1
+So instead of linking to http://yoursite.com/some/directory/mylink1.zip, link to http://yoursite.com/Indication/get.php?id=mylink1
 
-To find this URL select the download and click the Maginifying glass icon whilst on the admin page
+To find this URL select the link and click the Maginifying glass icon whilst on the admin page
 
-This will log the count of the download and redirect the user to the file or web page
+This will log the count of the link and redirect the user to the file or web page
 
-This script can also be called via $_POST just set the name of your form to "id" and the value to the ID you wish to download
+This script can also be called via $_POST just set the name of your form to "id" and the value to the ID you wish to link
 
-To show the download count for an ID, call http://yoursite.com/Indication/display.php?id=mydownload1. This could be done by linking directly to display.php, using an iframe or by using a PHP include
+To show the link count for an ID, call http://yoursite.com/Indication/display.php?id=mylink1. This could be done by linking directly to display.php, using an iframe or by using a PHP include
 
 **Examples:**
 
@@ -68,20 +68,20 @@ To show the download count for an ID, call http://yoursite.com/Indication/displa
 <?php
 require_once("Indication/config.php");
 
-$id = "download1";
+$id = "link1";
 $count = file_get_contents("" . PATH_TO_SCRIPT . "/display.php?id=$id");
 echo $count;
 ?>
 ```
 
 ```html
-<iframe src="Indication/display.php?id=download1" width="80" height="25" frameBorder="0" scrolling="no"></iframe>
+<iframe src="Indication/display.php?id=link1" width="80" height="25" frameBorder="0" scrolling="no"></iframe>
 ```
 
 Administration:
 ---------------
 
-Open up Indication to add new downloads, view statistics, update existing downloads or delete downloads. The admin panel can also be used to password protect downloads or to show you the tracking link for a download.
+Open up Indication to add new links, view statistics, update existing links or delete links. The admin panel can also be used to password protect links or to show you the tracking link for a link.
 
 Updating:
 ---------

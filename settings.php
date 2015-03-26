@@ -35,7 +35,9 @@ $currentpathtoscript = PATH_TO_SCRIPT;
 $currentadcode = htmlspecialchars_decode(AD_CODE);
 $currentcountuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
 $currentcountuniqueonlytime = COUNT_UNIQUE_ONLY_TIME;
-$currentignoreadminstate = IGNORE_ADMIN_STATE; 
+$currentignoreadminstate = IGNORE_ADMIN_STATE;
+$currentcustomurlstate = CUSTOM_URL_STATE;
+$currentcustomurl = CUSTOM_URL; 
 
 
 if (!empty($_POST)) {
@@ -64,13 +66,21 @@ if (!empty($_POST)) {
     $countuniqueonlystate = $_POST["countuniqueonlystate"];
     $countuniqueonlytime = $_POST["countuniqueonlytime"];
     $ignoreadminstate = $_POST["ignoreadminstate"];
+    $customurlstate = $_POST["customurlstate"];
+    $customurl = $_POST["customurl"];
 
     //Remember previous settings
     if (empty($adcode)) {
         $adcode = $currentadcode;
     }
+    if (empty($countuniqueonlytime)) {
+        $adcode = $currentcountuniqueonlytime;
+    }
+    if (empty($customurl)) {
+        $customurl = $currentcustomurl;
+    }
 
-    $settingsstring = "<?php\n\n//Database Settings\ndefine('DB_HOST', '" . DB_HOST . "');\ndefine('DB_USER', '" . DB_USER . "');\ndefine('DB_PASSWORD', '" . DB_PASSWORD . "');\ndefine('DB_NAME', '" . DB_NAME . "');\n\n//Other Settings\ndefine('SALT', '" . SALT . "');\ndefine('WEBSITE', " . var_export($website, true) . ");\ndefine('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");\ndefine('AD_CODE', " . var_export($adcode, true) . ");\ndefine('COUNT_UNIQUE_ONLY_STATE', " . var_export($countuniqueonlystate, true) . ");\ndefine('COUNT_UNIQUE_ONLY_TIME', " . var_export($countuniqueonlytime, true) . ");\ndefine('IGNORE_ADMIN_STATE', " . var_export($ignoreadminstate, true) . ");\ndefine('VERSION', '" . VERSION . "');\n\n?>";
+    $settingsstring = "<?php\n\n//Database Settings\ndefine('DB_HOST', '" . DB_HOST . "');\ndefine('DB_USER', '" . DB_USER . "');\ndefine('DB_PASSWORD', '" . DB_PASSWORD . "');\ndefine('DB_NAME', '" . DB_NAME . "');\n\n//Other Settings\ndefine('SALT', '" . SALT . "');\ndefine('WEBSITE', " . var_export($website, true) . ");\ndefine('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");\ndefine('AD_CODE', " . var_export($adcode, true) . ");\ndefine('COUNT_UNIQUE_ONLY_STATE', " . var_export($countuniqueonlystate, true) . ");\ndefine('COUNT_UNIQUE_ONLY_TIME', " . var_export($countuniqueonlytime, true) . ");\ndefine('IGNORE_ADMIN_STATE', " . var_export($ignoreadminstate, true) . ");\ndefine('CUSTOM_URL_STATE', " . var_export($customurlstate, true) . ");\ndefine('CUSTOM_URL', " . var_export($customurl, true) . ");\ndefine('VERSION', '" . VERSION . "');\n\n?>";
 
     //Update Settings
     mysqli_query($con, "UPDATE Users SET `user` = \"$user\", `password` = \"$password\", `email` = \"$email\", `salt` = \"$salt\" WHERE `user` = \"" . $resultgetusersettings["user"] . "\"");
@@ -167,7 +177,7 @@ a.close.pull-right {
 <input type="text" class="form-control" id="pathtoscript" name="pathtoscript" value="<?php echo $currentpathtoscript; ?>" placeholder="Type the path to Indication..." pattern="(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-?]*)*\/?" data-validation-pattern-message="Please enter a valid URL" required>
 </div>
 <h4>Ad Code</h4>
-<p>Show an advert before user can continue to their download. This can be changed on a per download basis.</p>
+<p>Show an advert before user can continue to their link. This can be changed on a per link basis.</p>
 <div class="alert alert-warning">
 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 <b>Warning:</b> On some server configurations using HTML code here may produce errors.</div>
@@ -187,12 +197,18 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 }   
 ?> 
 </div>
+<?php
+if ($currentcountuniqueonlystate == "Enabled" ) {
+?>
 <div class="form-group">
 <label for="countuniqueonlytime">Time to consider a user unique (hours)</label>
 <input type="number" class="form-control" id="countuniqueonlytime" name="countuniqueonlytime" value="<?php echo $currentcountuniqueonlytime; ?>" placeholder="Enter a time..." required>
 </div>
+<?php
+}
+?>
 <h4>Ignore Admin</h4>
-<p>This settings prevents downloads being counted when you are logged in to Indication.</p>
+<p>This settings prevents links being counted when you are logged in to Indication.</p>
 <div class="radio">
 <?php
 if ($currentignoreadminstate == "Enabled" ) {
@@ -204,6 +220,29 @@ if ($currentignoreadminstate == "Enabled" ) {
 }   
 ?> 
 </div>
+<h4>Custom URL</h4>
+<p>Allows you to use a custom get url (for clean urls).</p>
+<div class="radio">
+<?php
+if ($currentcustomurlstate == "Enabled" ) {
+    echo "<label><input type=\"radio\" id=\"customurlstateenable\" name=\"customurlstate\" value=\"Enabled\" checked=\"checked\"> Enabled</label></div>
+        <div class=\"radio\"><label><input type=\"radio\" id=\"customurlstatedisable\" name=\"customurlstate\" value=\"Disabled\"> Disabled</label>";    
+} else {
+    echo "<label><input type=\"radio\" id=\"customurlstateenable\" name=\"customurlstate\" value=\"Enabled\"> Enabled</label></div>
+     <div class=\"radio\"><label><input type=\"radio\" id=\"customurlstatedisable\" name=\"customurlstate\" value=\"Disabled\" checked=\"checked\"> Disabled</label>";   
+}   
+?> 
+</div>
+<?php
+if ($currentcustomurlstate == "Enabled" ) {
+?>
+<div class="form-group">
+<label for="customurl">Custom URL</label>
+<input type="text" class="form-control" id="customurl" name="customurl" value="<?php echo $currentcustomurl; ?>" placeholder="Enter a custom URL..." required>
+</div>
+<?php
+}
+?>
 <button type="submit" class="btn btn-default">Save</button>
 </form>
 <br>
