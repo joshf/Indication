@@ -83,7 +83,7 @@ $resultgetusersettings = mysqli_fetch_assoc($getusersettings);
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 <h1 class="page-header">Export</h1>
 <p>Export your data into CSV format for use in other applications</p>
-<input class="btn btn-default" id="export" type="button" value="Export"> <span id="spinner"></span>
+<input class="btn btn-default" id="export" type="button" value="Export">
 </div>
 </div>
 </div>
@@ -94,7 +94,6 @@ $resultgetusersettings = mysqli_fetch_assoc($getusersettings);
 <script type="text/javascript">
 $(document).ready(function() {
     $("#export").click(function() {
-        $("#spinner").addClass("glyphicon glyphicon-refresh glyphicon-spin");
         $.ajax({
             type: "POST",
             url: "worker.php",
@@ -109,7 +108,7 @@ $(document).ready(function() {
                 });
             },
             success: function() {
-                $("#spinner").removeClass("glyphicon glyphicon-refresh glyphicon-spin");
+                window.location.href = "?file.csv";
             }
         });
     });
