@@ -162,7 +162,7 @@ if ($action == "add") {
     );
 
     echo json_encode($data);
-}else {
+} else {
     die("Error: Action not recognised!");
 }
 
