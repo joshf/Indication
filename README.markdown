@@ -68,9 +68,9 @@ Indication exposes link data via a JSON array. You will need you api key which c
 {"id":"1","name":"Link 1","abbreviation":"link1","url":"http:\/\/mysite.com/page","count":"384","protect":"1"}
 ```
 
-```php
-
 **PHP Example:**
+
+```php
 
 <?php
 
