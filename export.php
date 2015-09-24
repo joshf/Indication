@@ -83,7 +83,23 @@ $resultgetusersettings = mysqli_fetch_assoc($getusersettings);
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 <h1 class="page-header">Export</h1>
 <p>Export your data into CSV format for use in other applications</p>
-<input class="btn btn-default" id="export" type="button" value="Export"> <a href="assets/export.csv" target="_blank" class="btn btn-default hidden" id="get" type="button">Get File</a>
+<button class="btn btn-default" id="export">Export</button> <a href="data/export-<?php echo date("d-m-y"); ?>.csv" target="_blank" class="btn btn-default hidden" id="get">Get File</a>
+<h2>Previous Data</h2>
+<ul class="list-group">
+<?php
+    
+if ($handle = opendir('data')) {
+    while (false !== ($entry = readdir($handle))) {
+        if ($entry != ".DS_Store" && $entry != ".." && $entry != ".") {
+            $name = str_replace(".csv", "", $entry);
+            echo "<li class=\"list-group-item\"><a href=\"data/$entry\">$name</a></li>";
+        }
+    }
+    closedir($handle);
+}
+
+?>
+</ul>
 </div>
 </div>
 </div>

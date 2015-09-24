@@ -154,10 +154,16 @@ if ($action == "add") {
     echo $api;
 } elseif ($action == "export") {
     
-    header("Content-Type: text/csv; charset=utf-8");
-    header("Content-Disposition: attachment; filename=assets/export.csv");
+    $data = date("d-m-y");
     
-    $output = fopen("assets/export.csv", "w");
+    header("Content-Type: text/csv; charset=utf-8");
+    header("Content-Disposition: attachment; filename=data/export-$data.csv");
+    
+    if (!file_exists("data")) {
+        mkdir("data");
+    }
+    
+    $output = fopen("data/export-$data.csv", "w");
 
     fputcsv($output, array("Link_ID", "Name", "Abbreviation", "Url", "Count", "Protect", "Password"));
 
