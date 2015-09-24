@@ -15,8 +15,12 @@ if (mysqli_connect_errno()) {
 }
 
 session_start();
-if (isset($_POST["api_key"])) {
-    $api = mysqli_real_escape_string($con, $_POST["api_key"]);
+if (isset($_POST["api_key"]) || isset($_GET["api_key"])) {
+    if (isset($_POST["action"])) {
+        $api = mysqli_real_escape_string($con, $_POST["api_key"]);
+    } elseif (isset($_GET["action"])) {
+        $api = mysqli_real_escape_string($con, $_GET["api_key"]);
+    }
     if (empty($api)) {
         die("Error: No API key passed!");
     }
@@ -44,15 +48,21 @@ $resultgetusersettings = mysqli_fetch_assoc($getusersettings);
 
 if (isset($_POST["action"])) {
     $action = $_POST["action"];
+} elseif (isset($_GET["action"])) {
+    $action = $_GET["action"];
 } else {
 	die("Error: No action passed!");
 }
 
 //Check if ID exists
-$actions = array("edit", "delete");
+$actions = array("edit", "delete", "info");
 if (in_array($action, $actions)) {
-    if (isset($_POST["id"])) {
-        $id = mysqli_real_escape_string($con, $_POST["id"]);
+    if (isset($_POST["id"]) || isset($_GET["id"])) {
+        if (isset($_POST["action"])) {
+            $id = mysqli_real_escape_string($con, $_POST["id"]);
+        } elseif (isset($_GET["action"])) {
+            $id = mysqli_real_escape_string($con, $_GET["id"]);
+        }
         $checkid = mysqli_query($con, "SELECT `id` FROM `links` WHERE `id` = \"$id\"");
         if (mysqli_num_rows($checkid) == 0) {
         	die("Error: ID does not exist!");
@@ -137,7 +147,22 @@ if ($action == "add") {
     $api = substr(str_shuffle(MD5(microtime())), 0, 50);
     mysqli_query($con, "UPDATE `Users` SET `api_key` = \"$api\" WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
     echo $api;
-} else {
+} elseif ($action == "info") {
+    
+    $getdata = mysqli_query($con, "SELECT `id`, `name`, `abbreviation`, `url`, `count`, `protect` FROM `links` WHERE `id` = \"$id\"");
+    $resultgetdata = mysqli_fetch_assoc($getdata); 
+    
+    $data = array(
+        "id" => $resultgetdata["id"],
+        "name" => $resultgetdata["name"],
+        "abbreviation" => $resultgetdata["abbreviation"],
+        "url" => $resultgetdata["url"],
+        "count" => $resultgetdata["count"],
+        "protect" => $resultgetdata["protect"]
+    );
+
+    echo json_encode($data);
+}else {
     die("Error: Action not recognised!");
 }
 

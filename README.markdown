@@ -60,6 +60,28 @@ This will log the count of the link and redirect the user to the file or web pag
 
 This script can also be called via $_POST just set the name of your form to "id" and the value to the abbreviation you wish to link
 
+Indication exposes link data via a JSON array. You will need you api key which can be found on the setings page. You need to pass the action "info" and the id of the link you want information for.
+
+**Example response:**
+
+```json
+{"id":"1","name":"Link 1","abbreviation":"link1","url":"http:\/\/mysite.com/page","count":"384","protect":"1"}
+```
+
+```php
+
+**PHP Example:**
+
+<?php
+
+$test = file_get_contents("http://path.to/Indication/worker.php?api_key=API_KEY&action=info&id=id");
+$test_resp = json_decode($test);
+$count = $test_resp->count;
+
+echo $count;
+
+?>
+```
 
 Administration:
 ---------------
