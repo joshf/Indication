@@ -160,8 +160,9 @@ if ($action == "add") {
         "count" => $resultgetdata["count"],
         "protect" => $resultgetdata["protect"]
     );
-
-    echo json_encode($data);
+    
+    echo json_encode(array("data" => $data));
+    
 } else {
     die("Error: Action not recognised!");
 }
