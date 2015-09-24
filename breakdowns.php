@@ -161,10 +161,11 @@ while($referrers = mysqli_fetch_assoc($getreferrers)) {
     echo "<li class=\"list-group-item\">";
     if ($referrers["referrer"] == "") {
         $referrer = "Blank referrer";
+        echo "<span class=\"badge\">" . $referrers["count"] . "</span>" . $referrer . "";
     } else {
         $referrer = $referrers["referrer"];
+        echo "<span class=\"badge\">" . $referrers["count"] . "</span><a href=\"" . $referrers["referrer"] . "\">" . $referrer . "</a>";
     }
-    echo "<span class=\"badge\">" . $referrers["count"] . "</span><a href=\"" . $referrers["referrer"] . "\">" . $referrer . "</a>";
     echo "</li>";
 }
     

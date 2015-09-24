@@ -36,7 +36,7 @@ $abbreviationclean = str_replace(".", "_", $abbreviation);
 session_start();
 
 if (!isset($_SESSION["indication_user"])) {
-    $link_id = $getinforesult["id"];
+    $id = $getinforesult["id"];
     
     //Get IP
     $ip = $_SERVER["REMOTE_ADDR"];
@@ -53,26 +53,26 @@ if (!isset($_SESSION["indication_user"])) {
             mysqli_query($con, "UPDATE `links` SET `count` = `count`+1 WHERE `abbreviation` = \"$abbreviation\"");
             setcookie("ihl_$abbreviationclean", "true", time()+3600);
             mysqli_query($con, "INSERT INTO `counts` (link_id, date, ip, referrer)
-            VALUES (\"$link_id\",CURDATE(),\"$ip\",\"$referrer\")");
+            VALUES (\"$id\",CURDATE(),\"$ip\",\"$referrer\")");
         }
     } else {
         mysqli_query($con, "UPDATE `links` SET `count` = `count`+1 WHERE `abbreviation` = \"$abbreviation\"");
         mysqli_query($con, "INSERT INTO `counts` (link_id, date, ip, referrer)
-        VALUES (\"$link_id\",CURDATE(),\"$ip\",\"$referrer\")");
+        VALUES (\"$id\",CURDATE(),\"$ip\",\"$referrer\")");
     }
     
 }
 
 //Make sure we balance
-$gettotalfromcounts = mysqli_query($con, "SELECT COUNT(id) AS `count` FROM `counts` WHERE `link_id` = \"$link_id\"");
+$gettotalfromcounts = mysqli_query($con, "SELECT COUNT(id) AS `count` FROM `counts` WHERE `link_id` = \"$id\"");
 $resultgettotalfromcounts = mysqli_fetch_assoc($gettotalfromcounts);
 
-$gettotalfromlinks = mysqli_query($con, "SELECT `count` FROM `links` WHERE `id` = \"$link_id\"");
+$gettotalfromlinks = mysqli_query($con, "SELECT `count` FROM `links` WHERE `id` = \"$id\"");
 $resultgettotalfromlinks = mysqli_fetch_assoc($gettotalfromlinks);
 
 if ($resultgettotalfromcounts["count"] != $resultgettotalfromlinks["count"]) {
     $newcount = $resultgettotalfromcounts["count"];
-    mysqli_query($con, "UPDATE `links` SET `count` = \"$newcount\" WHERE `id` = \"$link_id\"");   
+    mysqli_query($con, "UPDATE `links` SET `count` = \"$newcount\" WHERE `id` = \"$id\"");   
 }
 
 if ($getinforesult["protect"] == "0") {

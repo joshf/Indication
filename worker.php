@@ -154,16 +154,16 @@ if ($action == "add") {
     echo $api;
 } elseif ($action == "export") {
     
-    $data = date("d-m-y");
+    $date = date("d-m-y");
     
     header("Content-Type: text/csv; charset=utf-8");
-    header("Content-Disposition: attachment; filename=data/export-$data.csv");
+    header("Content-Disposition: attachment; filename=data/export-$date.csv");
     
     if (!file_exists("data")) {
         mkdir("data");
     }
     
-    $output = fopen("data/export-$data.csv", "w");
+    $output = fopen("data/export-$date.csv", "w");
 
     fputcsv($output, array("Link_ID", "Name", "Abbreviation", "Url", "Count", "Protect", "Password"));
 
