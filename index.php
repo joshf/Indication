@@ -5,8 +5,7 @@
 require_once("assets/version.php");
 
 if (!file_exists("config.php")) {
-    header("Location: install");
-    exit;
+    die("Error: Config file not found!");
 }
 
 require_once("config.php");
@@ -17,16 +16,13 @@ if (!isset($_SESSION["indication_user"])) {
     exit;
 }
 
-//Set cookie so we dont constantly check for updates
-setcookie("indicationupdatecheck", time(), time()+3600*24*7);
-
 //Connect to database
 @$con = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 if (mysqli_connect_errno()) {
     die("Error: Could not connect to database (" . mysqli_connect_error() . "). Check your database settings are correct.");
 }
 
-$getusersettings = mysqli_query($con, "SELECT `user` FROM `Users` WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
+$getusersettings = mysqli_query($con, "SELECT `user` FROM `users` WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
 if (mysqli_num_rows($getusersettings) == 0) {
     session_destroy();
     header("Location: login.php");
@@ -34,40 +30,42 @@ if (mysqli_num_rows($getusersettings) == 0) {
 }
 $resultgetusersettings = mysqli_fetch_assoc($getusersettings);
 
+//Stats
+$gettotal = mysqli_query($con, "SELECT COUNT(id) AS `count` FROM `counts`");
+$resultgettotal = mysqli_fetch_assoc($gettotal);
+
+$getday = mysqli_query($con, "SELECT COUNT(id) AS `count` FROM `counts` WHERE `date` = CURDATE()");
+$resultgetday = mysqli_fetch_assoc($getday);
+
+$getweek = mysqli_query($con, "SELECT COUNT(id) AS `count` FROM `counts` WHERE WEEKOFYEAR(`date`) = WEEKOFYEAR(NOW())");
+$resultgetweek = mysqli_fetch_assoc($getweek);
+
+$getmonth = mysqli_query($con, "SELECT COUNT(id) AS `count` FROM `counts` WHERE YEAR(`date`) = YEAR(NOW()) AND MONTH(`date`) = MONTH(NOW())");
+$resultgetmonth = mysqli_fetch_assoc($getmonth);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="assets/favicon.ico">
 <title>Indication</title>
 <link rel="apple-touch-icon" href="assets/icon.png">
-<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="assets/bootstrap-notify/css/bootstrap-notify.min.css" rel="stylesheet">
-<style type="text/css">
-body {
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-a.close.pull-right {
-    padding-left: 10px;
-}
-.trackinglink, .edit, .delete {
-    cursor: pointer;
-}
-</style>
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen">
+<link rel="stylesheet" href="assets/css/indication.css" type="text/css" media="screen">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-<div class="container">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+<div class="container-fluid">
 <div class="navbar-header">
-<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 <span class="sr-only">Toggle navigation</span>
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
@@ -75,427 +73,172 @@ a.close.pull-right {
 </button>
 <a class="navbar-brand" href="index.php">Indication</a>
 </div>
-<div class="navbar-collapse collapse" id="navbar-collapse">
-<div class="navbar-form navbar-left" role="search">
-<div class="form-group">
-<input type="text" class="form-control" id="search" placeholder="Search links">
-</div>
-</div>
+<div id="navbar" class="navbar-collapse collapse">
 <ul class="nav navbar-nav navbar-right">
-<li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo $resultgetusersettings["user"]; ?> <span class="caret"></span></a>
-<ul class="dropdown-menu" role="menu">
+<li><a href="index.php">Dashboard</a></li>
 <li><a href="settings.php">Settings</a></li>
 <li><a href="logout.php">Logout</a></li>
-</ul>
-</li>
 </ul>
 </div>
 </div>
 </nav>
-<div class="container">
-<div class="page-header">
-<h1>Links <small><?php echo WEBSITE; ?></small></h1>
-</div><div class="notifications top-right"></div>
-<noscript><div class="alert alert-info"><h4 class="alert-heading">Information</h4><p>Please enable JavaScript to use Indication. For instructions on how to do this, see <a href="http://www.activatejavascript.org" class="alert-link" target="_blank">here</a>.</p></div></noscript>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-3 col-md-2 sidebar">
+<ul class="nav nav-sidebar">
+<li class="active"><a href="index.php">Overview <span class="sr-only">(current)</span></a></li>
+<li><a href="breakdowns.php">Breakdowns</a></li>
+<li><a href="export.php">Export</a></li>
+</ul>
+<ul class="nav nav-sidebar">
+<li><a href="add.php">Add New</a></li>
+<li><a href="edit.php">Edit</a></li>
+</ul>
+</div>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<h1 class="page-header">Dashboard</h1>
+<div class="row placeholders">
+<div class="col-xs-6 col-sm-3 placeholder">
+<span class="badge"><?php echo $resultgettotal["count"]; ?></span>
+<h4>All Time</h4>
+<span class="text-muted">Hits from install</span>
+</div>
+<div class="col-xs-6 col-sm-3 placeholder">
+<span class="badge"><?php echo $resultgetday["count"]; ?></span>
+<h4>Day</h4>
+<span class="text-muted">Hits today</span>
+</div>
+<div class="col-xs-6 col-sm-3 placeholder">
+<span class="badge"><?php echo $resultgetweek["count"]; ?></span>
+<h4>Week</h4>
+<span class="text-muted">Hits this week</span>
+</div>
+<div class="col-xs-6 col-sm-3 placeholder">
+<span class="badge"><?php echo $resultgetmonth["count"]; ?></span>
+<h4>Month</h4>
+<span class="text-muted">Hits this week</span>
+</div>
+</div>
+<h2 class="sub-header">Links</h2>
+<div class="table-responsive">
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Name</th>
+<th>Abbreviation</th>
+<th>Count</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
 <?php
 
-//Update checking
-if (!isset($_COOKIE["indicationupdatecheck"])) {
-    $remoteversion = file_get_contents("https://raw.github.com/joshf/Indication/master/version.txt");
-    if (version_compare($version, $remoteversion) < 0) {
-        echo "<div class=\"alert alert-warning\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><h4 class=\"alert-heading\">Update</h4><p>Indication <a href=\"https://github.com/joshf/Indication/releases/$remoteversion\" class=\"alert-link\" target=\"_blank\">$remoteversion</a> is available. <a href=\"https://github.com/joshf/Indication#updating\" class=\"alert-link\" target=\"_blank\">Click here for instructions on how to update</a>.</p></div>";
-    }
-}
-
-$getlinks = mysqli_query($con, "SELECT * FROM `Data`");
+$getlinks = mysqli_query($con, "SELECT * FROM `links`");
 
 //Set counter to zero
 $numberofitems = 0;
-
-echo "<ul class=\"list-group\">";
-if (mysqli_num_rows($getlinks) != 0) {
-    while($row = mysqli_fetch_assoc($getlinks)) {
-        $numberofitems++;
-        echo "<li class=\"list-group-item\" id=\"" . $row["id"] . "\" >" . $row["name"] . "<div class=\"pull-right\">";
-        echo "<span class=\"badge\">" . $row["count"] . "</span> ";
-        echo "<span class=\"trackinglink glyphicon glyphicon-zoom-in\" data-id=\"" . $row["id"] . "\"></span> ";
-        echo "<span class=\"edit glyphicon glyphicon-edit\" data-id=\"" . $row["id"] . "\"></span> ";
-        echo "<span class=\"delete glyphicon glyphicon-trash\" data-id=\"" . $row["id"] . "\"></span>";
-        echo "</div></li>";
-    }
-} else {
-    echo "<li class=\"list-group-item\">No links to show</li>";
-}
-echo "</ul>";
-
-?>
-<button type="button" id="launchaddmodal" class="btn btn-default">Add</button><br><br>
-<div class="well">
-<?php
-
-$getnumberoflinks = mysqli_query($con, "SELECT COUNT(id) FROM `Data`");
-$resultgetnumberoflinks = mysqli_fetch_assoc($getnumberoflinks);
-echo "<i class=\"glyphicon glyphicon glyphicon-list\"></i> <b>" . $numberofitems . "</b> items<br>";
-
-$gettotalnumberoflinks = mysqli_query($con, "SELECT SUM(count) FROM `Data`");
-$resultgettotalnumberoflinks = mysqli_fetch_assoc($gettotalnumberoflinks);
-if (is_null($resultgettotalnumberoflinks["SUM(count)"])) {
-    echo "<i class=\"glyphicon glyphicon-link\"></i> <b>0</b> total clicks";
-} else {
-    echo "<i class=\"glyphicon glyphicon-link\"></i> <b>" . $resultgettotalnumberoflinks["SUM(count)"] . "</b> total clicks";
+while($row = mysqli_fetch_assoc($getlinks)) {
+    $numberofitems++;
+    echo "<tr>";
+    echo "<td><a href=\"breakdowns.php?id=" . $row["id"] . "\">" . $row["name"] . "</a></td>";
+    echo "<td>" . $row["abbreviation"] . "</td>";
+    echo "<td><span class=\"badge\">" . $row["count"] . "</span></td>";
+    echo "<td><a href=\"edit.php?id=" . $row["id"] . "\">Edit</a> | <a class=\"delete\" data-id=\"" . $row["id"] . "\">Delete</a> | <a class=\"link\" data-abbreviation=\"" . $row["abbreviation"] . "\">Link</a>";
+    echo "</tr>";
 }
 
-mysqli_close($con);
-
 ?>
+</tbody>
+</table>
 </div>
-<!-- Add form -->
-<div class="modal fade" id="addformmodal" tabindex="-1" role="dialog" aria-labelledby="addformmodal" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-<h4 class="modal-title" id="addformmodaltitle">Add Link</h4>
-</div>
-<div class="modal-body">
-<form id="addform" role="form" autocomplete="off">
-<div class="form-group">
-<input type="text" class="form-control" id="name" name="name" placeholder="Type a name..." required>
-</div>
-<div class="form-group">
-<input type="text" class="form-control" id="linkid" name="linkid" placeholder="Type a ID..." required>
-</div>
-<div class="form-group">
-<input type="text" class="form-control" id="url" name="url" placeholder="Type a URL..." required>
-</div>
-<div class="form-group">
-<input type="number" class="form-control" id="count" name="count" placeholder="Type an initial count...">
-</div>
-<div class="checkbox">
-<label>
-<input type="checkbox" id="showadsstate" name="showadsstate"> Show ads
-</label>
-</div>
-<div class="checkbox">
-<label>
-<input type="checkbox" id="passwordprotectstate" name="passwordprotectstate"> Enable password protection
-</label>
-</div>
-<div id="passwordentry" style="display: none;">
-<div class="form-group">
-<input type="password" class="form-control" id="password" name="password" placeholder="Type a password..." required>
-</div>
-</div>
-<input type="hidden" id="action" name="action" value="add">
-</form>
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-<button type="button" id="add" class="btn btn-primary">Add</button>
+<span class="pull-right text-muted"><small>Version <?php echo $version; ?></small></span>
 </div>
 </div>
 </div>
-</div>
-<!-- Add form end -->
-<!-- Edit form -->
-<div class="modal fade" id="editformmodal" tabindex="-1" role="dialog" aria-labelledby="editformmodal" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-<h4 class="modal-title" id="editformmodaltitle">Edit Link</h4>
-</div>
-<div class="modal-body">
-<form id="editform" role="form" autocomplete="off">
-<div class="form-group">
-<input type="text" class="form-control" id="editname" name="name" placeholder="Type a name..." required>
-</div>
-<div class="form-group">
-<input type="text" class="form-control" id="editlinkid" name="linkid" placeholder="Type a ID..." required>
-</div>
-<div class="form-group">
-<input type="text" class="form-control" id="editurl" name="url" placeholder="Type a URL..." required>
-</div>
-<div class="form-group">
-<input type="number" class="form-control" id="editcount" name="count" placeholder="Type an initial count...">
-</div>
-<div class="checkbox">
-<label>
-<input type="checkbox" id="editshowadsstate" name="showadsstate"> Show ads
-</label>
-</div>
-<div class="checkbox">
-<label>
-<input type="checkbox" id="editpasswordprotectstate" name="passwordprotectstate"> Enable password protection
-</label>
-</div>
-<div id="editpasswordentry" style="display: none;">
-<div class="form-group">
-<input type="password" class="form-control" id="editpassword" name="password" placeholder="Type a password..." required>
-</div>
-</div>
-<input type="hidden" id="editaction" name="action" value="edit">
-<input type="hidden" id="editid" name="id">
-</form>
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-<button type="button" id="edit" class="btn btn-primary">Edit</button>
-</div>
-</div>
-</div>
-</div>
-<!-- Edit form end -->
-<hr>
-<div class="footer">
-Indication <?php echo $version; ?> &copy; <a href="http://joshf.co.uk" target="_blank">Josh Fradley</a> <?php echo date("Y"); ?>. Themed by <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>.
-</div>
-</div>
-<script src="assets/jquery.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/bootstrap-notify/js/bootstrap-notify.min.js"></script>
-<script src="assets/bootbox.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    /* Search */
-    $("#search").keyup(function() {
-        $("#search-error").remove();
-        var filter = $(this).val();
-        var count = 0;
-        $(".list-group .list-group-item").each(function() {
-            if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-                $(this).hide();
-            } else {
-                $(this).show();
-                count++;
-            }            
-        });
-        if (count === 0) {
-            $(".list-group").prepend("<li class=\"list-group-item\" id=\"search-error\">No links found</li>");
-        }
-        document.title = "Indication (" + count + ")";
-    });
-    /* End */
-    $("#editpasswordprotectstate").click(function() {
-        if ($("#editpasswordprotectstate").prop("checked") == true) {
-            $("#editpassword").prop("required", true);
-            $("#editpasswordentry").show("fast");
-        } else {
-            $("#editpasswordentry").hide("fast");
-            $("#editpassword").prop("required", false);
-        }
-    });
-    /* Set Up Notifications */
-    var show_notification = function(type, icon, text, reload) {
-        $(".top-right").notify({
-            type: type,
-            transition: "fade",
-            icon: icon,
-            message: {
-                text: text
-            },
-            onClosed: function() {
-                if (reload == true) {
-                    window.location.reload();
-                }
-            }
-        }).show();
-    };
-    /* End */
-    /* Form Overrides */
-    $("#addformmodal").on("keypress", function(e) {
-        if (e.keyCode === 13) {
-            e.preventDefault();
-            $("#add").trigger("click");
-        }
-    });
-    $("#editformmodal").on("keypress", function(e) {
-        if (e.keyCode === 13) {
-            e.preventDefault();
-            $("#edit").trigger("click");
-        }
-    });
-    /* End */
-    /* Add */
-    $("#launchaddmodal").click(function() {
-        $("#addformmodal").modal();
-    });
-    $("#add").click(function() {
-        var haserrors = false;
-        if ($("#linkid").val() == "") {
-            if (!$(".form-group:eq(2)").hasClass("has-error")) {
-                $(".form-group:eq(2)").addClass("has-error");
-                $(".form-group:eq(2)").append("<span class=\"help-block\">ID cannot be empty</span>");
-            }
-            haserrors = true;
-        }
-        if ($("#url").val() == "") {
-            if (!$(".form-group:eq(3)").hasClass("has-error")) {
-                $(".form-group:eq(3)").addClass("has-error");
-                $(".form-group:eq(3)").append("<span class=\"help-block\">A URL is required</span>");
-            }
-            haserrors = true;
-        } else {
-            $(".form-group:eq(3)").removeClass("has-error");
-            $(".help-block").remove();
-            url = $("#url").val();
-            if (!/(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?$/i.test(url)) {
-                if (!$(".form-group:eq(3)").hasClass("has-error")) {
-                    $(".form-group:eq(3)").addClass("has-error");
-                    $(".form-group:eq(3)").append("<span class=\"help-block\">Invalid URL</span>");
-                }
-                haserrors = true;
-            }
-        }
-        if (haserrors == true) {
-            return false;
-        }
-        $(".form-group:eq(2)").removeClass("has-error");
-        $(".form-group:eq(3)").removeClass("has-error");
-        $(".help-block").remove();
-        $.ajax({
-            type: "POST",
-            url: "worker.php",
-            data: $("#addform").serialize(),
-            error: function() {
-                show_notification("danger", "warning-sign", "Ajax query failed!");
-            },
-            success: function() {
-                show_notification("success", "ok", "Link added!", true);
-                $("#addformmodal").modal("hide");
-            }
-        });
-    });
-    /* End */
-    /* Edit */
-    $("li").on("click", ".edit", function() {
-        var id = $(this).data("id");
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            url: "worker.php",
-            data: "action=details&id="+ id +"",
-            error: function() {
-                show_notification("danger", "warning-sign", "Ajax query failed!");
-            },
-            success: function(data) {
-                /* Stop auto checked */
-                $("#editshowadsstate").prop("checked", false);
-                $("#editname").val(data[0]);
-                $("#editlinkid").val(data[1]);
-                $("#editurl").val(data[2]);
-                $("#editcount").val(data[3]);
-                if (data[4] == "1") {
-                    $("#editshowadsstate").prop("checked", true);
-                }
-                if (data[5] == "1") {
-                    $("#editpasswordprotectstate").prop("checked", true);
-                    $("#editpassword").val(data[6]);
-                    $("#editpasswordentry").show("fast");
-                }
-                $("#editid").val(id);
-            }
-        });
-        $("#editformmodal").modal();
-    });
-    $("#edit").click(function() {
-        var haserrors = false;
-        if ($("#editlinkid").val() == "") {
-            if (!$(".form-group:eq(7)").hasClass("has-error")) {
-                $(".form-group:eq(7)").addClass("has-error");
-                $(".form-group:eq(7)").append("<span class=\"help-block\">ID cannot be empty</span>");
-            }
-            haserrors = true;
-        }
-        if ($("#editurl").val() == "") {
-            if (!$(".form-group:eq(8)").hasClass("has-error")) {
-                $(".form-group:eq(8)").addClass("has-error");
-                $(".form-group:eq(8)").append("<span class=\"help-block\">A URL is required</span>");
-            }
-            haserrors = true;
-        } else {
-            $(".form-group:eq(8)").removeClass("has-error");
-            $(".help-block").remove();
-            url = $("#editurl").val();
-            if (!/(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?$/i.test(url)) {
-                if (!$(".form-group:eq(8)").hasClass("has-error")) {
-                    $(".form-group:eq(8)").addClass("has-error");
-                    $(".form-group:eq(8)").append("<span class=\"help-block\">Invalid URL</span>");
-                }
-                haserrors = true;
-            }
-        }
-        if (haserrors == true) {
-            return false;
-        }
-        $(".form-group:eq(7)").removeClass("has-error");
-        $(".form-group:eq(8)").removeClass("has-error");
-        $(".help-block").remove();
-        $.ajax({
-            type: "POST",
-            url: "worker.php",
-            data: $("#editform").serialize(),
-            error: function() {
-                show_notification("danger", "warning-sign", "Ajax query failed!");
-            },
-            success: function() {
-                show_notification("success", "ok", "Link edited!", true);
-                $("#editformmodal").modal("hide");
-            }
-        });
-    });
-    /* End */
-    /* Tracking Link */
-    $("li").on("click", ".trackinglink", function() {
-        var id = $(this).data("id");
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            url: "worker.php",
-            data: "action=details&id="+ id +"",
-            error: function() {
-                show_notification("danger", "warning-sign", "Ajax query failed!");
-            },
-            success: function(data) {
-                bootbox.prompt({
-                    title: "Tracking Link",
-                    <?php
-                    if (CUSTOM_URL_STATE == "Enabled") {
-                        if (CUSTOM_URL != "") {
-                            echo "value: \"" . CUSTOM_URL . "/\" + data[1] + \"\",\n";
+<script src="assets/bower_components/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="assets/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="assets/bower_components/bootbox.js/bootbox.js" type="text/javascript" charset="utf-8"></script>
+<script src="assets/bower_components/js-cookie/src/js.cookie.js" type="text/javascript" charset="utf-8"></script>
+<script src="assets/bower_components/modernizr-load/modernizr.js" type="text/javascript" charset="utf-8"></script>
+<script src="assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">  
+$(document).ready(function () {
+    var indication_version = "<?php echo $version ?>";
+    if (!Cookies.get("indication_didcheckforupdates")) {
+        $.getJSON("https://api.github.com/repos/joshf/Indication/tags").done(function(resp) {
+            var data = resp[0];
+            var indication_remote_version = data.name;
+            var url = data.zipball_url;
+            if (indication_version < indication_remote_version) {
+                bootbox.dialog({
+                    message: "Indication " + indication_remote_version + " is available. Do you wish to download the update?",
+                    title: "Update Available",
+                    buttons: {
+                        cancel: {
+                            label: "Cancel",
+                            callback: function() {
+                                Cookies.set("indication_didcheckforupdates", "1", { expires: 7 });
+                            }
+                        },
+                        main: {
+                            label: "Download Update",
+                            className: "btn-primary",
+                            callback: function() {
+                                window.location.href = data.zipball_url;
+                            }
                         }
-                    } else {
-                        echo "value: \"" . PATH_TO_SCRIPT . "/get.php?id=\" + data[1] + \"\",\n";
-                    }
-                    ?>
-                    callback: function(result) {
-                    /* This has to be here for some reason */
                     }
                 });
             }
         });
-    });
-    /* End */
-    /* Delete */
-    $("li").on("click", ".delete", function() {
+    }
+    $("td").on("click", ".delete", function() {
         var id = $(this).data("id");
         $.ajax({
             type: "POST",
             url: "worker.php",
             data: "action=delete&id="+ id +"",
             error: function() {
-                show_notification("danger", "warning-sign", "Ajax query failed!");
+                $.notify({
+                    message: "Ajax query failed!",
+                    icon: "glyphicon glyphicon-warning-sign",
+                },{
+                    type: "danger",
+                    allow_dismiss: true
+                });
             },
             success: function() {
-                show_notification("success", "ok", "Link deleted!", true);
+                $.notify({
+                    message: "Link deleted!",
+                    icon: "glyphicon glyphicon-ok",
+                },{
+                    type: "success",
+                    allow_dismiss: true
+                });
+                setTimeout(function() {
+                	window.location.reload();
+                }, 2000);
             }
         });
     });
-    /* End */
-    /* Update Title */
-    document.title = "Indication (<?php echo $numberofitems; ?>)";
-    /* End */
+    $("td").on("click", ".link", function() {
+        var abbreviation = $(this).data("abbreviation");
+        bootbox.prompt({
+            title: "Link",
+            <?php
+            if (CUSTOM_URL_STATE == "Enabled") {
+                if (CUSTOM_URL != "") {
+                    echo "value: \"" . CUSTOM_URL . "/\" + abbreviation + \"\",\n";
+                }
+            } else {
+                echo "value: \"" . PATH_TO_SCRIPT . "/get.php?id=\" + abbreviation + \"\",\n";
+            }
+            ?>
+            callback: function(result) {
+                //Do nothing
+            }
+        });
+    });
 });
 </script>
 </body>

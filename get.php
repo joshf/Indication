@@ -2,11 +2,8 @@
 
 //Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
-ob_start();
-
 if (!file_exists("config.php")) {
-    header("Location: installer");
-    exit;
+    die("Error: Config file not found!");
 }
 
 require_once("config.php");
@@ -19,138 +16,142 @@ if (mysqli_connect_errno()) {
 
 //Get the ID from $_GET OR $_POST
 if (isset($_GET["id"])) {
-    $linkid = mysqli_real_escape_string($con, $_GET["id"]);
+    $abbreviation = mysqli_real_escape_string($con, $_GET["id"]);
 } elseif (isset($_POST["id"])) {
-    $linkid = mysqli_real_escape_string($con, $_POST["id"]);
+    $abbreviation = mysqli_real_escape_string($con, $_POST["id"]);
 } else {
     die("Error: ID cannot be blank.");
 }
 
 //Check if ID exists
-$getinfo = mysqli_query($con, "SELECT `name`, `url` FROM `Data` WHERE `linkid` = \"$linkid\"");
+$getinfo = mysqli_query($con, "SELECT `id`, `name`, `url`, `protect`, `password` FROM `links` WHERE `abbreviation` = \"$abbreviation\"");
 $getinforesult = mysqli_fetch_assoc($getinfo);
 if (mysqli_num_rows($getinfo) == 0) {
     die("Error: ID does not exist.");
+}
+
+//Cookies don't like dots
+$abbreviationclean = str_replace(".", "_", $abbreviation);
+
+session_start();
+
+if (!isset($_SESSION["indication_user"])) {
+    $link_id = $getinforesult["id"];
+    
+    //Get IP
+    $ip = $_SERVER["REMOTE_ADDR"];
+
+    //Get referrer
+    $referrer = $_SERVER["HTTP_REFERER"];
+
+    if (empty($referrer)) {
+        $referrer = "";
+    }
+    
+    if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
+        if (!isset($_COOKIE["ihl_$abbreviationclean"])) {
+            mysqli_query($con, "UPDATE `links` SET `count` = `count`+1 WHERE `abbreviation` = \"$abbreviation\"");
+            setcookie("ihl_$abbreviationclean", "true", time()+3600);
+            mysqli_query($con, "INSERT INTO `counts` (link_id, date, ip, referrer)
+            VALUES (\"$link_id\",CURDATE(),\"$ip\",\"$referrer\")");
+        }
+    } else {
+        mysqli_query($con, "UPDATE `links` SET `count` = `count`+1 WHERE `abbreviation` = \"$abbreviation\"");
+        mysqli_query($con, "INSERT INTO `counts` (link_id, date, ip, referrer)
+        VALUES (\"$link_id\",CURDATE(),\"$ip\",\"$referrer\")");
+    }
+    
+}
+
+//Make sure we balance
+$gettotalfromcounts = mysqli_query($con, "SELECT COUNT(id) AS `count` FROM `counts` WHERE `link_id` = \"$link_id\"");
+$resultgettotalfromcounts = mysqli_fetch_assoc($gettotalfromcounts);
+
+$gettotalfromlinks = mysqli_query($con, "SELECT `count` FROM `links` WHERE `id` = \"$link_id\"");
+$resultgettotalfromlinks = mysqli_fetch_assoc($gettotalfromlinks);
+
+if ($resultgettotalfromcounts["count"] != $resultgettotalfromlinks["count"]) {
+    $newcount = $resultgettotalfromcounts["count"];
+    mysqli_query($con, "UPDATE `links` SET `count` = \"$newcount\" WHERE `id` = \"$link_id\"");   
+}
+
+if ($getinforesult["protect"] == "0") {
+    header("Location: " . $getinforesult["url"] . "");
+    mysqli_close($con);
+    exit;
+}
+
+if (isset($_POST["password"])) {
+    $password = $_POST["password"];
+    $hashedpassword = hash("sha256", SALT . hash("sha256", $password));
+    if ($hashedpassword == $getinforesult["password"]) {
+        header("Location: " . $getinforesult["url"] . "");
+        mysqli_close($con);
+        exit;
+    }
 }
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<base href="<?php echo PATH_TO_SCRIPT; ?>/">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Indication</title>
-<meta name="robots" content="noindex, nofollow">
-<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<style type="text/css">
-body {
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-</style>
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="<?php echo PATH_TO_SCRIPT; ?>/">
+<link rel="icon" href="assets/favicon.ico">
+<title>Indication &raquo; Password Required</title>
+<link rel="apple-touch-icon" href="assets/icon.png">
+<link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen">
+<link rel="stylesheet" href="assets/css/indication.css" type="text/css" media="screen">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 <body>
-<div class="container">		
+<div class="container form-fix">
+<div class="row">
+<div class="col-sm-6 col-md-4 col-md-offset-4">
+<div class="panel panel-default">
+<div class="panel-heading">
+<strong><?php echo WEBSITE; ?> &raquo; <?php echo $getinforesult["name"]; ?></strong>
+</div>
+<div class="panel-body">
+<form method="post">
+<fieldset>
+<div class="row">
+</div>
+<div class="row">
+<div class="col-sm-12 col-md-10 col-md-offset-1">
+<div class="form-group">
+<div class="input-group">
+<span class="input-group-addon">
+<i class="glyphicon glyphicon-lock"></i>
+</span>
+<input type="password" class="form-control" name="password" id="password" placeholder="Password">
+</div>
+</div>
+<div class="form-group">
+<input type="submit" class="btn btn-primary btn-block" value="Follow Link">
+</div>
+</div>
+</div>
+</fieldset>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script src="assets/bower_components/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="assets/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
 <?php
-
-//Cookies don't like dots
-$linkidclean = str_replace(".", "_", $linkid);
-
-//Ignore admin counts if setting has been enabled
-session_start();
-
-if (IGNORE_ADMIN_STATE == "Enabled" && isset($_SESSION["indication_user"])) {
-    echo "<div class=\"alert alert-info\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><b>Info:</b> You are currently logged in, links will not be counted.</div>";    
-} else {
-    if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
-        if (!isset($_COOKIE["indicationhaslinked_$linkidclean"])) {
-            mysqli_query($con, "UPDATE `Data` SET `count` = `count`+1 WHERE `linkid` = \"$linkid\"");
-            setcookie("indicationhaslinked_$linkidclean", time(), time()+3600*COUNT_UNIQUE_ONLY_TIME);
-        }
-    } else {
-        mysqli_query($con, "UPDATE `Data` SET `count` = `count`+1 WHERE `linkid` = \"$linkid\"");
-    }
-}
-
-//Check if link is password protected
-$checkifprotected = mysqli_query($con, "SELECT `protect`, `password` FROM `Data` WHERE `linkid` = \"$linkid\"");
-$checkifprotectedresult = mysqli_fetch_assoc($checkifprotected);
-if ($checkifprotectedresult["protect"] == "1") {
-    $case = "passwordprotected";
-}
-
-//Check if we should show ads
-$checkifadsshow = mysqli_query($con, "SELECT `showads` FROM `Data` WHERE `linkid` = \"$linkid\"");
-$checkifadsshowresult = mysqli_fetch_assoc($checkifadsshow);
-if ($checkifadsshowresult["showads"] == "1") {
-    $case = "showads";
-}
-
-if ($checkifprotectedresult["protect"] == "1" && $checkifadsshowresult["showads"] == "1") {
-    $case = "passwordprotectedandshowads";
-}
-
-if ($checkifprotectedresult["protect"] != "1" && $checkifadsshowresult["showads"] != "1") {
-    $case = "normal";
-}
-
-if (isset($_POST["password"])) {
-    if (hash("sha256", SALT . hash("sha256", $_POST["password"])) == $checkifprotectedresult["password"]) {
-        $case = "passwordcorrect";
-    } else {
-        $case = "passwordincorrect";
-    }
-}
-
-switch ($case) {
-    case "showads":
-        $adcode = htmlspecialchars_decode(AD_CODE); 
-        echo "<p>$adcode</p><div class=\"btn-group pull-right\"><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><a class=\"btn btn-primary\" href=\"" . $getinforesult["url"] . "\">Get Link</a></div>";
-        break;
-    case "passwordprotected":
-        if (isset($_GET["error"])) {
-            echo "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><b>Error:</b> Incorrect password.</div>";
-        }
-        echo "<form role=\"form\" method=\"post\"><div class=\"form-group\"><label for=\"password\">Password</label><input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"Password...\"><div class=\"help-block\">This link is password protected, please enter the password you were given.</div></div><div class=\"btn-group pull-right\"><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><button type=\"submit\" class=\"btn btn-primary\">Get Link</button></div></form>";
-        break;
-    case "normal":
-        header("Location: " . $getinforesult["url"] . "");
-        exit;
-        break;
-    case "passwordprotectedandshowads":
-        if (isset($_GET["error"])) {
-            echo "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><b>Error:</b> Incorrect password.</div>";
-        }
-        $adcode = htmlspecialchars_decode(AD_CODE);
-        echo "<p>$adcode</p><form role=\"form\" method=\"post\"><div class=\"form-group\"><label for=\"password\">Password</label><input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"Password...\"><div class=\"help-block\">This link is password protected, please enter the password you were given.</div></div><div class=\"btn-group pull-right\"><a class=\"btn btn-default\" href=\"javascript:history.go(-1)\">Go Back</a><button type=\"submit\" class=\"btn btn-primary\">Get Link</button></div></form>";
-        break;
-    case "passwordcorrect":
-        header("Location: " . $getinforesult["url"] . "");
-        exit;
-        break;
-    case "passwordincorrect":
-        header("Location: get.php?id=$linkid&error=true");
-        exit;
-        break;
-} 
-    
-ob_end_flush();
 
 mysqli_close($con);
 
+
 ?>
-<br>
-<h6>Powered by <a href="https://github.com/joshf/Indication" target="_blank">Indication</a>
-<small><?php echo VERSION ?></small></h6>
-</div>
-<script src="assets/jquery.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-</body>
-</html>

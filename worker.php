@@ -3,8 +3,7 @@
 //Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
 if (!file_exists("config.php")) {
-    header("Location: install");
-    exit;
+    die("Error: Config file not found!");
 }
 
 require_once("config.php");
@@ -21,7 +20,7 @@ if (isset($_POST["api_key"])) {
     if (empty($api)) {
         die("Error: No API key passed!");
     }
-    $checkkey = mysqli_query($con, "SELECT `id`, `user` FROM `Users` WHERE `api_key` = \"$api\"");
+    $checkkey = mysqli_query($con, "SELECT `id`, `user` FROM `users` WHERE `api_key` = \"$api\"");
     $checkkeyresult = mysqli_fetch_assoc($checkkey);
     if (mysqli_num_rows($checkkey) == 0) {
         die("Error: API key is not valid!");
@@ -35,7 +34,7 @@ if (!isset($_SESSION["indication_user"])) {
     exit;
 }
 
-$getusersettings = mysqli_query($con, "SELECT `user` FROM `Users` WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
+$getusersettings = mysqli_query($con, "SELECT `user` FROM `users` WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
 if (mysqli_num_rows($getusersettings) == 0) {
     session_destroy();
     header("Location: login.php");
@@ -50,11 +49,11 @@ if (isset($_POST["action"])) {
 }
 
 //Check if ID exists
-$actions = array("edit", "delete", "details");
+$actions = array("edit", "delete");
 if (in_array($action, $actions)) {
     if (isset($_POST["id"])) {
         $id = mysqli_real_escape_string($con, $_POST["id"]);
-        $checkid = mysqli_query($con, "SELECT `id` FROM `Data` WHERE `id` = \"$id\"");
+        $checkid = mysqli_query($con, "SELECT `id` FROM `links` WHERE `id` = \"$id\"");
         if (mysqli_num_rows($checkid) == 0) {
         	die("Error: ID does not exist!");
         }
@@ -67,27 +66,23 @@ if (in_array($action, $actions)) {
 if (isset($_POST["name"])) {
     $name = mysqli_real_escape_string($con, $_POST["name"]);
 }
-if (isset($_POST["linkid"])) {
-    $linkid = mysqli_real_escape_string($con, $_POST["linkid"]);
+if (isset($_POST["abbreviation"])) {
+    $abbreviation = mysqli_real_escape_string($con, $_POST["abbreviation"]);
 }
 if (isset($_POST["url"])) {
     $url = mysqli_real_escape_string($con, $_POST["url"]);
 }
-if (isset($_POST["count"])) {
-    $count = mysqli_real_escape_string($con, $_POST["count"]);
-}
 
 if ($action == "add") {
-    if (empty($linkid) || empty($url)) {
+    if (empty($abbreviation) || empty($url)) {
         die("Error: Data was empty!");
     }
 
     //Check if ID exists
-    $checkid = mysqli_query($con, "SELECT `linkid` FROM `Data` WHERE `linkid` = \"$linkid\"");
+    $checkid = mysqli_query($con, "SELECT `linkid` FROM `Data` WHERE `linkid` = \"$abbreviation\"");
     $resultcheckid = mysqli_fetch_assoc($checkid); 
     if (mysqli_num_rows($checkid) != 0) {
         die("Error: ID Exists!");
-        exit;
     }
 
     //Make sure a password is set if the checkbox was enabled
@@ -105,16 +100,10 @@ if ($action == "add") {
         $password = "";
     }
 
-    if (isset($_POST["showadsstate"])) {
-        $showads = "1";
-    } else {
-        $showads = "0";
-    }
-
-    mysqli_query($con, "INSERT INTO `Data` (`name`, `linkid`, `url`, `count`, `protect`, `password`, `showads`)
-    VALUES (\"$name\",\"$linkid\",\"$url\",\"$count\",\"$protect\",\"$password\",\"$showads\")");
+    mysqli_query($con, "INSERT INTO `links` (`name`, `abbreviation`, `url`, `count`, `protect`, `password`)
+    VALUES (\"$name\",\"$abbreviation\",\"$url\",\"0\",\"$protect\",\"$password\")");
 } elseif ($action == "edit") {
-    if (empty($linkid) || empty($url)) {
+    if (empty($abbreviation) || empty($url)) {
         die("Error: Data was empty!");
     }
     
@@ -139,30 +128,11 @@ if ($action == "add") {
         $password = "";
     }
 
-    if (isset($_POST["showadsstate"])) {
-        $showads = "1";
-    } else {
-        $showads = "0";
-    }
-
-    mysqli_query($con, "UPDATE `Data` SET `name` = \"$name\", `linkid` = \"$linkid\", `url` = \"$url\", `count` = \"$count\", `protect` = \"$protect\", `password` = \"$password\", `showads` = \"$showads\" WHERE `id` = \"$id\"");
+    mysqli_query($con, "UPDATE `links` SET `name` = \"$name\", `abbreviation` = \"$abbreviation\", `url` = \"$url\", `protect` = \"$protect\", `password` = \"$password\" WHERE `id` = \"$id\"");
     
 } elseif ($action == "delete") {
-    mysqli_query($con, "DELETE FROM `Data` WHERE `id` = \"$id\"");
-} elseif ($action == "details") {
-    $getdetails = mysqli_query($con, "SELECT `name`, `linkid`, `url`, `count`, `showads`, `protect`, `password` FROM `Data` WHERE `id` = \"$id\"");
-    $resultgetdetails = mysqli_fetch_assoc($getdetails);
-    
-    $arr = array();
-    $arr[0] = $resultgetdetails["name"];
-    $arr[1] = $resultgetdetails["linkid"];
-    $arr[2] = $resultgetdetails["url"];
-    $arr[3] = $resultgetdetails["count"];
-    $arr[4] = $resultgetdetails["showads"];
-    $arr[5] = $resultgetdetails["protect"];
-    $arr[6] = $resultgetdetails["password"];
-    
-    echo json_encode($arr);
+    mysqli_query($con, "DELETE FROM `links` WHERE `id` = \"$id\"");
+    mysqli_query($con, "DELETE FROM `counts` WHERE `link_id` = \"$id\"");
 } elseif ($action == "generateapikey") {
     $api = substr(str_shuffle(MD5(microtime())), 0, 50);
     mysqli_query($con, "UPDATE `Users` SET `api_key` = \"$api\" WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");

@@ -3,8 +3,7 @@
 //Indication, Copyright Josh Fradley (http://github.com/joshf/Indication)
 
 if (!file_exists("config.php")) {
-    header("Location: install");
-    exit;
+    die("Error: Config file not found!");
 }
 
 require_once("config.php");
@@ -19,7 +18,7 @@ if (mysqli_connect_errno()) {
 
 if (isset($_COOKIE["indication_user_rememberme"])) {
     $hash = $_COOKIE["indication_user_rememberme"];
-    $getuser = mysqli_query($con, "SELECT `id`, `hash` FROM `Users` WHERE `hash` = \"$hash\"");
+    $getuser = mysqli_query($con, "SELECT `id`, `hash` FROM `users` WHERE `hash` = \"$hash\"");
     if (mysqli_num_rows($getuser) == 0) {
         header("Location: logout.php");
         exit;
@@ -53,51 +52,43 @@ if (isset($_POST["password"]) && isset($_POST["username"])) {
 }
 
 if (!isset($_SESSION["indication_user"])) {
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Indication &middot; Login</title>
-<meta name="robots" content="noindex, nofollow">
-<link href="assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-<style type="text/css">
-body {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background-color: #eee;
-}
-.form-signin {
-    max-width: 300px;
-    padding: 10px 30px 50px;
-    margin: 0 auto 20px;
-    background-color: #fff;
-    border: 1px solid #e5e5e5;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-    box-shadow: 0 1px 2px rgba(0,0,0,.05);
-}
-.form-signin input[type="text"], .form-signin input[type="password"] {
-    font-size: 16px;
-    height: auto;
-    margin-bottom: 5px;
-    padding: 5px 10px;
-}
-</style>
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="assets/favicon.ico">
+<title>Indication &raquo; Login</title>
+<link rel="apple-touch-icon" href="assets/icon.png">
+<link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen">
+<link rel="stylesheet" href="assets/css/indication.css" type="text/css" media="screen">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 <body>
-<div class="container">
-<form role="form" class="form-signin" method="post">
-<div class="text-center"><img src="assets/icon.png" width="75" height="75" alt="Indication Logo"></div>
+<div class="container form-fix">
+<div class="row">
+<div class="col-sm-6 col-md-4 col-md-offset-4">
+<div class="panel panel-default">
+<div class="panel-heading">
+<strong>Indication &raquo; Login</strong>
+</div>
+<div class="panel-body">
+<form method="post">
+<fieldset>
+<div class="row">
+<div class="center-block">
+<img class="profile-img" src="assets/icon.png" alt="Indication">
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 col-md-10 col-md-offset-1">
 <?php 
 if (isset($_GET["login_error"])) {
     echo "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Incorrect login.</div>";
@@ -106,26 +97,38 @@ if (isset($_GET["login_error"])) {
 }
 ?>
 <div class="form-group">
-<label for="username">Username</label>
-<input type="text" class="form-control" id="username" name="username" placeholder="Username..." autofocus>
+<div class="input-group">
+<span class="input-group-addon">
+<i class="glyphicon glyphicon-user"></i>
+</span> 
+<input type="text" class="form-control" name="username" id="username" placeholder="Username" autofocus>
+</div>
 </div>
 <div class="form-group">
-<label for="password">Password</label>
-<input type="password" class="form-control" id="password" name="password" placeholder="Password...">
+<div class="input-group">
+<span class="input-group-addon">
+<i class="glyphicon glyphicon-lock"></i>
+</span>
+<input type="password" class="form-control" name="password" id="password" placeholder="Password">
 </div>
-<div class="checkbox">
-<label>
-<input type="checkbox" id="rememberme" name="rememberme"> Remember me
-</label>
 </div>
-<div class="btn-group pull-right">
-<a href="reset.php" class="btn btn-default" role="button">Forgotten</a>
-<button type="submit" class="btn btn-primary">Login</button>
+<div class="form-group">
+<input type="submit" class="btn btn-primary btn-block" value="Sign in">
 </div>
+</div>
+</div>
+</fieldset>
 </form>
 </div>
-<script src="assets/jquery.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<div class="panel-footer">
+Forgot your password? <a href="login.php?resetpassword">Click Here</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script src="assets/bower_components/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="assets/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>
 <?php

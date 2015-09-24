@@ -26,7 +26,7 @@ If you like Indication and appreciate my hard work a [donation](https://www.payp
 Screenshots:
 ------------
 
-Screenshots of Indication can be found [here](http://imgur.com/a/7aQPl).
+Coming soon!
 
 Releases:
 ------------
@@ -40,7 +40,7 @@ Installation:
 2. Download and unzip Indication-xxxx.zip
 3. Upload the Indication folder to your server via FTP or your hosts control panel
 4. Open up http://yoursite.com/Indication/install in your browser and enter your database/user details
-5. Delete the "installer" folder from your server
+5. Delete the "install" folder from your server
 6. Login to the admin panel using the username and password you set during the install process
 7. Add your links
 8. Indication should now be set up
@@ -50,33 +50,16 @@ Usage:
 
 The main script is called like this: /get.php?id=mylink1
 
-Replace ID with the ID name/number of your URL, for example: http://yoursite.com/Indication/get.php?id=mylink1
+Replace ID with the abbreviation name/number of your URL, for example: http://yoursite.com/Indication/get.php?id=mylink1
 
 So instead of linking to http://yoursite.com/some/directory/mylink1.zip, link to http://yoursite.com/Indication/get.php?id=mylink1
 
-To find this URL select the link and click the Maginifying glass icon whilst on the admin page
+To find this URL select the link and click the "Link" text whilst on the admin page
 
 This will log the count of the link and redirect the user to the file or web page
 
-This script can also be called via $_POST just set the name of your form to "id" and the value to the ID you wish to link
+This script can also be called via $_POST just set the name of your form to "id" and the value to the abbreviation you wish to link
 
-To show the link count for an ID, call http://yoursite.com/Indication/display.php?id=mylink1. This could be done by linking directly to display.php, using an iframe or by using a PHP include
-
-**Examples:**
-
-```php
-<?php
-require_once("Indication/config.php");
-
-$id = "link1";
-$count = file_get_contents("" . PATH_TO_SCRIPT . "/display.php?id=$id");
-echo $count;
-?>
-```
-
-```html
-<iframe src="Indication/display.php?id=link1" width="80" height="25" frameBorder="0" scrolling="no"></iframe>
-```
 
 Administration:
 ---------------
@@ -101,7 +84,7 @@ N.B: The upgrade will only upgrade from the previous version of Indication (e.g 
 Removal:
 --------
 
-To remove Indication, simply delete the Indication folder from your server and delete the "Data" table from your database
+To remove Indication, simply delete the Indication folder from your server and delete the "links", "counts" and "users" tables from your database
 
 Contributing:
 -------------

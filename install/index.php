@@ -4,11 +4,6 @@
 
 require_once("../assets/version.php");
 
-//Check if Indication has been installed
-if (file_exists("../config.php") && (!isset($_GET["nonce"]))) {
-    die("Information: Indication has already been installed! To reinstall the app please delete your config file and run this installer again.");
-}
-
 //Make sure we start at step 0
 if (!isset($_GET["step"])) {
     header("Location: ?step=0");
@@ -22,15 +17,10 @@ if (!in_array($step, $steps)) {
     $step = "0";
 }
 
-//Nonce to check against
-$nonce = md5(date("h"));
 
-//Check nonce if step 0
-if (($step == "0") && (isset($_GET["nonce"]))) {
-    if ($nonce != $_GET["nonce"]) {
-        header("Location: ?step=0");
-        exit;
-    }
+//Check if Indication has been installed
+if (file_exists(".done")) {
+    die("Information: Indication has already been installed! To reinstall the app please delete the .done file and run this installer again.");
 }
 
 //Create config.php
@@ -53,16 +43,14 @@ if (isset($_POST["step_1"])) {
     $randsalt = md5(uniqid(rand(), true));
     $salt = substr($randsalt, 0, 3);
     
-    $installstring = "<?php\n\n//Database Settings\ndefine('DB_HOST', " . var_export($dbhost, true) . ");\ndefine('DB_USER', " . var_export($dbuser, true) . ");\ndefine('DB_PASSWORD', " . var_export($dbpassword, true) . ");\ndefine('DB_NAME', " . var_export($dbname, true) . ");\n\n//Other Settings\ndefine('SALT', " . var_export($salt, true) . ");\ndefine('WEBSITE', " . var_export($website, true) . ");\ndefine('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");\ndefine('AD_CODE', 'Ad code here...');\ndefine('COUNT_UNIQUE_ONLY_STATE', 'Enabled');\ndefine('COUNT_UNIQUE_ONLY_TIME', '24');\ndefine('IGNORE_ADMIN_STATE', 'Disabled');\ndefine('VERSION', " . var_export($version, true) . ");\n\n?>";
+    $installstring = "<?php\n\n//Database Settings\ndefine('DB_HOST', " . var_export($dbhost, true) . ");\ndefine('DB_USER', " . var_export($dbuser, true) . ");\ndefine('DB_PASSWORD', " . var_export($dbpassword, true) . ");\ndefine('DB_NAME', " . var_export($dbname, true) . ");\n\n//Other Settings\ndefine('SALT', " . var_export($salt, true) . ");\ndefine('WEBSITE', " . var_export($website, true) . ");\ndefine('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");\ndefine('COUNT_UNIQUE_ONLY_STATE', 'Enabled');\n\n?>";
 
     //Write Config
     $configfile = fopen("../config.php", "w");
     fwrite($configfile, $installstring);
     fclose($configfile);
     
-    //Generate nonce
-    $nonce = md5(date("h"));
-    header("Location: index.php?step=2&nonce=$nonce");
+    header("Location: index.php?step=2");
     exit;
 
 }
@@ -91,43 +79,57 @@ if (isset($_POST["step_2"])) {
         die("Error: Could not connect to database (" . mysqli_connect_error() . "). Check your database settings are correct.");
     }
 
-	//Create Data table
-	$createdatatable = "CREATE TABLE `Data` (
-    `id` smallint(10) NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(100) NOT NULL,
-	`linkid` VARCHAR(25) NOT NULL,
-	`url` VARCHAR(2000) NOT NULL,
-	`count` INT(10) NOT NULL default \"0\",
-	`protect` TINYINT(1) NOT NULL default \"0\",
-	`password` VARCHAR(200),
-	`showads` TINYINT(1) NOT NULL default \"0\",
-	PRIMARY KEY (`id`)
-	) ENGINE = MYISAM;";
+	//Create count table
+	$createcounttable = "CREATE TABLE `counts` (
+    `id` int(11) NOT NULL,
+    `link_id` varchar(100) NOT NULL,
+    `date` date NOT NULL,
+    `ip` varchar(50) NOT NULL,
+    `referrer` varchar(300) NOT NULL
+    ) ENGINE = InnoDB;";
     
-    mysqli_query($con, $createdatatable);
+    mysqli_query($con, $createcounttable) or die(mysqli_error($con));
+    
+	//Create links table
+	$createlinkstable = "CREATE TABLE `links` (
+    `id` smallint(10) NOT NULL,
+    `name` varchar(100) NOT NULL,
+    `abbreviation` varchar(25) NOT NULL,
+    `url` varchar(2000) NOT NULL,
+    `count` int(10) NOT NULL DEFAULT \"0\",
+    `protect` tinyint(1) NOT NULL DEFAULT \"0\",
+    `password` varchar(200) DEFAULT NULL
+    ) ENGINE = InnoDB;";
+    
+    mysqli_query($con, $createlinkstable) or die(mysqli_error($con));
     
     //Create Users table
-    $createuserstable = "CREATE TABLE `Users` (
-    `id` smallint(10) NOT NULL AUTO_INCREMENT,
+    $createuserstable = "CREATE TABLE `users` (
+    `id` smallint(10) NOT NULL,
     `user` varchar(20) NOT NULL,
     `password` varchar(200) NOT NULL,
     `salt` varchar(3) NOT NULL,
     `email` varchar(100) NOT NULL,
     `hash` varchar(200) NOT NULl,
-    `api_key` varchar(200) NOT NULl,
-    PRIMARY KEY (`id`)
-    ) ENGINE=MyISAM;";
+    `api_key` varchar(200) NOT NULl
+    ) ENGINE = InnoDB;";
     
-    mysqli_query($con, $createuserstable);
+    mysqli_query($con, $createuserstable) or die(mysqli_error($con));
     
-    mysqli_query($con, "INSERT INTO Users (user, password, salt, email, hash, api_key)
+    //Add keys
+    mysqli_query($con, "ALTER TABLE `counts` ADD PRIMARY KEY (`id`)");
+    mysqli_query($con, "ALTER TABLE `links` ADD PRIMARY KEY (`id`)");
+    mysqli_query($con, "ALTER TABLE `users` ADD PRIMARY KEY (`id`)");
+    mysqli_query($con, "ALTER TABLE `counts` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT");
+    mysqli_query($con, "ALTER TABLE `links` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT");
+    mysqli_query($con, "ALTER TABLE `users` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT");
+    
+    mysqli_query($con, "INSERT INTO users (user, password, salt, email, hash, api_key)
     VALUES (\"$user\",\"$password\",\"$salt\",\"$email\",\"\",\"$api_key\")");
         
     mysqli_close($con);
     
-    //Generate nonce
-    $nonce = md5(date("h"));
-    header("Location: index.php?step=3&nonce=$nonce&user=$user");
+    header("Location: index.php?step=3&user=$user");
     exit;
 }
 
@@ -137,47 +139,32 @@ if (isset($_POST["step_2"])) {
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Indication &middot; Install</title>
-<meta name="robots" content="noindex, nofollow">
-<link href="../assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-<style type="text/css">
-body {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background-color: #eee;
-}
-.install-content {
-    max-width: 600px;
-    padding: 10px 30px 50px;
-    margin: 0 auto 20px;
-    background-color: #fff;
-    border: 1px solid #e5e5e5;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-    box-shadow: 0 1px 2px rgba(0,0,0,.05);
-}
-.install-content input[type="text"] {
-    font-size: 14px;
-    height: auto;
-    margin-bottom: 5px;
-    padding: 5px 10px;
-}
-</style>
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../assets/favicon.ico">
+<title>Indication &raquo; Install</title>
+<link rel="apple-touch-icon" href="../assets/icon.png">
+<link rel="stylesheet" href="../assets/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../assets/css/indication.css" type="text/css" media="screen">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 <body>
-<div class="container">
-<div class="install-content">
-<div class="text-center"><img src="../assets/icon.png" width="75" height="75" alt="Indication Logo"></div>
+<div class="container form-fix">
+<div class="row">
+<div class="col-sm-6 col-md-4 col-md-offset-4">
+<div class="panel panel-default">
+<div class="panel-heading">
+<strong>Indication &raquo; Install</strong>
+</div>
+<div class="panel-body">
+<fieldset>
+<div class="row">
+<div class="col-sm-12 col-md-10 col-md-offset-1">
 <?php
-if ($step == "0") {    
+    if ($step == "0") {
 ?>
 <p>Welcome to Indication <?php echo $version ?>. Before getting started, we need some information on your database. You will need to know the following items before proceeding.</p>
 <ul>
@@ -187,19 +174,23 @@ if ($step == "0") {
 <li>Database host</li>
 </ul>
 <p>You will then be asked to create an admin user.</p>
-<p>Click "Install" to get started!</p>
-<a href="?step=1&amp;nonce=<?php echo $nonce; ?>" class="btn btn-primary pull-right" role="button">Install</a>
-<?php   
-} elseif (($step == "1") && ($_GET["nonce"] == $nonce)) {
-
-//Get path to script
-$currenturl = $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
-$pathtoscriptwithslash = "http://" . substr($currenturl, 0, strpos($currenturl, "install"));
-$pathtoscript = rtrim($pathtoscriptwithslash, "/");	
+<p>Click "Start Install" to get started!</p>
+<a href="index.php?step=1" class="btn btn-primary btn-block">Start Install</a>
+<?php
+  
+    } elseif ($step == "1") {
+    
+    //Get path to script
+    $currenturl = $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+    $pathtoscriptwithslash = "http://" . substr($currenturl, 0, strpos($currenturl, "install"));
+    $pathtoscript = rtrim($pathtoscriptwithslash, "/");	
+    
+    if (file_exists(".step1")) {
+        echo "Error: This step has been completed!";
+    } else {
 
 ?>
-<form role="form" method="post" autocomplete="off">
-<h4>Database Settings</h4>
+<form method="post" autocomplete="off">
 <div class="form-group">
 <label for="dbhost">Database Host</label>
 <input type="text" class="form-control" id="dbhost" name="dbhost" value="localhost" placeholder="Type your database host..." required>
@@ -218,21 +209,28 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 </div>
 <div class="form-group">
 <label for="website">Website Name</label>
-<input type="text" class="form-control" id="website" name="website" placeholder="Type your websites name..." required>
+<input type="text" class="form-control" id="website" name="website" value="Indication" placeholder="Type your websites name..." required>
 </div>
-<h4>Website Settings</h4>
 <div class="form-group">
 <label for="pathtoscript">Path to Script</label>
-<input type="text" class="form-control" id="pathtoscript" name="pathtoscript" value="<?php echo $pathtoscript; ?>" placeholder="Type the path to Indication..." required>
+<input type="url" class="form-control" id="pathtoscript" name="pathtoscript" value="<?php echo $pathtoscript; ?>" placeholder="Type the path to Indication..." required>
 </div>
 <input type="hidden" name="step_1">
-<input type="submit" class="btn btn-default pull-right" value="Next">
+<input type="submit" class="btn btn-primary btn-block" value="Next">
 </form>
 <?php
-} elseif (($step == "2") && ($_GET["nonce"] == $nonce)) {
+    }
+
+    } elseif ($step == "2") {
+        
+        $lock = fopen(".step1", "w");
+    
+        if (file_exists(".step2")) {
+            echo "Error: This step has been completed!";
+        } else {
+    
 ?>
-<form role="form" method="post" autocomplete="off">
-<h4>User Details</h4>
+<form method="post" autocomplete="off">
 <div class="form-group">
 <label for="user">User</label>
 <input type="text" class="form-control" id="user" name="user" placeholder="Type a username..." required>
@@ -245,59 +243,33 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 <label for="password">Password</label>
 <input type="password" class="form-control" id="password" name="password" placeholder="Type a password..." required>
 </div>
-<div class="form-group">
-<label for="passwordconfirm">Confirm Password</label>
-<input type="password" class="form-control" id="passwordconfirm" name="passwordconfirm" placeholder="Type your password again..." required>
-<span class="help-block">It is recommended that your password be at least 6 characters long</span>
-</div>
 <input type="hidden" name="step_2">
-<input type="submit" class="btn btn-default pull-right" value="Finish">
+<input type="submit" class="btn btn-primary btn-block" value="Next">
 </form>
 <?php
-} elseif (($step == "3") && ($_GET["nonce"] == $nonce)) {   
-?>
-<div class="alert alert-success">
-<h4 class="alert-heading">Install Complete</h4>
-<p>Indication has been successfully installed. Please delete the "install" folder from your server, as it poses a potential security risk!</p>
-<p>Your login details are shown below, please make a note of them.</p>
-<ul>
-<li>User: <i><?php echo strip_tags($_GET["user"]); ?></i></li>
-<li>Password: <i>Password you set during install</i></li></ul>
-</div>
-<a href="../login.php" class="btn btn-default pull-right" role="button">Login</a>
-<?php
-} else {
-?>
-<div class="alert alert-danger">
-<h4 class="alert-heading">Install Error</h4>
-<p>An error occured and the installation could not continue.</p>
-<p>Please go back and try again.</p>
-</div>
-<a href="?step=0&amp;nonce=<?php echo $nonce; ?>" class="btn btn-default pull-right" role="button">Start Over</a>
-<?php
     }
+    
+    } elseif ($step == "3") {
+    
+    $lock = fopen(".step2", "w");
+    $complete = fopen(".done", "w");
+    
+ 
+?>
+<p>Indication has been successfully installed. Please delete the "install" folder from your server, as it poses a potential security risk!</p>
+<a href="../login.php" class="btn btn-primary btn-block" role="button">Login</a>
+<?php
+}
 ?>
 </div>
 </div>
-<script src="../assets/jquery.min.js"></script>
-<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="../assets/nod.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    var metrics = [
-        ["#dbhost", "presence", "Database host cannot be empty!"],
-        ["#dbuser", "presence", "Database user cannot be empty!"],
-        ["#dbpassword", "presence", "Database password cannot be empty!"],        
-        ["#dbname", "presence", "Database name cannot be empty!"],
-        ["#website", "presence", "Website cannot be empty!"],
-        ["#pathtoscript", /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/, "Enter a valid URL!"],
-        ["#user", "presence", "User name cannot be empty!"],
-        ["#email", "email", "Enter a valid email address"],
-        ["#password", "presence", "Passwords should be more than 6 characters"],
-        ["#passwordconfirm", "same-as: #password", "Passwords do not match!"]
-    ];
-    $("form").nod(metrics);
-});
-</script>
+</fieldset>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script src="../assets/bower_components/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../assets/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>
