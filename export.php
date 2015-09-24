@@ -83,7 +83,7 @@ $resultgetusersettings = mysqli_fetch_assoc($getusersettings);
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 <h1 class="page-header">Export</h1>
 <p>Export your data into CSV format for use in other applications</p>
-<input class="btn btn-default" id="export" type="button" value="Export">
+<input class="btn btn-default" id="export" type="button" value="Export"> <a href="assets/export.csv" target="_blank" class="btn btn-primary hidden" id="get" type="button">Get File</a>
 </div>
 </div>
 </div>
@@ -108,7 +108,8 @@ $(document).ready(function() {
                 });
             },
             success: function() {
-                window.location.href = "?file.csv";
+                $("#export").hide();
+                $("#get").removeClass("hidden");
             }
         });
     });

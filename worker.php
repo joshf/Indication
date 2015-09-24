@@ -152,6 +152,22 @@ if ($action == "add") {
     $api = substr(str_shuffle(MD5(microtime())), 0, 50);
     mysqli_query($con, "UPDATE `Users` SET `api_key` = \"$api\" WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
     echo $api;
+} elseif ($action == "export") {
+    
+    header("Content-Type: text/csv; charset=utf-8");
+    header("Content-Disposition: attachment; filename=assets/export.csv");
+    
+    $output = fopen("assets/export.csv", "w");
+
+    fputcsv($output, array("Link_ID", "Name", "Abbreviation", "Url", "Count", "Protect", "Password"));
+
+    $getdata = mysqli_query($con, "SELECT * FROM `links`");
+
+    while ($row = mysqli_fetch_assoc($getdata)) {
+        fputcsv($output, $row);   
+    }
+
+    fclose($output);
 } elseif ($action == "info") {
     
     $getdata = mysqli_query($con, "SELECT `id`, `name`, `abbreviation`, `url`, `count`, `protect` FROM `links` WHERE `id` = \"$id\"");
