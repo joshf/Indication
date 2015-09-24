@@ -112,6 +112,8 @@ if ($action == "add") {
 
     mysqli_query($con, "INSERT INTO `links` (`name`, `abbreviation`, `url`, `count`, `protect`, `password`)
     VALUES (\"$name\",\"$abbreviation\",\"$url\",\"0\",\"$protect\",\"$password\")");
+    
+    echo "Info: Link added!";
 } elseif ($action == "edit") {
     if (empty($abbreviation) || empty($url)) {
         die("Error: Data was empty!");
@@ -140,9 +142,12 @@ if ($action == "add") {
 
     mysqli_query($con, "UPDATE `links` SET `name` = \"$name\", `abbreviation` = \"$abbreviation\", `url` = \"$url\", `protect` = \"$protect\", `password` = \"$password\" WHERE `id` = \"$id\"");
     
+    echo "Info: Link edit!";
 } elseif ($action == "delete") {
     mysqli_query($con, "DELETE FROM `links` WHERE `id` = \"$id\"");
     mysqli_query($con, "DELETE FROM `counts` WHERE `link_id` = \"$id\"");
+    
+    echo "Info: Link deleted!";
 } elseif ($action == "generateapikey") {
     $api = substr(str_shuffle(MD5(microtime())), 0, 50);
     mysqli_query($con, "UPDATE `Users` SET `api_key` = \"$api\" WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
