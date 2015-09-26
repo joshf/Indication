@@ -4,27 +4,13 @@
 
 require_once("../assets/version.php");
 
-//Make sure we start at step 0
-if (!isset($_GET["step"])) {
-    header("Location: ?step=0");
-    exit;
-}
-
-//Stop bad things from happening
-$step = $_GET["step"];
-$steps = array("0", "1", "2", "3");
-if (!in_array($step, $steps)) {
-    $step = "0";
-}
-
 
 //Check if Indication has been installed
-if (file_exists(".done")) {
-    die("Information: Indication has already been installed! To reinstall the app please delete the .done file and run this installer again.");
+if (file_exists("../config.php")) {
+    die("Information: Indication has already been installed! To reinstall the app please delete your config.php file and run this installer again.");
 }
 
-//Create config.php
-if (isset($_POST["step_1"])) {
+if (isset($_POST["install"])) {
     
     $dbhost = $_POST["dbhost"];
     $dbuser = $_POST["dbuser"];
@@ -50,16 +36,6 @@ if (isset($_POST["step_1"])) {
     fwrite($configfile, $installstring);
     fclose($configfile);
     
-    header("Location: index.php?step=2");
-    exit;
-
-}
-
-//Create tables
-if (isset($_POST["step_2"])) {
-    
-    require_once("../config.php");
-
     $user = $_POST["user"];
     $email = $_POST["email"];
     if (empty($_POST["password"])) {
@@ -74,7 +50,7 @@ if (isset($_POST["step_2"])) {
     $api_key = substr(str_shuffle(MD5(microtime())), 0, 50);
     
     //Check if we can connect
-    @$con = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    @$con = mysqli_connect($dbhost, $dbuser, $dbuser, $dbname);
     if (mysqli_connect_errno()) {
         die("Error: Could not connect to database (" . mysqli_connect_error() . "). Check your database settings are correct.");
     }
@@ -129,8 +105,6 @@ if (isset($_POST["step_2"])) {
         
     mysqli_close($con);
     
-    header("Location: index.php?step=3&user=$user");
-    exit;
 }
 
 ?>
@@ -152,45 +126,34 @@ if (isset($_POST["step_2"])) {
 <![endif]-->
 </head>
 <body>
-<div class="container form-fix">
-<div class="row">
-<div class="col-sm-6 col-md-4 col-md-offset-4">
-<div class="panel panel-default">
-<div class="panel-heading">
-<strong>Indication &raquo; Install</strong>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+<div class="container-fluid">
+<div class="navbar-header">
+<a class="navbar-brand" href="index.php">Indication</a>
 </div>
-<div class="panel-body">
-<fieldset>
-<div class="row">
-<div class="col-sm-12 col-md-10 col-md-offset-1">
+</div>
+</nav>
+<div class="container-fluid top-pad">
 <?php
-    if ($step == "0") {
+
+if (isset($_POST["install"])) {    
+ 
 ?>
-<p>Welcome to Indication <?php echo $version ?>. Before getting started, we need some information on your database. You will need to know the following items before proceeding.</p>
-<ul>
-<li>Database name</li>
-<li>Database username</li>
-<li>Database password</li>
-<li>Database host</li>
-</ul>
-<p>You will then be asked to create an admin user.</p>
-<p>Click "Start Install" to get started!</p>
-<a href="index.php?step=1" class="btn btn-primary btn-block">Start Install</a>
+<p>Indication has been successfully installed. Please delete the "install" folder from your server, as it poses a potential security risk!</p>
+<a href="../login.php" class="btn btn-default" role="button">Login</a>
 <?php
-  
-    } elseif ($step == "1") {
-    
-    //Get path to script
-    $currenturl = $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
-    $pathtoscriptwithslash = "http://" . substr($currenturl, 0, strpos($currenturl, "install"));
-    $pathtoscript = rtrim($pathtoscriptwithslash, "/");	
-    
-    if (file_exists(".step1")) {
-        echo "Error: This step has been completed!";
-    } else {
+} else {
+?>
+<div class="alert alert-info">Welcome to Indication <?php echo $version; ?>. To get started fill in all the information below.</div>
+<form method="post" autocomplete="off">
+<?php
+      
+//Get path to script
+$currenturl = $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+$pathtoscriptwithslash = "http://" . substr($currenturl, 0, strpos($currenturl, "install"));
+$pathtoscript = rtrim($pathtoscriptwithslash, "/");	
 
 ?>
-<form method="post" autocomplete="off">
 <div class="form-group">
 <label for="dbhost">Database Host</label>
 <input type="text" class="form-control" id="dbhost" name="dbhost" value="localhost" placeholder="Type your database host..." required>
@@ -215,22 +178,6 @@ if (isset($_POST["step_2"])) {
 <label for="pathtoscript">Path to Script</label>
 <input type="url" class="form-control" id="pathtoscript" name="pathtoscript" value="<?php echo $pathtoscript; ?>" placeholder="Type the path to Indication..." required>
 </div>
-<input type="hidden" name="step_1">
-<input type="submit" class="btn btn-primary btn-block" value="Next">
-</form>
-<?php
-    }
-
-    } elseif ($step == "2") {
-        
-        $lock = fopen(".step1", "w");
-    
-        if (file_exists(".step2")) {
-            echo "Error: This step has been completed!";
-        } else {
-    
-?>
-<form method="post" autocomplete="off">
 <div class="form-group">
 <label for="user">User</label>
 <input type="text" class="form-control" id="user" name="user" placeholder="Type a username..." required>
@@ -243,31 +190,13 @@ if (isset($_POST["step_2"])) {
 <label for="password">Password</label>
 <input type="password" class="form-control" id="password" name="password" placeholder="Type a password..." required>
 </div>
-<input type="hidden" name="step_2">
-<input type="submit" class="btn btn-primary btn-block" value="Next">
+<input type="hidden" name="install">
+<input type="submit" class="btn btn-default" value="Install">
 </form>
-<?php
-    }
-    
-    } elseif ($step == "3") {
-    
-    $lock = fopen(".step2", "w");
-    $complete = fopen(".done", "w");
-    
- 
-?>
-<p>Indication has been successfully installed. Please delete the "install" folder from your server, as it poses a potential security risk!</p>
-<a href="../login.php" class="btn btn-primary btn-block" role="button">Login</a>
+<br>
 <?php
 }
 ?>
-</div>
-</div>
-</fieldset>
-</div>
-</div>
-</div>
-</div>
 </div>
 <script src="../assets/bower_components/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../assets/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>

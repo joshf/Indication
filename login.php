@@ -72,23 +72,9 @@ if (!isset($_SESSION["indication_user"])) {
 <![endif]-->
 </head>
 <body>
-<div class="container form-fix">
-<div class="row">
-<div class="col-sm-6 col-md-4 col-md-offset-4">
-<div class="panel panel-default">
-<div class="panel-heading">
-<strong>Indication &raquo; Login</strong>
-</div>
-<div class="panel-body">
-<form method="post">
-<fieldset>
-<div class="row">
-<div class="center-block">
-<img class="profile-img" src="assets/icon.png" alt="Indication">
-</div>
-</div>
-<div class="row">
-<div class="col-sm-12 col-md-10 col-md-offset-1">
+<div class="container">
+<form method="post" class="form-signin">
+<img class="logo-img" src="assets/icon.png" alt="Indication">
 <?php 
 if (isset($_GET["login_error"])) {
     echo "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Incorrect login.</div>";
@@ -96,36 +82,17 @@ if (isset($_GET["login_error"])) {
     echo "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Successfully logged out.</div>";
 }
 ?>
-<div class="form-group">
-<div class="input-group">
-<span class="input-group-addon">
-<i class="glyphicon glyphicon-user"></i>
-</span> 
-<input type="text" class="form-control" name="username" id="username" placeholder="Username" autofocus>
+<label for="username" class="sr-only">Username</label>
+<input type="text" id="username" name="username" class="form-control" placeholder="Username..." required autofocus>
+<label for="password" class="sr-only">Password</label>
+<input type="password" id="password" name="password" class="form-control" placeholder="Password..." required>
+<div class="checkbox">
+<label>
+<input type="checkbox" value="remember-me"> Remember me
+</label>
 </div>
-</div>
-<div class="form-group">
-<div class="input-group">
-<span class="input-group-addon">
-<i class="glyphicon glyphicon-lock"></i>
-</span>
-<input type="password" class="form-control" name="password" id="password" placeholder="Password">
-</div>
-</div>
-<div class="form-group">
-<input type="submit" class="btn btn-primary btn-block" value="Sign in">
-</div>
-</div>
-</div>
-</fieldset>
+<button class="btn btn-primary btn-block" type="submit">Sign in</button>
 </form>
-</div>
-<div class="panel-footer">
-Forgot your password? <a href="login.php?resetpassword">Click Here</a>
-</div>
-</div>
-</div>
-</div>
 </div>
 <script src="assets/bower_components/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="assets/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>

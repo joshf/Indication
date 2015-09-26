@@ -111,39 +111,13 @@ if (isset($_POST["password"])) {
 <![endif]-->
 </head>
 <body>
-<div class="container form-fix">
-<div class="row">
-<div class="col-sm-6 col-md-4 col-md-offset-4">
-<div class="panel panel-default">
-<div class="panel-heading">
-<strong><?php echo WEBSITE; ?> &raquo; <?php echo $getinforesult["name"]; ?></strong>
-</div>
-<div class="panel-body">
-<form method="post">
-<fieldset>
-<div class="row">
-</div>
-<div class="row">
-<div class="col-sm-12 col-md-10 col-md-offset-1">
-<div class="form-group">
-<div class="input-group">
-<span class="input-group-addon">
-<i class="glyphicon glyphicon-lock"></i>
-</span>
-<input type="password" class="form-control" name="password" id="password" placeholder="Password">
-</div>
-</div>
-<div class="form-group">
-<input type="submit" class="btn btn-primary btn-block" value="Follow Link">
-</div>
-</div>
-</div>
-</fieldset>
+<div class="container">
+<form method="post" class="form-signin">
+<img class="logo-img" src="assets/icon.png" alt="Indication">
+<label for="password" class="sr-only">Password</label>
+<input type="password" id="password" name="password" class="form-control" placeholder="Password..." required autofocus>
+<button class="btn btn-primary btn-block" type="submit">Follow Link</button>
 </form>
-</div>
-</div>
-</div>
-</div>
 </div>
 <script src="assets/bower_components/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="assets/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
