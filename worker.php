@@ -89,9 +89,9 @@ if ($action == "add") {
     }
 
     //Check if ID exists
-    $checkid = mysqli_query($con, "SELECT `linkid` FROM `Data` WHERE `linkid` = \"$abbreviation\"");
-    $resultcheckid = mysqli_fetch_assoc($checkid); 
-    if (mysqli_num_rows($checkid) != 0) {
+    $checkabbreviation = mysqli_query($con, "SELECT `abbreviation` FROM `links` WHERE `abbreviation` = \"$abbreviation\"");
+    $resultcheckid = mysqli_fetch_assoc($checkabbreviation); 
+    if (mysqli_num_rows($checkabbreviation) != 0) {
         die("Error: ID Exists!");
     }
 
@@ -101,7 +101,6 @@ if ($action == "add") {
         $inputtedpassword = mysqli_real_escape_string($con, $_POST["password"]);
         if (empty($inputtedpassword)) {
             die("Error: Empty password!");
-            exit;
         }
         $hashedpassword = hash("sha256", $inputtedpassword);
         $password = hash("sha256", SALT . $hashedpassword);
@@ -123,9 +122,8 @@ if ($action == "add") {
     if (isset($_POST["passwordprotectstate"])) {
         if (empty($_POST["password"])) {
             die("Error: Empty password!");
-            exit;
         } 
-        $getprotectinfo = mysqli_query($con, "SELECT `password` FROM `Data` WHERE `id` = \"$id\"");
+        $getprotectinfo = mysqli_query($con, "SELECT `password` FROM `links` WHERE `id` = \"$id\"");
         $getprotectinforesult = mysqli_fetch_assoc($getprotectinfo); 
         $inputtedpassword = mysqli_real_escape_string($con, $_POST["password"]);
         if (empty($inputtedpassword)) {
