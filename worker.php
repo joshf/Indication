@@ -16,9 +16,9 @@ if (mysqli_connect_errno()) {
 
 session_start();
 if (isset($_POST["api_key"]) || isset($_GET["api_key"])) {
-    if (isset($_POST["action"])) {
+    if (isset($_POST["api_key"])) {
         $api = mysqli_real_escape_string($con, $_POST["api_key"]);
-    } elseif (isset($_GET["action"])) {
+    } elseif (isset($_GET["api_key"])) {
         $api = mysqli_real_escape_string($con, $_GET["api_key"]);
     }
     if (empty($api)) {
