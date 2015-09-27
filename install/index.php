@@ -4,10 +4,9 @@
 
 require_once("../assets/version.php");
 
-
 //Check if Indication has been installed
 if (file_exists("../config.php")) {
-    die("Information: Indication has already been installed! To reinstall the app please delete your config.php file and run this installer again.");
+    die("Information: Indication has already been installed! You can login <a href=\"../login.php\">here</a> or to reinstall the app please delete your config.php file and run this installer again.");
 }
 
 if (isset($_POST["install"])) {
@@ -29,7 +28,7 @@ if (isset($_POST["install"])) {
     $randsalt = md5(uniqid(rand(), true));
     $salt = substr($randsalt, 0, 3);
     
-    $installstring = "<?php\n\n//Database Settings\ndefine('DB_HOST', " . var_export($dbhost, true) . ");\ndefine('DB_USER', " . var_export($dbuser, true) . ");\ndefine('DB_PASSWORD', " . var_export($dbpassword, true) . ");\ndefine('DB_NAME', " . var_export($dbname, true) . ");\n\n//Other Settings\ndefine('SALT', " . var_export($salt, true) . ");\ndefine('WEBSITE', " . var_export($website, true) . ");\ndefine('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");\ndefine('COUNT_UNIQUE_ONLY_STATE', 'Enabled');\n\n?>";
+    $installstring = "<?php\n\n//Database Settings\ndefine('DB_HOST', " . var_export($dbhost, true) . ");\ndefine('DB_USER', " . var_export($dbuser, true) . ");\ndefine('DB_PASSWORD', " . var_export($dbpassword, true) . ");\ndefine('DB_NAME', " . var_export($dbname, true) . ");\n\n//Other Settings\ndefine('SALT', " . var_export($salt, true) . ");\ndefine('WEBSITE', " . var_export($website, true) . ");\ndefine('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");\ndefine('COUNT_UNIQUE_ONLY_STATE', 'Enabled');\ndefine('CUSTOM_URL_STATE', 'Disabled');\ndefine('CUSTOM_URL', '');\n\n?>";
 
     //Write Config
     $configfile = fopen("../config.php", "w");
@@ -39,7 +38,7 @@ if (isset($_POST["install"])) {
     $user = $_POST["user"];
     $email = $_POST["email"];
     if (empty($_POST["password"])) {
-        die("Error: No  password set.");
+        die("Error: No password set.");
     } else {
         //Salt and hash passwords
         $randsalt = md5(uniqid(rand(), true));
@@ -57,7 +56,7 @@ if (isset($_POST["install"])) {
 
 	//Create count table
 	$createcounttable = "CREATE TABLE `counts` (
-    `id` int(11) NOT NULL,
+    `id` int(8) NOT NULL,
     `link_id` varchar(100) NOT NULL,
     `date` date NOT NULL,
     `ip` varchar(50) NOT NULL,
@@ -68,7 +67,7 @@ if (isset($_POST["install"])) {
     
 	//Create links table
 	$createlinkstable = "CREATE TABLE `links` (
-    `id` smallint(10) NOT NULL,
+    `id` int(8) NOT NULL,
     `name` varchar(100) NOT NULL,
     `abbreviation` varchar(25) NOT NULL,
     `url` varchar(2000) NOT NULL,
@@ -79,9 +78,9 @@ if (isset($_POST["install"])) {
     
     mysqli_query($con, $createlinkstable) or die(mysqli_error($con));
     
-    //Create Users table
+    //Create users table
     $createuserstable = "CREATE TABLE `users` (
-    `id` smallint(10) NOT NULL,
+    `id` int(8) NOT NULL,
     `user` varchar(20) NOT NULL,
     `password` varchar(200) NOT NULL,
     `salt` varchar(3) NOT NULL,
@@ -96,9 +95,9 @@ if (isset($_POST["install"])) {
     mysqli_query($con, "ALTER TABLE `counts` ADD PRIMARY KEY (`id`)");
     mysqli_query($con, "ALTER TABLE `links` ADD PRIMARY KEY (`id`)");
     mysqli_query($con, "ALTER TABLE `users` ADD PRIMARY KEY (`id`)");
-    mysqli_query($con, "ALTER TABLE `counts` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT");
-    mysqli_query($con, "ALTER TABLE `links` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT");
-    mysqli_query($con, "ALTER TABLE `users` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT");
+    mysqli_query($con, "ALTER TABLE `counts` CHANGE `id` `id` INT(8) NOT NULL AUTO_INCREMENT");
+    mysqli_query($con, "ALTER TABLE `links` CHANGE `id` `id` INT(8) NOT NULL AUTO_INCREMENT");
+    mysqli_query($con, "ALTER TABLE `users` CHANGE `id` `id` INT(8) NOT NULL AUTO_INCREMENT");
     
     mysqli_query($con, "INSERT INTO users (user, password, salt, email, hash, api_key)
     VALUES (\"$user\",\"$password\",\"$salt\",\"$email\",\"\",\"$api_key\")");
@@ -144,7 +143,7 @@ if (isset($_POST["install"])) {
 <?php
 } else {
 ?>
-<div class="alert alert-info">Welcome to Indication <?php echo $version; ?>. To get started fill in all the information below.</div>
+<div class="alert alert-info">Welcome to Indication <?php echo $version ?>. Before getting started, we need some information on your database and for you to create an admin user.</div>
 <form method="post" autocomplete="off">
 <?php
       
