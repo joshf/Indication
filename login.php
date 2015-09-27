@@ -30,7 +30,7 @@ if (isset($_COOKIE["indication_user_rememberme"])) {
 if (isset($_POST["password"]) && isset($_POST["username"])) {
     $username = mysqli_real_escape_string($con, $_POST["username"]);
     $password = mysqli_real_escape_string($con, $_POST["password"]);
-    $userinfo = mysqli_query($con, "SELECT `id`, `user`, `password`, `salt` FROM `Users` WHERE `user` = \"$username\"");
+    $userinfo = mysqli_query($con, "SELECT `id`, `user`, `password`, `salt` FROM `users` WHERE `user` = \"$username\"");
     $userinforesult = mysqli_fetch_assoc($userinfo);
     if (mysqli_num_rows($userinfo) == 0) {
         header("Location: login.php?login_error=true");
@@ -42,7 +42,7 @@ if (isset($_POST["password"]) && isset($_POST["username"])) {
         $_SESSION["indication_user"] = $userinforesult["id"];
         if (isset($_POST["rememberme"])) {
             $hash = substr(str_shuffle(MD5(microtime())), 0, 50);
-            mysqli_query($con, "UPDATE `Users` SET `hash` = \"$hash\" WHERE `id` = \"" . $userinforesult["id"] . "\"");
+            mysqli_query($con, "UPDATE `users` SET `hash` = \"$hash\" WHERE `id` = \"" . $userinforesult["id"] . "\"");
             setcookie("indication_user_rememberme", $hash, time()+3600*24*7);
         }
     } else {

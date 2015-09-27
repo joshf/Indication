@@ -144,7 +144,7 @@ if (isset($_POST["install"])) {
 } else {
 ?>
 <div class="alert alert-info">Welcome to Indication <?php echo $version ?>. Before getting started, we need some information on your database and for you to create an admin user.</div>
-<form method="post" autocomplete="off">
+<form id="installform" method="post" autocomplete="off">
 <?php
       
 //Get path to script
@@ -199,5 +199,13 @@ $pathtoscript = rtrim($pathtoscriptwithslash, "/");
 </div>
 <script src="../assets/bower_components/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../assets/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../assets/bower_components/bootstrap-validator/dist/validator.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $("#installform").validator({
+        disable: true
+    });
+});
+</script>
 </body>
 </html>
