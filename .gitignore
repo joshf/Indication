@@ -1,4 +1,4 @@
 config.php
 generate.php
-patches/*
 api_test.php
+data/*
