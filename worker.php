@@ -140,7 +140,7 @@ if ($action == "add") {
 
     mysqli_query($con, "UPDATE `links` SET `name` = \"$name\", `abbreviation` = \"$abbreviation\", `url` = \"$url\", `protect` = \"$protect\", `password` = \"$password\" WHERE `id` = \"$id\"");
     
-    echo "Info: Link edit!";
+    echo "Info: Link edited!";
 } elseif ($action == "delete") {
     mysqli_query($con, "DELETE FROM `links` WHERE `id` = \"$id\"");
     mysqli_query($con, "DELETE FROM `counts` WHERE `link_id` = \"$id\"");
@@ -172,6 +172,7 @@ if ($action == "add") {
     }
 
     fclose($output);
+    echo "Info: CSV created!";
 } elseif ($action == "info") {
     
     $getdata = mysqli_query($con, "SELECT `id`, `name`, `abbreviation`, `url`, `count`, `protect` FROM `links` WHERE `id` = \"$id\"");

@@ -117,3 +117,9 @@ body {
 .top-pad {
     padding-top: 15px;
 }
+.results tr[visible="false"] {
+    display:none;
+}
+.results tr[visible="true"]{
+    display:table-row;
+}

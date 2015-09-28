@@ -120,8 +120,11 @@ $resultgetmonth = mysqli_fetch_assoc($getmonth);
 </div>
 </div>
 <h2 class="sub-header">Links</h2>
+<div class="form-group has-feedback">
+<input type="text" id="search" name="search" class="form-control" placeholder="Search your links..."> <span id="counter" class="text-muted form-control-feedback"></span>
+</div>
 <div class="table-responsive">
-<table class="table table-striped">
+<table class="table table-striped results">
 <thead>
 <tr>
 <th>Name</th>
@@ -238,6 +241,30 @@ $(document).ready(function () {
                 //Do nothing
             }
         });
+    });
+    $("#search").keyup(function () {
+        $("#counter").removeClass("hidden");
+        var term = $("#search").val();
+        if (term == "") {
+            $("#counter").addClass("hidden");
+        }
+        var list_tem = $(".results tbody").children("tr");
+        var search_split = term.replace(/ /g, "\"):containsi(\"")
+        $.extend($.expr[":"], {"containsi": function(elem, i, match, array) {
+                return (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+            }
+        });
+        $(".results tbody tr").not(":containsi(\"" + search_split + "\")").each(function(e){
+            $(this).attr("visible","false");
+        });
+        $(".results tbody tr:containsi(\"" + search_split + "\")").each(function(e){
+            $(this).attr("visible","true");
+        });
+        var count = $(".results tbody tr[visible=true]").length;
+        $("#counter").text(count);
+        if (count == "0") {
+            $("#counter").text("0");
+        }
     });
 });
 </script>
