@@ -35,7 +35,6 @@ $currentcountuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
 $currentcustomurlstate = CUSTOM_URL_STATE;
 $currentcustomurl = CUSTOM_URL; 
 
-
 if (!empty($_POST)) {
     //Get new settings from POST
     $user = $_POST["user"];
@@ -166,7 +165,7 @@ if ($currentcountuniqueonlystate == "Enabled" ) {
 ?> 
 </div>
 <h4>Custom URL</h4>
-<p>Allows you to use a custom get url (for clean urls).</p>
+<p>Allows you to use a custom get url (for clean URL's).</p>
 <div class="radio">
 <?php
 if ($currentcustomurlstate == "Enabled" ) {
@@ -193,8 +192,8 @@ if ($currentcustomurlstate == "Enabled" ) {
 <br>
 <hr>
 <h5>API key</h5>
-<p>Your API key is: <div id="api_key"><b><?php echo $resultgetusersettings["api_key"]; ?></b></div></p>
-<button id="generateapikey" class="btn btn-default">Generate New Key</button
+<p>Your API key is: <b><span id="api_key"><?php echo $resultgetusersettings["api_key"]; ?></span></b></p>
+<button id="generateapikey" class="btn btn-default">Generate New Key</button>
 </div>
 </div>
 </div>
@@ -227,10 +226,10 @@ $(document).ready(function() {
             url: "worker.php",
             data: "action=generateapikey",
             error: function() {
-                $("#api_key").html("<b>Could not generate key. Failed to connect to worker.</b>");
+                $("#api_key").html("Could not generate key. Failed to connect to worker.</b>");
             },
             success: function(api_key) {
-                $("#api_key").html("<b>"  + api_key +  "</b>");
+                $("#api_key").html(api_key);
             }
         });
     });

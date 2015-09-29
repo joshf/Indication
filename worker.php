@@ -17,14 +17,14 @@ if (mysqli_connect_errno()) {
 session_start();
 if (isset($_POST["api_key"]) || isset($_GET["api_key"])) {
     if (isset($_POST["api_key"])) {
-        $api = mysqli_real_escape_string($con, $_POST["api_key"]);
+        $api_key = mysqli_real_escape_string($con, $_POST["api_key"]);
     } elseif (isset($_GET["api_key"])) {
-        $api = mysqli_real_escape_string($con, $_GET["api_key"]);
+        $api_key = mysqli_real_escape_string($con, $_GET["api_key"]);
     }
-    if (empty($api)) {
+    if (empty($api_key)) {
         die("Error: No API key passed!");
     }
-    $checkkey = mysqli_query($con, "SELECT `id`, `user` FROM `users` WHERE `api_key` = \"$api\"");
+    $checkkey = mysqli_query($con, "SELECT `id`, `user` FROM `users` WHERE `api_key` = \"$api_key\"");
     $checkkeyresult = mysqli_fetch_assoc($checkkey);
     if (mysqli_num_rows($checkkey) == 0) {
         die("Error: API key is not valid!");
@@ -88,11 +88,11 @@ if ($action == "add") {
         die("Error: Data was empty!");
     }
 
-    //Check if ID exists
+    //Check if abbreviation exists
     $checkabbreviation = mysqli_query($con, "SELECT `abbreviation` FROM `links` WHERE `abbreviation` = \"$abbreviation\"");
     $resultcheckid = mysqli_fetch_assoc($checkabbreviation); 
     if (mysqli_num_rows($checkabbreviation) != 0) {
-        die("Error: ID Exists!");
+        die("Error: Abbreviation Exists!");
     }
 
     //Make sure a password is set if the checkbox was enabled
@@ -147,15 +147,15 @@ if ($action == "add") {
     
     echo "Info: Link deleted!";
 } elseif ($action == "generateapikey") {
-    $api = substr(str_shuffle(MD5(microtime())), 0, 50);
-    mysqli_query($con, "UPDATE `Users` SET `api_key` = \"$api\" WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
-    echo $api;
+    $api_key = substr(str_shuffle(MD5(microtime())), 0, 50);
+    mysqli_query($con, "UPDATE `Users` SET `api_key` = \"$api_key\" WHERE `id` = \"" . $_SESSION["indication_user"] . "\"");
+    echo $api_key;
 } elseif ($action == "export") {
     
-    $date = date("d-m-y");
+    $today = date("d-m-y");
     
     header("Content-Type: text/csv; charset=utf-8");
-    header("Content-Disposition: attachment; filename=data/export-$date.csv");
+    header("Content-Disposition: attachment; filename=data/export-$today.csv");
     
     if (!file_exists("data")) {
         mkdir("data");
@@ -163,9 +163,9 @@ if ($action == "add") {
         fclose($protect);
     }
     
-    $output = fopen("data/export-$date.csv", "w");
+    $output = fopen("data/export-$today.csv", "w");
 
-    fputcsv($output, array("#", "Name", "Abbreviation", "Url", "Count", "Protect", "Password"));
+    fputcsv($output, array("#", "Name", "Abbreviation", "URL", "Count", "Protect", "Password"));
 
     $getdata = mysqli_query($con, "SELECT * FROM `links`");
 

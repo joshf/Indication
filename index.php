@@ -165,7 +165,7 @@ while($row = mysqli_fetch_assoc($getlinks)) {
 <script src="assets/bower_components/modernizr-load/modernizr.js" type="text/javascript" charset="utf-8"></script>
 <script src="assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">  
-$(document).ready(function () {
+$(document).ready(function () {    
     var indication_version = "<?php echo $version ?>";
     if (!Cookies.get("indication_didcheckforupdates")) {
         $.getJSON("https://api.github.com/repos/joshf/Indication/releases").done(function(resp) {
@@ -174,11 +174,11 @@ $(document).ready(function () {
             var url = data.zipball_url;
             if (indication_version < indication_remote_version) {
                 bootbox.dialog({
-                    message: "Indication " + indication_remote_version + " is available. Do you wish to download the update? For more information about this update click <a href=\""+ data.html_url + "\">here</a>.",
+                    message: "Indication " + indication_remote_version + " is available. Do you wish to download the update? For more information about this update click <a href=\""+ data.html_url + "\" target=\"_blank\">here</a>. If you click \"Not Now\" you will be not reminded for another 7 days.",
                     title: "Update Available",
                     buttons: {
                         cancel: {
-                            label: "Cancel",
+                            label: "Not Now",
                             callback: function() {
                                 Cookies.set("indication_didcheckforupdates", "1", { expires: 7 });
                             }
