@@ -159,11 +159,13 @@ if ($action == "add") {
     
     if (!file_exists("data")) {
         mkdir("data");
+        $protect = fopen("data/index.php", "w");
+        fclose($protect);
     }
     
     $output = fopen("data/export-$date.csv", "w");
 
-    fputcsv($output, array("Link_ID", "Name", "Abbreviation", "Url", "Count", "Protect", "Password"));
+    fputcsv($output, array("#", "Name", "Abbreviation", "Url", "Count", "Protect", "Password"));
 
     $getdata = mysqli_query($con, "SELECT * FROM `links`");
 
@@ -172,6 +174,7 @@ if ($action == "add") {
     }
 
     fclose($output);
+    
     echo "Info: CSV created!";
 } elseif ($action == "info") {
     

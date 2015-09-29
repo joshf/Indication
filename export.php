@@ -90,7 +90,7 @@ $resultgetusersettings = mysqli_fetch_assoc($getusersettings);
     
 if ($handle = opendir("data")) {
     while (false !== ($entry = readdir($handle))) {
-        if ($entry != ".DS_Store" && $entry != ".." && $entry != ".") {
+        if ($entry != ".DS_Store" && $entry != ".." && $entry != "." && $entry != "index.php") {
             $string = str_replace(".csv", "", $entry);
             $name = str_replace("export-", "", $string);
             echo "<li class=\"list-group-item\"><a href=\"data/$entry\">$name</a></li>";

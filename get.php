@@ -127,5 +127,4 @@ if (isset($_POST["password"])) {
 
 mysqli_close($con);
 
-
 ?>

@@ -168,13 +168,13 @@ while($row = mysqli_fetch_assoc($getlinks)) {
 $(document).ready(function () {
     var indication_version = "<?php echo $version ?>";
     if (!Cookies.get("indication_didcheckforupdates")) {
-        $.getJSON("https://api.github.com/repos/joshf/Indication/tags").done(function(resp) {
+        $.getJSON("https://api.github.com/repos/joshf/Indication/releases").done(function(resp) {
             var data = resp[0];
-            var indication_remote_version = data.name;
+            var indication_remote_version = data.tag_name;
             var url = data.zipball_url;
             if (indication_version < indication_remote_version) {
                 bootbox.dialog({
-                    message: "Indication " + indication_remote_version + " is available. Do you wish to download the update?",
+                    message: "Indication " + indication_remote_version + " is available. Do you wish to download the update? For more information about this update click <a href=\""+ data.html_url + "\">here</a>.",
                     title: "Update Available",
                     buttons: {
                         cancel: {
