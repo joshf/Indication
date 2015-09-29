@@ -165,7 +165,7 @@ if ($action == "add") {
     
     $output = fopen("data/export-$today.csv", "w");
 
-    fputcsv($output, array("#", "Name", "Abbreviation", "URL", "Count", "Protect", "Password"));
+    fputcsv($output, array("#", "Name", "Abbreviation", "URL", "Protect", "Password"));
 
     $getdata = mysqli_query($con, "SELECT * FROM `links`");
 
@@ -178,15 +178,18 @@ if ($action == "add") {
     echo "Info: CSV created!";
 } elseif ($action == "info") {
     
-    $getdata = mysqli_query($con, "SELECT `id`, `name`, `abbreviation`, `url`, `count`, `protect` FROM `links` WHERE `id` = \"$id\"");
+    $getdata = mysqli_query($con, "SELECT `id`, `name`, `abbreviation`, `url`, `protect` FROM `links` WHERE `id` = \"$id\"");
     $resultgetdata = mysqli_fetch_assoc($getdata); 
+    
+    $getcount = mysqli_query($con, "SELECT COUNT(id) AS `count` FROM `counts` WHERE `link_id` = \"$id\"");
+    $resultgetcount = mysqli_fetch_assoc($getcount);
     
     $data = array(
         "id" => $resultgetdata["id"],
         "name" => $resultgetdata["name"],
         "abbreviation" => $resultgetdata["abbreviation"],
         "url" => $resultgetdata["url"],
-        "count" => $resultgetdata["count"],
+        "count" => $resultgetcount["count"],
         "protect" => $resultgetdata["protect"]
     );
     

@@ -71,7 +71,6 @@ if (isset($_POST["install"])) {
     `name` varchar(100) NOT NULL,
     `abbreviation` varchar(25) NOT NULL,
     `url` varchar(2000) NOT NULL,
-    `count` int(10) NOT NULL DEFAULT \"0\",
     `protect` tinyint(1) NOT NULL DEFAULT \"0\",
     `password` varchar(200) DEFAULT NULL
     ) ENGINE = InnoDB;";

@@ -63,18 +63,6 @@ if (!isset($_SESSION["indication_user"])) {
     
 }
 
-//Make sure we balance
-$gettotalfromcounts = mysqli_query($con, "SELECT COUNT(id) AS `count` FROM `counts` WHERE `link_id` = \"$id\"");
-$resultgettotalfromcounts = mysqli_fetch_assoc($gettotalfromcounts);
-
-$gettotalfromlinks = mysqli_query($con, "SELECT `count` FROM `links` WHERE `id` = \"$id\"");
-$resultgettotalfromlinks = mysqli_fetch_assoc($gettotalfromlinks);
-
-if ($resultgettotalfromcounts["count"] != $resultgettotalfromlinks["count"]) {
-    $newcount = $resultgettotalfromcounts["count"];
-    mysqli_query($con, "UPDATE `links` SET `count` = \"$newcount\" WHERE `id` = \"$id\"");   
-}
-
 if ($getinforesult["protect"] == "0") {
     header("Location: " . $getinforesult["url"] . "");
     mysqli_close($con);

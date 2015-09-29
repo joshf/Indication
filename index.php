@@ -138,15 +138,15 @@ $resultgetmonth = mysqli_fetch_assoc($getmonth);
 
 $getlinks = mysqli_query($con, "SELECT * FROM `links`");
 
-//Set counter to zero
-$numberofitems = 0;
-while($row = mysqli_fetch_assoc($getlinks)) {
-    $numberofitems++;
+while($links = mysqli_fetch_assoc($getlinks)) {
+    $id = $links["id"];
+    $getcounts = mysqli_query($con, "SELECT COUNT(id) AS `count` FROM `counts` WHERE `link_id` = \"$id\"");
+    $resultgetcounts = mysqli_fetch_assoc($getcounts);
     echo "<tr>";
-    echo "<td><a href=\"breakdowns.php?id=" . $row["id"] . "\">" . $row["name"] . "</a></td>";
-    echo "<td>" . $row["abbreviation"] . "</td>";
-    echo "<td><span class=\"badge\">" . $row["count"] . "</span></td>";
-    echo "<td><a href=\"edit.php?id=" . $row["id"] . "\">Edit</a> | <a class=\"delete\" data-id=\"" . $row["id"] . "\">Delete</a> | <a class=\"link\" data-abbreviation=\"" . $row["abbreviation"] . "\">Link</a>";
+    echo "<td><a href=\"breakdowns.php?id=" . $links["id"] . "\">" . $links["name"] . "</a></td>";
+    echo "<td>" . $links["abbreviation"] . "</td>";
+    echo "<td><span class=\"badge\">" . $resultgetcounts["count"] . "</span></td>";
+    echo "<td><a href=\"edit.php?id=" . $links["id"] . "\">Edit</a> | <a class=\"delete\" data-id=\"" . $links["id"] . "\">Delete</a> | <a class=\"link\" data-abbreviation=\"" . $links["abbreviation"] . "\">Link</a>";
     echo "</tr>";
 }
 

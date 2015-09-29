@@ -100,7 +100,7 @@ if (!isset($_GET["id"])) {
 $idtoedit = mysqli_real_escape_string($con, $_GET["id"]);
 
 //Check if ID exists
-$getdata = mysqli_query($con, "SELECT `id`, `name`, `abbreviation`, `url`, `count`, `protect`, `password` FROM `links` WHERE `id` = $idtoedit");
+$getdata = mysqli_query($con, "SELECT `id`, `name`, `abbreviation`, `url`, `protect`, `password` FROM `links` WHERE `id` = $idtoedit");
 if (mysqli_num_rows($getdata) == 0) {
     echo "<div class=\"alert alert-danger\"><h4 class=\"alert-heading\">Error</h4><p>ID does not exist.</p><p><a class=\"btn btn-danger\" href=\"javascript:history.go(-1)\">Go Back</a></p></div>";
 } else {
