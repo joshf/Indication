@@ -109,8 +109,8 @@ if ($action == "add") {
         $password = "";
     }
 
-    mysqli_query($con, "INSERT INTO `links` (`name`, `abbreviation`, `url`, `count`, `protect`, `password`)
-    VALUES (\"$name\",\"$abbreviation\",\"$url\",\"0\",\"$protect\",\"$password\")");
+    mysqli_query($con, "INSERT INTO `links` (`name`, `abbreviation`, `url`, `protect`, `password`)
+    VALUES (\"$name\",\"$abbreviation\",\"$url\",\"$protect\",\"$password\")");
     
     echo "Info: Link added!";
 } elseif ($action == "edit") {
