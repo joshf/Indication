@@ -87,6 +87,10 @@ if ($action == "add") {
     if (empty($abbreviation) || empty($url)) {
         die("Error: Data was empty!");
     }
+    
+    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $url)) {
+        die("Error: Invalid URL!");
+    }
 
     //Check if abbreviation exists
     $checkabbreviation = mysqli_query($con, "SELECT `abbreviation` FROM `links` WHERE `abbreviation` = \"$abbreviation\"");
