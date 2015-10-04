@@ -18,12 +18,6 @@ if (isset($_POST["install"])) {
 	$website = $_POST["website"];
 	$pathtoscript = $_POST["pathtoscript"];
     
-    //Check if we can connect
-    @$con = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbname);
-    if (mysqli_connect_errno()) {
-        die("Error: Could not connect to database (" . mysqli_connect_error() . "). Check your database settings are correct.");
-    }
-    
     $user = $_POST["user"];
     $email = $_POST["email"];
     if (empty($_POST["password"])) {
