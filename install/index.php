@@ -24,17 +24,6 @@ if (isset($_POST["install"])) {
         die("Error: Could not connect to database (" . mysqli_connect_error() . "). Check your database settings are correct.");
     }
     
-    //Second salt for password protection
-    $randsalt = md5(uniqid(rand(), true));
-    $salt = substr($randsalt, 0, 3);
-    
-    $installstring = "<?php\n\n//Database Settings\ndefine('DB_HOST', " . var_export($dbhost, true) . ");\ndefine('DB_USER', " . var_export($dbuser, true) . ");\ndefine('DB_PASSWORD', " . var_export($dbpassword, true) . ");\ndefine('DB_NAME', " . var_export($dbname, true) . ");\n\n//Other Settings\ndefine('SALT', " . var_export($salt, true) . ");\ndefine('WEBSITE', " . var_export($website, true) . ");\ndefine('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");\ndefine('COUNT_UNIQUE_ONLY_STATE', 'Enabled');\ndefine('CUSTOM_URL_STATE', 'Disabled');\ndefine('CUSTOM_URL', '');\n\n?>";
-
-    //Write Config
-    $configfile = fopen("../config.php", "w");
-    fwrite($configfile, $installstring);
-    fclose($configfile);
-    
     $user = $_POST["user"];
     $email = $_POST["email"];
     if (empty($_POST["password"])) {
@@ -102,6 +91,17 @@ if (isset($_POST["install"])) {
     VALUES (\"$user\",\"$password\",\"$salt\",\"$email\",\"\",\"$api_key\")");
         
     mysqli_close($con);
+    
+    //Second salt for password protection
+    $randsalt = md5(uniqid(rand(), true));
+    $salt = substr($randsalt, 0, 3);
+    
+    $installstring = "<?php\n\n//Database Settings\ndefine('DB_HOST', " . var_export($dbhost, true) . ");\ndefine('DB_USER', " . var_export($dbuser, true) . ");\ndefine('DB_PASSWORD', " . var_export($dbpassword, true) . ");\ndefine('DB_NAME', " . var_export($dbname, true) . ");\n\n//Other Settings\ndefine('SALT', " . var_export($salt, true) . ");\ndefine('WEBSITE', " . var_export($website, true) . ");\ndefine('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");\ndefine('COUNT_UNIQUE_ONLY_STATE', 'Enabled');\ndefine('CUSTOM_URL_STATE', 'Disabled');\ndefine('CUSTOM_URL', '');\n\n?>";
+
+    //Write Config
+    $configfile = fopen("../config.php", "w");
+    fwrite($configfile, $installstring);
+    fclose($configfile);
     
 }
 
