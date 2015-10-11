@@ -63,7 +63,7 @@ if (in_array($action, $actions)) {
         } elseif (isset($_GET["action"])) {
             $id = mysqli_real_escape_string($con, $_GET["id"]);
         }
-        $checkid = mysqli_query($con, "SELECT `id` FROM `links` WHERE `id` = \"$id\"");
+        $checkid = mysqli_query($con, "SELECT `id` FROM `links` WHERE `id` = $id");
         if (mysqli_num_rows($checkid) == 0) {
         	die("Error: ID does not exist!");
         }
@@ -182,10 +182,10 @@ if ($action == "add") {
     echo "Info: CSV created!";
 } elseif ($action == "info") {
     
-    $getdata = mysqli_query($con, "SELECT `id`, `name`, `abbreviation`, `url`, `protect` FROM `links` WHERE `id` = \"$id\"");
+    $getdata = mysqli_query($con, "SELECT `id`, `name`, `abbreviation`, `url`, `protect` FROM `links` WHERE `id` = $id");
     $resultgetdata = mysqli_fetch_assoc($getdata); 
     
-    $getcount = mysqli_query($con, "SELECT COUNT(id) AS `count` FROM `counts` WHERE `link_id` = \"$id\"");
+    $getcount = mysqli_query($con, "SELECT COUNT(id) AS `count` FROM `counts` WHERE `link_id` = $id");
     $resultgetcount = mysqli_fetch_assoc($getcount);
     
     $data = array(
