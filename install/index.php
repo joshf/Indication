@@ -32,7 +32,7 @@ if (isset($_POST["install"])) {
     $api_key = substr(str_shuffle(MD5(microtime())), 0, 50);
     
     //Check if we can connect
-    @$con = mysqli_connect($dbhost, $dbuser, $dbuser, $dbname);
+    @$con = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbname);
     if (mysqli_connect_errno()) {
         die("Error: Could not connect to database (" . mysqli_connect_error() . "). Check your database settings are correct.");
     }
