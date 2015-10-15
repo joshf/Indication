@@ -178,8 +178,14 @@ if ($action == "add") {
     }
 
     fclose($output);
+                
+    $data[] = array(
+        "url" => "" . PATH_TO_SCRIPT . "/data/export-$today.csv",
+        "name" => $today
+    );
     
-    echo "Info: CSV created!";
+    echo json_encode(array("data" => $data));
+    
 } elseif ($action == "info") {
     
     $getdata = mysqli_query($con, "SELECT `id`, `name`, `abbreviation`, `url`, `protect` FROM `links` WHERE `id` = $id");
@@ -188,7 +194,7 @@ if ($action == "add") {
     $getcount = mysqli_query($con, "SELECT COUNT(id) AS `count` FROM `counts` WHERE `link_id` = $id");
     $resultgetcount = mysqli_fetch_assoc($getcount);
     
-    $data = array(
+    $data[] = array(
         "id" => $resultgetdata["id"],
         "name" => $resultgetdata["name"],
         "abbreviation" => $resultgetdata["abbreviation"],

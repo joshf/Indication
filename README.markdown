@@ -65,7 +65,7 @@ Indication exposes link data via a JSON array. You will need you api key which c
 **Example response:**
 
 ```json
-{"data":{"id":"1","name":"Link 1","abbreviation":"link1","url":"http:\/\/mysite.com/links/link1.php","count":"384","protect":"1"}}
+{"data":[{"id":"1","name":"Link 1","abbreviation":"link1","url":"http:\/\/mysite.com/links/link1.php","count":"384","protect":"1"}]}
 ```
 
 **PHP Example:**
@@ -76,7 +76,7 @@ Indication exposes link data via a JSON array. You will need you api key which c
 
 $test = file_get_contents("http://path.to/Indication/worker.php?api_key=API_KEY&action=info&id=id");
 $test_resp = json_decode($test);
-$count = $test_resp->data->count;
+$count = $test_resp->data[0]->count;
 
 echo $count;
 

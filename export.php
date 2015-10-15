@@ -83,20 +83,24 @@ $resultgetusersettings = mysqli_fetch_assoc($getusersettings);
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 <h1 class="page-header">Export</h1>
 <p>Export your data into CSV format for use in other applications</p>
-<button class="btn btn-default" id="export">Export</button> <a href="data/export-<?php echo date("d-m-y"); ?>.csv" target="_blank" class="btn btn-default hidden" id="get">Get File</a>
+<button class="btn btn-default" id="export">Export</button>
 <h2>Previous Data</h2>
 <ul class="list-group">
 <?php
-    
-if ($handle = opendir("data")) {
-    while (false !== ($entry = readdir($handle))) {
-        if ($entry != ".DS_Store" && $entry != ".." && $entry != "." && $entry != "index.php") {
-            $string = str_replace(".csv", "", $entry);
-            $name = str_replace("export-", "", $string);
-            echo "<li class=\"list-group-item\"><a href=\"data/$entry\">$name</a></li>";
+
+if (file_exists("data")) {
+    if ($handle = opendir("data")) {
+        while (false !== ($entry = readdir($handle))) {
+            if ($entry != ".DS_Store" && $entry != ".." && $entry != "." && $entry != "index.php") {
+                $string = str_replace(".csv", "", $entry);
+                $name = str_replace("export-", "", $string);
+                echo "<li class=\"list-group-item\"><a href=\"data/$entry\">$name</a></li>";
+            }
         }
+        closedir($handle);
     }
-    closedir($handle);
+} else {
+    echo "<li class=\"nodata list-group-item\">No data to show</li>";
 }
 
 ?>
@@ -114,6 +118,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url: "worker.php",
+            dataType: "json",
             data: "action=export",
             error: function() {
                 $.notify({
@@ -124,9 +129,15 @@ $(document).ready(function() {
                     allow_dismiss: true
                 });
             },
-            success: function() {
-                $("#export").addClass("hidden");
-                $("#get").removeClass("hidden");
+            success: function(resp) {
+                $.notify({
+                    message: "Export complete!",
+                    icon: "glyphicon glyphicon-ok",
+                },{
+                    type: "success",
+                    allow_dismiss: true
+                });
+                window.open(resp.data[0].url, "_blank");
             }
         });
     });
