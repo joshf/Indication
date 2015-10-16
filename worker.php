@@ -169,9 +169,9 @@ if ($action == "add") {
     
     $output = fopen("data/export-$today.csv", "w");
 
-    fputcsv($output, array("#", "Name", "Abbreviation", "URL", "Protect", "Password"));
+    fputcsv($output, array("#", "Name", "Abbreviation", "URL", "Count", "Protect", "Password"));
 
-    $getdata = mysqli_query($con, "SELECT * FROM `links`");
+    $getdata = mysqli_query($con, "SELECT links.id, links.name, links.abbreviation, links.url, count(counts.id) AS `count`, links.protect, links.password FROM `links` LEFT JOIN `counts` ON links.id = counts.link_id GROUP BY links.id");
 
     while ($row = mysqli_fetch_assoc($getdata)) {
         fputcsv($output, $row);   
