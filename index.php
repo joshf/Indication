@@ -87,7 +87,7 @@ $resultgetmonth = mysqli_fetch_assoc($getmonth);
 <div class="col-sm-3 col-md-2 sidebar">
 <ul class="nav nav-sidebar">
 <li class="active"><a href="index.php">Overview <span class="sr-only">(current)</span></a></li>
-<li><a href="breakdowns.php">Breakdowns</a></li>
+<li><a href="details.php">Details</a></li>
 <li><a href="export.php">Export</a></li>
 </ul>
 <ul class="nav nav-sidebar">
@@ -140,7 +140,7 @@ $getlinks = mysqli_query($con, "SELECT links.id, links.name, links.abbreviation,
 
 while($links = mysqli_fetch_assoc($getlinks)) {
     echo "<tr>";
-    echo "<td><a href=\"breakdowns.php?id=" . $links["id"] . "\">" . $links["name"] . "</a></td>";
+    echo "<td><a href=\"details.php?id=" . $links["id"] . "\">" . $links["name"] . "</a></td>";
     echo "<td>" . $links["abbreviation"] . "</td>";
     echo "<td><span class=\"badge\">" . $links["count"] . "</span></td>";
     echo "<td><a href=\"edit.php?id=" . $links["id"] . "\">Edit</a> | <a class=\"delete\" data-id=\"" . $links["id"] . "\">Delete</a> | <a class=\"link\" data-abbreviation=\"" . $links["abbreviation"] . "\">Link</a>";

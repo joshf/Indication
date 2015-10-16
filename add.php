@@ -72,7 +72,7 @@ $resultgetusersettings = mysqli_fetch_assoc($getusersettings);
 <div class="col-sm-3 col-md-2 sidebar">
 <ul class="nav nav-sidebar">
 <li><a href="index.php">Overview</a></li>
-<li><a href="breakdowns.php">Breakdowns</a></li>
+<li><a href="details.php">Details</a></li>
 <li><a href="export.php">Export</a></li>
 </ul>
 <ul class="nav nav-sidebar">

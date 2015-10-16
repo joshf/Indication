@@ -36,7 +36,7 @@ $resultgetusersettings = mysqli_fetch_assoc($getusersettings);
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="assets/favicon.ico">
-<title>Indication &raquo; Breakdowns</title>
+<title>Indication &raquo; Details</title>
 <link rel="apple-touch-icon" href="assets/icon.png">
 <link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen">
 <link rel="stylesheet" href="assets/css/indication.css" type="text/css" media="screen">
@@ -72,7 +72,7 @@ $resultgetusersettings = mysqli_fetch_assoc($getusersettings);
 <div class="col-sm-3 col-md-2 sidebar">
 <ul class="nav nav-sidebar">
 <li><a href="index.php">Overview</a></li>
-<li class="active"><a href="breakdowns.php">Breakdowns <span class="sr-only">(current)</span></a></li>
+<li class="active"><a href="details.php">Details <span class="sr-only">(current)</span></a></li>
 <li><a href="export.php">Export</a></li>
 </ul>
 <ul class="nav nav-sidebar">
@@ -81,13 +81,13 @@ $resultgetusersettings = mysqli_fetch_assoc($getusersettings);
 </ul>
 </div>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-<h1 class="page-header">Breakdowns</h1>
+<h1 class="page-header">Details</h1>
 <?php
 
 if (!isset($_GET["id"])) {
     $getids = mysqli_query($con, "SELECT `id`, `name` FROM `links`");
     if (mysqli_num_rows($getids) != 0) {
-        echo "<form action=\"breakdowns.php\" method=\"get\"><div class=\"form-group\"><label for=\"id\">Select a Link</label><select class=\"form-control\" id=\"id\" name=\"id\">";
+        echo "<form action=\"details.php\" method=\"get\"><div class=\"form-group\"><label for=\"id\">Select a Link</label><select class=\"form-control\" id=\"id\" name=\"id\">";
         while($ids = mysqli_fetch_assoc($getids)) {
             echo "<option value=\"" . $ids["id"] . "\">" . ucfirst($ids["name"]) . "</option>";
         }
