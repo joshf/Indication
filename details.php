@@ -60,9 +60,8 @@ $resultgetusersettings = mysqli_fetch_assoc($getusersettings);
 </div>
 <div id="navbar" class="navbar-collapse collapse">
 <ul class="nav navbar-nav navbar-right">
-<li><a href="index.php">Dashboard</a></li>
 <li><a href="settings.php">Settings</a></li>
-<li><a href="logout.php">Logout</a></li>
+<li><a href="logout.php">Logout (<?php echo $resultgetusersettings["user"]; ?>)</a></li>
 </ul>
 </div>
 </div>
@@ -71,7 +70,7 @@ $resultgetusersettings = mysqli_fetch_assoc($getusersettings);
 <div class="row">
 <div class="col-sm-3 col-md-2 sidebar">
 <ul class="nav nav-sidebar">
-<li><a href="index.php">Overview</a></li>
+<li><a href="index.php">Dashboard</a></li>
 <li class="active"><a href="details.php">Details <span class="sr-only">(current)</span></a></li>
 <li><a href="export.php">Export</a></li>
 </ul>
