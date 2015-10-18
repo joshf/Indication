@@ -198,7 +198,7 @@ $(document).ready(function () {
                 $.ajax({
                     type: "POST",
                     url: "worker.php",
-                    data: "action=dedlete&id="+ id +"",
+                    data: "action=delete&id="+ id +"",
                     error: function() {
                         $.notify({
                             message: "Ajax query failed!",
