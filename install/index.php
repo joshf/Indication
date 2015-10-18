@@ -134,7 +134,9 @@ if (isset($_POST["install"])) {
 <p>Indication has been successfully installed. Please delete the "install" folder from your server, as it poses a potential security risk!</p>
 <a href="../login.php" class="btn btn-default" role="button">Login</a>
 <?php
+
 } else {
+
 ?>
 <div class="alert alert-info">Welcome to Indication <?php echo $version ?>. Before getting started, we need some information on your database and for you to create an admin user.</div>
 <form id="installform" method="post" autocomplete="off">

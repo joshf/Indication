@@ -170,7 +170,7 @@ $(document).ready(function () {
             var url = data.zipball_url;
             if (indication_version < indication_remote_version) {
                 bootbox.dialog({
-                    message: "Indication " + indication_remote_version + " is available. Do you wish to download the update? For more information about this update click <a href=\""+ data.html_url + "\" target=\"_blank\">here</a>. If you click \"Not Now\" you will be not reminded for another 7 days.",
+                    message: "Indication " + indication_remote_version + " is available. For more information about this update click <a href=\""+ data.html_url + "\" target=\"_blank\">here</a>. Do you wish to download the update? If you click \"Not Now\" you will be not reminded for another 7 days.",
                     title: "Update Available",
                     buttons: {
                         cancel: {
