@@ -99,7 +99,7 @@ if (file_exists("data")) {
         closedir($handle);
     }
 } else {
-    echo "<li class=\"nodata list-group-item\">No data to show</li>";
+    echo "<li class=\"list-group-item\">No data to show</li>";
 }
 
 ?>

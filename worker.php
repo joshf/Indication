@@ -188,18 +188,15 @@ if ($action == "add") {
     
 } elseif ($action == "info") {
     
-    $getdata = mysqli_query($con, "SELECT `id`, `name`, `abbreviation`, `url`, `protect` FROM `links` WHERE `id` = $id");
+    $getdata = mysqli_query($con, "SELECT links.id, links.name, links.abbreviation, links.url, count(counts.id) AS `count`, links.protect, links.password FROM `links` LEFT JOIN `counts` ON links.id = counts.link_id WHERE links.id = $id");
     $resultgetdata = mysqli_fetch_assoc($getdata); 
-    
-    $getcount = mysqli_query($con, "SELECT COUNT(id) AS `count` FROM `counts` WHERE `link_id` = $id");
-    $resultgetcount = mysqli_fetch_assoc($getcount);
     
     $data[] = array(
         "id" => $resultgetdata["id"],
         "name" => $resultgetdata["name"],
         "abbreviation" => $resultgetdata["abbreviation"],
         "url" => $resultgetdata["url"],
-        "count" => $resultgetcount["count"],
+        "count" => $resultgetdata["count"],
         "protect" => $resultgetdata["protect"]
     );
     
