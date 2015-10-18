@@ -1,5 +1,5 @@
 /*!
- * JavaScript Cookie v2.0.3
+ * JavaScript Cookie v2.0.4
  * https://github.com/js-cookie/js-cookie
  *
  * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
@@ -12,7 +12,7 @@
 		module.exports = factory();
 	} else {
 		var _OldCookies = window.Cookies;
-		var api = window.Cookies = factory(window.jQuery);
+		var api = window.Cookies = factory();
 		api.noConflict = function () {
 			window.Cookies = _OldCookies;
 			return api;
