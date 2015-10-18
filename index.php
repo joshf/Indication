@@ -192,33 +192,37 @@ $(document).ready(function () {
         });
     }
     $("td").on("click", ".delete", function() {
-        var id = $(this).data("id");
-        $.ajax({
-            type: "POST",
-            url: "worker.php",
-            data: "action=delete&id="+ id +"",
-            error: function() {
-                $.notify({
-                    message: "Ajax query failed!",
-                    icon: "glyphicon glyphicon-warning-sign",
-                },{
-                    type: "danger",
-                    allow_dismiss: true
+        bootbox.confirm("Are you sure you wish to delete this link?", function(result) {
+            if (result == true) {
+                var id = $(this).data("id");
+                $.ajax({
+                    type: "POST",
+                    url: "worker.php",
+                    data: "action=dedlete&id="+ id +"",
+                    error: function() {
+                        $.notify({
+                            message: "Ajax query failed!",
+                            icon: "glyphicon glyphicon-warning-sign",
+                        },{
+                            type: "danger",
+                            allow_dismiss: true
+                        });
+                    },
+                    success: function() {
+                        $.notify({
+                            message: "Link deleted!",
+                            icon: "glyphicon glyphicon-ok",
+                        },{
+                            type: "success",
+                            allow_dismiss: true
+                        });
+                        setTimeout(function() {
+                        	window.location.reload();
+                        }, 2000);
+                    }
                 });
-            },
-            success: function() {
-                $.notify({
-                    message: "Link deleted!",
-                    icon: "glyphicon glyphicon-ok",
-                },{
-                    type: "success",
-                    allow_dismiss: true
-                });
-                setTimeout(function() {
-                	window.location.reload();
-                }, 2000);
             }
-        });
+        }); 
     });
     $("td").on("click", ".link", function() {
         var abbreviation = $(this).data("abbreviation");
@@ -237,6 +241,7 @@ $(document).ready(function () {
                 //Do nothing
             }
         });
+        $(".bootbox-input").select();        
     });
     $("#search").keyup(function () {
         $("#counter").removeClass("hidden");
