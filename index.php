@@ -192,9 +192,9 @@ $(document).ready(function () {
         });
     }
     $("td").on("click", ".delete", function() {
+        var id = $(this).data("id");
         bootbox.confirm("Are you sure you wish to delete this link?", function(result) {
             if (result == true) {
-                var id = $(this).data("id");
                 $.ajax({
                     type: "POST",
                     url: "worker.php",
