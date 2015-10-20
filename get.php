@@ -48,6 +48,13 @@ if (!isset($_SESSION["indication_user"])) {
         $referrer = "";
     }
     
+    //Check against blacklist
+    $checkblacklist = mysqli_query($con, "SELECT `id`, `ip` FROM `blacklist` WHERE `ip` = \"$ip\"");
+    $checkblacklistresult = mysqli_fetch_assoc($checkblacklist);
+    if (mysqli_num_rows($checkblacklist) == 1) {
+        die("Error: The IP address " . $checkblacklistresult["ip"] . " has been blocked by the site administrator.");
+    }
+    
     if (COUNT_UNIQUE_ONLY_STATE == "Enabled") {
         if (!isset($_COOKIE["ihl_$abbreviationclean"])) {
             mysqli_query($con, "UPDATE `links` SET `count` = `count`+1 WHERE `abbreviation` = \"$abbreviation\"");

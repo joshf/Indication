@@ -55,7 +55,7 @@ if (isset($_POST["action"])) {
 }
 
 //Check if ID exists
-$actions = array("edit", "delete", "info");
+$actions = array("edit", "delete", "info", "deleteip");
 if (in_array($action, $actions)) {
     if (isset($_POST["id"]) || isset($_GET["id"])) {
         if (isset($_POST["action"])) {
@@ -81,6 +81,9 @@ if (isset($_POST["abbreviation"])) {
 }
 if (isset($_POST["url"])) {
     $url = mysqli_real_escape_string($con, $_POST["url"]);
+}
+if (isset($_POST["ip"])) {
+    $ip = mysqli_real_escape_string($con, $_POST["ip"]);
 }
 
 if ($action == "add") {
@@ -202,6 +205,17 @@ if ($action == "add") {
     
     echo json_encode(array("data" => $data));
     
+} elseif ($action == "addip") {
+    
+	mysqli_query($con, "INSERT INTO `blacklist` (`ip`)
+	VALUES (\"$ip\")");
+    
+	echo "Info: IP added!";
+
+} elseif ($action == "deleteip") {
+	mysqli_query($con, "DELETE FROM `blacklist` WHERE `id` = \"$id\"");
+	
+	echo "Info: IP deleted!";
 } else {
     die("Error: Action not recognised!");
 }

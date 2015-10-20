@@ -74,8 +74,6 @@ if (!empty($_POST)) {
     exit;
 }
 
-mysqli_close($con);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -190,7 +188,25 @@ if ($currentcustomurlstate == "Enabled" ) {
 </form>
 <br>
 <hr>
-<h5>API key</h5>
+<h2>Blacklist</h2>
+<ul id="ips" class="list-group">
+<?php
+
+$getips = mysqli_query($con, "SELECT `id`, `ip` FROM `blacklist`");
+
+while($ips = mysqli_fetch_assoc($getips)) {
+    echo "<li class=\"list-group-item\">";
+    echo "<span class=\"badge\" data-ip=\"" . $ips["ip"] . "\">" . $ips["count"] . "</span>" . $ips["ip"] . " <span class=\"pull-right delete glyphicon glyphicon-remove\" data-id=\"" . $ips["id"] . "\"></span>";
+    echo "</li>";
+}
+
+mysqli_close($con);
+    
+?>
+</ul>
+<button id="addip" class="btn btn-default">Add IP</button>
+<hr>
+<h2>API key</h2>
 <p>Your API key is: <b><span id="api_key"><?php echo $resultgetusersettings["api_key"]; ?></span></b></p>
 <button id="generateapikey" class="btn btn-default">Generate New Key</button>
 </div>
@@ -201,6 +217,7 @@ if ($currentcustomurlstate == "Enabled" ) {
 <script src="assets/bower_components/bootstrap-validator/dist/validator.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="assets/bower_components/js-cookie/src/js.cookie.js" type="text/javascript" charset="utf-8"></script>
+<script src="assets/bower_components/bootbox.js/bootbox.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     if (Cookies.get("indication_settings_updated")) {
@@ -232,6 +249,67 @@ $(document).ready(function() {
             }
         });
     });
+    $("#addip").click(function() {
+        bootbox.prompt({
+            title: "Add an IP",
+            callback: function(result) {
+                if (result !== null) {
+                    $.ajax({
+                        type: "POST",
+                        url: "worker.php",
+                        data: "action=addip&ip=" + result + "",
+                        error: function() {
+                            $.notify({
+                                message: "Ajax Error!",
+                                icon: "glyphicon glyphicon-exclamation-sign",
+                            },{
+                                type: "danger",
+                                allow_dismiss: true
+                            });
+                        },
+                        success: function(api_key) {
+                            $.notify({
+                                message: "IP Added to blocklist!",
+                                icon: "glyphicon glyphicon-ok",
+                            },{
+                                type: "success",
+                                allow_dismiss: true
+                            });
+                            $("#ips").append("<li class=\"list-group-item\">" + result + "</li>")
+                        }
+                    });
+                }
+            }
+        });
+    });
+    $("li").on("click", ".delete", function() {
+        var id = $(this).data("id");
+        var element = $(this).parent();
+            $.ajax({
+                type: "POST",
+                url: "worker.php",
+                data: "action=deleteip&id="+ id +"",
+                error: function() {
+                    $.notify({
+                        message: "Ajax query failed!",
+                        icon: "glyphicon glyphicon-warning-sign",
+                    },{
+                        type: "danger",
+                        allow_dismiss: true
+                    });
+                },
+                success: function() {
+                    $.notify({
+                        message: "IP deleted!",
+                        icon: "glyphicon glyphicon-ok",
+                    },{
+                        type: "success",
+                        allow_dismiss: true
+                    });
+                    $(element).remove();
+                }
+            });
+        }); 
 });
 </script>
 </body>
