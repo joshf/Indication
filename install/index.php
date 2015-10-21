@@ -73,13 +73,23 @@ if (isset($_POST["install"])) {
     
     mysqli_query($con, $createuserstable) or die(mysqli_error($con));
     
+    //Create blacklist table
+    $createblacklisttable = "CREATE TABLE `blacklist` (
+    `id` int(8) NOT NULL,
+    `ip` varchar(25) NOT NULL
+    ) ENGINE=InnoDB;";
+    
+    mysqli_query($con, $createblacklisttable) or die(mysqli_error($con));
+    
     //Add keys
     mysqli_query($con, "ALTER TABLE `counts` ADD PRIMARY KEY (`id`)");
     mysqli_query($con, "ALTER TABLE `links` ADD PRIMARY KEY (`id`)");
     mysqli_query($con, "ALTER TABLE `users` ADD PRIMARY KEY (`id`)");
+    mysqli_query($con, "ALTER TABLE `blacklist` ADD PRIMARY KEY (`id`)");
     mysqli_query($con, "ALTER TABLE `counts` CHANGE `id` `id` INT(8) NOT NULL AUTO_INCREMENT");
     mysqli_query($con, "ALTER TABLE `links` CHANGE `id` `id` INT(8) NOT NULL AUTO_INCREMENT");
     mysqli_query($con, "ALTER TABLE `users` CHANGE `id` `id` INT(8) NOT NULL AUTO_INCREMENT");
+    mysqli_query($con, "ALTER TABLE `blacklist` CHANGE `id` `id` INT(8) NOT NULL AUTO_INCREMENT");
     
     mysqli_query($con, "INSERT INTO users (user, password, salt, email, hash, api_key)
     VALUES (\"$user\",\"$password\",\"$salt\",\"$email\",\"\",\"$api_key\")");
