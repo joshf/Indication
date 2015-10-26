@@ -90,6 +90,7 @@ if (isset($_GET["login_error"])) {
 <label>
 <input type="checkbox" value="remember-me"> Remember me
 </label>
+<a class="pull-right btn btn-default btn-xs" href="reset.php">Reset</a>
 </div>
 <button class="btn btn-primary btn-block" type="submit">Sign in</button>
 </form>
