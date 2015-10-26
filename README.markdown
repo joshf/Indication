@@ -111,7 +111,7 @@ N.B: The upgrade will only upgrade from the previous version of Indication (e.g 
 Removal:
 --------
 
-To remove Indication, simply delete the Indication folder from your server and delete the "links", "counts" and "users" tables from your database
+To remove Indication, simply delete the Indication folder from your server and delete the "links", "counts", "users" and "blacklist" tables from your database
 
 Contributing:
 -------------
