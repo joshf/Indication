@@ -177,8 +177,15 @@ while($referrers = mysqli_fetch_assoc($getreferrers)) {
 $getips = mysqli_query($con, "SELECT `ip`, COUNT(*) AS `count` FROM `counts` WHERE `link_id` = \"$id\" GROUP BY `ip` ORDER BY `count` DESC LIMIT 10");
 
 while($ips = mysqli_fetch_assoc($getips)) {
+    if (FETCH_LOCATION === "Enabled") {
+        $getcountry = json_decode(file_get_contents("http://www.telize.com/geoip/" . $ips["ip"] . ""));
+        $country = $getcountry->country;
+        if (empty($country)) {
+            $country = "Unknown Country";
+        }
+    }
     echo "<li class=\"list-group-item\">";
-    echo "<span class=\"badge\">" . $ips["count"] . "</span>" . $ips["ip"] . "";
+    echo "<span class=\"badge\">" . $ips["count"] . "</span> <span class=\"badge\">" . $country . "</span>" . $ips["ip"] . "";
     echo "</li>";
 }
     

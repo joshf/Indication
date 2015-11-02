@@ -33,7 +33,8 @@ $currentwebsite = WEBSITE;
 $currentpathtoscript = PATH_TO_SCRIPT;
 $currentcountuniqueonlystate = COUNT_UNIQUE_ONLY_STATE;
 $currentcustomurlstate = CUSTOM_URL_STATE;
-$currentcustomurl = CUSTOM_URL; 
+$currentcustomurl = CUSTOM_URL;
+$currentfetchlocation = FETCH_LOCATION;
 
 if (!empty($_POST)) {
     //Get new settings from POST
@@ -53,13 +54,14 @@ if (!empty($_POST)) {
     $countuniqueonlystate = $_POST["countuniqueonlystate"];
     $customurlstate = $_POST["customurlstate"];
     $customurl = $_POST["customurl"];
+    $fetchlocation = $_POST["fetchlocation"];
 
     //Remember previous settings
     if (empty($customurl)) {
         $customurl = $currentcustomurl;
     }
 
-    $settingsstring = "<?php\n\n//Database Settings\ndefine('DB_HOST', '" . DB_HOST . "');\ndefine('DB_USER', '" . DB_USER . "');\ndefine('DB_PASSWORD', '" . DB_PASSWORD . "');\ndefine('DB_NAME', '" . DB_NAME . "');\n\n//Other Settings\ndefine('SALT', '" . SALT . "');\ndefine('WEBSITE', " . var_export($website, true) . ");\ndefine('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");\ndefine('COUNT_UNIQUE_ONLY_STATE', " . var_export($countuniqueonlystate, true) . ");\ndefine('CUSTOM_URL_STATE', " . var_export($customurlstate, true) . ");\ndefine('CUSTOM_URL', " . var_export($customurl, true) . ");\n\n?>";
+    $settingsstring = "<?php\n\n//Database Settings\ndefine('DB_HOST', '" . DB_HOST . "');\ndefine('DB_USER', '" . DB_USER . "');\ndefine('DB_PASSWORD', '" . DB_PASSWORD . "');\ndefine('DB_NAME', '" . DB_NAME . "');\n\n//Other Settings\ndefine('SALT', '" . SALT . "');\ndefine('WEBSITE', " . var_export($website, true) . ");\ndefine('PATH_TO_SCRIPT', " . var_export($pathtoscript, true) . ");\ndefine('COUNT_UNIQUE_ONLY_STATE', " . var_export($countuniqueonlystate, true) . ");\ndefine('CUSTOM_URL_STATE', " . var_export($customurlstate, true) . ");\ndefine('CUSTOM_URL', " . var_export($customurl, true) . ");\ndefine('FETCH_LOCATION', " . var_export($fetchlocation, true) . ");\n\n?>";
 
     //Update Settings
     mysqli_query($con, "UPDATE `users` SET `user` = \"$user\", `password` = \"$password\", `email` = \"$email\", `salt` = \"$salt\" WHERE `user` = \"" . $resultgetusersettings["user"] . "\"");
@@ -184,6 +186,19 @@ if ($currentcustomurlstate == "Enabled" ) {
 <?php
 }
 ?>
+<h4>Fetch Location</h4>
+<p>Allows you to see the countries where IP's come from.</p>
+<div class="radio">
+<?php
+if ($currentfetchlocation == "Enabled" ) {
+    echo "<label><input type=\"radio\" id=\"fetchlocationenable\" name=\"fetchlocation\" value=\"Enabled\" checked=\"checked\"> Enabled</label></div>
+        <div class=\"radio\"><label><input type=\"radio\" id=\"fetchlocationdisable\" name=\"fetchlocation\" value=\"Disabled\"> Disabled</label>";    
+} else {
+    echo "<label><input type=\"radio\" id=\"fetchlocationenable\" name=\"fetchlocation\" value=\"Enabled\"> Enabled</label></div>
+     <div class=\"radio\"><label><input type=\"radio\" id=\"fetchlocationdisable\" name=\"fetchlocation\" value=\"Disabled\" checked=\"checked\"> Disabled</label>";   
+}   
+?> 
+</div>
 <button type="submit" class="btn btn-default">Update</button>
 </form>
 <br>
