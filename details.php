@@ -178,7 +178,7 @@ $getips = mysqli_query($con, "SELECT `ip`, COUNT(*) AS `count` FROM `counts` WHE
 
 while($ips = mysqli_fetch_assoc($getips)) {
     if (FETCH_LOCATION === "Enabled") {
-        $getcountry = json_decode(file_get_contents("http://www.telize.com/geoip/" . $ips["ip"] . ""));
+        $getcountry = json_decode(file_get_contents("http://ip-api.com/json/" . $ips["ip"] . ""));
         $country = $getcountry->country;
         if (empty($country)) {
             $country = "Unknown Country";
