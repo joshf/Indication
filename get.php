@@ -67,7 +67,7 @@ if (!isset($_SESSION["indication_user"])) {
         mysqli_query($con, "INSERT INTO `counts` (link_id, date, ip, referrer)
         VALUES (\"$id\",CURDATE(),\"$ip\",\"$referrer\")");
     }
-    
+
 }
 
 if ($getinforesult["protect"] == "0") {
@@ -83,6 +83,8 @@ if (isset($_POST["password"])) {
         header("Location: " . $getinforesult["url"] . "");
         mysqli_close($con);
         exit;
+    } else {
+    	$wrong_pass = true;
     }
 }
 
@@ -109,6 +111,11 @@ if (isset($_POST["password"])) {
 <div class="container">
 <form method="post" class="form-signin">
 <img class="logo-img" src="assets/icon.png" alt="Indication">
+<?php 
+if ($wrong_pass) {
+    echo "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Incorrect password.</div>";
+}
+?>
 <label for="password" class="sr-only">Password</label>
 <input type="password" id="password" name="password" class="form-control" placeholder="Password..." required autofocus>
 <button class="btn btn-primary btn-block" type="submit">Follow Link</button>
