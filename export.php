@@ -136,7 +136,7 @@ $(document).ready(function() {
                     type: "success",
                     allow_dismiss: true
                 });
-                window.open(resp.data[0].url, "_blank");
+                window.location.href = resp.data[0].url;
             }
         });
     });
