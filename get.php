@@ -95,6 +95,7 @@ if (isset($_POST["password"])) {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <base href="<?php echo PATH_TO_SCRIPT; ?>/">
 <link rel="icon" href="assets/favicon.ico">
 <title>Indication &raquo; Password Required</title>
